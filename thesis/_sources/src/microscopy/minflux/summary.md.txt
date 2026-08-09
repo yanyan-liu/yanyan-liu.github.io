@@ -1,0 +1,14 @@
+(minflux-summary)=
+# Summary
+
+We introduced a computational approach to investigate the optimality of excitation patterns in MINFLUX,
+a novel SMLM technique.
+Our study leads to two key findings in the PSF engineering of MINFLUX.
+The donut beam is optimal when the excitation pattern is constrained to take a single shape,
+while the half-moon beams yield lower CRB when multiple shapes are available.
+These results, obtained through our PSF-engineering pipeline, were further supported by
+a mathematical investigation of the maximization of the gradient of the electric field.
+Our approach is fast and economic to discover and investigate novel beam shapes for MINFLUX.
+Additionally, this flexible framework can be extended to optimize PSFs for 3D
+localization using vectorial models of the electric field propagation,
+potentially expanding the capabilities of MINFLUX across diverse imaging scenarios.

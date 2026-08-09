@@ -1,0 +1,22 @@
+(chapter-opt)=
+# Correction of Artifacts in Optical Projection Tomography
+
+```{note}
+This chapter is based on the following publications:
+
+- Y. Liu, J. Dong, T. Pham, F. Marelli, and M. Unser, "Mechanical artifacts in optical projection tomography:
+Classification and automatic calibration," _Optics Continuum_ 1, 2577 (2022).
+
+- Y. Liu, J. Dong, C. Schmidt, A. Boquet-Pujadas, J. Extermann, and M. Unser,
+"Artifacts in optical projection tomography due to refractive-index mismatch: Model and correction,"
+_Optics Letters_ 47, 2618 (2022).
+```
+
+```{toctree}
+:maxdepth: 2
+
+introduction.md
+mechanical/index.md
+optical/index.md
+appendix.md
+```

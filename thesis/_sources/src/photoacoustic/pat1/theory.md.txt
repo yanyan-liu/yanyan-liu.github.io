@@ -1,0 +1,276 @@
+(pat1-modeling)=
+# Modeling of Photo-Switching and Unmixing Method
+
+In this section, we present a comprehensive forward model and an unmixing algorithm for photo-switching PAT.
+
+(pat1-forward-model-continuum)=
+## Forward Model in the Continuum
+
+We consider the general case of {math}`P` species of reporters distributed along the concentration map
+{math}`c_p(\mathbf{r})` for {math}`p = 1, \ldots, P`, characterized by an intrinsic kinetic
+constant {math}`k_p`.
+Note that we model the non-switching background as the last ({math}`P`th) _reporter_ with kinetic constant
+{math}`k_P=0`.
+
+Without loss of generality, we look at one sequence of OFF-switching pulses
+and assume that all reporters are initially in their ON-state.
+The transition of the proteins from ON to the OFF state is a stochastic process under
+pulsed illumination at the OFF-wavelength, which results in exponential decay of the extinction coefficient
+{math}`\varepsilon_p(\mathbf{r}, t; \lambda_{\text{OFF}})`:
+
+```{math}
+:label: eq:epsilon
+
+    \varepsilon_p(\mathbf{r}, t; \lambda_{\text{OFF}}) =
+    \left(\varepsilon_p^{\text{ON}}(\lambda_{\text{OFF}}) - \varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}})\right)
+    \text{e}^{-k_p\Phi(\mathbf{r})t} + \varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}}),
+```
+where {math}`\varepsilon_p^{\text{ON}}(\lambda_{\text{OFF}})` and
+{math}`\varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}})` are the extinction coefficients of the {math}`p`th reporter
+of the ON and OFF states at wavelength {math}`\lambda_{\text{OFF}}`, respectively.
+Here, we adopt the approximation by Yao et al. {cite:p}`yao_photoimprint_2014` that the decay rate depends linearly
+on light fluence {math}`\Phi(\mathbf{r})`.
+The distribution {math}`H(\mathbf{r}, t)` of total deposited optical energy at
+spatial location {math}`\mathbf{r}` and switching time {math}`t` is
+
+```{math}
+:label: eq:absorbed-energy-H
+    H(\mathbf{r}, t) = \Phi(\mathbf{r}) \left(\sum_{p=1}^{P}\varepsilon_p(\mathbf{r}, t; \lambda_{\text{OFF}})
+    c_p(\mathbf{r})\right),\qquad \mathbf{r}\in\Omega, \quad t\ge0,
+```
+
+where {math}`\Omega \subset \mathbb{R}^3` represents the domain of the 3D sample to be imaged.
+We assume that light pulses are independent of each other and that there is no temporal overlap with neighboring
+switching events.
+The combination of {eq}`eq:epsilon` and {eq}`eq:absorbed-energy-H` yields the forward model
+
+```{math}
+:label: eq:final-H
+
+    H(\mathbf{r}, t) = 
+    \Phi(\mathbf{r})\left(\sum_{p=1}^{P}
+    \left(\bar{\varepsilon}_p
+    \mathrm{e}^{-k_p\Phi(\mathbf{r})t} +
+    \varepsilon_p^{\text{OFF}}\right)
+    c_p(\mathbf{r})\right),
+```
+
+where
+{math}`\bar{\varepsilon}_p =
+\left(\varepsilon_p^{\text{ON}}(\lambda_{\text{OFF}}) -
+\varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}})\right)`
+and we omit the dependence of {math}`\bar{\varepsilon}_p` and {math}`\varepsilon_p^{\text{OFF}}` on
+{math}`\lambda_{\text{OFF}}` to simplify notations.
+
+In {eq}`eq:final-H`, the series of optical energy deposition maps {math}`H` is proportional to {math}`p^0`,
+the acoustically reconstructed PA image at the corresponding pulse number.
+The unknown quantities are the concentration maps {math}`c_p(\mathbf{r})` of {math}`P` species of reporters and the
+distribution {math}`\Phi(\mathbf{r})` of light fluence within the sample.
+
+Spatial distribution of fluence {math}`\Phi(\mathbf{r})` in the tomographic setting can be estimated separately via
+diffusion equation with optical parameters of the nonswitching background of the sample
+{cite:p}`wang_biomedical_2007, bauer_quantitative_2011, cox_quantitative_2012`.
+It is time-independent as the contribution of blood vessels to the absorption is much stronger than that of protein
+reporters.
+More details on the computation of fluence are provided in section
+[](#pat-compute-fluence).
+
+(pat1-forward-model-discrete)=
+## Discrete Forward Model
+
+To numerically implement the forward model, we proceed to discretize {eq}`eq:final-H` over domain
+{math}`\Omega`.
+Because of tomographic sectioning, we consider a 2D cross-section of the sample and write the forward model in 2D while
+we still compute light fluence in 3D.
+We discretize a 2D cross-section into a collection of points {math}`\Delta\boldsymbol{i} = (\Delta_1 i_1, \Delta_2 i_2)`,
+where {math}`\boldsymbol{i} = (i_1, i_2) \in \Omega_{\text{2D}}\subset \mathbb{Z}^2` is the index of sampled points,
+{math}`i_1 = 0, \ldots, L_\text{x} - 1`, and {math}`i_2=0, \ldots, L_\text{z} - 1`.
+The diagonal matrix {math}`\Delta = \text{diag}\left\{\Delta_1, \Delta_2\right\}` defines the stepsize {math}`\Delta_1`
+and {math}`\Delta_2` for the lateral and axial direction, respectively.
+Switching time {math}`t` is sampled at {math}`N` pulses such that {math}`t_n = \Delta_{\text{t}} n`, {math}`n=0, \ldots, N-1`,
+with {math}`\Delta_{\text{t}}` the temporal stepsize which is determined by the laser repetition rate during switching.
+We define discrete energy deposition {math}`H_{\boldsymbol{i}}^{n}= H(\mathbf{r}_{i_1, i_2},t_{n} )`,
+reporter concentrations {math}`c^p_{\boldsymbol{i}} = c^{p} (\mathbf{r}_{i_1,i_2} )`,
+{math}`p=1, \ldots, P` (with {math}`P` the total number of protein species plus one),
+and fluence distribution {math}`\Phi_{\boldsymbol{i}} = \Phi (\mathbf{r}_{i_1,i_2} )`.
+The photo-switching forward model {eq}`eq:final-H` is first specified at a pixel index {math}`\boldsymbol{i}`
+for all {math}`N` time points as
+
+```{math}
+:label: eq:Sij-detailed
+
+    \underbrace{
+    \begin{bmatrix}
+    H^{0}_{\boldsymbol{i}} \\ H^{2}_{\boldsymbol{i}} \\ \vdots \\ H^{N-1}_{\boldsymbol{i}} 
+    \end{bmatrix}}
+    _{\mathbf{H}_{\boldsymbol{i}}}
+    = 
+    \underbrace{
+    \Phi_{\boldsymbol{i}}
+    \begin{bmatrix}
+    \bar{\varepsilon}_{1} \mathrm{e}^{-k_{1} \Phi_{\boldsymbol{i}} t_{0}} + \varepsilon_{1}^{\text{OFF}}
+    &  
+    \cdots & 
+    \bar{\varepsilon}_{P} \mathrm{e}^{-k_{P} \Phi_{\boldsymbol{i}} t_{0}} + \varepsilon_{P}^{\text{OFF}}\\
+    \bar{\varepsilon}_{1} \mathrm{e}^{-k_{1} \Phi_{\boldsymbol{i}} t_{1}} + \varepsilon_{1}^{\text{OFF}}
+    & 
+    \cdots & 
+    \bar{\varepsilon}_{P} \mathrm{e}^{-k_{P} \Phi_{\boldsymbol{i}} t_{1}} + \varepsilon_{P}^{\text{OFF}}\\
+    \vdots &  
+    \ddots & 
+    \vdots \\
+    \bar{\varepsilon}_{1} \mathrm{e}^{-k_{1} \Phi_{\boldsymbol{i}} t_{N-1}} + \varepsilon_{1}^{\text{OFF}}
+    & 
+    \cdots & 
+    \bar{\varepsilon}_{P} \mathrm{e}^{-k_{P} \Phi_{\boldsymbol{i}} t_{N-1}} + \varepsilon_{P}^{\text{OFF}}
+    \end{bmatrix}}
+    _{\mathbf{S}_{\boldsymbol{i}}}
+    \underbrace{
+    \begin{bmatrix}
+    c^1_{\boldsymbol{i}} \\ c^2_{\boldsymbol{i}} \\ \vdots \\ c^P_{\boldsymbol{i}} 
+    \end{bmatrix}}
+    _{\mathbf{c}_{\boldsymbol{i}}},
+
+```
+where {math}`\mathbf{H}_{\boldsymbol{i}} \in \mathbb{R}^{N}`, {math}`\mathbf{c}_{\boldsymbol{i}} \in \mathbb{R}^{P}`,
+and {math}`\mathbf{S}_{\boldsymbol{i}} \in \mathbb{R}^{N \times P}`.
+Then, we assemble the per-pixel system of {eq}`eq:Sij-detailed` into a block-diagonal system by sequentially combining {math}`L=L_{\text{x}} L_{\text{z}}` systems
+
+```{math}
+:label: eq:photoswitching-full-discrete-forward-detailed
+    \underbrace{
+    \begin{bmatrix}
+    \mathbf{H}_{0,0} \\ \mathbf{H}_{1,0} \\ \vdots \\
+    \mathbf{H}_{L_{\text{x}}-1,0} \\ \mathbf{H}_{0,1} \\ \vdots \\
+    \mathbf{H}_{L_{\text{x}}-1,L_{\text{z}}-1}
+    \end{bmatrix}}
+    _{\mathbf{H}}
+    = 
+    \underbrace{
+    \begin{bmatrix}
+    \mathbf{S}_{0,0} & 
+    \mathbf{0} &     
+    \cdots & 
+    \cdots & 
+    \cdots & 
+    \cdots & 
+    \mathbf{0} \\
+    \mathbf{0} & 
+    \mathbf{S}_{1,0} &
+    \ddots &     
+    \cdots & 
+    \cdots & 
+    \cdots & 
+    \vdots \\
+    \vdots & 
+    \ddots &
+    \ddots &     
+    \mathbf{0} & 
+    \cdots & 
+    \cdots & 
+    \vdots \\
+    \vdots & 
+    \cdots & 
+    \mathbf{0} &     
+    \mathbf{S}_{L_{\text{x}}-1,0} &
+    \mathbf{0} & 
+    \cdots & 
+    \vdots \\
+    \vdots & 
+    \cdots & 
+    \cdots & 
+    \mathbf{0} &     
+    \mathbf{S}_{0,1} &
+    \ddots & 
+    \vdots \\
+    \vdots & 
+    \cdots & 
+    \cdots & 
+    \cdots & 
+    \ddots &     
+    \ddots &
+    \mathbf{0} \\
+    \mathbf{0} & 
+    \cdots & 
+    \cdots & 
+    \cdots & 
+    \cdots & 
+    \mathbf{0} &     
+    \mathbf{S}_{L_{\text{x}}-1, L_{\text{z}}-1} \\
+    \end{bmatrix}}
+    _{\mathbf{S}}
+    \underbrace{
+    \begin{bmatrix}
+    \mathbf{c}_{0,0} \\ \mathbf{c}_{1,0} \\ \vdots \\
+    \mathbf{c}_{L_{\text{x}}-1,0} \\ \mathbf{c}_{0,1} \\ \vdots \\
+    \mathbf{c}_{L_{\text{x}}-1,L_{\text{z}}-1}
+    \end{bmatrix}}
+    _{\mathbf{c}},
+
+```
+with deposited energy vector {math}`\mathbf{H} \in \mathbb{R}^{NL}`,
+concentration map vector {math}`\mathbf{c} \in \mathbb{R}^{PL}`,
+and the pooled system matrix {math}`\mathbf{S} \in \mathbb{R}^{NL \times PL}`.
+For the sake of memory efficiency,
+the block matrix {math}`\mathbf{S}_{\boldsymbol{i}}` for all each location is directly constructed using
+Einstein summation {cite:p}`einstein_sum`,
+and the final forward matrix {math}`\mathbf{S}` is implemented as a block-diagonal operator
+without storing the zeros in it via _PyLops_ {cite:p}`pylops`.
+
+By assembling the temporal evolution of all pixels into one linear system,
+we aggregate all available information to reconstruct concentration maps of all reporters at once.
+Compared to pixelwise fitting, our approach enables spatial regularization to increase robustness to noise and
+obtain coherent concentration maps.
+
+(pat1-unmixing-algorithm)=
+## Unmixing Algorithm
+
+The unmixing task is to reconstruct spatial concentration maps of {math}`P` reporters
+from measurements of the optical deposition over time via the linear system
+{eq}`eq:photoswitching-full-discrete-forward-detailed`.
+In a typical photo-switching PAT experiment, {math}`N \sim 10^1`, {math}`P \sim 10^{0}`, and {math}`L \sim 10^6`,
+which yields a linear system of size {math}`\sim 10^{13}`.
+Direct inversion of such a large sparse linear system is computationally challenging and not robust
+against measurement noise.
+We thus follow the methodology introduced in chapter [](#intro-modeling-and-solving-inverse-problems)
+and adopt a model-based approach that retrieves solution to
+{eq}`eq:photoswitching-full-discrete-forward-detailed` via the resolution of an optimization problem
+
+```{math}
+:label: eq:recon_opt
+
+    \hat{\mathbf{c}} \in
+      \text{arg}\min_{\mathbf{c} \geq \mathbf{0}}\left\{\frac{1}{2} 
+        \lVert \mathbf{H} - \mathbf{S}\mathbf{c} \rVert^{2}_{2}
+    +  \mathcal{R}(\mathbf{c}) \right\},
+    
+```
+which involves a quadratic data-fidelity term and a regularization term {math}`\mathcal{R}`.
+Regularization enforces prior information on the solution, which we define as the combination of
+total-variation (TV) and {math}`\ell_1` regularizers given by
+
+```{math}
+:label: eq:regularization
+
+    \mathcal{R}(\mathbf{c}) = \gamma^{\text{TV}} \sum_{p=1}^{P} |\mathbf{c}^p|_{\text{TV}} +
+    \gamma^{\ell_1} \sum_{i_1=0}^{L_{\text{x} - 1}} \sum_{i_2=0}^{L_{\text{z} - 1}}
+    \|\mathbf{c}_{i_1, i_2}\|_1,
+    
+```
+where the nonnegative
+constants {math}`\gamma^{\text{TV}}` and {math}`\gamma^{\ell_1}` are the weights of TV and {math}`\ell_1`
+regularizers.
+We choose the anisotropic TV
+{math}`|\cdot|_{\text{TV}} = \lVert \nabla_{\text{x}} (\cdot) \rVert_1 + \lVert \nabla_{\text{z}} (\cdot) \rVert_1`
+for computational efficiency,
+where {math}`\nabla_\text{x}` and {math}`\nabla_\text{z}` are the finite difference operators
+in the lateral and axial directions, respectively.
+TV-regularization promotes sparse gradients and hence achieves piecewise-smooth reconstructions
+{cite:p}`chambolle_algorithm_2004`;
+{math}`\ell_1`-regularization minimizes cross-talk between different species.
+
+The minimization in {eq}`eq:recon_opt` is a large-scale convex optimization problem.
+For computational speed, we use the limited-memory Broyden–Fletcher–Goldfarb–Shanno algorithm with bound constraints
+(L-BFGS-B) {cite:p}`lbfgsb`.
+The whole pipeline, including forward operator and inverse-problem solver, is implemented using
+_PyLops_, an open-source Python library for large-scale optimization with linear operators {cite:p}`pylops`.

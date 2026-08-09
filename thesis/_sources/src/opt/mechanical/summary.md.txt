@@ -1,0 +1,27 @@
+(opt-mechanical-summary)=
+# Summary
+
+We presented a comprehensive study of geometrical artifacts in a poorly calibrated OPT imaging system.
+We summarized our results in the form of a catalog by combining existing results on the shifted center of rotation and
+our own contribution to the 3D tilt of the rotation axis and the inaccurate rotation angles.
+In doing so, we are able to explain various types of mechanical artifacts, its appearance, cause, and properties,
+as well as the associated correction methods.
+This catalog serves as a reference for OPT practitioners to gain insight into their experimental setup and help them
+better calibrate their hardware system.
+
+To fill the vacancy of a versatile computational method to account for all types of mechanical artifacts, we proposed
+an automatic calibration algorithm.
+It is based on a refined 3D mathematical model of the OPT imaging geometry that is able to characterize mechanical
+errors in the system.
+Moreover, the algorithm adapts to the large-size measurement datasets of OPT by performing the calibration on coarse
+scale to overcome the computational bottleneck, while the final reconstruction of the 3D volume is achieved on fine
+scale.
+Our multiscale calibration scheme was first validated on synthesized bead data where we simulated shifted
+center of rotation and imprecise rotation angles and successfully removed resulting artifacts.
+We then applied our algorithm to experimental datasets of a fluorescent textile fiber containing tilt errors,
+and successfully identified them to obtain an artifact-free reconstruction.
+
+In practice, regularization may be introduced in the final reconstruction step.
+In principle, our geometric calibration framework can be adapted to other tomographic modalities,
+for instance, transmission OPT, optical coherence refraction tomography {cite:p}`Zhou2019` or optical diffraction
+tomography {cite:p}`Sung:09`.

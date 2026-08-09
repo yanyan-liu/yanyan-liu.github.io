@@ -1,0 +1,95 @@
+(opti-mechanical-results)=
+# Results
+
+## Phantom Results
+
+To validate our calibration method,
+we simulated a 3D cube of size {math}`512^3` pixels
+that contains 150 fluorescent beads at random locations as ground truth.
+A positive constant accumulative error of 0.05 degrees in the rotation angles and
+a constant shift of 8 pixels along {math}`x` axis were added to the forward model
+to synthesize a set of 300 projections as measurements.
+Then, we downsampled the measurements to a coarse scale of ({math}`128\times128\times300`) pixels, using
+the MATLAB function {math}`\texttt{imresize}` with bicubic interpolation, for calibration.
+Choice of initial guess was described in [](#opt-calibration-algorithm).
+Reconstruction step of the algorithm was implemented using _GlobalBioIm_,
+an open-source library that provides easy-to-use computational modules
+for solving inverse problems in computational bio-imaging {cite:p}`Soubies:19`.
+Calibration step employed functions from the _Cryo-Em-Refinement_ library {cite:p}`zehni_joint_2020`.
+
+In total, we adopted 10 global rounds of joint reconstruction-calibration,
+each composed of 30 iterations of reconstruction and 6 iterations of calibration
+to avoid overfitting in the presence of model mismatch.
+After having obtained the calibrated system parameters,
+we reconstructed the 3D volume at fine scale ({math}`512^3`).
+We show that without any calibration or shift correction,
+reconstruction contains both circle and seagull-shaped artifacts ({numref}`fig:opt-calibration-simu-result` (a));
+with only shift correction, reconstruction still suffers from seagull artifacts
+({numref}`fig:opt-calibration-simu-result` (b)).
+After applying our calibration algorithm,
+we successfully remove both circle and seagull artifacts
+({numref}`fig:opt-calibration-simu-result` (c)).
+
+```{figure} images/simu_results.*
+:name: fig:opt-calibration-simu-result
+:width: 90%
+
+Reconstructions (a)-(c) and ground truth (d) at slice 147 (out of 512 along {math}`z` axis).
+(a) Without calibration. 
+(b) With shift correction only. 
+(c) With our calibration algorithm. Intensities are normalized and saturated for better visualization.
+```
+
+## Experimental Results
+
+We follow steps in the flowchart ({numref}`fig:opt-calibration-flowchart`)
+to further validate our algorithm on experimental datasets of a fluorescent textile fiber
+with controlled in-plane tilt angles of -3.5, 0, 2.5, and 4 degrees.
+Data were acquired using a focal-sheet-scanning OPT system {cite:p}`Marelli:21`
+which employs a lateral light-sheet illumination to reduce the out-of-focus blur in the images and
+enables the assumption of straight-ray projections.
+We used 720 projections of size {math}`(256 \times 256)`
+that we downsampled to a coarse scale of {math}`(64 \times 64 \times 720)` pixels.
+We used 6 global rounds of joint reconstruction-calibration,
+each composed of 30 iterations of reconstruction and 5 iterations of calibration.
+
+```{figure} images/fiber4000_FBP-FBPshift-calib6noTVrecon.*
+:name: fig:opt-calibration-fiber-result
+:width: 80%
+
+Snapshots of 3D visualization of reconstructions of a fluorescent textile fiber. 
+(a)-(b) Results via the 2D FBP algorithm in slice by slice without correction (a) and with shift correction only (b).
+(c) Result via our calibration algorithm.
+Intensities of images are normalized and saturated for better visualization.
+```
+
+We visualize 3D reconstructions of the fiber with a four-degree tilt
+in {numref}`fig:opt-calibration-fiber-result`.
+Without any correction, we see multiple ghost shadows ({numref}`fig:opt-calibration-fiber-result` (a)).
+After shift correction, these shadows are partially reduced
+({numref}`fig:opt-calibration-fiber-result` (b)).
+After applying our calibration algorithm, we effectively reduce these artifacts
+({numref}`fig:opt-calibration-fiber-result` (b)).
+We show evolution of the cost during the joint reconstruction-calibration in
+{numref}`fig:opt-calibration-fiber-cost-evolution`(a).
+The cost is reduced after each calibration step, especially during the first three rounds,
+yielding a 73\% decrease of cost after 6 global rounds,
+compared to the reconstruction-only scenario without calibration.
+This confirms that calibration managed to reduce the model mismatch.
+
+```{figure} images/cost-compare.*
+:name: fig:opt-calibration-fiber-cost-evolution
+:width: 80%
+
+Convergence and accuracy. 
+(a) Evolution of the cost function of the reconstruction calculated based on {eq}`eq:opt-global-minimization` during the
+calibration process with (solid) and without (dashed) calibration. 
+(b) The calibrated in-plane tilt angle against the true in-plane tilt angle for 4 different values indicated by the
+triangles. The dotted line represents {math}`y=x`. 
+The closer the triangles are to this line, the closer the calibrated angles are to the true angles.
+```
+
+Finally, we compare the four tilt angles recovered by the calibration algorithm and their controlled counterparts
+in {numref}`fig:opt-calibration-fiber-cost-evolution` (b), which show successful outcomes.
+
+The code and data to produce the results are available online {cite:p}`opt1-code`.

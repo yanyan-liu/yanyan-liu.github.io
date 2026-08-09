@@ -1,0 +1,130 @@
+(ms-intro)=
+# Introduction
+
+In the previous two chapters, we have focused on two imaging techniques that aim to achieve a large penetration
+depth beyond the diffusion limit.
+In the last contribution of the thesis, we switch to resolution, the other important aspect of imaging that has been
+introduced in section [](#intro-imaging-resolution) in chapter [](#intro-biomedical-optical-imaging).
+
+We recall that the spatial resolution of optical imaging techniques is governed by the optical diffraction limit,
+which is defined by the numerical aperture (NA) and the excitation wavelength {math}`\lambda`.
+For instance, a confocal microscope can achieve a resolution of ~200 nm given a NA of 1.4 and
+{math}`\lambda=560` nm.
+While this is adequate to study cells and organelles, it is not sufficient to observe proteins in their
+cellular environments.
+Over the past two decades, advances in optical microscopy have pushed resolution beyond the diffraction limit,
+achieving spatial precision down to tens of nanometers.
+Stimulated emission depletion (STED) microscopy was among the first techniques to achieve practical
+super-resolution imaging of subcellular structures {cite:p}`hell1994breaking`.
+These methods now allow researchers to resolve individual proteins within living cells,
+which offers insight into molecular dynamics underlying cellular function and pathology
+{cite:p}`Scarselli2016, wolff_minflux_2023`.
+
+In this chapter, we will focus on localization microscopy, a type of super-resolution microscopy that is
+specialized in localization and tracking of single molecules.
+In particular, we are interested in the point spread function (PSF) of the imaging system, a key enabling feature
+that is central to localization microscopy.
+
+## Overview
+
+(ms-intro-overview)=
+### Localization Microscopy
+
+As mentioned in [](#intro-imaging-beyond-the-diffraction-limit),
+fluorescent super-resolution microscopy techniques break the diffraction limit of light to achieve resolutions
+as good as a few nanometers by manipulating the emission state of fluorophores {cite:p}`hell_far-field_2007`.
+Typical examples include STED (1994) {cite:p}`hell1994breaking`,
+STORM (2006) {cite:p}`rust_sub-diffraction-limit_2006`,
+PALM (2006) {cite:p}`betzig_imaging_2006`,
+and a recent emerging technique called MINFLUX
+(2017) {cite:p}`balzarotti_nanometer_2017`.
+By virtue of localizing single molecules, they are widely used in the study of the structure and function of proteins
+in life sciences {cite:p}`Sillibourne2011, Scarselli2016, Veeraraghavan2016, masch2018, vavrdova_multicolour_2019`.
+In the first part of this chapter, we focus on MINFLUX
+(details on this technique are provided in section [](#minflux-background) of [](#chapter-minflux)).
+
+An important aspect of localization microscopy is its precision.
+With the help of information theory, in particular, the Cramér-Rao bound (CRB),
+one is able to quantify the precision of localization microscopy
+{cite:p}`shechtman_optimal_2014, tzang_two-photon_2019, nehme_deepstorm3d_2020,
+dong2021fundamental, Fu2022, opatovski_depth-enhanced_2024`.
+Information theory shows that the variance of any unbiased estimator for the spatial coordinates of the single
+molecule to be localized is larger than the inverse of the Fisher information matrix (i.e. the CRB).
+Since it is independent of the estimator, CRB provides a theoretical lower limit on the variance of the
+estimation, and thus the attainable precision (square root of the CRB) {cite:p}`ober_localization_2004`.
+We will detail this part in [](#chapter-minflux).
+
+(ms-intro-psf)=
+### Point Spread Function
+
+The key to localization techniques such as STED and MINFLUX is the engineering of their point spread function (PSF).
+Also referred to as the impulse response, PSF is a fundamental concept that encapsulates key features of
+an optical microscope.
+In particular, the excitation PSF describes the shape of light that excites the fluorophores, which is determined
+by the illumination laser and the objective lens;
+the detection PSF represents the shape of light on the camera, which depends on the paths of the emitted photons
+and is usually influenced by the objective, the emission filter, and the pinhole (when it is used, e.g. in confocal
+microscopy).
+Through the design of novel PSFs and excitation patterns, one can achieve a spatial resolution beyond
+the Abbe limit, as has been discussed in [](#intro-imaging-diffraction).
+
+PSF engineering has been a well studied topic in the field of light microscopy.
+For instance, in camera-based 3D localization, work has been done in engineering the excitation
+and/or detection PSFs
+{cite:p}`shechtman_optimal_2014, roider_3d_2017, tzang_two-photon_2019, nehme_deepstorm3d_2020, Fu2022,
+opatovski_depth-enhanced_2024`.
+A common strategy of PSF engineering is via its corresponding phase mask (in Fourier space) expressed on a set of
+basis functions, e.g. Zernike polynomials {cite:p}`lakshminarayanan_zernike_2011`.
+Then, the optimization of the shape of the PSF is indirectly achieved by optimizing the phase mask instead,
+over a loss metric most often based on the CRB.
+Such an approach has been applied to 3D localization in a wide field configuration
+{cite:p}`shechtman_optimal_2014`.
+
+(ms-intro-contributions)=
+## Motivation and Contribution
+
+The focus of this chapter, which divided in two parts, is design and precise characterization of PSFs
+for localization microscopy.
+
+In the first part, we investigate how to improve the localization precision of MINFLUX via PSF engineering.
+We develop an optimization pipeline using CRB as a performance metric to investigate optimal MINFLUX
+excitation configurations through simulation.
+This computational framework is a fast and low-cost alternative to experimental explorations,
+and it provides quick insights on possible directions for discovering new beam shapes.
+The pipeline has a flexible modular structure: it takes as input the coefficients of the Zernike polynomials that
+parameterize the pupil function, then models light propagation,
+and finally outputs the average CRB over a defined region of interest.
+Such a forward model is nonlinear and the optimization of the pupil function is nonconvex.
+As we have discussed in [](#intro-computational-aspects) under the general framework of
+[](#intro-modeling-and-solving-inverse-problems),
+we tackle these challenges via the automatic differentiation capability of PyTorch, a popular
+deep-learning library, to solve the optimization problem.
+We first confirm that the donut beam is an optimal excitation PSF under the constraint
+of a single excitation beam shape;
+we then show that two pairs of orthogonal half-moon beams lead to a further increase
+in the localization precision by a factor of two if more than one beam shape is
+possible, which has recently been implemented experimentally
+{cite:p}`geismann2023fast, deguchi2024simple`.
+Finally, we complement the numerical results with a mathematical analysis of the optimality based on the underlying
+physical intuition: steepness of the gradient of electric field.
+
+In the second part of this chapter, we shift our focus from the specific light propagation model
+used in MINFLUX to the precise characterization of PSFs in the broader context of localization microscopy.
+Particularly for high-NA systems, the scalar Fourier model is insufficient to account for the polarization of the
+electric field and the non-paraxial angles.
+Accurate computation of PSFs thus relies on a more precise model of the propagation of the electric field
+as well as correction factors to compensate for aberrations that may occur in the microscope.
+For instance, the Gibson-Lanni factor is responsible for handling spherical aberrations caused by the mismatch
+of refractive indices between different layers, e.g. the sample and the immersion medium
+{cite:p}`Gibson:92`.
+While numerous studies have covered modeling and computing PSFs, a unified framework that systematically relates
+these approaches and compares their formalisms and parameterizations is missing.
+Therefore, we propose a unifying framework for PSF models in which we show the equivalence
+between the two common approaches, one via Fourier transforms in the Cartesian coordinates,
+and the other via Bessel functions on spherical coordinates.
+In addition to the unifying theory, we distribute an open-source PyTorch-based library called _PSF Generator_.
+It inherits all functionalities of PyTorch, including automatic differentiation,
+which enables seamless integration with deep learning workflows.
+We benchmark the two classes of models on CPU and GPU and show that
+the Bessel model is advantageous for axisymmetric PSFs, while the Fourier one is more general and
+thus more suitable for applications such as PSF engineering.

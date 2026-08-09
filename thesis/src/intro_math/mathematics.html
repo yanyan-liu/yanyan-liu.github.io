@@ -1,0 +1,900 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Correction of Artifacts in Optical Projection Tomography" href="../opt/index.html"><link rel="prev" title="Modeling and Solving of Inverse Problems" href="index.html">
+        <link rel="prefetch" href="../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Overview</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<span id="intro-maths-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h1>
+<p>As seen in the previous chapter,
+biomedical optical imaging relies on the interactions between light and the biological
+object under investigation to retrieve information on its composition, structure, or functionality.
+The measurements of an imaging system, collected by the detector and usually corrupted by noise,
+are often not readily the physical quantities that we are interested in.
+For example, OPT measurements consist of projections of the object acquired from multiple angles
+and do not directly correspond to the image of the object.
+To reconstruct the desired image, we first need to understand the imaging system and
+the relationship between the target quantity and the measured data.
+This step, called the forward problem, typically involves mathematical tools to precisely describe the imaging
+principles and the data acquisition process.
+Once we have crafted a model, we can recover the unknown quantity (e.g., the 3D intensity image in the case of OPT)
+from the measurement (e.g., the sinogram of an OPT experiment) via the resolution of an inverse problem.
+We explain these two steps, the relevant mathematical concepts, and computational tools in detail.
+A generic imaging system is shown in <a class="reference internal" href="#fig-intro-generic-system"><span class="std std-numref">Fig. 9</span></a>.</p>
+<figure class="align-default" id="fig-intro-generic-system">
+<a class="reference internal image-reference" href="../../_images/general_imaging_principle.png"><img alt="../../_images/general_imaging_principle.png" src="../../_images/general_imaging_principle.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">A generic optical imaging system.</span><a class="headerlink" href="#fig-intro-generic-system" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We first introduce the notations for this chapter.
+We write a continuous function defined on the <span class="math notranslate nohighlight">\(d\)</span>-dimensional real space as
+<span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}=(x_1, \ldots, x_d)\in\mathbb{R}^d\)</span>,
+or more compactly <span class="math notranslate nohighlight">\(f(\cdot)\)</span>, or simply <span class="math notranslate nohighlight">\(f\)</span>.
+For instance, a 3D sample is represented by a function <span class="math notranslate nohighlight">\(f\in L_2(\mathbb{R}^3)\)</span>,
+and measurements on the detector plane (in most cases a 2D camera) are denoted by a function <span class="math notranslate nohighlight">\(b\in L_2(\mathbb{R}^2)\)</span>.
+We denote a sequence by <span class="math notranslate nohighlight">\(c[\boldsymbol{k}]\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{k}=(k_1, \ldots, k_d)\in\mathbb{Z}^d\)</span>, or simply <span class="math notranslate nohighlight">\(c[\cdot]\)</span>,
+and an operator by a calligraphic letter, e.g. <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>.
+A vector is written as a bold lowercase letter, e.g. <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.
+A matrix (discrete version of a linear operator) or the discrete version of a non-linear operator is represented by
+a bold uppercase letter, e.g. <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.
+The spaces of square-integrable and square-summable functions are denoted by <span class="math notranslate nohighlight">\(L_2(\mathbb{R}^2)\)</span> and
+<span class="math notranslate nohighlight">\(\ell_2(\mathbb{Z}^2)\)</span>, respectively.
+The <span class="math notranslate nohighlight">\(\ell_p\)</span>-norm of a vector <span class="math notranslate nohighlight">\(\mathbf{c}=(c_1, \ldots, c_N)\in\mathbb{R}^N\)</span> is defined as
+<span class="math notranslate nohighlight">\(\|\mathbf{c}\|_p = \left(\sum_{l=1}^L |c_l|^p\right)^{\frac{1}{p}}\)</span>.
+We mostly encounter the <span class="math notranslate nohighlight">\(\ell_2\)</span>-norm and <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm in this thesis.
+The symbol <span class="math notranslate nohighlight">\(\nabla\)</span> refers to the gradient of either a vector or a function depending on the context.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="forward-model">
+<span id="intro-maths-forward-model"></span><h1>Forward Model<a class="headerlink" href="#forward-model" title="Link to this heading">¶</a></h1>
+<p>The first step towards solving inverse problems is to construct the forward imaging model.
+The closer the model approximates reality, the more likely it is to achieve an accurate estimate of the target image.
+In this section, we explain it with the help of a generic forward operator <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> which encompasses
+the physical acquisition process during an experiment.</p>
+<section id="continuous-formulation">
+<span id="intro-maths-forward-model-continuous"></span><h2>Continuous Formulation<a class="headerlink" href="#continuous-formulation" title="Link to this heading">¶</a></h2>
+<p>We denote the unknown image of interest as <span class="math notranslate nohighlight">\(f\)</span>,
+the measurements as <span class="math notranslate nohighlight">\(b\)</span>,
+and the noise in the measurement as <span class="math notranslate nohighlight">\(n\)</span>.
+Then, we obtain a generic forward model</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-generic-forward-model">
+<div class="math notranslate nohighlight" id="equation-eq-intro-generic-forward-model">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-intro-generic-forward-model" title="Link to this equation">¶</a></span>\[b = \mathcal{A}_{\Theta}(f) + n.\]</div>
+</div>
+<p>The function <span class="math notranslate nohighlight">\(f\in L_2(\mathbb{R}^d)\)</span>, which represents the sample,
+is a square-integrable function on <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>, <span class="math notranslate nohighlight">\(d=2,3\)</span>.
+We usually assume that <span class="math notranslate nohighlight">\(f\)</span> has a compact support <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^d\)</span>,
+where the bounded domain <span class="math notranslate nohighlight">\(\Omega\)</span> is the region of interest in the sample.
+The function <span class="math notranslate nohighlight">\(b\in L_2(\mathbb{R}^2)\)</span> represents the image on the 2D camera plane.
+In practice, experiments inevitably involve some kind of noise in the measurements.
+In <a class="reference internal" href="#equation-eq-intro-generic-forward-model">Eq. (3)</a>, we assume that the noise is additive.
+For instance, a common type of noise is the
+Gaussian noise where its value follows a normal distribution.</p>
+<p>The forward operator <span class="math notranslate nohighlight">\(\mathcal{A}_{\Theta}: L_2(\mathbb{R}^d) \to L_2(\mathbb{R}^2)\)</span> can be linear or nonlinear.
+It often depends on a set of parameters, denoted by <span class="math notranslate nohighlight">\(\Theta\)</span>, which characterizes the imaging system.
+Constructing the operator <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a critical step in any imaging task.
+It requires a solid understanding of the underlying physics, including light propagation,
+optical principles of the system, detector characteristics, and acquisition protocols, as well as appropriate
+mathematical tools for its formulation.
+The operator <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is an approximation to the actual experiment, and
+one needs to find a balance between the accuracy of the model and its
+computational tractability.
+For example, the commonly adopted forward model by OPT practitioners is the 2D Radon transform applied in a
+slice-by-slice fashion, and the main parameter concerned are the rotation angles <span id="id1">[<a class="reference internal" href="../../index.html#id110" title="Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Correction of artefacts in optical projection tomography. Physics in Medicine &amp; Biology, 50(19):4645–4665, sep 2005.">58</a>]</span>.
+This 2D model with parallel geometry is acceptable when the system is well calibrated and
+the sample is well aligned with the rotation stage.
+However, for a poorly calibrated setup, the assumption of the parallel geometry does not necessarily hold.
+One then needs to introduce a 3D model and additional parameters into <span class="math notranslate nohighlight">\(\Theta\)</span>
+while still keeping the complexity of the model manageable.</p>
+</section>
+<section id="discrete-formulation">
+<span id="intro-maths-forward-model-discrete"></span><h2>Discrete Formulation<a class="headerlink" href="#discrete-formulation" title="Link to this heading">¶</a></h2>
+<p>Because real-world detector comprises finite-sized pixels rather than infinitesimal sampling points,
+the continuous forward model described in <a class="reference internal" href="#equation-eq-intro-generic-forward-model">Eq. (3)</a> needs to be discretized.
+To this end, we follow the generalized sampling framework described in <span id="id2">[<a class="reference internal" href="../../index.html#id106" title="Michael Unser. Sampling—50 Years after Shannon. Proceedings of the IEEE, 88(4):569-587, 2000.">59</a>]</span>.
+We introduce a reconstruction space <span class="math notranslate nohighlight">\(V(\varphi)\)</span> in which the unknown function <span class="math notranslate nohighlight">\(f\)</span> is represented by a
+finite sum of a sequence of coefficients <span class="math notranslate nohighlight">\(c[\cdot]\)</span> multiplied by a series of shifted basis functions (dilated
+by a factor of <span class="math notranslate nohighlight">\(T\)</span>)
+:</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-recon-space">
+<div class="math notranslate nohighlight" id="equation-eq-intro-recon-space">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-intro-recon-space" title="Link to this equation">¶</a></span>\[V(\varphi)=\left\{
+\sum_{\boldsymbol{k}\in\Omega_{\text{s}}}c[\boldsymbol{k}]\varphi
+\left(\frac{\cdot}{T}-\boldsymbol{k}\right),
+\quad c \in \ell_2\big(\mathbb{Z}^d\big)\right\}.\]</div>
+</div>
+<p>The discrete representation of the sample is thus a finite vector
+<span class="math notranslate nohighlight">\(\mathbf{c}=\big(c[\boldsymbol{k}]\big)_{\boldsymbol{k}\in\Omega_{\text{s}}}\in\mathbb{R}^N\)</span>,
+which we assume of length <span class="math notranslate nohighlight">\(N\)</span>, and <span class="math notranslate nohighlight">\(\Omega_{\text{s}}\subset \mathbb{Z}^d\)</span> is the compact
+support of the coefficients.
+Then, <a class="reference internal" href="#equation-eq-intro-generic-forward-model">Eq. (3)</a> becomes</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-generic-forward-sampled">
+<div class="math notranslate nohighlight" id="equation-eq-intro-generic-forward-sampled">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-intro-generic-forward-sampled" title="Link to this equation">¶</a></span>\[b(\mathbf{y}) = \mathcal{A}_{\Theta}\left(
+                \sum_{\boldsymbol{k}\in\Omega_{\text{s}}}c[\boldsymbol{k}]
+                \varphi\left(\frac{\cdot}{T}-\boldsymbol{k}\right)
+                \right)(\mathbf{y}) + n(\mathbf{y}).\]</div>
+</div>
+<p>There are many choices for the basis function <span class="math notranslate nohighlight">\(\varphi\)</span>.
+The most popular one is the rectangular function, which is a natural representation of pixels.
+In this case, the coefficients directly correspond to pixel values.
+The selection of the most suitable basis function depends on the specific task.
+For instance, in the correction of OPT artifacts where the differentiability of the basis is important,
+one can adopt the optimized Kaiser-Bessel function <span id="id3">[<a class="reference internal" href="../../index.html#id100" title="Masih Nilchian, John Paul Ward, Cédric Vonesch, and Michael A. Unser. Optimized kaiser–bessel window functions for computed tomography. IEEE Transactions on Image Processing, 24:3826-3833, 2015.">60</a>]</span> which is well-suited
+for computed tomography because of its isotropy.</p>
+<p>We assume that the measurement <span class="math notranslate nohighlight">\(b\)</span> on the 2D detector plane is acquired at sampled points
+<span class="math notranslate nohighlight">\(\mathbf{y}_{\boldsymbol{j}} = \Lambda\boldsymbol{j} = (j_1\Lambda_1,j_2\Lambda_2)\)</span>,
+for <span class="math notranslate nohighlight">\(\boldsymbol{j}\in\Omega_{\text{m}}\subset\mathbb{Z}^2\)</span>.
+The finite set <span class="math notranslate nohighlight">\(\Omega_{\text{m}}\)</span> of size <span class="math notranslate nohighlight">\(M\)</span> denotes the support of the measurement.
+The vector <span class="math notranslate nohighlight">\(\boldsymbol{j}=(j_1,j_2)\)</span> is the index of the sampled points.
+The diagonal matrix <span class="math notranslate nohighlight">\(\Lambda=\text{diag}\left\{\Lambda_1,\Lambda_2\right\}\)</span> encodes
+the sampling steps in the horizontal and vertical directions on the detector plane, with
+<span class="math notranslate nohighlight">\(\Lambda_1\)</span> and <span class="math notranslate nohighlight">\(\Lambda_2\)</span> corresponding to the respective dimensions.
+Similarly, the noise function is sampled at the same positions <span class="math notranslate nohighlight">\(\mathbf{y}_{\boldsymbol{j}}\)</span>.
+We assemble the discrete entries <span class="math notranslate nohighlight">\(b(\Lambda\boldsymbol{j})\)</span> into a measurement vector denoted by
+<span class="math notranslate nohighlight">\(\mathbf{b}\in\mathbb{R}^M\)</span>, similarly for the noise vector <span class="math notranslate nohighlight">\(\mathbf{n}\in\mathbb{R}^M\)</span>.
+The discrete version of <a class="reference internal" href="#equation-eq-intro-generic-forward-model">Eq. (3)</a> finally becomes</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-generic-forward-discrete">
+<div class="math notranslate nohighlight" id="equation-eq-intro-generic-forward-discrete">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-intro-generic-forward-discrete" title="Link to this equation">¶</a></span>\[\mathbf{b} = \mathbf{A}_{\Theta}(\mathbf{c}) + \mathbf{n},\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{A}_{\Theta}: \mathbb{R}^{M} \to \mathbb{R}^N\)</span> is the discrete forward operator.
+In the special case where the forward operator is linear,
+it can be represented by a matrix <span class="math notranslate nohighlight">\(\mathbf{A}_{\Theta}\in\mathbb{R}^{M\times N}\)</span> whose entry, denoted by
+<span class="math notranslate nohighlight">\([\mathbf{A}_{\Theta}]_{\boldsymbol{j}, \boldsymbol{k}}\)</span>, is</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-generic-forward-model-discrete">
+<div class="math notranslate nohighlight" id="equation-eq-intro-generic-forward-model-discrete">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-intro-generic-forward-model-discrete" title="Link to this equation">¶</a></span>\[[\mathbf{A}_{\Theta}]_{\boldsymbol{j}, \boldsymbol{k}} =
+                \mathcal{A}_{\Theta}
+                [\varphi]\left(\frac{\cdot}{T}-\boldsymbol{k}\right)
+                (\Lambda\boldsymbol{j}).\]</div>
+</div>
+<p>The vector <span class="math notranslate nohighlight">\(\mathbf{c}\in\mathbb{R}^N\)</span> represents the unknown quantity of interest.
+Once reconstructed, it can be expanded via the formula in <a class="reference internal" href="#equation-eq-intro-recon-space">Eq. (4)</a> to obtain <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="inverse-problem">
+<span id="intro-maths-inverse-problem"></span><h1>Inverse Problem<a class="headerlink" href="#inverse-problem" title="Link to this heading">¶</a></h1>
+<section id="formulation">
+<span id="intro-maths-inverse-problem-formulation"></span><h2>Formulation<a class="headerlink" href="#formulation" title="Link to this heading">¶</a></h2>
+<p>In many scenarios, the goal of an inverse problem is to reconstruct the sample from its measurements.
+For instance, in OPT, one is interested in obtaining the 3D volumetric intensity map of a sample from a set of its 2D
+projections.
+Mathematically, it corresponds to the following problem:
+given <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, find <span class="math notranslate nohighlight">\(\mathbf{c}^*\)</span>, such that
+<span class="math notranslate nohighlight">\(\mathbf{b} = \mathbf{A}_{\Theta}(\mathbf{c}^*) + \mathbf{n}\)</span>.
+The system parameters <span class="math notranslate nohighlight">\(\Theta\)</span> are either known or separately estimated.
+For simplicity, we omit the subscript <span class="math notranslate nohighlight">\(\Theta\)</span> in <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+<p>In this thesis, we mainly focus on the case where <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a linear model.
+In practice, <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> may be non-invertible, implying that a solution is ill-defined
+or non-unique.
+Even when <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is invertible, direct inversion (via <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span>
+when <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is square) is often impractical in imaging due to its large size.
+When <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is rectangular, the Moore-Penrose
+pseudo-inverse may be used: <span class="math notranslate nohighlight">\((\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\)</span> for full column rank,
+or <span class="math notranslate nohighlight">\(\mathbf{A}^T(\mathbf{A}\mathbf{A}^T)^{-1}\)</span> for full row rank.
+However, if <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is ill-conditioned, these direct methods become numerically unstable in the
+presence of measurement noise.
+In practice, one typically formulates the inverse problem as an optimization problem
+and solve it iteratively until we have reached a good approximate solution.
+To this end, we define an objective function <span class="math notranslate nohighlight">\(J(\cdot)\)</span> (also referred to as a loss or cost function)
+to be minimized.
+The approximate solution is then obtained by finding</p>
+<div class="math-wrapper docutils container" id="equation-src-intro-math-mathematics-0">
+<div class="math notranslate nohighlight" id="equation-src-intro-math-mathematics-0">
+<span class="eqno">(8)<a class="headerlink" href="#equation-src-intro-math-mathematics-0" title="Link to this equation">¶</a></span>\[\mathbf{c}^* \in \text{arg}\min_{\mathbf{c}\in \mathbb{R}^N} J(\mathbf{c}).\]</div>
+</div>
+<p>Typically, one minimizes an objective that contains a data-fidelity term
+<span class="math notranslate nohighlight">\(D(\mathbf{b}, \mathbf{A}(\mathbf{c}))\)</span> (also called data-discrepancy)
+which measures the distance between the collected data <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and
+the current prediction <span class="math notranslate nohighlight">\(\mathbf{A} (\mathbf{c})\)</span>.
+In this thesis, we most often adopt the <span class="math notranslate nohighlight">\(\ell_2\)</span>-norm of the difference between them</p>
+<div class="math-wrapper docutils container" id="equation-src-intro-math-mathematics-1">
+<div class="math notranslate nohighlight" id="equation-src-intro-math-mathematics-1">
+<span class="eqno">(9)<a class="headerlink" href="#equation-src-intro-math-mathematics-1" title="Link to this equation">¶</a></span>\[D(\mathbf{b}, \mathbf{A} (\cdot) ) = \frac{1}{2}\|\mathbf{b} - \mathbf{A} (\cdot)\|_2^2,\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\|\cdot\|_2\)</span> is the <span class="math notranslate nohighlight">\(\ell_2\)</span>-norm of a vector.
+Minimizing the data-fidelity term ensures that the reconstructed image remains consistent with the measurement data.</p>
+<p>In other scenarios, the goal is to optimize the system parameters <span class="math notranslate nohighlight">\(\Theta\)</span>.
+The inverse problem is then formulated as</p>
+<div class="math-wrapper docutils container" id="equation-src-intro-math-mathematics-2">
+<div class="math notranslate nohighlight" id="equation-src-intro-math-mathematics-2">
+<span class="eqno">(10)<a class="headerlink" href="#equation-src-intro-math-mathematics-2" title="Link to this equation">¶</a></span>\[\Theta^* \in \text{arg}\min_{\Theta} J(\Theta).\]</div>
+</div>
+<p>For instance, in localization microscopy, one may seek to engineer the PSF to maximize localization precision.
+In this case, the unknowns to seek are the parameters governing the phase mask,
+and the objective is a function that quantifies the precision of estimating the coordinates of the molecule in the
+field of view.</p>
+</section>
+<section id="regularization-roles-and-choices">
+<span id="intro-maths-regularization"></span><h2>Regularization: Roles and Choices<a class="headerlink" href="#regularization-roles-and-choices" title="Link to this heading">¶</a></h2>
+<p>To improve robustness of the solution against noise in the measurements,
+it is common to introduce an additional regularization term
+<span class="math notranslate nohighlight">\(\mathcal{R}(\cdot)\)</span> (also called a penalty term) to the objective function.
+For instance, the inverse problem for reconstructing the unknown <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> then becomes</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-regularized-recon">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-regularized-recon">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-intro-math-regularized-recon" title="Link to this equation">¶</a></span>\[\mathbf{c}^* \in \text{arg}\min_{\mathbf{c}\in \mathbb{R}^N} \left\{ \frac{1}{2}
+\|\mathbf{b} - \mathbf{A} \mathbf{c}\|_2^2 + \alpha\mathcal{R}(\mathbf{c}) \right\},\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\geq 0\)</span>, called the regularization weight, is an adjustable tradeoff factor.
+The purpose of regularization is to induce stability and
+to incorporate <em>a priori</em> information in the form of constraints to favor a solution that exhibits
+desirable properties <span id="id4">[<a class="reference internal" href="../../index.html#id42" title="Curtis R. Vogel. Computational Methods for Inverse Problems. Society for Industrial and Applied Mathematics, January 2002.">61</a>]</span>.
+It is important to find a balance between the data-fidelity and the regularization terms for the best
+reconstruction results, which relies on tuning the weight <span class="math notranslate nohighlight">\(\alpha\)</span>.
+One heuristic and intuitive method to select the regularization weight is the L-curve method <span id="id5">[<a class="reference internal" href="../../index.html#id43" title="Per Christian Hansen and Dianne Prost O’Leary. The Use of the L-Curve in the Regularization of Discrete Ill-Posed Problems. SIAM Journal on Scientific Computing, 14(6):1487–1503, November 1993.">62</a>]</span>.
+It plots the trade-off between two competing terms:
+the norm of the regularized solution versus the norm of the corresponding residual.
+The shape of this curve resembles the letter L and the <em>corner</em> point represents a balance between the two terms.
+Specifically for imaging applications, it is also practical to evaluate the quality of the reconstructed image to
+determine the optimal regularization weight.</p>
+<p>There are various choices of regularizers from traditional to recent neural-network-based ones.
+Among the traditional ones,
+the most common is the Tikhonov (<span class="math notranslate nohighlight">\(\ell_2\)</span>) type <span id="id6">[<a class="reference internal" href="../../index.html#id36" title="Andrey N. Tikhonov and Vasiliy Y. Arsenin. Solutions of ill-posed problems. V. H. Winston &amp; Sons, Washington, D.C.: John Wiley &amp; Sons, New York, USA, 1977. Translated from the Russian, Preface by translation editor Fritz John, Scripta Series in Mathematics.">63</a>]</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-l2">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-l2">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-intro-math-l2" title="Link to this equation">¶</a></span>\[\mathcal{R}(\cdot) = \frac{1}{2}\|\mathbf{L}(\cdot)\|_2^2,\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is a suitable regularization operator.
+Common choices for <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> are the identity, the gradient, or the Laplacian operator.
+For instance, when <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is the identity, it favors small pixel values in the image,
+while the gradient or the Laplacian penalizes large first-order and second-order derivatives, respectively,
+producing smoothened images.</p>
+<p>Another category is sparsity-based regularization.
+For instance, the <span class="math notranslate nohighlight">\(\ell_1\)</span> regularizer</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-l1">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-l1">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-intro-math-l1" title="Link to this equation">¶</a></span>\[\mathcal{R}(\cdot) = \|\cdot\|_1\]</div>
+</div>
+<p>favors sparse solutions with few nonzero entries and is useful when the image of the sample is sparse in nature.</p>
+<p>Another candidate is total variation (TV) regularization <span id="id7">[<a class="reference internal" href="../../index.html#id38" title="Leonid I. Rudin, Stanley Osher, and Emad Fatemi. Nonlinear total variation based noise removal algorithms. Physica D: Nonlinear Phenomena, 60(1-4):259–268, November 1992.">64</a>]</span>,
+which is well suited for edge-preservation.
+The discrete total variation of a vector is defined as</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-tv">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-tv">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-intro-math-tv" title="Link to this equation">¶</a></span>\[|\cdot|_{\text{TV}} = \|\nabla (\cdot) \|_1\]</div>
+</div>
+<p>where the gradient <span class="math notranslate nohighlight">\((\nabla (\cdot))_l\)</span> at location index <span class="math notranslate nohighlight">\(l\)</span> is defined as
+either the isotropic
+<span class="math notranslate nohighlight">\(\left(\nabla_\text{x} (\cdot))_l^2 + (\nabla_\text{y} (\cdot))_l^2\right)^{\frac{1}{2}}\)</span>
+or anisotropic <span class="math notranslate nohighlight">\((|(\nabla_\text{x} (\cdot))_l| + |(\nabla_\text{y} (\cdot))_l|)\)</span> version.
+Operators <span class="math notranslate nohighlight">\(\nabla_\text{x}\)</span> and <span class="math notranslate nohighlight">\(\nabla_\text{y}\)</span>
+represent the finite differences in the horizontal and vertical directions, respectively.</p>
+<p>This regularization promotes piecewise-constant solutions by applying the sparsity-inducing
+<span class="math notranslate nohighlight">\(\ell_1\)</span>-norm to the gradient of the image.
+It produces images with sharp edges and piecewise-constant values within regions,
+and it is also effective in reducing noise in images.
+These advantages make TV a popular choice for image reconstruction and image analysis tasks.
+However, it may produce undesirable staircase artifacts in smooth regions <span id="id8">[<a class="reference internal" href="../../index.html#id6" title="David C. Dobson and Fadil Santosa. Recovery of Blocky Images from Noisy and Blurred Data. SIAM Journal on Applied Mathematics, 56(4):1181–1198, August 1996.">65</a>]</span>,
+and the reconstruction may lose gradual transitional textures.
+To remedy this, different approaches have been proposed,
+including nonlocal TV <span id="id9">[<a class="reference internal" href="../../index.html#id5" title="Xiaoqun Zhang, Martin Burger, Xavier Bresson, and Stanley Osher. Bregmanized Nonlocal Regularization for Deconvolution and Sparse Reconstruction. SIAM Journal on Imaging Sciences, 3(3):253–276, January 2010.">66</a>]</span>, Hessian-based TV <span id="id10">[<a class="reference internal" href="../../index.html#id4" title="S. Lefkimmiatis, A. Bourquard, and M. Unser. Hessian-Based Norm Regularization for Image Restoration With Biomedical Applications. IEEE Transactions on Image Processing, 21(3):983–995, March 2012.">67</a>]</span>,
+and overlapping sparsity-based TV <span id="id11">[<a class="reference internal" href="../../index.html#id3" title="Jun Liu, Ting-Zhu Huang, Ivan W. Selesnick, Xiao-Guang Lv, and Po-Yu Chen. Image restoration using total variation with overlapping group sparsity. Information Sciences, 295:232–246, Febuary 2015.">68</a>]</span>.</p>
+<p>Recently, advances in neural networks and deep learning have revolutionized numerous research fields,
+and imaging is no exception.
+In 2013, an alternative regularization method called <em>Plug-and-Play</em> priors
+<span id="id12">[<a class="reference internal" href="../../index.html#id44" title="Singanallur V. Venkatakrishnan, Charles A. Bouman, and Brendt Wohlberg. Plug-and-Play priors for model based reconstruction. In 2013 IEEE Global Conference on Signal and Information Processing, 945–948. Austin, TX, USA, December 2013. IEEE.">69</a>]</span>
+expanded the framework of model-based reconstruction to include state-of-the-art neural networks.
+It allows one to plug in any denoiser which acts as an implicit regularizer in the objective function.
+The denoiser can be the classical TV regularizer, learning-based networks such as DRUNet
+<span id="id13">[<a class="reference internal" href="../../index.html#id46" title="Sripad Krishna Devalla, Prajwal K. Renukanand, Bharathwaj K. Sreedhar, Giridhar Subramanian, Liang Zhang, Shamira Perera, Jean-Martial Mari, Khai Sing Chin, Tin A. Tun, Nicholas G. Strouthidis, Tin Aung, Alexandre H. Thiéry, and Michaël J. A. Girard. DRUNET: a dilated-residual U-Net deep learning network to segment optic nerve head tissues in optical coherence tomography images. Biomedical Optics Express, 9(7):3244, July 2018.">70</a>]</span>, or state-of-the-art diffusion models <span id="id14">[<a class="reference internal" href="../../index.html#id47" title="Yuanzhi Zhu, Kai Zhang, Jingyun Liang, Jiezhang Cao, Bihan Wen, Radu Timofte, and Luc Van Gool. Denoising Diffusion Models for Plug-and-Play Image Restoration. In 2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW), 1219–1229. Vancouver, BC, Canada, June 2023. IEEE.">71</a>]</span>.
+This flexible approach has demonstrated convincing performances in improving the image quality compared to traditional
+reconstruction methods <span id="id15">[<a class="reference internal" href="../../index.html#id48" title="Ulugbek S. Kamilov, Charles A. Bouman, Gregery T. Buzzard, and Brendt Wohlberg. Plug-and-Play Methods for Integrating Physical and Learned Models in Computational Imaging: Theory, algorithms, and applications. IEEE Signal Processing Magazine, 40(1):85–97, January 2023.">72</a>]</span> and has become popular in biomedical imaging applications.
+However, theoretical analysis of learning-based approaches remains incomplete.
+Careful selection of denoisers is essential to ensure theoretical guarantees of convergence
+<span id="id16">[<a class="reference internal" href="../../index.html#id45" title="Yaniv Romano, Michael Elad, and Peyman Milanfar. The Little Engine That Could: Regularization by Denoising (RED). SIAM Journal on Imaging Sciences, 10(4):1804–1844, January 2017.">19</a>]</span>.
+In this thesis, we focus on classical regularizers that are handcrafted and
+grounded in well-established theories of inverse problems.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="algorithms">
+<span id="intro-algorithms"></span><h1>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h1>
+<p>The optimization problem defined in <a class="reference internal" href="#equation-eq-intro-math-regularized-recon">Eq. (11)</a> is usually solved
+with an iterative algorithm tailored to the specific regularizer.
+The goal is to design an algorithm that iteratively generates a sequence
+<span class="math notranslate nohighlight">\(\mathbf{c}_k, k=0, 1, \dots\)</span>, which converges to the true solution
+<span class="math notranslate nohighlight">\(\mathbf{c}^*\)</span> given the measurement vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and the forward model <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.
+For practical reasons of memory, the current iteration usually depends on the previous one or two steps
+in most algorithms.
+Depending on the properties of the objective function, such as convexity, continuity, and differentiability,
+the methods and algorithms to solve the optimization problem are classified into different categories.</p>
+<p>In this thesis, we mainly focus on linear models and convex optimization problems.
+The most common algorithms that we have adopted are gradient-based or proximal-gradient methods.
+Before delving into details, we first summarize some common first-order methods
+(based on the gradient of the objective function) and second-order methods
+(based on the Hessian, i.e. second-order derivatives of the objective function).
+In <a class="reference internal" href="#tab-intro-math-optimization-methods-first-order"><span class="std std-numref">Table 1</span></a> and
+<a class="reference internal" href="#tab-intro-math-optimization-methods-second-order"><span class="std std-numref">Table 2</span></a>, we list these methods and the representative algorithms
+along with their convergence rate and related references.</p>
+<div class="table-wrapper colwidths-auto docutils container" id="tab-intro-math-optimization-methods-first-order">
+<table class="docutils align-default" id="tab-intro-math-optimization-methods-first-order">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Common Optimization Methods and Algorithms (First-Order)</span><a class="headerlink" href="#tab-intro-math-optimization-methods-first-order" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Methods</strong></p></th>
+<th class="head"><p><strong>Representative Algorithms</strong></p></th>
+<th class="head"><p><strong>Convergence Rate (Typical)</strong></p></th>
+<th class="head"><p><strong>Problem Class</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gradient Methods</p></td>
+<td><p>Basic Gradient Descent (GD) <span id="id17">[<a class="reference internal" href="../../index.html#id50" title="Augustin Cauchy. Méthode générale pour la résolution des systèmes d'équations simultanées. Comp. Rend. Sci. Paris, 25:536–538, 1847.">73</a>]</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1/k)\)</span></p></td>
+<td><p>Smooth, <br> convex, <br> unconstrained</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>Stochastic Gradient Descent (SGD) <span id="id18">[<a class="reference internal" href="../../index.html#id52" title="Herbert Robbins and Sutton Monro. A Stochastic Approximation Method. The Annals of Mathematical Statistics, 22(3):400–407, September 1951.">74</a>]</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1/\sqrt{k})\)</span> non-convex, <br> <span class="math notranslate nohighlight">\(O(1/k)\)</span> strongly convex</p></td>
+<td><p>Smooth, <br> unconstrained</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>Accelerated Gradient Descent (AGD) <span id="id19">[<a class="reference internal" href="../../index.html#id51" title="Y. E. Nesterov. A method for unconstrained convex minimization problem with the rate of convergence o(1/k^2). Dokl. Akad. Nauk SSSR, 269(3):543-547, 1983.">75</a>]</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1/k^2)\)</span></p></td>
+<td><p>Smooth, <br> convex, <br> unconstrained</p></td>
+</tr>
+<tr class="row-odd"><td><p>Proximal Gradient Methods (PGM)</p></td>
+<td><p>Iterative Shrinkage Thresholding Algorithm (ISTA) <span id="id20">[<a class="reference internal" href="../../index.html#id53" title="I. Daubechies, M. Defrise, and C. De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. Communications on Pure and Applied Mathematics, 57(11):1413–1457, November 2004.">76</a>]</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1/k)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(J = g + h\)</span>, <span class="math notranslate nohighlight">\(g\)</span> smooth, convex; <br> <span class="math notranslate nohighlight">\(h\)</span> non-smooth, convex</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>Fast ISTA (FISTA) <span id="id21">[<a class="reference internal" href="../../index.html#id210" title="Amir Beck and Marc Teboulle. A fast iterative shrinkage-thresholding algorithm for linear inverse problems. SIAM Journal on Imaging Sciences, 2(1):183-202, 2009.">77</a>]</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1/k^2)\)</span></p></td>
+<td><p>same as ISTA</p></td>
+</tr>
+<tr class="row-odd"><td><p>Primal-Dual Methods</p></td>
+<td><p>Chambolle-Pock <span id="id22">[<a class="reference internal" href="../../index.html#id286" title="Antonin Chambolle and Thomas Pock. A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging. Journal of Mathematical Imaging and Vision, 40(1):120–145, May 2011.">78</a>]</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1/k)\)</span></p></td>
+<td><p>Saddle point problems</p></td>
+</tr>
+<tr class="row-even"><td><p>Splitting Methods</p></td>
+<td><p>Alternating Direction Method of Multipliers (ADMM) <span id="id23">[<a class="reference internal" href="../../index.html#id49" title="Stephen Boyd. Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers. Foundations and Trends® in Machine Learning, 3(1):1–122, 2010.">79</a>]</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1/k)\)</span></p></td>
+<td><p>Convex separable problems in different spaces and equality constraints</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When the objective function is smooth, i.e., continuously differentiable,
+the family of gradient methods, including the gradient descent algorithm and its variants, can be adopted.
+For instance,</p>
+<div class="table-wrapper colwidths-auto docutils container" id="tab-intro-math-optimization-methods-second-order">
+<table class="docutils align-default" id="tab-intro-math-optimization-methods-second-order">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Common Optimization Methods and Algorithms (Second-Order)</span><a class="headerlink" href="#tab-intro-math-optimization-methods-second-order" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Methods</strong></p></th>
+<th class="head"><p><strong>Representative Algorithms</strong></p></th>
+<th class="head"><p><strong>Convergence Rate</strong></p></th>
+<th class="head"><p><strong>Problem Class</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Newton Methods</p></td>
+<td><p>Basic Newton Method <span id="id24">[<a class="reference internal" href="../../index.html#id55" title="J. E. Dennis and Robert B. Schnabel. Numerical methods for unconstrained optimization and nonlinear equations. Number 16 in Classics in applied mathematics. Society for Industrial and Applied Mathematics, Philadelphia, USA, 1996.">80</a>]</span></p></td>
+<td><p>Quadratic (local)</p></td>
+<td><p>Smooth, <br> twice-differentiable, <br> unconstrained</p></td>
+</tr>
+<tr class="row-odd"><td><p>Quasi-Newton Methods</p></td>
+<td><p>L-BFGS <span id="id25">[<a class="reference internal" href="../../index.html#id289" title="Richard H. Byrd, Peihuang Lu, Jorge Nocedal, and Ciyou Zhu. A limited memory algorithm for bound constrained optimization. SIAM Journal on Scientific Computing, 16(5):1190-1208, 1995.">81</a>]</span></p></td>
+<td><p>Superlinear</p></td>
+<td><p>Smooth</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>the objective of the following <span class="math notranslate nohighlight">\(\ell_2\)</span>-regularized minimization for a linear inverse problem</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-linear-minimization-with-l2-regularization">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-linear-minimization-with-l2-regularization">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-intro-math-linear-minimization-with-l2-regularization" title="Link to this equation">¶</a></span>\[    \text{arg}\min_{\mathbf{c} \in \mathbb{R}^N} \left\{ J(\mathbf{c}) =
+    \frac{1}{2}\|\mathbf{b} - \mathbf{Ac}\|^2_2
+    + \frac{\alpha}{2}\|\mathbf{Lc}\|_2^2\right\},\]</div>
+</div>
+<p>is smooth.
+In this case, the accelerated gradient descent algorithm is a common choice:
+given the current iterate <span class="math notranslate nohighlight">\(\mathbf{c}_k\)</span>, it computes</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-agd">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-agd">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-intro-math-agd" title="Link to this equation">¶</a></span>\[\begin{split}&amp; \boldsymbol{d}_{k} = \mathbf{c}_k - s_k\nabla J(\mathbf{c}_k) \\
+&amp; t_{k+1} = \frac{1 + \sqrt{1 + 4t_k^2}}{2} \\
+&amp; \mathbf{c}_{k+1} = \boldsymbol{d}_k + \frac{t_k - 1}{t_{k+1}} (\boldsymbol{d}_k - \boldsymbol{d}_{k-1}).\end{split}\]</div>
+</div>
+<p>The first line in <a class="reference internal" href="#equation-eq-intro-math-agd">Eq. (16)</a> is the gradient-descent step and
+<span class="math notranslate nohighlight">\(\nabla J\)</span> represents the gradient of the objective.
+The last two lines in <a class="reference internal" href="#equation-eq-intro-math-agd">Eq. (16)</a> are the acceleration steps based on momentum, which was proposed by
+Nesterov <span id="id26">[<a class="reference internal" href="../../index.html#id51" title="Y. E. Nesterov. A method for unconstrained convex minimization problem with the rate of convergence o(1/k^2). Dokl. Akad. Nauk SSSR, 269(3):543-547, 1983.">75</a>]</span>.
+If we set a constant stepsize <span class="math notranslate nohighlight">\(s_k=1/L\)</span>,
+where <span class="math notranslate nohighlight">\(L\)</span> is an upper bound of the Lipschitz constant of <span class="math notranslate nohighlight">\(\nabla J\)</span>, the algorithm has a
+convergence rate of <span class="math notranslate nohighlight">\(O(1/k^2)\)</span>.</p>
+<p>When the objective function is twice-differentiable,
+one can deploy a second-order method based on the Hessian of the objective function.
+Second-order methods require more memory as they need to store additionally the Hessian of the objective.
+Methods with reduced memory requirements have been proposed to circumvent this issue,
+such as the limited-memory Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) algorithm <span id="id27">[<a class="reference internal" href="../../index.html#id289" title="Richard H. Byrd, Peihuang Lu, Jorge Nocedal, and Ciyou Zhu. A limited memory algorithm for bound constrained optimization. SIAM Journal on Scientific Computing, 16(5):1190-1208, 1995.">81</a>]</span>.
+Second-order methods converge much faster, especially when the Hessian (or an approximation of it)
+is explicitly provided.</p>
+<p>In this thesis, we have also encountered objective functions <span class="math notranslate nohighlight">\(J\)</span> that are
+composed of a smooth part <span class="math notranslate nohighlight">\(g\)</span> (e.g. the quadratic data term)
+combined with a nonsmooth part <span class="math notranslate nohighlight">\(h\)</span> (e.g., the sparsity-based regularizer
+<span class="math notranslate nohighlight">\(\mathcal{R}(\mathbf{c}) = \|\mathbf{Lc}\|_1\)</span> that we have introduced in <a class="reference internal" href="#intro-maths-regularization"><span class="std std-ref">Regularization: Roles and Choices</span></a>).
+In this case, we deploy the proximal gradient method, also known as the forward-backward splitting method,
+which is suitable for such a separable structure.
+The updates of the proximal gradient algorithm for the optimization problem
+<span class="math notranslate nohighlight">\(\text{arg}\min_{\mathbf{c}\in \mathbb{R}^N} \left\{ J(\mathbf{c}) = g(\mathbf{c}) + h(\mathbf{c}) \right\}\)</span> are:
+Given the current iterate <span class="math notranslate nohighlight">\(\mathbf{c}_k\)</span>, the next iterate is computed by</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-pgd">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-pgd">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-intro-math-pgd" title="Link to this equation">¶</a></span>\[\mathbf{c}_{k+1} = \text{prox}_{s_k h}(\mathbf{c}_{k} - s_k \nabla g(\mathbf{c}_{k})).\]</div>
+</div>
+<p>The stepsize <span class="math notranslate nohighlight">\(s_k&gt;0\)</span> is computed similarly as in the smooth case.
+The proximal operator of the function <span class="math notranslate nohighlight">\(h: \mathbb{R}^N \to \mathbb{R}\)</span> is defined as the solution to
+another minimization problem (which is essentially a denoising problem)</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-proximal-operator">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-proximal-operator">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-intro-math-proximal-operator" title="Link to this equation">¶</a></span>\[\text{prox}_{h}(\cdot) = \text{arg}\min_{\boldsymbol{\eta}} \left\{
+\frac{1}{2} \|\cdot - \boldsymbol{\eta} \|_2^2 + h(\boldsymbol{\eta})
+\right\}.\]</div>
+</div>
+<p>When <span class="math notranslate nohighlight">\(h(\cdot)=\alpha\|\cdot\|_1\)</span>, i.e., the <span class="math notranslate nohighlight">\(\ell_1\)</span> regularizer,
+the proximal operator in <a class="reference internal" href="#equation-eq-intro-math-proximal-operator">Eq. (18)</a> admits a closed-form expression</p>
+<div class="math-wrapper docutils container" id="equation-eq-intro-math-prox-of-l1">
+<div class="math notranslate nohighlight" id="equation-eq-intro-math-prox-of-l1">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-intro-math-prox-of-l1" title="Link to this equation">¶</a></span>\[\text{prox}_{\alpha\|\cdot\|_1}(\cdot) = \tau_{\alpha}(\cdot),\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\tau_{\theta}(\cdot)\)</span> is the element-wise soft-thresholding operator
+<span class="math notranslate nohighlight">\(\tau_{\theta}(\mathbf{c})_n = \max(|c_n| - \theta, 0)\text{sgn}(c_n)\)</span> <span id="id28">[<a class="reference internal" href="../../index.html#id210" title="Amir Beck and Marc Teboulle. A fast iterative shrinkage-thresholding algorithm for linear inverse problems. SIAM Journal on Imaging Sciences, 2(1):183-202, 2009.">77</a>]</span>.
+Common choices of algorithms in this case include
+the iterative thresholding algorithm (ISTA) and FISTA (its Nesterov-accelerated version) <span id="id29">[<a class="reference internal" href="../../index.html#id210" title="Amir Beck and Marc Teboulle. A fast iterative shrinkage-thresholding algorithm for linear inverse problems. SIAM Journal on Imaging Sciences, 2(1):183-202, 2009.">77</a>]</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(h(\cdot)=\alpha\|\nabla(\cdot)\|_1\)</span>, i.e., the TV regularizer, the corresponding proximal operator
+no longer admits a closed-form solution, and an extra inner loop is required to compute it.
+For instance, one can switch to the dual problem in <a class="reference internal" href="#equation-eq-intro-math-proximal-operator">Eq. (18)</a> which can be solved
+with a gradient descent step followed by a projection onto the <span class="math notranslate nohighlight">\(L_{\infty}\)</span>-ball
+(see <a class="reference internal" href="../photoacoustic/pat2/index.html#pat2"><span class="std std-ref">Part II: Global Unmixing Framework Directly from Acoustic Signals</span></a> for details).</p>
+<p>Apart from convex problems, we have also encountered nonconvex optimization in this thesis, for instance,
+the calibration of the system parameters for OPT in chapter <a class="reference internal" href="../opt/index.html#chapter-opt"><span class="std std-ref">Correction of Artifacts in Optical Projection Tomography</span></a> and the optimization of the
+illumination pattern for MINFLUX in chapter <a class="reference internal" href="../microscopy/minflux/index.html#chapter-minflux"><span class="std std-ref">Optimal Excitation Patterns in MINFLUX via PSF Engineering</span></a>.
+Since the objective functions are smooth, we have chosen gradient-based first-order algorithms in these cases
+(see respective chapters for details).
+Due to the nonconvexity, there may exist multiple local optima, and the initialization of the algorithm is important.
+It is good practice to use a warm start, i.e., a guess based on available information.
+For instance, in OPT, where the errors in the unknown parameters are typically small,
+the ideal system parameters serve as viable initialization.
+In MINFLUX, the standard donut beam pattern provides a suitable starting point.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computational-aspects">
+<span id="intro-computational-aspects"></span><h1>Computational Aspects<a class="headerlink" href="#computational-aspects" title="Link to this heading">¶</a></h1>
+<p>We have seen that successful resolution of inverse problems in an imaging application relies on an accurate
+physics-based forward model, a proper formulation of the inverse problem, and a carefully designed optimization
+algorithm.
+In this section, we address implementation and computational considerations which are also critical to successful
+inversion.</p>
+<p>Computational speed can be optimized according to the specific task at hand.
+For instance, the default approach to compute convolution between dense vectors is the fast Fourier transform;
+while for sparse kernels, direct computation in the original domain combined with a sparse representation
+of the kernel may offer better performance (see chapter <a class="reference internal" href="../photoacoustic/index.html#chapter-pa"><span class="std std-ref">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</span></a>).
+For algorithms, the optimal choice depends on the scale of the problem, the requirement of the algorithm,
+and available computational resources.
+For instance, second-order methods, while converging faster than first-order alternatives, require additional memory
+to store higher-order derivatives.</p>
+<p>For small- to medium-scale problems, it often suffices to solve them on a local machine and obtain a solution
+within a reasonable timeframe.
+For large-scale problems, remote computational resources, graphic processing unit (GPU) or
+just-in-time compilation are often essential (see chapter <a class="reference internal" href="../photoacoustic/index.html#chapter-pa"><span class="std std-ref">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</span></a>).</p>
+<section id="matrix-free-operators">
+<h2>Matrix-Free Operators<a class="headerlink" href="#matrix-free-operators" title="Link to this heading">¶</a></h2>
+<p>Linear models can be explicitly computed and stored as a matrix,
+which is a viable approach when the size of the operator is modest.
+However, in many applications, this becomes impractical if the size of the problem is prohibitively large.
+For instance, in a typical OPT experiment, let us assume the 3D sample is of size <span class="math notranslate nohighlight">\(128^3\)</span> pixels and
+the 2D camera produces 1200 projection images each of size <span class="math notranslate nohighlight">\(1024^2\)</span> pixels.
+The resulting forward matrix has ~<span class="math notranslate nohighlight">\(10^{15}\)</span> entries, making explicit storage infeasible.</p>
+<p>One alternative is to implement a matrix-free operator, provided that
+the forward model can be expressed as a sequence of simple or modular operations.
+This is feasible for many imaging tasks, for instance,
+in OPT reconstruction (via the X-ray transform, see chapter <a class="reference internal" href="../opt/index.html#chapter-opt"><span class="std std-ref">Correction of Artifacts in Optical Projection Tomography</span></a>), and
+MINFLUX optimization of the illumination pattern (via Fourier transforms, see chapter <a class="reference internal" href="../microscopy/minflux/index.html#chapter-minflux"><span class="std std-ref">Optimal Excitation Patterns in MINFLUX via PSF Engineering</span></a>).
+The core elements of any matrix-free operator are its forward and adjoint implementations.
+Numerous examples are available in open-source libraries such as <em>GlobalBioIm</em> <span id="id30">[<a class="reference internal" href="../../index.html#id125" title="Emmanuel Soubies, Ferréol Soulez, Michael T McCann, Thanh-an Pham, Laurène Donati, Thomas Debarre, Daniel Sage, and Michael Unser. Pocket guide to solve inverse problems with GlobalBioIm. Inverse Problems, 35(10):104006, sep 2019.">82</a>]</span>, <em>PyLops</em>
+<span id="id31">[<a class="reference internal" href="../../index.html#id251" title="Matteo Ravasi and Ivan Vasconcelos. Pylops—a linear-operator python library for scalable algebra and optimization. SoftwareX, 11:100361, 2020.">83</a>]</span>, and <em>Pyxu</em> <span id="id32">[<a class="reference internal" href="../../index.html#id9" title="Matthieu Simeoni, Sepand Kashani, Joan Rué-Queralt, and Pyxu Developers. Pyxu-org/pyxu: pyxu.">84</a>]</span>.</p>
+</section>
+<section id="data-preprocessing">
+<h2>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">¶</a></h2>
+<p>When processing data from modern high-performance instruments, a common challenge is
+the sheer volume of raw measurements.
+Directly applying inversion algorithms to full-resolution data is often infeasible and frequently unnecessary.
+Preprocessing steps such as region-of-interest segmentation (to exclude irrelevant data) and downsampling
+(to reduce the data size) are essential for computational efficiency.
+A practical compromise is to solve the inverse problem at a coarse resolution, then refine the results to finer
+resolution, to balance accuracy, speed, and resource constraints (see <a class="reference internal" href="../opt/index.html#chapter-opt"><span class="std std-ref">Correction of Artifacts in Optical Projection Tomography</span></a> and <a class="reference internal" href="../microscopy/minflux/index.html#chapter-minflux"><span class="std std-ref">Optimal Excitation Patterns in MINFLUX via PSF Engineering</span></a> for details).</p>
+</section>
+<section id="automatic-differentiation">
+<h2>Automatic Differentiation<a class="headerlink" href="#automatic-differentiation" title="Link to this heading">¶</a></h2>
+<p>A key requirement of the iterative algorithms discussed in <a class="reference internal" href="#algorithms"><span class="std std-ref">Algorithms</span></a> is
+the efficient computation of derivatives of the objective function.
+If the forward operator is a simple function, it is straightforward to compute its derivatives.
+However, some models are so elaborate that deriving explicit gradients is either intractable or impractical.
+For instance, the forward model of MINFLUX (see chapter <a class="reference internal" href="../microscopy/minflux/index.html#chapter-minflux"><span class="std std-ref">Optimal Excitation Patterns in MINFLUX via PSF Engineering</span></a>)
+comprises multiple complex operations in the shape of a feed-forward neural network.
+To address this, we implement the forward model using <em>PyTorch</em>, to
+leverage its automatic differentiation feature to compute gradients numerically.
+We also benefit from the built-in optimization algorithms of <em>PyTorch</em>,
+such as stochastic gradient descent and Adam <span id="id33">[<a class="reference internal" href="../../index.html#id10" title="Diederik P. Kingma and Jimmy Ba. Adam: a method for stochastic optimization. In 3rd International Conference on Learning Representations (ICLR). San Diego, CA, USA, 2015.">85</a>]</span>.</p>
+<p>In summary, successful resolution of inverse problems in optical imaging depends on an accurate forward model,
+a suitable algorithm, and a carefully designed high-performance implementation.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../opt/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Correction of Artifacts in Optical Projection Tomography</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Modeling and Solving of Inverse Problems</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

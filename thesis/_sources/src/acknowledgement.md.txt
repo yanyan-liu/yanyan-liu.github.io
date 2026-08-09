@@ -1,0 +1,57 @@
+# Acknowledgement
+
+I would like to express my gratitude for everyone that has generously offered their support and help during my PhD
+at EPFL.
+First of all, I would like to thank my advisors Prof. Michael Unser and Dr. Jonathan Dong.
+Under their guidance, I have progressed and learned a lot over the past five years in many interesting research projects.
+In particular, Jonathan has not only been my academic supervisor, but also a close friend.
+The many hours that we have spent together on advancing different projects and
+attending events inside and outside EPFL have
+become a precious memory during my stay at the Biomedical Imaging Group.
+I am indebted to Michael and Jonathan for my knowledge in imaging and optics as well as the continuous support
+that I have received from them throughout my PhD.
+I would like to thank my mentor, Prof. Andrei Popescu-Belis, for his heartful support of me all these years.
+I would also like to thank the members in my thesis jury: Prof. Jean-Philippe Thiran, Prof. Yves Bellouard,
+Prof. Sylvain Gigan, and Dr. Emmanuel Soubies, for taking their time to review my work and attending my defense.
+
+Thanks to the platform provided to me by our lab, I have had many great opportunities to collaborate
+with experts in Switzerland and Europe on different topics.
+Without their generous offer of experimental datasets or precious insights from their respective field,
+the work accomplished in this thesis would have not been possible.
+Hence, I would like to thank our collaborators: Dr. François Marelli from Idiap,
+Dr. Cédric Schmidt from the University of Geneva,
+Prof. André C. Stiel, Dr. Hailong He, and Dr. Yishu Huang from the Helmholtz Zentrum Müchen,
+Prof. Francisco Balzarotti and Mehrta Shirzadian from the Vienna BioCenter.
+I owe my knowledge about each of the three imaging modalities in my thesis to them.
+
+My appreciation extends to Dr. Aleix Boquet I Pujadas, Dr. Daniel Sage, and Dr. Vasiliki Stergiopoulou from EPFL for
+the time that we have spent together on fruitful discussions over different projects,
+and Dr. Martin Zach for helping to proofread sections in my thesis.
+In particular, I would like to thank Jonathan Chuah, an expert in computational science, with whom I have had a very
+pleasant and productive time while working on photoacoustic imaging.
+
+I would like to express my deep appreciation for my academic mentors along the way: Prof. Habib Ammari for the warm
+support and strong belief in me during my time at ETH, Prof. Wuwei Ren for introducing me to the field of optical imaging in 2018,
+and Prof. Hui Zhang for supporting me to pursue higher degrees in Europe during my last year at Beijing Normal University.
+I would have not made it so far without their guidance.
+
+Besides research, I have shared many happy moments with my friends
+in the beautiful nature of Switzerland in summer and in winter.
+I would like to thank them for the good times and the warm support that I have received over the years.
+In particular, the time that I have spent with Jonathan, Aleix and Susana, Jonathan (Chuah), Sepideh, Mehrsa, Xinlin,
+Vasi, Pakshal, Alessio, Philip, Muze, Hongruyu and Zhiyuan has become a dear memory to me.
+
+I would have not pulled through the many years of my studies without the unconditional support from my loving family.
+I would like to thank my parents and my brother, especially my mother, for always believing in me and taking
+care of me.
+I am thankful for the genuine support from my parents-in-law for always being there for me over the years.
+
+Finally, I would like to dedicate my thesis to and share every success that I have achieved since 2018 with my husband,
+my best friend, Eric.
+It is safe to say that without his wholehearted support in my work or life, I would have not become who I am today.
+Eric was there for me when I was troubled by my studies, when I was in hospital, and when I was nervous in presentations.
+Eric was there for me when I moved from Zürich to Lausanne, when I struggled with work, and when I defended my thesis.
+Eric was there for me when I wanted to give up so many times.
+He is truly the hidden hero behind all my achievements and I have learned so much from him.
+Together as a team, we have moved mountains.
+I cannot find enough words to describe my gratitude for him.

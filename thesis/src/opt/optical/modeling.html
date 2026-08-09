@@ -1,0 +1,561 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Results" href="results.html"><link rel="prev" title="Background" href="background.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Problem Statement</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<style>
+  .ss-layout-default-A_B { grid-template-areas: 'A' 'B'; }
+</style>
+<section class="tex2jax_ignore mathjax_ignore" id="problem-statement">
+<span id="opt-optical-problem-formulation"></span><h1>Problem Statement<a class="headerlink" href="#problem-statement" title="Link to this heading">¶</a></h1>
+<p>Before an emission OPT experiment, the rotation axis is carefully adjusted to be perpendicular to the optical axis,
+so that the projection data of one slice of the volume are recorded in a row of pixels on the detector
+<span id="id1">[<a class="reference internal" href="../../../index.html#id109" title="James Sharpe. Optical projection tomography. Annual Review of Biomedical Engineering, 6(1):209-228, 2004.">11</a>]</span>.
+When the effect of refraction, diffraction, scattering, or defocusing is negligible,
+the emitted light propagates through the sample, the RI-matching liquid,
+and the telecentric lens system in parallel straight lines (see <a class="reference internal" href="#fig-opt-optical-setup"><span class="std std-numref">Fig. 16</span></a>).</p>
+<figure class="sphinx-subfigure align-default" id="fig-opt-optical-setup" style="width: 80">
+<div class="sphinx-subfigure-grid ss-layout-default-A_B" style="display: grid;">
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: A;">
+<img alt="OPT geometry" src="../../../_images/opt_optical_setup.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: B;">
+<img alt="Refraction" src="../../../_images/opt_refraction.png" />
+</div>
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Emission OPT geometry in the ideal case and in the non-ideal case where the refractive indices do not match.
+(Top) Emission OPT viewed from the top.
+The sample, fixed in agarose gel of RI <span class="math notranslate nohighlight">\(n_1\)</span>, is placed inside a glass container filled with an immersion liquid
+of RI <span class="math notranslate nohighlight">\(n_2\)</span>.
+The fluorophores inside the sample emit light that propagates through the object-space telecentric lens system and gets
+recorded by the camera.
+More details about the experimental system can be found in <span id="id2">[<a class="reference internal" href="../../../index.html#id140" title="Cédric Schmidt, Arielle L. Planchette, David Nguyen, Gabriel Giardina, Yoan Neuenschwander, Mathieu Di Franco, Alessio Mylonas, Adrien C. Descloux, Enrico Pomarico, Aleksandra Radenovic, and Jérôme Extermann. High resolution optical projection tomography platform for multispectral imaging of the mouse gut. Biomedical Optics Express, 12(6):3619–3629, June 2021.">13</a>]</span>.
+(Bottom) Ideal case (orange) and RI mismatch (blue).
+Only rays parallel to the optical axis are considered due to the low-NA fluorescence collection in OPT.
+The RI <span class="math notranslate nohighlight">\(n_1\)</span>  of the agarose differs from the RI <span class="math notranslate nohighlight">\(n_2\)</span> of the immersion liquid.
+This creates a lensing effect, with a virtual focus at position <span class="math notranslate nohighlight">\(O'\)</span> on the optical axis.</span><a class="headerlink" href="#fig-opt-optical-setup" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Accordingly, the standard forward model for OPT is the Radon transform <span id="id3">[<a class="reference internal" href="../../../index.html#id129" title="Frank Natterer. The mathematics of computerized tomography. Number 32 in Classics in applied mathematics. Society for Industrial and Applied Mathematics, Philadelphia, USA, 2001.">94</a>, <a class="reference internal" href="../../../index.html#id120" title="Ville Koljonen, Olli Koskela, Toni Montonen, Atena Rezaei, Birhanu Belay, Edite Figueiras, Jari Hyttinen, and Sampsa Pursiainen. A mathematical model and iterative inversion for fluorescent optical projection tomography. Physics in Medicine &amp; Biology, 64(4):045017, Febuary 2019.">108</a>]</span>,
+which in 3D is typically inverted in a slice-by-slice fashion using the filtered backprojection (FBP) algorithm
+<span id="id4">[<a class="reference internal" href="../../../index.html#id109" title="James Sharpe. Optical projection tomography. Annual Review of Biomedical Engineering, 6(1):209-228, 2004.">11</a>, <a class="reference internal" href="../../../index.html#id129" title="Frank Natterer. The mathematics of computerized tomography. Number 32 in Classics in applied mathematics. Society for Industrial and Applied Mathematics, Philadelphia, USA, 2001.">94</a>]</span>.
+In reality, when the RI of the sample does not match the RI of the immersion liquid,
+the path along which light propagates is altered so that the parallel-beam assumption no longer holds.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="modeling-of-ri-mismatch">
+<span id="opt-optical-modeling"></span><h1>Modeling of RI Mismatch<a class="headerlink" href="#modeling-of-ri-mismatch" title="Link to this heading">¶</a></h1>
+<p>Let us consider a 2D transverse slice of the sample in the liquid bath as depicted in
+<a class="reference internal" href="#fig-opt-optical-setup"><span class="std std-numref">Fig. 16</span></a>.
+We denote the RI of the agarose gel and the liquid bath as <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>,
+respectively, and the radius of the cylinder as <span class="math notranslate nohighlight">\(R\)</span>.
+When <span class="math notranslate nohighlight">\(n_1=n_2\)</span>, light follows parallel straight lines as it travels through the sample,
+liquid bath, and finally the flat wall of the cuvette (see the orange lines in <a class="reference internal" href="#fig-opt-optical-setup"><span class="std std-numref">Fig. 16</span></a>).
+When <span class="math notranslate nohighlight">\(n_1 &lt; n_2\)</span>,
+light is refracted at the interface that separates the agarose cylinder from the liquid bath.
+Propagation of the refracted light is illustrated by the blue lines in <a class="reference internal" href="#fig-opt-optical-setup"><span class="std std-numref">Fig. 16</span></a>.
+The extended incident rays (blue lines inside the cylinder in <a class="reference internal" href="#fig-opt-optical-setup"><span class="std std-numref">Fig. 16</span></a>)
+intersect at a point <span class="math notranslate nohighlight">\(O'\)</span> on the optical axis (dotted red lines in <a class="reference internal" href="#fig-opt-optical-setup"><span class="std std-numref">Fig. 16</span></a>).
+Hence, the front wall (close to the detector side)
+of the cylinder can be thought of as a diverging lens whose virtual focus <span class="math notranslate nohighlight">\(O'\)</span> is on the optical axis.
+Rays inside the cylinder can then be approximated by a fan beam,
+the origin of which coincides with the virtual focus.</p>
+<p>Such a picture is based on two common assumptions in ray optics, to keep our model computationally tractable.
+First, we make the paraxial assumption, namely, that the point emitters are close to the optical axis.
+Second, we consider difference in RIs to be small (<span class="math notranslate nohighlight">\(\Delta n = |n_2-n_1| \ll n_1\)</span>),
+so that the resulting origin of the fan beam is far away from the cylinder.
+Under these assumptions,
+we can calculate the location of the virtual focus of the diverging lens (i.e., the origin of the fan beam)
+as follows.
+Let us focus on the 2D transverse slice of the cylinder shown in <a class="reference internal" href="#fig-opt-optical-cone-beam-geometry"><span class="std std-numref">Fig. 17</span></a>).</p>
+<figure class="align-default" id="fig-opt-optical-cone-beam-geometry">
+<a class="reference internal image-reference" href="../../../_images/opt_geometry.png"><img alt="../../../_images/opt_geometry.png" src="../../../_images/opt_geometry.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Geometry of light refraction at the interface of the cylinder and the immersion liquid.
+RIs inside and outside the circle are <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>, respectively.</span><a class="headerlink" href="#fig-opt-optical-cone-beam-geometry" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Relevant quantities are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R\)</span>: radius of the disk</p></li>
+<li><p><span class="math notranslate nohighlight">\(A (x_A, y_a)\)</span>: position of emitter</p></li>
+<li><p><span class="math notranslate nohighlight">\(P (\hat x, \hat y)\)</span>: incident point on the surface of the cylinder</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta x&gt;0\)</span>: vertical displacement between the emitter and <span class="math notranslate nohighlight">\(P\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O'\)</span>: intersection of the incident ray with <span class="math notranslate nohighlight">\(y\)</span>-axis</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span>: refracted angle such that the refracted ray is parallel to the optical axis</p></li>
+<li><p><span class="math notranslate nohighlight">\((\theta + \delta \theta)\)</span>: incident angle</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta n=(n_2-n_1)\)</span>: RI mismatch which is assumed to be small with respect to <span class="math notranslate nohighlight">\(n_1\)</span></p></li>
+</ul>
+<p>Snell’s law states that</p>
+<div class="math-wrapper docutils container" id="equation-eq-snell">
+<div class="math notranslate nohighlight" id="equation-eq-snell">
+<span class="eqno">(27)<a class="headerlink" href="#equation-eq-snell" title="Link to this equation">¶</a></span>\[    n_2\sin\theta=n_1\sin(\theta+\delta\theta)\approx n_1(\sin\theta+\delta\theta\cos\theta),\]</div>
+</div>
+<p>where we performed a first-order Taylor expansion.
+<a class="reference internal" href="#equation-eq-snell">Eq. (27)</a> implies that</p>
+<div class="math-wrapper docutils container" id="equation-eq-deltatheta">
+<div class="math notranslate nohighlight" id="equation-eq-deltatheta">
+<span class="eqno">(28)<a class="headerlink" href="#equation-eq-deltatheta" title="Link to this equation">¶</a></span>\[    \delta\theta=\frac{n_2-n_1}{n_1}\tan\theta.\]</div>
+</div>
+<p>Because <span class="math notranslate nohighlight">\(\delta\theta\ll1\)</span>, in the right triangle with the longest side AP, one has that</p>
+<div class="math-wrapper docutils container" id="equation-eq-deltax">
+<div class="math notranslate nohighlight" id="equation-eq-deltax">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eq-deltax" title="Link to this equation">¶</a></span>\[    \delta\theta\approx\tan\delta\theta=\frac{\delta x}{\hat y-y_A},\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(\hat y = \sqrt{R^2-(x_A-\delta x)^2} = \sqrt{R^2 - x_A^2} + \mathcal{O}(\Delta n)\)</span>,
+noticing <span class="math notranslate nohighlight">\(\mathcal{O}(\delta x) \sim \mathcal{O}(\Delta n)\)</span>.
+Combining <a class="reference internal" href="#equation-eq-deltax">Eq. (29)</a> and <a class="reference internal" href="#equation-eq-deltatheta">Eq. (28)</a>, we obtain that</p>
+<div class="math-wrapper docutils container" id="equation-eq-formula1">
+<div class="math notranslate nohighlight" id="equation-eq-formula1">
+<span class="eqno">(30)<a class="headerlink" href="#equation-eq-formula1" title="Link to this equation">¶</a></span>\[    \delta x =\left(\hat y-y_A\right)\frac{\Delta n}{n_1}\tan\theta.\]</div>
+</div>
+<p>We also have that</p>
+<div class="math-wrapper docutils container" id="equation-eq-tantheta">
+<div class="math notranslate nohighlight" id="equation-eq-tantheta">
+<span class="eqno">(31)<a class="headerlink" href="#equation-eq-tantheta" title="Link to this equation">¶</a></span>\[    \tan \theta = -\frac{x_A + \delta x}{\hat y}.\]</div>
+</div>
+<p>Substitution of <a class="reference internal" href="#equation-eq-tantheta">Eq. (31)</a> into <a class="reference internal" href="#equation-eq-formula1">Eq. (30)</a> at order 1 in <span class="math notranslate nohighlight">\(\Delta n\)</span> yields that</p>
+<div class="math-wrapper docutils container" id="equation-eq-formula2">
+<div class="math notranslate nohighlight" id="equation-eq-formula2">
+<span class="eqno">(32)<a class="headerlink" href="#equation-eq-formula2" title="Link to this equation">¶</a></span>\[    \delta x=\left(y_A - \hat y \right)\frac{\Delta n x_A}{n_1\hat y}.\]</div>
+</div>
+<p>The line (AP) thus satisfies that</p>
+<div class="math-wrapper docutils container" id="equation-src-opt-optical-modeling-0">
+<div class="math notranslate nohighlight" id="equation-src-opt-optical-modeling-0">
+<span class="eqno">(33)<a class="headerlink" href="#equation-src-opt-optical-modeling-0" title="Link to this equation">¶</a></span>\[    y - y_A = \frac{\hat y - y_A}{\delta x} (x - x_A)  
+    = -\frac{n_1 \hat y}{\Delta n x_A} (x - x_A).\]</div>
+</div>
+<p>The intersection for which <span class="math notranslate nohighlight">\(x=0\)</span> corresponds to</p>
+<div class="math-wrapper docutils container" id="equation-src-opt-optical-modeling-1">
+<div class="math notranslate nohighlight" id="equation-src-opt-optical-modeling-1">
+<span class="eqno">(34)<a class="headerlink" href="#equation-src-opt-optical-modeling-1" title="Link to this equation">¶</a></span>\[    y_0 = y_A + \frac{n_1 \sqrt{R^2-x_A^2}}{\Delta n}.\]</div>
+</div>
+<p>For <span class="math notranslate nohighlight">\(x_A \ll R\)</span> (i.e., for points close to the optical axis, which corresponds to the paraxial approximation),
+we have</p>
+<div class="math-wrapper docutils container" id="equation-src-opt-optical-modeling-2">
+<div class="math notranslate nohighlight" id="equation-src-opt-optical-modeling-2">
+<span class="eqno">(35)<a class="headerlink" href="#equation-src-opt-optical-modeling-2" title="Link to this equation">¶</a></span>\[    y_0 = y_A + \frac{n_1 R}{\Delta n}.\]</div>
+</div>
+<p>The first term <span class="math notranslate nohighlight">\(y_A\)</span> is negligible compared to the second term as <span class="math notranslate nohighlight">\(\Delta n \ll 1\)</span> and <span class="math notranslate nohighlight">\(y_A\leqslant R\)</span>.
+This implies that the distance of the origin <span class="math notranslate nohighlight">\(O'\)</span> of the fan beam to the origin of the coordinate system
+<span class="math notranslate nohighlight">\(O\)</span> is much larger than the sample diameter.
+We thus obtain that</p>
+<div class="math-wrapper docutils container" id="equation-eq-opt-optical-origin-of-cone-beam">
+<div class="math notranslate nohighlight" id="equation-eq-opt-optical-origin-of-cone-beam">
+<span class="eqno">(36)<a class="headerlink" href="#equation-eq-opt-optical-origin-of-cone-beam" title="Link to this equation">¶</a></span>\[    y_0=\frac{n_1}{n_2-n_1}R.\]</div>
+</div>
+<p>The location <span class="math notranslate nohighlight">\(y_0\)</span> of the origin <span class="math notranslate nohighlight">\(O'\)</span> depends on the radius
+<span class="math notranslate nohighlight">\(R\)</span> of the cylinder and the refractive indices (<span class="math notranslate nohighlight">\(n_1,n_2\)</span>), but not
+on the position of our point <span class="math notranslate nohighlight">\(A\)</span> in the paraxial approximation.
+Further, the unitless quantity <span class="math notranslate nohighlight">\(y_0/R\)</span> is not affected by the magnification of the imaging system.
+We thus obtain a fan-beam geometry where all the rays inside the cylinder intersect at <span class="math notranslate nohighlight">\(O'\)</span>.
+When <span class="math notranslate nohighlight">\(n_1=n_2\)</span>, the origin of the fan beam becomes <span class="math notranslate nohighlight">\(+\infty\)</span>;
+hence, the cone reduces to the standard parallel-beam model, as expected.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="correction-method">
+<h1>Correction Method<a class="headerlink" href="#correction-method" title="Link to this heading">¶</a></h1>
+<p>We see that when <span class="math notranslate nohighlight">\(n_1 \neq n_2\)</span>,
+the physical model in <a class="reference internal" href="#equation-eq-opt-optical-origin-of-cone-beam">Eq. (36)</a> differs from the one typically used for reconstruction
+with a parallel-beam geometry.
+Yet, the proposed virtual-lens model is a better approximation of the actual physics.
+We are going to show that
+it is capable of reproducing and eventually correcting for some of the reconstruction artifacts.
+This 2D analysis corresponds to a fan-beam model;
+we can extend it to a cone-beam model when the height of the volume is sufficiently small.
+Cone-beam geometries are common in other tomographic applications,
+which allows us to leverage efficient implementations and reconstruction algorithms.</p>
+<p>While <a class="reference internal" href="#equation-eq-opt-optical-origin-of-cone-beam">Eq. (36)</a> provides a good approximation of the beam origin in an idealized setting,
+two additional challenges arise in practice.
+First, the RI of the agarose gel evolves to match that of the immersion liquid (e.g., BABB) due to molecular diffusion.
+This process may extend over the standard clearing protocol time, making it difficult to measure the value of <span class="math notranslate nohighlight">\(n_1\)</span>
+and thus to calculate the origin using <a class="reference internal" href="#equation-eq-opt-optical-origin-of-cone-beam">Eq. (36)</a>.
+Second, there is another physical effect to consider: the cylinder is displaced as it rotates because of an experimental
+offset between the axis of rotation and axis of the cylinder.
+Despite their best effort, instrumentalists have not yet been able to calibrate their setups
+accurately enough to avoid this offset <span id="id5">[<a class="reference internal" href="../../../index.html#id105" title="Olli Koskela, Toni Montonen, Birhanu Belay, Edite Figueiras, Sampsa Pursiainen, and Jari Hyttinen. Gaussian Light Model in Brightfield Optical Projection Tomography. Scientific Reports, 9(1):13934, December 2019.">106</a>, <a class="reference internal" href="../../../index.html#id120" title="Ville Koljonen, Olli Koskela, Toni Montonen, Atena Rezaei, Birhanu Belay, Edite Figueiras, Jari Hyttinen, and Sampsa Pursiainen. A mathematical model and iterative inversion for fluorescent optical projection tomography. Physics in Medicine &amp; Biology, 64(4):045017, Febuary 2019.">108</a>, <a class="reference internal" href="../../../index.html#id143" title="Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Resolution improvement in emission optical projection tomography. Physics in Medicine &amp; Biology, 52(10):2775–2790, apr 2007.">124</a>]</span>.
+For example, the seagull artifacts in <span id="id6">[<a class="reference internal" href="../../../index.html#id140" title="Cédric Schmidt, Arielle L. Planchette, David Nguyen, Gabriel Giardina, Yoan Neuenschwander, Mathieu Di Franco, Alessio Mylonas, Adrien C. Descloux, Enrico Pomarico, Aleksandra Radenovic, and Jérôme Extermann. High resolution optical projection tomography platform for multispectral imaging of the mouse gut. Biomedical Optics Express, 12(6):3619–3629, June 2021.">13</a>]</span> (cf. Fig. 2f therein) can be reduced
+by decreasing the offset between the axis of the cylinder and the axis of rotation.
+In the <a class="reference internal" href="../appendix.html#opt-optical-cone-beam-shift-of-origin-due-to-off-center-rotation"><span class="std std-ref">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</span></a>,
+we show that the cone-beam geometry remains a good approximation under these conditions,
+but with an origin that is closer to the sample than <a class="reference internal" href="#equation-eq-opt-optical-origin-of-cone-beam">Eq. (36)</a>.</p>
+<p>To tackle both challenges at once,
+we propose a method to automatically determine the optimal origin of the cone beam by minimizing a heuristic loss metric.
+More details are provided in the <a class="reference internal" href="results.html#opt-optical-results"><span class="std std-ref">Results</span></a> section.</p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="results.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Results</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="background.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Background</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

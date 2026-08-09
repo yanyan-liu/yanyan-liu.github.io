@@ -1,0 +1,76 @@
+(pat1-sample-preparation)=
+# Sample Preparation and Data Acquisition
+
+## Reporters
+
+We used three rsOAPs, ReBphP-PCM (Re), DrBphP-PCM (Dr) and RpBphP1-PCM (Rp),
+in the experiments.
+The protein was expressed in _E. coli_ BL21 (DE3) cells, induced with IPTG,
+and purified using immobilized metal-affinity
+chromatography followed by size-exclusion chromatography.
+ON and OFF spectra of the protein samples were recorded using a spectrophotometer (Shimadzu UV-1800, Shimadzu Inc.,
+Kyoto, Japan) after being illuminated with 660 nm or 780 nm LEDs (Thorlabs) in a
+10 mm-pathlength quartz cuvette.
+
+In {numref}`tab:pat1-reporters`, we show key photo-physical properties of the three rsOAPs,
+including halftime of the OFF-switching cycle
+{math}`\tau_{\text{OFF}}`, kinetic constant {math}`\bar{k}` derived based on {math}`\tau_{\text{OFF}}`, and
+molar extinction coefficients {math}`\varepsilon^{\text{ON}}_{\text{770nm}}` and {math}`
+\varepsilon^{\text{OFF}}_{\text{770nm}}` of ON and OFF states, respectively, at 770 nm (OFF-switching wavelength).
+For a summary of complete properties of these reporters, refer to {cite:p}`mishra_multiplexed_2020`.
+
+```{table} Key Photo-Physical Properties of Three rsOAPs
+:name: tab:pat1-reporters
+
+| Quantity | {math}`\tau_{\text{OFF}}`  | {math}`\bar{k}` | {math}`\varepsilon^{\text{ON}}_{\text{770nm}}` | {math}`\varepsilon^{\text{OFF}}_{\text{770nm}}` |
+|:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:|
+|       Unit |  {math}`\text{s}`  | {math}`\text{s}^{-1}` | {math}`\mu\text{M}^{-1}\text{cm}^{-1}` | {math}`\mu\text{M}^{-1}\text{cm}^{-1}` |
+|       Re | 0.18 | 3.85 | 0.07 | 0.002 |
+|       Dr | 0.70 | 0.99 | 0.04 | 0.004 |
+|       Rp | 0.42 | 1.65 | 0.06 | 0.009 |
+
+```
+
+## Tissue-Mimicking Phantoms
+
+For section [](#pat1-result-experimental-phantom), we prepared
+tissue-mimicking cylindrical phantoms (used in ) of diameter 27 mm by
+mixing 3\% intralipid
+(Sigma-Aldrich, St. Louis, Missouri, USA), 3\% sheep blood (Thermo Scientific, Massachusetts, USA), and 2\% agarose
+(Carl Roth, Karlsruhe, Germany) in a 50 ml flacon (30 mm diameter) as cast.
+The mixture aims to replicate the optical properties of biological tissues, with intralipid serving as scatterer,
+sheep blood as absorber, and agarose providing a gel matrix.
+Protein samples were loaded into 580 {math}`\mu`m catheter tubing and positioned at different locations within the phantom.
+
+We prepared two phantoms.
+In the first phantom, we inserted four tubes of protein solutions with the following setting
+
+- tube one: one portion of Re (4.23 {math}`\mu`M)
+- tube two: one portion of Dr (3.71 {math}`\mu`M)
+- tube three: 1/3 of one portion of Re mixed with 2/3 of one portion of Dr
+- tube four: 2/3 of one portion of Re mixed with 1/3 of one portion of Dr
+
+In the second phantom, we inserted three tubes of protein solutions
+
+- tube one and two: each containing one portion of Re
+- tube three: one portion of Dr
+
+Tube one and two in the second phantom are placed at different depths from the boundary of the phantom
+to test the impact of local fluence.
+
+## Bead Phantom and Mouse Model
+
+For section [](#pat1-result-experimental-mouse), we used a phantom made of 1mm-alginate beads inserted at random locations,
+each bead containing _E. coli_ that express one of the three rsOAPs.
+For the mouse model, Jurkat T cells and _E. coli_ expressing each of the three rsOAPs are implanted into a
+4T1 tumor on the back of a mouse on the same plane.
+More details can be found in {cite:p}`mishra_multiplexed_2020`.
+
+## Acquisition
+
+Samples were scanned using MSOT InVision 256-TF (iThera Medical GmbH, Munich, Germany), described in more detail in
+{cite:p}`mishra_multiplexed_2020` with a protocol of 50 pulses at 680 nm and 50 pulses at 770 nm.
+The pulse train was repeated 50 times, and an average was computed to reduce noise.
+The acquired data were reconstructed using the ViewMSOT software version 4.0.2.2 (iThera Medical GmbH, Munich, Germany)
+with the following settings: 100 {math}`\mu`m resolution; 50 kHz to 6.5 MHz filtering; and a speed-of-sound trim of
+{math}`(-30) \text{m}/\text{s}`.

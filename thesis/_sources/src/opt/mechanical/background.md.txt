@@ -1,0 +1,68 @@
+(opt-mechanical-background)=
+# Background
+
+While OPT achieves high-resolution 3D imaging {cite:p}`Ramirez:19, Zhang:20`,
+reconstructions often suffer from artifacts that impact their quality due to model mismatches.
+Among them, mechanical errors play a non-negligible role, especially for low-cost OPT systems
+{cite:p}`Ramirez:19`.
+
+(opt-existing-mechanical-artifacts-review)=
+## Previously Reported Artifacts and Correction Techniques
+
+The most common type of mechanical error is an offset of the rotation axis which results in a misaligned center of
+rotation during the experiment.
+The consequences depend on the direction of this translation mismatch.
+A constant shift in the direction parallel to the detector plane has been reported in both OPT
+{cite:p}`Walls2005, Tang:16` and X-ray CT {cite:p}`Donath:06`.
+It will cause a constant shift in 2D projections, generating ring artifacts:
+a point in the sample will be imaged into a circle after reconstruction.
+For example, Tang _et al._ reported circles in imaging a zebrafish embryo {cite:p}`Tang:16`.
+Walls _et al._ observed a so-called double-edge artifact while imaging the cardiac region of a mouse embryo
+{cite:p}`Walls2005` and Donath _et al._ observed tuning-fork artifacts of a point object {cite:p}`Donath:06`.
+A shift in the direction of light propagation will result in out-of-focus blur due to
+limited depth-of-field that is unique to OPT {cite:p}`Koskela19`.
+
+Different methods are available to correct for an off-center rotation in both OPT and X-ray CT.
+Walls _et al._ proposed a heuristic method that calculates the variance of each reconstruction of a 2D slice using a
+range of assumed shift values in a sinogram: the shift value that produces the maximum variance serves as a close guess
+for the true shift {cite:p}`Walls2005`.
+This method is fast to implement and yields satisfactory reconstructions when the volume is not too sparse;
+it is commonly used as a preprocessing step by OPT practitioners {cite:p}`Schmidt:21`.
+Other methods such as sinogram unification of both fluorescent and
+bright-field OPT {cite:p}`Tang:16`, center of mass or image registration {cite:p}`Donath:06`, total-variation
+regularization {cite:p}`michalek:15`, and methods that take advantage of the symmetrical structure
+of certain samples {cite:p}`Zhang:20` are also used in OPT but with limitations because they require
+a priori information.
+These 2D methods assume that the tilt of the rotation axis is negligible.
+Their extension to small tilt angles introduces a height dependence of the rotation axis {cite:p}`Ramirez:19, Torres2021`.
+
+Tilt of the rotation axis in 3D can be described by a combination of out-of-plane and in-plane tilt.
+Only in-plane tilts of a small angle have been studied.
+With this assumption, each transverse slice of the sample still approximately corresponds to
+a row of pixels on the camera;
+then, compensation of 3D tilt reduces to a 2D problem of finding the true center of rotation for each slice.
+This is done using the same techniques as for dealing with off-center rotation.
+For example, Torres _et al._ {cite:p}`Torres2021` used maximum-variance method {cite:p}`Walls2005` to find the
+rotation center at two different heights.
+They then performed a linear regression to obtain the shift of rotation center at any intermediate horizontal plane.
+For larger tilt angles, a method to account for tilt in 3D is still missing.
+
+Another type of mechanical error that has not been well studied is the angular errors of the rotation motor, which will
+result in seagull-shaped artifacts for point-like objects, as we will show in
+[](#opt-catalog-of-mechanical-artifacts).
+While many efforts have been made to characterize and correct mechanical artifacts,
+they focus on a single type, whereas a comprehensive documentation of all
+sorts of mechanical artifacts did not exist.
+
+## Contribution
+
+We rely on a 3D description of the imaging system that uses a set of angular and translational parameters to
+systematically document many mechanical artifacts.
+We provide a catalog of artifacts which lists their cause, resulting effects, and existing correction methods.
+It serves as a reference for OPT practitioners and assists them to calibrate their experiments.
+
+We introduce a joint reconstruction-calibration algorithm
+that is able to recover the unknown set of characterizing parameters at coarse scale.
+Refined system parameters are then fed into the 3D reconstruction algorithm to achieve a distortion-free volumetric
+image at a finer scale.
+We validate our algorithm on simulated beads data and experimental data of a fluorescent textile fiber.

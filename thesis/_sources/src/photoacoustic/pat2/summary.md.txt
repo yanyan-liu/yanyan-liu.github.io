@@ -1,0 +1,16 @@
+# Summary
+
+We presented a comprehensive model for photo-switching photoacoustic mesoscopy and a global inversion framework
+to reconstruct concentration maps directly from the acoustic measurements.
+Our global framework includes a one-step reconstruction algorithm with a tailored {math}`\ell_1` regularization combined
+with TV regularization on two spaces to mitigate noise and improve the unmixing quality.
+We demonstrated that our regularized one-step approach was consistently more robust as compared to other approaches and
+under various setups.
+We provided an efficient GPU implementation of the pipeline.
+Its benchmarking results underlines its importance for fast iterative-reconstruction algorithms.
+
+Our framework is extendable to 3D imaging and flexible to include other models of the transducer impulse response.
+It provides a unique opportunity for in-depth imaging at cellular resolution using photo-switching photoacoustic
+mesoscopy.
+The algorithm that has been developed will be tested on experimental data when they have been acquired on the
+corresponding setup that is currently under development at the Helmholtz Zentrum Müchen.

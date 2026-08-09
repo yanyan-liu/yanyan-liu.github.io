@@ -1,0 +1,22 @@
+(chapter-pa)=
+# Temporal Unmixing for Photo-Switching Photoacoustic Imaging
+
+```{note}
+This chapter is based on the following publications:
+
+- Y. Liu, J. Chuah, Y. Huang, A. C. Stiel, M. Unser, and J. Dong,
+"Model-based temporal unmixing towards quantitative photo-switching optoacoustic tomography,"
+_Optics Express_ 33, 6216 (2025).
+
+- Y. Liu, J. Chuah, M. Unser, and J. Dong.
+"A global inverse-problem approach to quantitative photo-switching optoacoustic mesoscopy", _arXiv preprint arXiv:2510.23739_ (2025).
+```
+
+```{toctree}
+:maxdepth: 2
+
+introduction.md
+pat1/index.md
+pat2/index.md
+appendix.md
+```

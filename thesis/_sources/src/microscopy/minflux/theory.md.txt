@@ -1,0 +1,296 @@
+(minflux-theory)=
+# Theoretical Foundation: Physical and Mathematical Models
+
+In this section, we explain the theoretical foundation of our optimization pipeline, in which we introduce the physical
+principles and necessary mathematical tools.
+
+(minflux-psf-model)=
+## Scalar Excitation PSF Model via Zernike Polynomials
+
+We start with modeling the beam propagation.
+The model that we adopt is the scalar Fourier propagation formula
+```{math}
+:label: eq:def-of-PSF
+h(x,y) = |\mathcal{F}^{-1}\left\{ P(k_\text{x}, k_\text{y}) \right\}(x, y)|^2.    
+```
+{eq}`eq:def-of-PSF` describes the relation between the pupil function {math}`P` in the Fourier space and the resulting PSF
+{math}`h` at the focal plan in the object space.
+The wave vector in the Fourier plane is {math}`(k_\text{x},k_\text{y})`.
+We define the pupil function {math}`P: \mathbb{R}^2 \to \mathbb{C}` on a disk whose radius is determined by the
+cutoff frequency {math}`k_{\max}=\frac{2\pi NA}{\lambda}` in the Fourier space
+as
+```{math}
+    :label: eq:def-of-pupil
+
+    P(k_\text{x}, k_\text{y}) = \left\{
+    \begin{array}{ll}
+       \exp\left\{\mathrm{j}\left(\sum_{d=0}^{D-1} c_d \varphi_d(k_\text{x}, k_\text{y}) 
+        + \kappa(k_\text{x}, k_\text{y}) \right)\right\},  &   k_\text{x}^2 + 
+        k_\text{y}^2 < k_{\max}^2,\\
+       0,  &   \text{elsewhere}.
+    \end{array}
+    \right.
+    
+```
+with {math}`\mathrm{j}` the imaginary unit, NA is the numerical aperture,
+and {math}`\lambda` is the excitation wavelength.
+The complex term in the exponential in {eq}`eq:def-of-pupil` represents a phase mask which we parameterize with a
+series of Zernike coefficients, represented by a length-{math}`D` vector
+{math}`\mathbf{c} = (c_0, \ldots, c_d, \ldots, c_{D-1} )`, where {math}`c_d\in \mathbb{R}`.
+The collection of functions {math}`\left\{ \varphi_d(\cdot, \cdot) \right\}_{d=0}^{D-1}`,
+{math}`\varphi_d:\mathbb{R}^2 \to \mathbb{R}`, is
+the first {math}`D` Zernike polynomials.
+An extra factor {math}`\kappa(\cdot)` is added to the phase to include functions outside the space
+spanned by the Zernike polynomials, e.g. the vortex phase ramp.
+The phase mask modulates the shape of the resulting excitation PSF.
+For example, when the phase mask is equal to zero, the resulting PSF is an Airy disk;
+when the phase mask is the ramp function
+{math}`\kappa(k_\text{x}, k_\text{y}) = \text{arctan}\left(\frac{k_\text{x}}{k_\text{y}}\right)`,
+the resulting PSF is a donut beam.
+
+(minflux-statistical-model)=
+## Statistical Model of the Photon Detection in MINFLUX
+
+The measurement in MINFLUX is not images acquired by a camera, rather, one uses a photon counter to record
+the number of emitted photons from which one can estimate the spatial location of an emitter.
+In this section, we explain the statistical model of the photon detection in MINFLUX.
+
+We assume that there is only one emitter (e.g., a fluorescent molecule) of interest in the FOV
+{math}`\Gamma_\tau`.
+We denote its location as {math}`\boldsymbol{\theta}=(x, y) \in \Gamma_{\tau}\subset\mathbb{R}^2`.
+It is exposed to a total number of {math}`K` different excitation beams.
+Note that in the standard MINFLUX setup, four excitation beams are used.
+Here, we carry out our analysis in a more general scenario.
+
+We describe the intensities of these beams by the following {math}`K` functions
+{math}`h_0(\boldsymbol{\theta}), \ldots, h_{K-1}(\boldsymbol{\theta})`,
+where each function {math}`h_i(\boldsymbol{\theta}) = h_i(\boldsymbol{\theta} - \mathbf{t}_i)`, and
+{math}`\mathbf{t}_i = (t_{\text{x}, i}, t_{\text{y}, i})\in\mathbb{R}^2` is a constant shift vector
+that represents the location of the center of the {math}`i`th beam.
+
+After each exposure, the molecule of interest emits photons that are collected by a photon counter.
+We define the expected number of detected photons {math}`\mu_i(\boldsymbol{\theta})` for the
+{math}`i`th exposure before normalization as
+```{math}
+    :label: eq:def-mu
+    
+    \mu_i(\boldsymbol{\theta})= \alpha h_i(\boldsymbol{\theta}) + b.
+```
+The constant {math}`\alpha` represents the efficiency of the experiment.
+It depends on the photo-physics of the emitter, the detection efficiency of the system, and the energy delivered to the
+sample, and {math}`b` is a constant background level including the detector dark counts.
+
+We introduce a position-dependent normalization factor {math}`\mathcal{N}(\boldsymbol{\theta})` to impose a budget
+{math}`N` on the total expected number of photons on the detector for any position {math}`\boldsymbol{\theta}`
+to ensure a fair comparison of the detection limits between experiments.
+The expected number of detected photons after normalization is
+```{math}
+:label: eq:normalized-mu
+n_i(\theta) = \mathcal{N}(\boldsymbol{\theta})\mu_i(\boldsymbol{\theta}),
+```
+and the normalization factor is defined as
+```{math}
+:label: eq:normalization-factor
+\mathcal{N}(\boldsymbol{\theta}) = \frac{N}{\sum_{i=0}^{K-1} \mu_i(\boldsymbol{\theta})}
+```
+such that {math}`N = \sum_{i=0}^{K-1} n_i(\boldsymbol{\theta})`.
+We model the number of detected photons of the {math}`i`th exposure as a Poissonian random variable (R.V.)
+{math}`X_i` with mean {math}`n_i(\boldsymbol{\theta})` dependent on the position
+{math}`\boldsymbol{\theta}` of the emitter.
+Its probability mass function (PMF) is
+```{math}
+    :label: eq:poisson-pmf
+    
+    f_i(s_i; \boldsymbol{\theta}) = \mathbb{P}(X_i=s_i; \boldsymbol{\theta}) =
+    \frac{(n_i(\boldsymbol{\theta}))^{s_i} \mathrm{e}^{-n_i(\boldsymbol{\theta})}}{s_i!}, 
+    \quad i=0, \ldots, K-1,
+```
+Finally, the measurements of a MINFLUX experiment is a list of photon counts {math}`s_0, \ldots, s_{K-1}`
+which are realizations of the {math}`K` R.V.s {math}`(X_0, \ldots, X_{K-1})`.
+The photons emitted by the fluorescent molecule and the background are statistically independent.
+
+(minflux-detection-limit)=
+## Statistical Detection Limit via the Cramér-Rao Lower Bound
+
+We proceed to quantify the statistical detection limit of MINFLUX by computing the underlying
+Cramér-Rao bound (CRB), which is associated with the metric that we plan to optimize.
+Specifically, we would like to estimate the multivariate parameter {math}`\boldsymbol{\theta}=(x, y)`
+which represents the location of the molecule from {math}`K` independent measurements {math}`(X_0, \ldots, X_{K-1})`.
+We first compute the 2-by-2 Fisher information matrix {math}`I(\boldsymbol{\theta})`
+for estimating {math}`\boldsymbol{\theta}` whose entry {math}`I(\boldsymbol{\theta})_{j, l}`,
+{math}`j, l\in \left\{1, 2\right\}` is defined as
+```{math}
+    :label: eq:def-fisher
+    
+    I(\boldsymbol{\theta})_{j, l} = 
+    \sum_{i=0}^{K-1} -
+    \mathrm{E}\left[\frac{\partial^2 \log (f_i(X_i; \boldsymbol{\theta}))}{\partial\theta_l\partial\theta_j}\right],
+```
+where the expectation {math}`\mathrm{E}=\mathrm{E}_{X_i;\boldsymbol{\theta}}` is taken over the R.V. {math}`X_i`.
+Now we proceed to compute {eq}`eq:def-fisher` step by step.
+
+- First compute {math}`\log(f_i(X_i; \boldsymbol{\theta}))` as
+    ```{math}
+        :label: eq:log-f
+        
+            \log(f_i(X_i; \boldsymbol{\theta})) 
+             = X_i\log n_i(\boldsymbol{\theta}) - n_i(\boldsymbol{\theta}) - \log (X_i!).
+    ```
+- Then, compute the first- and second-order partial derivatives of {eq}`eq:log-f` as
+    ```{math}
+        :label: eq:partial-log-f
+        
+        \frac{\partial\log(f_i(X_i; \boldsymbol{\theta}))}{\partial\theta_j} = 
+        X_i\frac{1}{n_i(\boldsymbol{\theta})} \frac{\partial n_i(\boldsymbol{\theta})}{\partial \theta_j} 
+            - \frac{\partial n_i(\boldsymbol{\theta})}{\partial\theta_j}
+    ```
+    ```{math}
+        :label: eq:partial2-log-f
+        
+        &\frac{\partial^2\log(f_i(X_i; \boldsymbol{\theta}))}{\partial\theta_l\partial\theta_j} \\
+        &= 
+        X_i\left[ 
+        -\frac{1}{(n_i(\boldsymbol{\theta}))^2} 
+        \frac{\partial n_i(\boldsymbol{\theta})}{\partial \theta_l} 
+        \frac{\partial n_i(\boldsymbol{\theta})}{\partial \theta_j}
+        + \frac{1}{n_i(\boldsymbol{\theta})} 
+        \frac{\partial^2 n_i(\boldsymbol{\theta})}{\partial \theta_l \partial \theta_j}
+        \right]
+        - \frac{\partial^2 n_i(\boldsymbol{\theta})}{\partial \theta_l \partial \theta_j}.
+    ```
+- Finally, take the expectation of {eq}`eq:partial2-log-f` to attain that
+    ```{math}
+        :label: eq:exp
+        
+        & \mathrm{E}\left[
+        \frac{\partial^2\log(f_i(X_i; \boldsymbol{\theta}))}{\partial\theta_l\partial\theta_j}\right] \\
+        & = n_i(\boldsymbol{\theta})\left[ 
+            -\frac{1}{(n_i(\boldsymbol{\theta}))^2} 
+            \frac{\partial n_i(\boldsymbol{\theta})}{\partial \theta_l} 
+            \frac{\partial n_i(\boldsymbol{\theta})}{\partial \theta_j}
+            + \frac{1}{n_i(\boldsymbol{\theta})} 
+            \frac{\partial^2 n_i(\boldsymbol{\theta})}{\partial \theta_l \partial \theta_j}
+            \right]
+            - \frac{\partial^2 n_i(\boldsymbol{\theta})}{\partial \theta_l \partial \theta_j} \\
+        & = -\frac{1}{n_i(\boldsymbol{\theta})}\frac{\partial 
+            n_i(\boldsymbol{\theta})}{\partial \theta_l} 
+            \frac{\partial n_i(\boldsymbol{\theta})}{\partial \theta_j}.
+    ```
+
+Hence, the Fisher information matrix at entry {math}`(j,l)` has the following expression
+```{math}
+    :label: eq:fisher-expression
+    
+    I(\boldsymbol{\theta})_{j, l} & =
+        \sum_{i=0}^{K-1} \frac{1}{n_i(\boldsymbol{\theta})}\frac{\partial 
+        n_i(\boldsymbol{\theta})}{\partial \theta_l} 
+        \frac{\partial n_i(\boldsymbol{\theta})}{\partial \theta_j} \\
+        & = \sum_{i=0}^{K-1}
+        \frac{1}{\mathcal{N}(\boldsymbol{\theta})\mu_i(\boldsymbol{\theta})}
+        \frac{\partial (\mathcal{N}(\boldsymbol{\theta})\mu_i(\boldsymbol{\theta}))}
+        {\partial \theta_l} 
+        \frac{\partial (\mathcal{N}(\boldsymbol{\theta})\mu_i(\boldsymbol{\theta}))}
+        {\partial \theta_j}
+```
+
+Now, we proceed to simplify the expression in {eq}`eq:fisher-expression`.
+First, we handle the partial derivative term by plugging {eq}`eq:normalization-factor` in
+{math}`\frac{\partial (\mathcal{N} (\boldsymbol{\theta})  \mu_i  (\boldsymbol{\theta})))}{\partial \theta}`
+which leads to
+```{math}
+    :label: eq:derivative-modified
+    
+    \frac{\partial (\mathcal{N}(\boldsymbol{\theta})  \mu_i(\boldsymbol{\theta}) )}{\partial \theta} =& 
+    \frac{-N \sum_{m=0}^{K-1}\frac{\partial \mu_m (\boldsymbol{\theta})}{\partial \theta} }{\left(\sum_{m=0}^{K-1} 
+     \mu_m(\boldsymbol{\theta})\right)^2} \mu_i(\boldsymbol{\theta}) 
+  + \frac{N}{\sum_{m=0}^{K-1}  \mu_m(\boldsymbol{\theta})}\frac{\partial 
+  \mu_i(\boldsymbol{\theta}) }{\partial \theta} \\
+    =& \frac{N}{\sum_{m=0}^{K-1}  \mu_m(\boldsymbol{\theta})}\left(\frac{\partial 
+    \mu_i(\boldsymbol{\theta}) }{\partial \theta} 
+    - \frac{\sum_{m=0}^{K-1}\frac{\partial \mu_m (\boldsymbol{\theta})}{\partial \theta} }
+    {\sum_{m=0}^{K-1}  \mu_m(\boldsymbol{\theta})}\mu_i(\boldsymbol{\theta})\right),
+
+```
+where {math}`\theta\in\left\{x, y\right\}`.
+Finally, we obtain the expression of the entries of the Fisher information matrix as
+```{math}
+    :label: eq:fisher-final
+    
+    \begin{aligned}
+    I(\boldsymbol{\theta})_{j,l}
+    = \sum_{i=0}^{K-1} 
+    \frac{N}{ \mu_i(\boldsymbol{\theta}) \sum_{m=0}^{K-1} \mu_m(\boldsymbol{\theta})}
+    & \left(\frac{\partial  \mu_i(\boldsymbol{\theta})}{\partial \theta_j} - 
+    \frac{ \sum_{m=0}^{K-1}\frac{\partial \mu_m (\boldsymbol{\theta})}{\partial \theta_j}}
+    {\sum_{m=0}^{K-1} \mu_m(\boldsymbol{\theta})} \mu_i(\boldsymbol{\theta})
+    \right) \times\\
+    & \left(\frac{\partial  \mu_i(\boldsymbol{\theta})}{\partial \theta_l} - 
+    \frac{\sum_{m=0}^{K-1}\frac{\partial \mu_m (\boldsymbol{\theta})}{\partial \theta_l} }
+    {\sum_{m=0}^{K-1} \mu_m(\boldsymbol{\theta})} \mu_i(\boldsymbol{\theta})
+    \right).
+    \end{aligned} 
+```
+
+We notice that the computation of {math}`I(\boldsymbol{\theta})` relies on computing the partial derivatives of
+{math}`\mu_i(\boldsymbol{\theta})`, and subsequently the partial derivatives of {math}`h(\boldsymbol{\theta})`.
+In fact, these partial derivatives admit explicit analytical expressions, and
+the formulae are provided in the following section [](#minflux-explicit-expression-of-the-fisher-information-matrix).
+
+The statistical detection limit is determined by the Cramér-Rao lower bound,
+which indicates the theoretical best detection precision of MINFLUX.
+The inverse of the Fisher information matrix indicates the
+minimal variance of any unbiased estimator of {math}`\boldsymbol{\theta}`.
+Assuming invertibility of the Fisher information matrix {math}`I`,
+we denote {math}`I^{-1}` its inverse and
+```{math}
+I^{-1}=
+    \begin{bmatrix}
+    \sigma^2_\text{xx} & \sigma^2_\text{xy} \\
+    \sigma^2_\text{yx} & \sigma^2_\text{yy}
+    \end{bmatrix},
+```
+where the diagonal entries {math}`\sigma^2_\text{xx}` and {math}`\sigma^2_\text{yy}` are the variance of the estimated
+horizontal and vertical locations, respectively.
+
+(minflux-definition-of-optimization)=
+## Definition of the Optimization Problem
+
+We are interested in the optimal shape of the excitation beams and thus a set of Zernike coefficients that would
+lead to a minimal CRB under certain experimental setups.
+We define such a quest as the following minimization problem of a loss function {math}`J`
+```{math}
+    :label: eq:minflux-optimization
+    
+    \min_{\mathbf{C}\in\mathbb{R}^{D\times K}}J(\mathbf{C}) =
+    \min_{\mathbf{C}\in\mathbb{R}^{D\times K}} \left\{\sum_{(x, y)\in \Gamma_{\tau}} \nu(x, y) 
+    - \gamma \sum_{(x, y)\in\Omega_\text{h}} \left(\sum_{i=0}^{K-1}h_i(x, y)\right) \right\}.
+```
+The columns in the {math}`(D\times K)` matrix {math}`\mathbf{C} = [\mathbf{c}_0, \ldots, \mathbf{c}_{K-1}]`
+contain the Zernike coefficient vectors of all {math}`K` beams.
+The loss function is minimized over the matrix {math}`\mathbf{C}` of all {math}`K` Zernike coefficient vectors.
+The relation of {math}`\mathbf{c}` and {math}`h_i` is provided in {eq}`eq:def-of-PSF` and {eq}`eq:def-of-pupil`.
+The loss is composed of two terms.
+The first term in {math}`J(\mathbf{C})` is a sum of the average CRB value {math}`\nu(x, y)`
+at every location {math}`(x, y)` inside a given field of view {math}`\Gamma_{\tau}\subset\mathbb{R}^2`,
+which is the prime quantity that we aim to minimize.
+The average CRB (which we call precision) {math}`\nu(x, y)` at a location {math}`(x, y)`
+is defined as the arithmetic average of
+the variance {math}`\sigma_\text{xx}^2` and {math}`\sigma_\text{yy}^2` in the horizontal and vertical directions,
+respectively:
+```{math}
+:label: eq:minflux-average-crb
+
+    \nu(x, y) = \sqrt{\frac{\sigma_\text{xx}^2 + \sigma_\text{yy}^2}{2}}.
+```
+The second term involves a nonnegative constant {math}`\gamma` multiplied by the sum of the intensities of all
+{math}`K` beams inside a given region of interest {math}`\Omega_\text{h}\subset\mathbb{R}^2`,
+which guides the optimization into directions of desirable beams (regularization).
+The hyperparameter {math}`\gamma` controls the strength of the regularization.
+To be precise, here it is defined to maximize the intensity of all the beams inside the ROI and
+avoid degenerate cases where most of the energy of the beams is outside the FOV.
+In our simulations, we define {math}`\Gamma` as a disk the radius of which is a tunable hyperparameter.
+The ROI {math}`\Omega_\text{h}` is defined similarly as a disk with a radius of 170 nm, approximately the radius of
+a donut beam.
+Because the problem in {eq}`eq:minflux-optimization` is nonconvex with multiple local minima,
+the solution is not unique and strongly depends on the initial start.
+Therefore, initialization is crucial, and we provide more details on this in section [](#minflux-results).

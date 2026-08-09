@@ -1,0 +1,17 @@
+(opt-optical-summary)=
+# Summary
+
+We modeled the mismatching refractive indices in emission OPT as a virtual lens.
+Using the corresponding cone-beam model,
+we reproduced in simulations the _seagull_ artifacts observed in real emission OPT experiments.
+To achieve the best performance in practice,
+we proposed a fast approach that automatically determines the optimal origin of the cone beam.
+We performed reconstructions based on the cone-beam model
+and validated our methods on experimental data of fluorescent beads.
+
+Our results show that the cone-beam model, with an optimized origin,
+successfully mitigates the _seagull_-shaped artifacts
+and increases the resolution of the reconstruction in the directions perpendicular to the optical axis.
+Future research directions include the design of a better model of the finite depth-of-field and of the rotating cylinder.
+This work could be extended to transmission OPT by taking into account the RI mismatch on both sides of the sample.
+Finally, cone-beam reconstructions could be applied to non-pointwise samples.

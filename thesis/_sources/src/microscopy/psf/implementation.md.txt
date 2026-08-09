@@ -1,0 +1,70 @@
+(psf-implementation)=
+# Implementation
+
+(psf-design-usage)=
+## Design and Usage
+
+We provide a high-performance open-source PyTorch-based library _PSF Generator_ {cite:p}`psf-library`
+to generate 2D and 3D PSFs.
+The library implements the four PSF models described in the previous section:
+
+- `ScalarCartesianPropagator` ({eq}`eq:cartesian-scalar`);
+- `ScalarSphericalPropagator` ({eq}`eq:polar-scalar`);
+- `VectorialCartesianPropagator` ({eq}`eq:cartesian-vectorial`);
+- `VectorialSphericalPropagator` ({eq}`eq:polar-vectorial-final`).
+
+Users can choose between these propagator types, as well as configure physical (e.g., numerical aperture,
+wavelength, and field of view), and numerical parameters (e.g., image dimensions and number of z-planes).
+Our library also allows users to freely apply any kind of correction factors tailored
+to their microscope on any chosen propagator as described in [](#psf-arbitrary-phase-aberrations).
+The propagators use these parameters to first define the far field (pupil) and propagate it to obtain the focus field
+(PSF).
+Finally, the user can visualize, save, and export the generated PSF using our built-in utility functions.
+Written in PyTorch, the library easily integrates into deep-learning workflows,
+leveraging native features of PyTorch, such as automatic differentiation.
+
+In our unifying framework, these models encompass all previously proposed PSF models based on the
+Richards-Wolf integral.
+As discussed in [](#psf-scalar-models), the spherical propagators require the axisymmetric assumption.
+When it is valid, the Cartesian and spherical propagators perform equivalent integral computations and
+result in the same PSF.
+Both are proposed in our library as they differ in terms of computational efficiency and applicability.
+
+## Code Optimization
+
+We have designed our library to follow the convention of PyTorch to benefit from its performance optimization for
+data loading and computation parallelization.
+Namely, any tensor corresponding to a field has a shape of the form `(z, channel, x, y)`,
+which corresponds to the typical PyTorch convention `(batch, channel, x, y)`.
+Computations are performed plane-by-plane on the axial `z` axis (`batch` dimension),
+while `x` and `y` correspond to the transverse sizes of 2D images.
+This enables the efficient parallelization of Fourier transforms for Cartesian models and of numerical integrations
+for spherical models.
+Akin to grayscale versus RGB images, the `channel` dimension is equal to 1 for scalar models and
+3 in the vectorial case.
+
+The Cartesian parameterization relies on multiple calls of 2D Fourier transforms with a desired field of view
+and pixel size.
+To account for the very small physical dimensions associated to pixels in localization microscopy,
+we have implemented a custom variant of the `2D FFT` in PyTorch.
+It enables arbitrary pixel sizes and is based on the chirp Z-transform, at the cost of a convolution and three FFTs.
+The computational complexity of a single plane is still {math}`O(n\log(n))` with {math}`n` the size of the
+transverse plane.
+This method has been introduced in previous studies of the Cartesian models
+{cite:p}`leutenegger_fast_2006, miora2024calculating, liu_point_2015`, e.g.,
+refer to section [](#minflux-zoomfft) in the previous chapter [](#chapter-minflux) for details.
+This approach also eliminates any artifacts caused by periodic boundary conditions,
+which are common with FFTs {cite:p}`miora2024calculating`.
+
+The spherical parametrization relies on fast and accurate
+evaluation of multiple one-dimensional integrals that involve the Bessel function of
+first order {math}`J_0` over the interval {math}`[0, \theta_{\max}]` as defined in
+{eq}`eq:polar-scalar-final` for the scalar case.
+To maximize speed, we vectorize the computation of the batch of 1D integrals at
+different defocus distances via _torch.vmap_.
+Then, for each 1D integral, we adopt the composite Simpson's rule {cite:p}`stoer_introduction_2002`
+to benefit from its high accuracy, good numerical stability, and minimal computational overhead.
+The computational complexity in this case is {math}`O(n)` with {math}`n` the number of integration steps
+in the interval {math}`[0, \theta_{\max}]`.
+Additionally, as PyTorch does not natively support automatic differentiation of Bessel functions
+as of version 2.3, we also provide a differentiable version of the Bessel functions in our library.

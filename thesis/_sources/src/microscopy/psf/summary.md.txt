@@ -1,0 +1,34 @@
+(psf-summary)=
+# Summary
+
+We have introduced a unifying theory for accurate PSF models,
+revisiting previous approaches and generalizing correction factors.
+This framework demonstrates the equivalence of Cartesian and spherical methods as
+different parametrizations of the same propagation integral, providing a simplified
+understanding of light propagation in high-NA systems.
+We have also developed a high-performance implementation in PyTorch,
+which is open-source and supported by comprehensive documentation.
+This library allows for efficient CPU/GPU computation of PSFs,
+with functionalities such as automatic differentiation that make it particularly
+suitable for optimization pipelines.
+
+In practice, the choice of propagators depends on the symmetry of the pupil function.
+Based on our benchmark, for axisymmetric pupil functions,
+spherical propagators are recommended thanks to their high accuracy and scalability.
+They are also particularly amenable to GPU parallelization.
+For non-axisymmetric cases, such as those involving Zernike aberrations or specialized phase masks,
+Cartesian propagators are required.
+In all these cases, the difference in computational time is relatively modest for
+pupil sizes up to a few hundred pixels.
+Hence, the vectorial Cartesian propagator should be a solid default choice
+in most applications.
+
+We hope for our PyTorch library to contribute to the rapidly growing field of applying deep neural networks on physical
+imaging models {cite:p}`belthangady2019applications`.
+Learning-based methods have demonstrated their effectiveness in various applications, such as deconvolution
+{cite:p}`weigert2018content, li2022incorporating, yanny2022deep` and 3D SMLM {cite:p}`sage2019super`,
+with state-of-the-art deep-learning tools such as DeepSTORM {cite:p}`nehme2020deepstorm3d`
+and DECODE {cite:p}`speiser2021deep`.
+For instance, some use cases of our framework include generating large reference datasets to train networks or
+adapting images based on physical rules to enable learning in self-supervised inversions
+{cite:p}`kobayashi2020image` and generative adversarial networks {cite:p}`cachia2023fluorescence`.

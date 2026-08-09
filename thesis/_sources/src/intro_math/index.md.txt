@@ -1,0 +1,14 @@
+(intro-modeling-and-solving-inverse-problems)=
+# Modeling and Solving of Inverse Problems
+
+Many tasks in different biomedical imaging modalities can be handled through the resolution of inverse
+problems.
+While each task presents distinct challenges,
+the underlying approach to modeling and solving these problems share common principles.
+This chapter introduces the general methodology and core mathematical concepts relevant to this thesis.
+
+```{toctree}
+:maxdepth: 2
+
+mathematics.md
+```

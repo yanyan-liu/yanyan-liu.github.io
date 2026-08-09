@@ -1,0 +1,600 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Engineering of Point Spread Functions for Localization Microscopy" href="../microscopy/index.html"><link rel="prev" title="Summary" href="pat2/summary.html">
+        <link rel="prefetch" href="../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Appendix</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<style>
+  .ss-layout-default-A_B_C_D { grid-template-areas: 'A' 'B' 'C' 'D'; }
+  .ss-layout-default-A_B_C { grid-template-areas: 'A' 'B' 'C'; }
+  .ss-layout-default-AB_CC { grid-template-areas: 'A B' 'C C'; }
+</style>
+<section class="tex2jax_ignore mathjax_ignore" id="appendix">
+<span id="pa-appendix"></span><h1>Appendix<a class="headerlink" href="#appendix" title="Link to this heading">¶</a></h1>
+<section id="effectiveness-of-regularization">
+<span id="pat1-effectiveness-of-regularization"></span><h2>Effectiveness of Regularization<a class="headerlink" href="#effectiveness-of-regularization" title="Link to this heading">¶</a></h2>
+<p>We demonstrate effectiveness of the proposed regularization in our unmixing framework with the
+following simulation.</p>
+<figure class="align-default" id="fig-pat1-decay-compare">
+<img alt="../../_images/noise_compare.png" src="../../_images/noise_compare.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Evolution of the PA signal during an OFF-switching cycle of 50 time points at three representative locations inside the
+three rsOAPs: Re (blue), Dr (red), and Rp (green) for the simulated (a) and experimental measurements (b) of a phantom
+of beads.
+The noise level in the measurements of the simulated beads phantom is 1% of its maximal intensity.</span><a class="headerlink" href="#fig-pat1-decay-compare" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="sphinx-subfigure align-default" id="fig-pat1-effect-of-reg" style="width: 80%">
+<div class="sphinx-subfigure-grid ss-layout-default-A_B_C_D" style="display: grid;">
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: A;">
+<img alt="simu no reg" src="../../_images/simu_noreg_paper.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: B;">
+<img alt="simu only tv" src="../../_images/simu_onlytv_paper.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: C;">
+<img alt="simu l1 plus tv" src="../../_images/simu_l1tv_paper.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: D;">
+<img alt="simu noise free" src="../../_images/simu_noisefree_paper.png" />
+</div>
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Unmixing results of a simulated beads phantom mimicking the experimental beads phantom.
+The first three rows each contains reconstructed distribution maps of Re (first column), Dr (second column),
+and Rp (third column) and the non-switching background (fourth column).
+PSNR and SSIM of each reconstruction is indicated on top of each image.
+Row one (a)-(d): via least-square.
+Row two (e)-(h): via least-square with total variation regularization.
+Row three (i)-(l): via least-square with total variation and <span class="math notranslate nohighlight">\(\ell_1\)</span> regularization.
+Row four (m)-(p): ground truth.
+Intensities of all images are normalized to <span class="math notranslate nohighlight">\([0, 1]\)</span> for visual comparison.</span><a class="headerlink" href="#fig-pat1-effect-of-reg" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="sphinx-subfigure align-default" id="fig-pat1-effect-of-reg-profiles" style="width: 80%">
+<div class="sphinx-subfigure-grid ss-layout-default-A_B_C" style="display: grid;">
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: A;">
+<img alt="profile reporter 1" src="../../_images/reporter1_profiles.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: B;">
+<img alt="profile reporter 2" src="../../_images/reporter2_profiles.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: C;">
+<img alt="profile reporter 3" src="../../_images/reporter3_profiles.png" />
+</div>
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Comparison of the intensity profiles at the 60th row of pixels of the reporter
+Re (q), Dr (r), and Rp (s) for eachreconstruction method shown in <a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a>.</span><a class="headerlink" href="#fig-pat1-effect-of-reg-profiles" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We design a 2D numerical phantom of size <span class="math notranslate nohighlight">\((150\times150)\)</span> px in which we randomly insert three groups of disk
+targets of diameter between 7 px and 12 px that represent photo-switching reporters on a heterogeneous
+background.
+The background image is synthesized similarly as in <a class="reference internal" href="pat1/results.html#pat1-result-numerical-phantom"><span class="std std-ref">Quantitative Unmixing Results</span></a>.
+Each target has homogeneous intensity.
+The ratio of intensities between the three groups and the background (maximal) is 2:1:1:5,
+mimicking a blood-rich sample where the background signal is stronger than that of the reporters.
+Each group has the same kinetic constant as one of the three rsOAPs (see <a class="reference internal" href="pat1/materials.html#tab-pat1-reporters"><span class="std std-numref">Table 5</span></a>).
+We generate measurements simulating an OFF-switching cycle with 50 PA images of size <span class="math notranslate nohighlight">\((150\times150)\)</span> px, with
+1% additive white Gaussian noise to mimic to experimental datasets (see <a class="reference internal" href="#fig-pat1-decay-compare"><span class="std std-numref">Fig. 38</span></a>).</p>
+<p>We test three reconstruction approaches, namely, least-square only (LS), least-square regularized with total variation
+on the spatial maps of each reporter (LS+TV), and least-square regularized with TV and additionally <span class="math notranslate nohighlight">\(\ell_1\)</span> among
+the reporters (LS+TV+<span class="math notranslate nohighlight">\(\ell_1\)</span>).
+We compare in <a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a> the results of using these methods against the ground truth.</p>
+<p>In all scenarios, the non-switching background
+is well recovered with a perfect structural similarity index (SSIM) of 1.0, though the peak signal-to-noise ratio (PSNR)
+varies among different methods (<a class="reference internal" href="#fig-pat1-decay-compare"><span class="std std-numref">Fig. 38</span></a> (d), (h), and (l)).</p>
+<p>Without any regularization, unmixing performs well only on the Re (with the largest kinetic constant among three rsOAPs),
+achieving an SSIM of 0.88 out of 1 (<a class="reference internal" href="#fig-pat1-decay-compare"><span class="std std-numref">Fig. 38</span></a> (a)).
+However, the algorithm struggles to separate Dr and Rp.
+This is indicated by the presence of reporters belonging to Rp appearing in the map of the Dr
+(<a class="reference internal" href="#fig-pat1-decay-compare"><span class="std std-numref">Fig. 38</span></a> (b)-(c)), leading to an SSIM of only 0.73 for Dr.
+In fact, Rp reporters appear in images of the first two rsOAPs (see the zoom-in area in
+<a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a> (a) and (b)).</p>
+<p>After adding TV regularizer, we observe in <a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a> (e)-(g) that
+TV not only reduces noise inside the beads, giving a much smoother intensity
+distribution for each of them, but also greatly mitigates the cross-talk issue if we compare
+<a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a> (b) and (f).
+PSNR of each group enjoys an average boost of 7 dB and SSIM of reporters Re and Dr is improved by 7% on average.</p>
+<p>However, there still remains a hint of cross-talk (see for example <a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a> (f)),
+which is solved by adding <span class="math notranslate nohighlight">\(\ell_1\)</span> regularizer to enforce sparsity at each pixel
+(<a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a> (i)-(j)).
+The intensity of each bead is more uniform, increasing
+the PSNR of each map by another 2-5 dB (see <a class="reference internal" href="#fig-pat1-effect-of-reg"><span class="std std-numref">Fig. 39</span></a> (i)-(k)).</p>
+<p>To gain more insight on the reconstruction quality, we compare intensity profiles along a representative horizontal
+line at the 60th row in <a class="reference internal" href="#fig-pat1-effect-of-reg-profiles"><span class="std std-numref">Fig. 40</span></a> (q)-(s).
+We see that LS+TV+<span class="math notranslate nohighlight">\(\ell_1\)</span> outperforms LS only and LS+TV in the following aspects:</p>
+<ul class="simple">
+<li><p>Signal is correctly recovered at nearly its 100% intensity with very little fluctuation inside the bead
+(see signals at location 55 px and 140 px in <a class="reference internal" href="#fig-pat1-effect-of-reg-profiles"><span class="std std-numref">Fig. 40</span></a> (s) for a good example)</p></li>
+<li><p>LS+TV+<span class="math notranslate nohighlight">\(\ell_1\)</span> does not suffer from cross-talk on locations where there should not
+be any signal compared to the other two approaches.</p></li>
+</ul>
+<p>Taking signals at location 55 px and 140 px in <a class="reference internal" href="#fig-pat1-effect-of-reg-profiles"><span class="std std-numref">Fig. 40</span></a> (q) and (r)
+as an example, LS only and LS+TV show relatively prominent peaks at these two locations where signals from
+the Rp should not appear at all, while LS+TV+<span class="math notranslate nohighlight">\(\ell_1\)</span> shows only flat tiny bumps.
+These details confirm that our proposed reconstruction method, LS+TV+<span class="math notranslate nohighlight">\(\ell_1\)</span> is effective and
+yields the best reconstruction results.</p>
+</section>
+<section id="optical-parameters">
+<span id="pat1-optical-parameters"></span><h2>Optical Parameters<a class="headerlink" href="#optical-parameters" title="Link to this heading">¶</a></h2>
+<p>The absorption coefficient <span class="math notranslate nohighlight">\(\mu_a\)</span> of the background is calculated according to <span id="id1">[<a class="reference internal" href="../../index.html#id293" title="Scott Prahl. Tabulated molar extinction coefficient for hemoglobin in water. https://omlc.org/spectra/hemoglobin/summary.html. Accessed: 2024-10-18.">181</a>]</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-mu-a-blood">
+<div class="math notranslate nohighlight" id="equation-eq-mu-a-blood">
+<span class="eqno">(104)<a class="headerlink" href="#equation-eq-mu-a-blood" title="Link to this equation">¶</a></span>\[\mu_a(\lambda) = \ln 10 \cdot
+\varepsilon(\lambda) [\text{cm}^{-1 }\cdot \text{mole}^{-1} \cdot \text{L}] \cdot 
+\frac{x\% \cdot 150 [\text{g}\cdot\text{L}^{-1}]} 
+{64500 [\text{g}\cdot\text{mole}^{-1}]},\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda=770\)</span> nm is the OFF-switching wavelength,
+<span class="math notranslate nohighlight">\(\varepsilon(\lambda) = 1311.88 [\text{cm}^{-1 }\cdot \text{mole}^{-1} \cdot \text{L} = \text{cm}^{-1 }\cdot \text{M}^{-1}]\)</span>
+is the molar extinction coefficient of blood at 770 nm, assuming the blood we used in the phantom to be mostly composed
+of deoxygenated hemoglobin (Hb),
+<span class="math notranslate nohighlight">\(x=3\)</span> is the percentage of blood used in the phantom,
+<span class="math notranslate nohighlight">\(150[\text{g}\cdot\text{L}^{-1}]\)</span> is the typical mass concentration of hemoglobin within blood,
+and <span class="math notranslate nohighlight">\(64500 [\text{g}\cdot\text{mole}^{-1}]\)</span> is the molecular weight of hemoglobin.
+Using these values, the background is determined by <span class="math notranslate nohighlight">\(\mu_a^{\text{bg}} =  0.21 [\text{cm}^{-1}]\)</span>.</p>
+<p>The absorption coefficients of the protein species Re and Dr are calculated via <span id="id2">[<a class="reference internal" href="../../index.html#id294" title="Steven L Jacques. Optical properties of biological tissues: a review. Physics in Medicine &amp; Biology, 58(11):R37–R61, June 2013.">182</a>]</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-mu-a-protein">
+<div class="math notranslate nohighlight" id="equation-eq-mu-a-protein">
+<span class="eqno">(105)<a class="headerlink" href="#equation-eq-mu-a-protein" title="Link to this equation">¶</a></span>\[\mu_a(\lambda) = \ln 10 \cdot \varepsilon(\lambda) [\text{M}^{-1}\cdot\text{cm}^{-1}] \cdot c [\text{M}]\]</div>
+</div>
+<p>from their molar concentration <span class="math notranslate nohighlight">\(c_{\text{Re}}=4.23\times 10^{-6}\)</span> [M],
+<span class="math notranslate nohighlight">\(c_{\text{Dr}}=3.71\times 10^{-6}\)</span> [M] and their respective molar extinction coefficients at 770nm
+<span class="math notranslate nohighlight">\(\varepsilon_{\text{Re}}(770\text{nm})\approx 0.7\times 10^{5}\)</span> <span class="math notranslate nohighlight">\([\text{M}^{-1}\cdot\text{cm}^{-1}]\)</span>,
+<span class="math notranslate nohighlight">\(\varepsilon_{\text{Dr}}(770\text{nm})\approx 0.4\times 10^{5}\)</span> <span class="math notranslate nohighlight">\([\text{M}^{-1}\cdot\text{cm}^{-1}]\)</span>.
+We thus have <span class="math notranslate nohighlight">\(\mu_a^{\text{Re}} = 0.68\text{ cm}^{-1}\)</span> and <span class="math notranslate nohighlight">\(\mu_a^{\text{Dr}} = 0.34\text{ cm}^{-1}\)</span>.</p>
+<p>We adopt a typical value of <span class="math notranslate nohighlight">\(10\text{ cm}^{-1}\)</span> for the reduced scattering coefficient <span class="math notranslate nohighlight">\(\mu_s^{'}\)</span> of the
+background, which is composed of 3% intralipid as a scatterer.</p>
+</section>
+<section id="estimation-of-kinetic-constants">
+<span id="pat1-estimation-of-kinetic-constants"></span><h2>Estimation of Kinetic Constants<a class="headerlink" href="#estimation-of-kinetic-constants" title="Link to this heading">¶</a></h2>
+<p>The kinetic constants <span class="math notranslate nohighlight">\(\bar{k}\)</span> reported in <a class="reference internal" href="pat1/materials.html#tab-pat1-reporters"><span class="std std-numref">Table 5</span></a> are measured experimentally and depend
+on the pulse energy and the subsequent unknown light fluence <span class="math notranslate nohighlight">\(\Phi_m\)</span> during the measurement via
+<span class="math notranslate nohighlight">\(k = \frac{\bar{k}}{\Phi_m}\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> is the intrinsic constant.
+To estimate <span class="math notranslate nohighlight">\(\Phi_m\)</span>, we first use an empirical method to retrieve the decay rates
+<span class="math notranslate nohighlight">\(\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}\)</span> of each species from the experimental dataset.
+Then, we determine <span class="math notranslate nohighlight">\(\Phi_m\)</span> from</p>
+<div class="math-wrapper docutils container" id="equation-eq-average">
+<div class="math notranslate nohighlight" id="equation-eq-average">
+<span class="eqno">(106)<a class="headerlink" href="#equation-eq-average" title="Link to this equation">¶</a></span>\[\Phi_m = \sqrt[3]{\frac{\bar{k}_{\text{Re}}}{b_{\text{Re}}}\frac{\bar{k}_{\text{Dr}}}
+{b_{\text{Dr}}}\frac{\bar{k}_{\text{Rp}}}{b_{\text{Rp}}}},\]</div>
+</div>
+<p>which is the geometric mean of the estimated results from all three species.
+To estimate <span class="math notranslate nohighlight">\(\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}\)</span>, we fit an exponential function</p>
+<div class="math-wrapper docutils container" id="equation-eq-exp-fit">
+<div class="math notranslate nohighlight" id="equation-eq-exp-fit">
+<span class="eqno">(107)<a class="headerlink" href="#equation-eq-exp-fit" title="Link to this equation">¶</a></span>\[y = a\text{e}^{-bt} + c\]</div>
+</div>
+<p>at each pixel to obtain a map of decay rates <span class="math notranslate nohighlight">\(b\)</span>.
+Then, we approximate the OFF-switching rate of each reporter by locating the peaks in the
+histogram of the map of <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>In <a class="reference internal" href="#fig-find-k"><span class="std std-numref">Fig. 41</span></a> (a), we show an example of the fitting result at one location inside each of the three rsOAPs
+marked by the three dots in <a class="reference internal" href="#fig-find-k"><span class="std std-numref">Fig. 41</span></a> (b) for the dataset of the experimental phantom of beads.
+In <a class="reference internal" href="#fig-find-k"><span class="std std-numref">Fig. 41</span></a> (c), we show the result of the empirical estimate of kinetic constants.
+Three prominent peaks are observed, indicating decay rates of the three species.
+We take a value around these peaks as the empirical estimate for <span class="math notranslate nohighlight">\(\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}\)</span>.
+Plugging the estimated values of <span class="math notranslate nohighlight">\(\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}\)</span> shown in <a class="reference internal" href="#fig-find-k"><span class="std std-numref">Fig. 41</span></a>
+and <span class="math notranslate nohighlight">\(\{\bar{k}_{\text{Re}}, \bar{k}_{\text{Dr}},\bar{k}_{\text{Rp}}\}\)</span> in <a class="reference internal" href="pat1/materials.html#tab-pat1-reporters"><span class="std std-numref">Table 5</span></a>
+into <a class="reference internal" href="#equation-eq-average">Eq. (106)</a>, we obtain that <span class="math notranslate nohighlight">\(\Phi_m = 0.3\)</span>.</p>
+<figure class="sphinx-subfigure align-default" id="fig-find-k" style="width: 80%">
+<div class="sphinx-subfigure-grid ss-layout-default-AB_CC" style="display: grid;">
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: A;">
+<img alt="exp fits" src="../../_images/exp_fits.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: B;">
+<img alt="exp locations" src="../../_images/exp_locations.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: C;">
+<img alt="histogram of k" src="../../_images/hist_ks.png" />
+</div>
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Estimation of the decay rates for the three species based on the OFF-switching dataset of the experimental
+beads phantom.
+(a) Fitting results at three representative pixels, each inside one of the three rsOAPs.
+Scatter points represent original data, curves are the fitted results.
+(b) Location of the three pixels used in (a). PA image is the first frame of the OFF-switching series.
+(c) Histogram (partial) of the fitted decay rate <span class="math notranslate nohighlight">\(b\)</span> for all pixels in the PA image.
+Based on the fitting result in (a), only the part of the histogram where the values within the range (&lt;25) is displayed.</span><a class="headerlink" href="#fig-find-k" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../microscopy/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Engineering of Point Spread Functions for Localization Microscopy</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="pat2/summary.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Summary</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Appendix</a><ul>
+<li><a class="reference internal" href="#effectiveness-of-regularization">Effectiveness of Regularization</a></li>
+<li><a class="reference internal" href="#optical-parameters">Optical Parameters</a></li>
+<li><a class="reference internal" href="#estimation-of-kinetic-constants">Estimation of Kinetic Constants</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

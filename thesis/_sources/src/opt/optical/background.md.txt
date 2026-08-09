@@ -1,0 +1,26 @@
+(opt-optical-background)=
+# Background
+
+In the previous section, we have focused on mechanical artifacts and computational methods to correct them.
+In this section, we investigate optical artifacts that are due to
+refractive-index (RI) mismatch between the sample and the immersion liquid.
+
+## Motivation
+
+During an OPT experiment, the sample is typically embedded in a cylindrical gel
+phantom which is immersed in an RI-matching liquid {cite:p}`Doran:01, Islam:03, Sharpe2004`.
+The purpose of this is to limit the refraction of light at the interface of the agarose gel
+and the immersion liquid {cite:p}`Doran:01, Islam:03, Haidekker:06, marcos:20`, in order for the assumption of
+straight-ray projections to be acceptable.
+Despite their best effort, OPT practitioners still observe seagull-shaped artifacts
+suspected to be caused by a residual mismatch in the RIs {cite:p}`Schmidt:21`.
+A previous study had already reported similar artifacts, mostly located around the edge of the sample,
+and proposed a computational method to compensate for RI mismatch {cite:p}`JochenBirk:11`.
+However, as this method requires volumetric alignment, it remains computationally expensive.
+
+## Contribution
+
+In this section, we propose a simple model based on ray optics to approximate the effect of RI mismatch,
+which we interpret as a virtual cylindrical lens and approximate the lensing effect with the help of a cone-beam model.
+We then implement a fast reconstruction method to correct resulting seagull-shaped artifacts
+and validate our approach on experimental data of fluorescent beads.

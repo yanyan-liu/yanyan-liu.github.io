@@ -1,0 +1,20 @@
+(pat1-summary)=
+# Summary
+
+We presented a model-based unmixing framework to reconstruct concentration maps of multiple species of
+photo-switching reporters using photoacoustic tomography.
+This model describes how time series of PA images evolve during the OFF-switching process.
+Our model explicitly relates unknown concentration maps to the factors that govern the switching dynamics, namely,
+reporter kinetic constant, extinction coefficient, and distribution of light fluence in the sample.
+We make the best use of full time-series information during OFF-switching cycles on the whole image, thus avoiding
+shortcomings of pixelwise analysis.
+This also enables the addition of carefully designed spatial regularization to the inverse reconstruction problem.
+The combination of total variation and {math}`\ell_1` regularizers helps reduce noise and improves the separation of
+different species of reporters, which is crucial to a successful unmixing and high-quality reconstruction.
+
+The proposed framework offers fast and efficient quantitative analysis of temporally entangled PA data during
+photo-switching experiments.
+This approach is versatile and easily applicable to various geometries such as 2D cross-sectioning or whole 3D volumes
+acquired with a raster-scanning or tomographic PA setup.
+Our framework also allows for a realistic heterogeneous light fluence distribution map, which can be separately
+estimated with another model, to be conveniently incorporated in the forward model for high-quality volume unmixing.

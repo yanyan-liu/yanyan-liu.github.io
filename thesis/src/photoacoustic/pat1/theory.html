@@ -1,0 +1,651 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Sample Preparation and Data Acquisition" href="materials.html"><link rel="prev" title="Background" href="background.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Modeling of Photo-Switching and Unmixing Method</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="modeling-of-photo-switching-and-unmixing-method">
+<span id="pat1-modeling"></span><h1>Modeling of Photo-Switching and Unmixing Method<a class="headerlink" href="#modeling-of-photo-switching-and-unmixing-method" title="Link to this heading">¶</a></h1>
+<p>In this section, we present a comprehensive forward model and an unmixing algorithm for photo-switching PAT.</p>
+<section id="forward-model-in-the-continuum">
+<span id="pat1-forward-model-continuum"></span><h2>Forward Model in the Continuum<a class="headerlink" href="#forward-model-in-the-continuum" title="Link to this heading">¶</a></h2>
+<p>We consider the general case of <span class="math notranslate nohighlight">\(P\)</span> species of reporters distributed along the concentration map
+<span class="math notranslate nohighlight">\(c_p(\mathbf{r})\)</span> for <span class="math notranslate nohighlight">\(p = 1, \ldots, P\)</span>, characterized by an intrinsic kinetic
+constant <span class="math notranslate nohighlight">\(k_p\)</span>.
+Note that we model the non-switching background as the last (<span class="math notranslate nohighlight">\(P\)</span>th) <em>reporter</em> with kinetic constant
+<span class="math notranslate nohighlight">\(k_P=0\)</span>.</p>
+<p>Without loss of generality, we look at one sequence of OFF-switching pulses
+and assume that all reporters are initially in their ON-state.
+The transition of the proteins from ON to the OFF state is a stochastic process under
+pulsed illumination at the OFF-wavelength, which results in exponential decay of the extinction coefficient
+<span class="math notranslate nohighlight">\(\varepsilon_p(\mathbf{r}, t; \lambda_{\text{OFF}})\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-epsilon">
+<div class="math notranslate nohighlight" id="equation-eq-epsilon">
+<span class="eqno">(40)<a class="headerlink" href="#equation-eq-epsilon" title="Link to this equation">¶</a></span>\[    \varepsilon_p(\mathbf{r}, t; \lambda_{\text{OFF}}) =
+    \left(\varepsilon_p^{\text{ON}}(\lambda_{\text{OFF}}) - \varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}})\right)
+    \text{e}^{-k_p\Phi(\mathbf{r})t} + \varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}}),\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\varepsilon_p^{\text{ON}}(\lambda_{\text{OFF}})\)</span> and
+<span class="math notranslate nohighlight">\(\varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}})\)</span> are the extinction coefficients of the <span class="math notranslate nohighlight">\(p\)</span>th reporter
+of the ON and OFF states at wavelength <span class="math notranslate nohighlight">\(\lambda_{\text{OFF}}\)</span>, respectively.
+Here, we adopt the approximation by Yao et al. <span id="id1">[<a class="reference internal" href="../../../index.html#id283" title="Junjie Yao, Lidai Wang, Chiye Li, Chi Zhang, and Lihong V. Wang. Photoimprint Photoacoustic Microscopy for Three-Dimensional Label-Free Subdiffraction Imaging. Physical Review Letters, 112(1):014302, January 2014.">157</a>]</span> that the decay rate depends linearly
+on light fluence <span class="math notranslate nohighlight">\(\Phi(\mathbf{r})\)</span>.
+The distribution <span class="math notranslate nohighlight">\(H(\mathbf{r}, t)\)</span> of total deposited optical energy at
+spatial location <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> and switching time <span class="math notranslate nohighlight">\(t\)</span> is</p>
+<div class="math-wrapper docutils container" id="equation-eq-absorbed-energy-h">
+<div class="math notranslate nohighlight" id="equation-eq-absorbed-energy-h">
+<span class="eqno">(41)<a class="headerlink" href="#equation-eq-absorbed-energy-h" title="Link to this equation">¶</a></span>\[    H(\mathbf{r}, t) = \Phi(\mathbf{r}) \left(\sum_{p=1}^{P}\varepsilon_p(\mathbf{r}, t; \lambda_{\text{OFF}})
+    c_p(\mathbf{r})\right),\qquad \mathbf{r}\in\Omega, \quad t\ge0,\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega \subset \mathbb{R}^3\)</span> represents the domain of the 3D sample to be imaged.
+We assume that light pulses are independent of each other and that there is no temporal overlap with neighboring
+switching events.
+The combination of <a class="reference internal" href="#equation-eq-epsilon">Eq. (40)</a> and <a class="reference internal" href="#equation-eq-absorbed-energy-h">Eq. (41)</a> yields the forward model</p>
+<div class="math-wrapper docutils container" id="equation-eq-final-h">
+<div class="math notranslate nohighlight" id="equation-eq-final-h">
+<span class="eqno">(42)<a class="headerlink" href="#equation-eq-final-h" title="Link to this equation">¶</a></span>\[    H(\mathbf{r}, t) = 
+    \Phi(\mathbf{r})\left(\sum_{p=1}^{P}
+    \left(\bar{\varepsilon}_p
+    \mathrm{e}^{-k_p\Phi(\mathbf{r})t} +
+    \varepsilon_p^{\text{OFF}}\right)
+    c_p(\mathbf{r})\right),\]</div>
+</div>
+<p>where
+<span class="math notranslate nohighlight">\(\bar{\varepsilon}_p = \left(\varepsilon_p^{\text{ON}}(\lambda_{\text{OFF}}) - \varepsilon_p^{\text{OFF}}(\lambda_{\text{OFF}})\right)\)</span>
+and we omit the dependence of <span class="math notranslate nohighlight">\(\bar{\varepsilon}_p\)</span> and <span class="math notranslate nohighlight">\(\varepsilon_p^{\text{OFF}}\)</span> on
+<span class="math notranslate nohighlight">\(\lambda_{\text{OFF}}\)</span> to simplify notations.</p>
+<p>In <a class="reference internal" href="#equation-eq-final-h">Eq. (42)</a>, the series of optical energy deposition maps <span class="math notranslate nohighlight">\(H\)</span> is proportional to <span class="math notranslate nohighlight">\(p^0\)</span>,
+the acoustically reconstructed PA image at the corresponding pulse number.
+The unknown quantities are the concentration maps <span class="math notranslate nohighlight">\(c_p(\mathbf{r})\)</span> of <span class="math notranslate nohighlight">\(P\)</span> species of reporters and the
+distribution <span class="math notranslate nohighlight">\(\Phi(\mathbf{r})\)</span> of light fluence within the sample.</p>
+<p>Spatial distribution of fluence <span class="math notranslate nohighlight">\(\Phi(\mathbf{r})\)</span> in the tomographic setting can be estimated separately via
+diffusion equation with optical parameters of the nonswitching background of the sample
+<span id="id2">[<a class="reference internal" href="../../../index.html#id254" title="Lihong V. Wang and Hsin-i Wu. Biomedical optics: principles and imaging. Wiley-Interscience, Hoboken, NJ, USA, 2007.">8</a>, <a class="reference internal" href="../../../index.html#id284" title="Adam Q. Bauer, Ralph E. Nothdurft, Todd N. Erpelding, Lihong V. Wang, and Joseph P. Culver. Quantitative photoacoustic imaging: correcting for heterogeneous light fluence distributions using diffuse optical tomography. Journal of Biomedical Optics, 16(9):096016, 2011.">158</a>, <a class="reference internal" href="../../../index.html#id248" title="Ben Cox, Jan G. Laufer, Simon R. Arridge, and Paul C. Beard. Quantitative spectroscopic photoacoustic imaging: a review. Journal of Biomedical Optics, 17(6):061202, 2012.">159</a>]</span>.
+It is time-independent as the contribution of blood vessels to the absorption is much stronger than that of protein
+reporters.
+More details on the computation of fluence are provided in section
+<a class="reference internal" href="fluence.html#pat-compute-fluence"><span class="std std-ref">Computation of Light Fluence</span></a>.</p>
+</section>
+<section id="discrete-forward-model">
+<span id="pat1-forward-model-discrete"></span><h2>Discrete Forward Model<a class="headerlink" href="#discrete-forward-model" title="Link to this heading">¶</a></h2>
+<p>To numerically implement the forward model, we proceed to discretize <a class="reference internal" href="#equation-eq-final-h">Eq. (42)</a> over domain
+<span class="math notranslate nohighlight">\(\Omega\)</span>.
+Because of tomographic sectioning, we consider a 2D cross-section of the sample and write the forward model in 2D while
+we still compute light fluence in 3D.
+We discretize a 2D cross-section into a collection of points <span class="math notranslate nohighlight">\(\Delta\boldsymbol{i} = (\Delta_1 i_1, \Delta_2 i_2)\)</span>,
+where <span class="math notranslate nohighlight">\(\boldsymbol{i} = (i_1, i_2) \in \Omega_{\text{2D}}\subset \mathbb{Z}^2\)</span> is the index of sampled points,
+<span class="math notranslate nohighlight">\(i_1 = 0, \ldots, L_\text{x} - 1\)</span>, and <span class="math notranslate nohighlight">\(i_2=0, \ldots, L_\text{z} - 1\)</span>.
+The diagonal matrix <span class="math notranslate nohighlight">\(\Delta = \text{diag}\left\{\Delta_1, \Delta_2\right\}\)</span> defines the stepsize <span class="math notranslate nohighlight">\(\Delta_1\)</span>
+and <span class="math notranslate nohighlight">\(\Delta_2\)</span> for the lateral and axial direction, respectively.
+Switching time <span class="math notranslate nohighlight">\(t\)</span> is sampled at <span class="math notranslate nohighlight">\(N\)</span> pulses such that <span class="math notranslate nohighlight">\(t_n = \Delta_{\text{t}} n\)</span>, <span class="math notranslate nohighlight">\(n=0, \ldots, N-1\)</span>,
+with <span class="math notranslate nohighlight">\(\Delta_{\text{t}}\)</span> the temporal stepsize which is determined by the laser repetition rate during switching.
+We define discrete energy deposition <span class="math notranslate nohighlight">\(H_{\boldsymbol{i}}^{n}= H(\mathbf{r}_{i_1, i_2},t_{n} )\)</span>,
+reporter concentrations <span class="math notranslate nohighlight">\(c^p_{\boldsymbol{i}} = c^{p} (\mathbf{r}_{i_1,i_2} )\)</span>,
+<span class="math notranslate nohighlight">\(p=1, \ldots, P\)</span> (with <span class="math notranslate nohighlight">\(P\)</span> the total number of protein species plus one),
+and fluence distribution <span class="math notranslate nohighlight">\(\Phi_{\boldsymbol{i}} = \Phi (\mathbf{r}_{i_1,i_2} )\)</span>.
+The photo-switching forward model <a class="reference internal" href="#equation-eq-final-h">Eq. (42)</a> is first specified at a pixel index <span class="math notranslate nohighlight">\(\boldsymbol{i}\)</span>
+for all <span class="math notranslate nohighlight">\(N\)</span> time points as</p>
+<div class="math-wrapper docutils container" id="equation-eq-sij-detailed">
+<div class="math notranslate nohighlight" id="equation-eq-sij-detailed">
+<span class="eqno">(43)<a class="headerlink" href="#equation-eq-sij-detailed" title="Link to this equation">¶</a></span>\[\begin{split}    \underbrace{
+    \begin{bmatrix}
+    H^{0}_{\boldsymbol{i}} \\ H^{2}_{\boldsymbol{i}} \\ \vdots \\ H^{N-1}_{\boldsymbol{i}} 
+    \end{bmatrix}}
+    _{\mathbf{H}_{\boldsymbol{i}}}
+    = 
+    \underbrace{
+    \Phi_{\boldsymbol{i}}
+    \begin{bmatrix}
+    \bar{\varepsilon}_{1} \mathrm{e}^{-k_{1} \Phi_{\boldsymbol{i}} t_{0}} + \varepsilon_{1}^{\text{OFF}}
+    &amp;  
+    \cdots &amp; 
+    \bar{\varepsilon}_{P} \mathrm{e}^{-k_{P} \Phi_{\boldsymbol{i}} t_{0}} + \varepsilon_{P}^{\text{OFF}}\\
+    \bar{\varepsilon}_{1} \mathrm{e}^{-k_{1} \Phi_{\boldsymbol{i}} t_{1}} + \varepsilon_{1}^{\text{OFF}}
+    &amp; 
+    \cdots &amp; 
+    \bar{\varepsilon}_{P} \mathrm{e}^{-k_{P} \Phi_{\boldsymbol{i}} t_{1}} + \varepsilon_{P}^{\text{OFF}}\\
+    \vdots &amp;  
+    \ddots &amp; 
+    \vdots \\
+    \bar{\varepsilon}_{1} \mathrm{e}^{-k_{1} \Phi_{\boldsymbol{i}} t_{N-1}} + \varepsilon_{1}^{\text{OFF}}
+    &amp; 
+    \cdots &amp; 
+    \bar{\varepsilon}_{P} \mathrm{e}^{-k_{P} \Phi_{\boldsymbol{i}} t_{N-1}} + \varepsilon_{P}^{\text{OFF}}
+    \end{bmatrix}}
+    _{\mathbf{S}_{\boldsymbol{i}}}
+    \underbrace{
+    \begin{bmatrix}
+    c^1_{\boldsymbol{i}} \\ c^2_{\boldsymbol{i}} \\ \vdots \\ c^P_{\boldsymbol{i}} 
+    \end{bmatrix}}
+    _{\mathbf{c}_{\boldsymbol{i}}},\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{H}_{\boldsymbol{i}} \in \mathbb{R}^{N}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{c}_{\boldsymbol{i}} \in \mathbb{R}^{P}\)</span>,
+and <span class="math notranslate nohighlight">\(\mathbf{S}_{\boldsymbol{i}} \in \mathbb{R}^{N \times P}\)</span>.
+Then, we assemble the per-pixel system of <a class="reference internal" href="#equation-eq-sij-detailed">Eq. (43)</a> into a block-diagonal system by sequentially combining <span class="math notranslate nohighlight">\(L=L_{\text{x}} L_{\text{z}}\)</span> systems</p>
+<div class="math-wrapper docutils container" id="equation-eq-photoswitching-full-discrete-forward-detailed">
+<div class="math notranslate nohighlight" id="equation-eq-photoswitching-full-discrete-forward-detailed">
+<span class="eqno">(44)<a class="headerlink" href="#equation-eq-photoswitching-full-discrete-forward-detailed" title="Link to this equation">¶</a></span>\[\begin{split}    \underbrace{
+    \begin{bmatrix}
+    \mathbf{H}_{0,0} \\ \mathbf{H}_{1,0} \\ \vdots \\
+    \mathbf{H}_{L_{\text{x}}-1,0} \\ \mathbf{H}_{0,1} \\ \vdots \\
+    \mathbf{H}_{L_{\text{x}}-1,L_{\text{z}}-1}
+    \end{bmatrix}}
+    _{\mathbf{H}}
+    = 
+    \underbrace{
+    \begin{bmatrix}
+    \mathbf{S}_{0,0} &amp; 
+    \mathbf{0} &amp;     
+    \cdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \mathbf{0} \\
+    \mathbf{0} &amp; 
+    \mathbf{S}_{1,0} &amp;
+    \ddots &amp;     
+    \cdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \vdots \\
+    \vdots &amp; 
+    \ddots &amp;
+    \ddots &amp;     
+    \mathbf{0} &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \vdots \\
+    \vdots &amp; 
+    \cdots &amp; 
+    \mathbf{0} &amp;     
+    \mathbf{S}_{L_{\text{x}}-1,0} &amp;
+    \mathbf{0} &amp; 
+    \cdots &amp; 
+    \vdots \\
+    \vdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \mathbf{0} &amp;     
+    \mathbf{S}_{0,1} &amp;
+    \ddots &amp; 
+    \vdots \\
+    \vdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \ddots &amp;     
+    \ddots &amp;
+    \mathbf{0} \\
+    \mathbf{0} &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \cdots &amp; 
+    \mathbf{0} &amp;     
+    \mathbf{S}_{L_{\text{x}}-1, L_{\text{z}}-1} \\
+    \end{bmatrix}}
+    _{\mathbf{S}}
+    \underbrace{
+    \begin{bmatrix}
+    \mathbf{c}_{0,0} \\ \mathbf{c}_{1,0} \\ \vdots \\
+    \mathbf{c}_{L_{\text{x}}-1,0} \\ \mathbf{c}_{0,1} \\ \vdots \\
+    \mathbf{c}_{L_{\text{x}}-1,L_{\text{z}}-1}
+    \end{bmatrix}}
+    _{\mathbf{c}},\end{split}\]</div>
+</div>
+<p>with deposited energy vector <span class="math notranslate nohighlight">\(\mathbf{H} \in \mathbb{R}^{NL}\)</span>,
+concentration map vector <span class="math notranslate nohighlight">\(\mathbf{c} \in \mathbb{R}^{PL}\)</span>,
+and the pooled system matrix <span class="math notranslate nohighlight">\(\mathbf{S} \in \mathbb{R}^{NL \times PL}\)</span>.
+For the sake of memory efficiency,
+the block matrix <span class="math notranslate nohighlight">\(\mathbf{S}_{\boldsymbol{i}}\)</span> for all each location is directly constructed using
+Einstein summation <span id="id3">[<a class="reference internal" href="../../../index.html#id299" title="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html.">160</a>]</span>,
+and the final forward matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> is implemented as a block-diagonal operator
+without storing the zeros in it via <em>PyLops</em> <span id="id4">[<a class="reference internal" href="../../../index.html#id251" title="Matteo Ravasi and Ivan Vasconcelos. Pylops—a linear-operator python library for scalable algebra and optimization. SoftwareX, 11:100361, 2020.">83</a>]</span>.</p>
+<p>By assembling the temporal evolution of all pixels into one linear system,
+we aggregate all available information to reconstruct concentration maps of all reporters at once.
+Compared to pixelwise fitting, our approach enables spatial regularization to increase robustness to noise and
+obtain coherent concentration maps.</p>
+</section>
+<section id="unmixing-algorithm">
+<span id="pat1-unmixing-algorithm"></span><h2>Unmixing Algorithm<a class="headerlink" href="#unmixing-algorithm" title="Link to this heading">¶</a></h2>
+<p>The unmixing task is to reconstruct spatial concentration maps of <span class="math notranslate nohighlight">\(P\)</span> reporters
+from measurements of the optical deposition over time via the linear system
+<a class="reference internal" href="#equation-eq-photoswitching-full-discrete-forward-detailed">Eq. (44)</a>.
+In a typical photo-switching PAT experiment, <span class="math notranslate nohighlight">\(N \sim 10^1\)</span>, <span class="math notranslate nohighlight">\(P \sim 10^{0}\)</span>, and <span class="math notranslate nohighlight">\(L \sim 10^6\)</span>,
+which yields a linear system of size <span class="math notranslate nohighlight">\(\sim 10^{13}\)</span>.
+Direct inversion of such a large sparse linear system is computationally challenging and not robust
+against measurement noise.
+We thus follow the methodology introduced in chapter <a class="reference internal" href="../../intro_math/index.html#intro-modeling-and-solving-inverse-problems"><span class="std std-ref">Modeling and Solving of Inverse Problems</span></a>
+and adopt a model-based approach that retrieves solution to
+<a class="reference internal" href="#equation-eq-photoswitching-full-discrete-forward-detailed">Eq. (44)</a> via the resolution of an optimization problem</p>
+<div class="math-wrapper docutils container" id="equation-eq-recon-opt">
+<div class="math notranslate nohighlight" id="equation-eq-recon-opt">
+<span class="eqno">(45)<a class="headerlink" href="#equation-eq-recon-opt" title="Link to this equation">¶</a></span>\[    \hat{\mathbf{c}} \in
+      \text{arg}\min_{\mathbf{c} \geq \mathbf{0}}\left\{\frac{1}{2} 
+        \lVert \mathbf{H} - \mathbf{S}\mathbf{c} \rVert^{2}_{2}
+    +  \mathcal{R}(\mathbf{c}) \right\},
+    \]</div>
+</div>
+<p>which involves a quadratic data-fidelity term and a regularization term <span class="math notranslate nohighlight">\(\mathcal{R}\)</span>.
+Regularization enforces prior information on the solution, which we define as the combination of
+total-variation (TV) and <span class="math notranslate nohighlight">\(\ell_1\)</span> regularizers given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-regularization">
+<div class="math notranslate nohighlight" id="equation-eq-regularization">
+<span class="eqno">(46)<a class="headerlink" href="#equation-eq-regularization" title="Link to this equation">¶</a></span>\[    \mathcal{R}(\mathbf{c}) = \gamma^{\text{TV}} \sum_{p=1}^{P} |\mathbf{c}^p|_{\text{TV}} +
+    \gamma^{\ell_1} \sum_{i_1=0}^{L_{\text{x} - 1}} \sum_{i_2=0}^{L_{\text{z} - 1}}
+    \|\mathbf{c}_{i_1, i_2}\|_1,
+    \]</div>
+</div>
+<p>where the nonnegative
+constants <span class="math notranslate nohighlight">\(\gamma^{\text{TV}}\)</span> and <span class="math notranslate nohighlight">\(\gamma^{\ell_1}\)</span> are the weights of TV and <span class="math notranslate nohighlight">\(\ell_1\)</span>
+regularizers.
+We choose the anisotropic TV
+<span class="math notranslate nohighlight">\(|\cdot|_{\text{TV}} = \lVert \nabla_{\text{x}} (\cdot) \rVert_1 + \lVert \nabla_{\text{z}} (\cdot) \rVert_1\)</span>
+for computational efficiency,
+where <span class="math notranslate nohighlight">\(\nabla_\text{x}\)</span> and <span class="math notranslate nohighlight">\(\nabla_\text{z}\)</span> are the finite difference operators
+in the lateral and axial directions, respectively.
+TV-regularization promotes sparse gradients and hence achieves piecewise-smooth reconstructions
+<span id="id5">[<a class="reference internal" href="../../../index.html#id285" title="Antonin Chambolle. An Algorithm for Total Variation Minimization and Applications. Journal of Mathematical Imaging and Vision, 20(1):89–97, January 2004.">161</a>]</span>;
+<span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization minimizes cross-talk between different species.</p>
+<p>The minimization in <a class="reference internal" href="#equation-eq-recon-opt">Eq. (45)</a> is a large-scale convex optimization problem.
+For computational speed, we use the limited-memory Broyden–Fletcher–Goldfarb–Shanno algorithm with bound constraints
+(L-BFGS-B) <span id="id6">[<a class="reference internal" href="../../../index.html#id289" title="Richard H. Byrd, Peihuang Lu, Jorge Nocedal, and Ciyou Zhu. A limited memory algorithm for bound constrained optimization. SIAM Journal on Scientific Computing, 16(5):1190-1208, 1995.">81</a>]</span>.
+The whole pipeline, including forward operator and inverse-problem solver, is implemented using
+<em>PyLops</em>, an open-source Python library for large-scale optimization with linear operators <span id="id7">[<a class="reference internal" href="../../../index.html#id251" title="Matteo Ravasi and Ivan Vasconcelos. Pylops—a linear-operator python library for scalable algebra and optimization. SoftwareX, 11:100361, 2020.">83</a>]</span>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="materials.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Sample Preparation and Data Acquisition</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="background.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Background</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Modeling of Photo-Switching and Unmixing Method</a><ul>
+<li><a class="reference internal" href="#forward-model-in-the-continuum">Forward Model in the Continuum</a></li>
+<li><a class="reference internal" href="#discrete-forward-model">Discrete Forward Model</a></li>
+<li><a class="reference internal" href="#unmixing-algorithm">Unmixing Algorithm</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(opt-optical-cone-beam-shift-of-origin-due-to-off-center-rotation)=
+# Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation
+
+While we have shown that the RI mismatch transforms the parallel problem into a conic one, the center that yields
+the optimal FDK reconstruction is not the {math}`y_0` predicted by {eq}`eq:opt-optical-origin-of-cone-beam`, but rather an {math}`y_r`
+that is significantly closer to the object, with {math}`y_0>y_r`.
+Following recent evidence regarding the effects of recalibration on seagull artifacts {cite:p}`Schmidt:21`, we have
+established experimentally that a mis\-centering of the cylinder with respect to the axis of the turning platform is at
+the origin of this offset.
+
+To reconcile the conic geometry motivated in {eq}`eq:opt-optical-origin-of-cone-beam` with this newly characterized experimental error,
+we proceed to show that the offset of the center of rotation accumulates the original projections in a way that
+generates an alternative cone with its center displaced towards the origin.
+Indeed, even when misaligned, the platform still rotates the sample fully, and hence, generates complete tomographic data.
+The center of a cone beam corresponds to the position through which all light rays pass; we thus look for the point
+where the flux of intensity is maximal.
+
+```{figure} optical/images/off_center.*
+:name: fig:opt-optical-offcenter-geometry
+:width: 80%
+Effect of the off-centered rotation of the sample on the center of the cone beam. The bigger black disk
+corresponds to the cylinder in {numref}`fig:opt-optical-setup`, whereas the greyish inner circle represents its orbit around
+the true center (size exaggerated). The rotation trajectory (in blue) is translated into an oscillation (also in blue)
+of the cone's center that generates an alternative cone closer to the sample.
+``` 
+
+The effect of the rotation on the {math}`y` direction being negligible because {math}`y_0 \gg R`, we focus instead on
+the movement induced in the {math}`x` direction.
+This displacement can be expressed as {math}`r\cos \theta`, where {math}`\theta` is the angle of rotation and {math}`r`
+he distance between the center of the sample and the true axis.
+At each angle of rotation, the rays originate a light cone that is viewed from {math}`y_0` with an angle {math}`\psi`,
+which in turn depends on {math}`R` ({numref}`fig:opt-optical-offcenter-geometry`).
+These cones accumulate on the line segment {math}`[-r,r] \times \{y_0\}` (blue in
+{numref}`fig:opt-optical-offcenter-geometry`) according to the amplitude of rotation.
+
+Let us establish the coordinate system {math}`(x,y')` centered on {math}`(0,y_0)` and with the axis of symmetry flipped,
+so that {math}`y=(y_0-y')`.
+In the {math}`(x, y')` system of coordinates, the finite domain limits the spatial influence of the rays, making them
+all coincide at {math}`x=0`, {math}`y'=y'^\star = r \cot \left( \psi /2 \right)`, and thus creating an equivalent cone
+center under fairly general conditions.
+To show this, we use {math}`f(x,y')` to model the brightness within the span of each cone and {math}`w(x)` to weight
+their contributions in a way that reflects how the projections concentrate at the poles.
+Together, they multiply to yield the weighted intensity flux
+```{math}
+g (x, y') = f \left( \sqrt{x^2+y'^2} \right) w(x).
+```
+All contributions can then be combined by integrating over the {math}`x` movement as
+```{math}
+I(y')/2 = \left\{
+\begin{aligned} 
+      & \int_0^r g\left( x, y' \right) \,\text{d}x,  \quad y' \geq y'^\star \\
+      &\int_0^{y'\tan(\psi/2)} g\left( x, y' \right)\,\text{d}x,  \quad y'<y'^\star,
+   \end{aligned}
+\right.
+```
+which is split into two components precisely because the offset rotation has a finite amplitude.
+Note that the weighted intensity energy {math}`I` is continuous as {math}`y'=y'^\star` is the solution to
+{math}`r=y'\tan(\psi/2)`, and that the factor of 2 appears due to the symmetry of {math}`g` with respect to
+the integration domain.
+
+The maximum of {math}`I` is attained at {math}`y'^\star` when {math}`g` is constant, thus originating a (uniform)
+cone beam closer ({math}`y'^\star>0`) to the object.
+We now show that such a maximum still exists under quite general physical conditions.
+On one hand, brightness is to be conserved, one expects the divergence of {math}`f` to vanish in the radial direction
+{math}`\rho` of the corresponding polar reference system, yielding that
+{math}`\nabla \cdot f = \rho^{-1} \partial \left( \rho f \right) / \partial \rho=0` and, thus,
+that {math}`f \propto \rho^{-1} = 1/\sqrt{x^2+y'^2}`.
+On the other hand, the weighting function can be thought to be proportional to the derivative of the geometric
+projection of the rotation, like {math}`w\propto \left|\sin (\pi x/2r) \right|`.
+Together, {math}`f` and {math}`w` combine into a {math}`g \propto \sin (\pi x/2r) / \sqrt{x^2+y'^2}` that makes
+{math}`I` monotonically increasing for {math}`y'<y'^\star` and decreasing for {math}`y'>y'^\star` because the
+integration domain shrinks progressively.
+Therefore, with the maximum {math}`y'^\star=\text{argmax}_{y' \in [0, \infty)} I`, this showcases the formation of
+an equivalent cone beam that is closer to the object. With respect to the original system of coordinates, the shifted
+cone-beam center is at {math}`y_r=(y_0-y'^\star)`.
+
+To find the center {math}`y_r` of the cone beam in practice, we resort to the automatic calibration scheme presented
+in the main text because it is more robust against seagull artifacts: it finds an origin that is consistent across
+several beads without the need to estimate additional experimental parameters such as {math}`r`, {math}`y_0`,
+or {math}`\psi`.

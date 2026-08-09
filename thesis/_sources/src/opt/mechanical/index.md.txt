@@ -1,0 +1,28 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(opt-mechanical)=
+# Mechanical Artifacts
+
+```{note}
+This section is based on the following publication:
+
+Y. Liu, J. Dong, T. Pham, F. Marelli, and M. Unser, "Mechanical artifacts in optical projection tomography:
+Classification and automatic calibration," _Opt. Continuum_ 1, 2577 (2022).
+
+It is a collaboration with the Computational Bioimaging Group at [Idiap](https://www.idiap.ch/).
+```
+
+```{toctree}
+:maxdepth: 2
+
+background.md
+classification.md
+calibration.md
+results.md
+summary.md
+
+```

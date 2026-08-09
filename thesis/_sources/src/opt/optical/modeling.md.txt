@@ -1,0 +1,202 @@
+(opt-optical-problem-formulation)=
+# Problem Statement
+
+Before an emission OPT experiment, the rotation axis is carefully adjusted to be perpendicular to the optical axis,
+so that the projection data of one slice of the volume are recorded in a row of pixels on the detector
+{cite:p}`Sharpe2004`.
+When the effect of refraction, diffraction, scattering, or defocusing is negligible,
+the emitted light propagates through the sample, the RI-matching liquid,
+and the telecentric lens system in parallel straight lines (see {numref}`fig:opt-optical-setup`).
+````{subfigure} A|B
+:name: fig:opt-optical-setup
+:width: 80
+
+   ```{image} images/opt_optical_setup.*
+       :alt: OPT geometry
+   ```
+   
+   ```{image} images/opt_refraction.*
+       :alt: Refraction
+   ```
+
+Emission OPT geometry in the ideal case and in the non-ideal case where the refractive indices do not match.
+(Top) Emission OPT viewed from the top.
+The sample, fixed in agarose gel of RI {math}`n_1`, is placed inside a glass container filled with an immersion liquid
+of RI {math}`n_2`.
+The fluorophores inside the sample emit light that propagates through the object-space telecentric lens system and gets
+recorded by the camera.
+More details about the experimental system can be found in {cite:p}`Schmidt:21`.
+(Bottom) Ideal case (orange) and RI mismatch (blue).
+Only rays parallel to the optical axis are considered due to the low-NA fluorescence collection in OPT.
+The RI {math}`n_1`  of the agarose differs from the RI {math}`n_2` of the immersion liquid.
+This creates a lensing effect, with a virtual focus at position {math}`O'` on the optical axis.
+````
+Accordingly, the standard forward model for OPT is the Radon transform {cite:p}`natterer_mathematics_2001, Koljonen19`,
+which in 3D is typically inverted in a slice-by-slice fashion using the filtered backprojection (FBP) algorithm
+{cite:p}`Sharpe2004, natterer_mathematics_2001`.
+In reality, when the RI of the sample does not match the RI of the immersion liquid,
+the path along which light propagates is altered so that the parallel-beam assumption no longer holds.
+
+(opt-optical-modeling)=
+# Modeling of RI Mismatch
+
+Let us consider a 2D transverse slice of the sample in the liquid bath as depicted in
+{numref}`fig:opt-optical-setup`.
+We denote the RI of the agarose gel and the liquid bath as {math}`n_1` and {math}`n_2`,
+respectively, and the radius of the cylinder as {math}`R`.
+When {math}`n_1=n_2`, light follows parallel straight lines as it travels through the sample,
+liquid bath, and finally the flat wall of the cuvette (see the orange lines in {numref}`fig:opt-optical-setup`).
+When {math}`n_1 < n_2`,
+light is refracted at the interface that separates the agarose cylinder from the liquid bath.
+Propagation of the refracted light is illustrated by the blue lines in {numref}`fig:opt-optical-setup`.
+The extended incident rays (blue lines inside the cylinder in {numref}`fig:opt-optical-setup`)
+intersect at a point {math}`O'` on the optical axis (dotted red lines in {numref}`fig:opt-optical-setup`).
+Hence, the front wall (close to the detector side)
+of the cylinder can be thought of as a diverging lens whose virtual focus {math}`O'` is on the optical axis.
+Rays inside the cylinder can then be approximated by a fan beam,
+the origin of which coincides with the virtual focus.
+
+Such a picture is based on two common assumptions in ray optics, to keep our model computationally tractable.
+First, we make the paraxial assumption, namely, that the point emitters are close to the optical axis.
+Second, we consider difference in RIs to be small ({math}`\Delta n = |n_2-n_1| \ll n_1`),
+so that the resulting origin of the fan beam is far away from the cylinder.
+Under these assumptions,
+we can calculate the location of the virtual focus of the diverging lens (i.e., the origin of the fan beam)
+as follows.
+Let us focus on the 2D transverse slice of the cylinder shown in {numref}`fig:opt-optical-cone-beam-geometry`).
+
+```{figure} images/opt_geometry.*
+:name: fig:opt-optical-cone-beam-geometry
+:width: 80%
+
+Geometry of light refraction at the interface of the cylinder and the immersion liquid.
+RIs inside and outside the circle are {math}`n_1` and {math}`n_2`, respectively.
+```
+
+Relevant quantities are:
+
+- {math}`R`: radius of the disk
+- {math}`A (x_A, y_a)`: position of emitter
+- {math}`P (\hat x, \hat y)`: incident point on the surface of the cylinder
+- {math}`\delta x>0`: vertical displacement between the emitter and {math}`P`
+- {math}`O'`: intersection of the incident ray with {math}`y`-axis
+- {math}`\theta`: refracted angle such that the refracted ray is parallel to the optical axis
+- {math}`(\theta + \delta \theta)`: incident angle
+- {math}`\Delta n=(n_2-n_1)`: RI mismatch which is assumed to be small with respect to {math}`n_1`
+
+Snell's law states that
+
+```{math}
+:label: eq:snell
+
+    n_2\sin\theta=n_1\sin(\theta+\delta\theta)\approx n_1(\sin\theta+\delta\theta\cos\theta),
+```
+
+where we performed a first-order Taylor expansion.
+{eq}`eq:snell` implies that
+
+```{math}
+:label: eq:deltatheta
+
+    \delta\theta=\frac{n_2-n_1}{n_1}\tan\theta.
+```
+
+Because {math}`\delta\theta\ll1`, in the right triangle with the longest side AP, one has that
+```{math}
+:label: eq:deltax
+
+    \delta\theta\approx\tan\delta\theta=\frac{\delta x}{\hat y-y_A},
+```
+with {math}`\hat y = \sqrt{R^2-(x_A-\delta x)^2} = \sqrt{R^2 - x_A^2} + \mathcal{O}(\Delta n)`, 
+noticing {math}`\mathcal{O}(\delta x) \sim \mathcal{O}(\Delta n)`.
+Combining {eq}`eq:deltax` and {eq}`eq:deltatheta`, we obtain that
+
+```{math}
+:label: eq:formula1
+
+    \delta x =\left(\hat y-y_A\right)\frac{\Delta n}{n_1}\tan\theta.
+```
+
+We also have that
+
+```{math}
+:label: eq:tantheta
+
+    \tan \theta = -\frac{x_A + \delta x}{\hat y}.
+```
+
+Substitution of {eq}`eq:tantheta` into {eq}`eq:formula1` at order 1 in {math}`\Delta n` yields that
+
+```{math}
+:label: eq:formula2
+
+    \delta x=\left(y_A - \hat y \right)\frac{\Delta n x_A}{n_1\hat y}.
+```
+
+The line (AP) thus satisfies that
+```{math}
+    y - y_A = \frac{\hat y - y_A}{\delta x} (x - x_A)  
+    = -\frac{n_1 \hat y}{\Delta n x_A} (x - x_A).
+```
+
+The intersection for which {math}`x=0` corresponds to
+
+```{math}
+    y_0 = y_A + \frac{n_1 \sqrt{R^2-x_A^2}}{\Delta n}.
+```
+
+For {math}`x_A \ll R` (i.e., for points close to the optical axis, which corresponds to the paraxial approximation),
+we have
+
+```{math}
+    y_0 = y_A + \frac{n_1 R}{\Delta n}.
+```
+
+The first term {math}`y_A` is negligible compared to the second term as {math}`\Delta n \ll 1` and {math}`y_A\leqslant R`.
+This implies that the distance of the origin {math}`O'` of the fan beam to the origin of the coordinate system
+{math}`O` is much larger than the sample diameter.
+We thus obtain that
+```{math}
+    :label: eq:opt-optical-origin-of-cone-beam
+    
+    y_0=\frac{n_1}{n_2-n_1}R.
+```
+The location {math}`y_0` of the origin {math}`O'` depends on the radius
+{math}`R` of the cylinder and the refractive indices ({math}`n_1,n_2`), but not
+on the position of our point {math}`A` in the paraxial approximation.
+Further, the unitless quantity {math}`y_0/R` is not affected by the magnification of the imaging system.
+We thus obtain a fan-beam geometry where all the rays inside the cylinder intersect at {math}`O'`.
+When {math}`n_1=n_2`, the origin of the fan beam becomes {math}`+\infty`;
+hence, the cone reduces to the standard parallel-beam model, as expected.
+
+# Correction Method
+
+We see that when {math}`n_1 \neq n_2`,
+the physical model in {eq}`eq:opt-optical-origin-of-cone-beam` differs from the one typically used for reconstruction
+with a parallel-beam geometry.
+Yet, the proposed virtual-lens model is a better approximation of the actual physics.
+We are going to show that
+it is capable of reproducing and eventually correcting for some of the reconstruction artifacts.
+This 2D analysis corresponds to a fan-beam model;
+we can extend it to a cone-beam model when the height of the volume is sufficiently small.
+Cone-beam geometries are common in other tomographic applications,
+which allows us to leverage efficient implementations and reconstruction algorithms.
+
+While {eq}`eq:opt-optical-origin-of-cone-beam` provides a good approximation of the beam origin in an idealized setting,
+two additional challenges arise in practice.
+First, the RI of the agarose gel evolves to match that of the immersion liquid (e.g., BABB) due to molecular diffusion.
+This process may extend over the standard clearing protocol time, making it difficult to measure the value of {math}`n_1`
+and thus to calculate the origin using {eq}`eq:opt-optical-origin-of-cone-beam`.
+Second, there is another physical effect to consider: the cylinder is displaced as it rotates because of an experimental
+offset between the axis of rotation and axis of the cylinder.
+Despite their best effort, instrumentalists have not yet been able to calibrate their setups
+accurately enough to avoid this offset {cite:p}`Koljonen19, Walls:07, Koskela19`.
+For example, the seagull artifacts in {cite:p}`Schmidt:21` (cf. Fig. 2f therein) can be reduced
+by decreasing the offset between the axis of the cylinder and the axis of rotation.
+In the [](#opt-optical-cone-beam-shift-of-origin-due-to-off-center-rotation),
+we show that the cone-beam geometry remains a good approximation under these conditions,
+but with an origin that is closer to the sample than {eq}`eq:opt-optical-origin-of-cone-beam`.
+
+To tackle both challenges at once,
+we propose a method to automatically determine the optimal origin of the cone beam by minimizing a heuristic loss metric.
+More details are provided in the [](#opt-optical-results) section.  

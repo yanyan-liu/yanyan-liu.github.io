@@ -1,0 +1,267 @@
+(minflux-implementation)=
+# Implementation
+
+In this section, we present the implementation of the optimization pipeline,
+including
+
+- the architecture of the forward model,
+- the optimization algorithm, and
+- technical details on the computation of the partial derivatives and the generalized inverse Fourier transform.
+
+(minflux-overview-pipeline)=
+## Overview of the Pipeline
+
+The forward model described in the previous section follows a linear structure, and we implement it
+as a pipeline composed of seven modules (see {numref}`fig:minflux-architecture` for an overview and
+{numref}`fig:minflux-flowchart-detailed` for details).
+
+```{figure} images/optimization_architecture.*
+:name: fig:minflux-architecture
+
+MINFLUX optimization pipeline. 
+Solid and dashed lines with arrowheads indicate the forward and inverse processes, respectively.
+The quantities in the ellipses correspond to the inputs and outputs of the modules (rectangles). 
+```
+```{figure} images/flowchart-minflux.*
+:name: fig:minflux-flowchart-detailed
+:width: 100%
+
+Flowchart of the detailed structure of the optimization pipeline.
+```
+The five core modules (Pupil, PSF, MINFLUX, Quantification, and Loss) are executed sequentially,
+with the output of one as the input for the next.
+The two auxiliary modules, Derivative and CRB, support Quantification.
+A detailed flowchart of these modules is provided in the {numref}`fig:minflux-flowchart-detailed`.
+
+(minflux-optimization-algorithm)=
+## Optimization Algorithm
+
+We deploy a gradient-based minimization algorithm in {prf:ref}`alg:minflux-optimization` to solve
+{eq}`eq:minflux-optimization` .
+We employ _Adam_, a stochastic gradient descent algorithm for solving inverse problems {cite:p}`kingma_adam_2015`.
+Due to the complexity of the forward model (a sequence of common operations but overall nonlinear, as shown
+in {numref}`fig:minflux-flowchart-detailed`), it is impractical to derive and implement an explicit expression
+of the gradient {math}`\frac{\mathrm{d}J}{\mathrm{d}\mathbf{C}}` of the loss function.
+We thus use PyTorch and leverage its automatic differentiation functionality to obtain the gradient,
+which has been introduced in section [](#intro-computational-aspects)
+in chapter [](#intro-modeling-and-solving-inverse-problems).
+The coefficient matrix {math}`\mathbf{C}^{N_{\textrm{iter}}}` of the final iteration is used to generate the final
+optimized pupil, the PSF and the corresponding CRB map.
+
+```{prf:algorithm} MINFLUX Optimization
+:label: alg:minflux-optimization
+
+**Input**: Initial guess of the Zernike coefficient matrix {math}`\mathbf{C}^0`,
+stopping threshold {math}`\epsilon=10^{-6}`, and maximal number of iterations {math}`N_{\max}`
+
+1. {math}`N_{\textrm{iter}} = 0`
+2. Calculate the loss {math}`J(\mathbf{C}^{N_{\textrm{iter}}})` in {eq}`eq:minflux-optimization`
+3. Calculate the gradient {math}`\frac{\mathrm{d}J}{\mathrm{d}\mathbf{C}} (\mathbf{C}^{N_{\textrm{iter}}})` using
+{math}`J.\textrm{backward()}`
+4. Apply a gradient-descent step via {math}`Adam(lr=0.05, betas=(0.9, 0.999))` 
+5. If ({math}`N_{\textrm{iter}} > 0` and
+{math}`|J(\mathbf{C}^{N_{\mathrm{iter}}}) - J(\mathbf{C}^{N_{\textrm{iter} - 1}})| \leq \epsilon`) or
+({math}` N_{\textrm{iter}} > N_{\max})`:
+
+    Terminate.
+
+6. {math}`N_{\textrm{iter}}\leftarrow N_{\textrm{iter}} + 1`  
+
+```
+
+Our pipeline has a practical multiresolution feature.
+The input of the pipeline, the Zernike coefficient matrix, does not depend on the size of the pupil or the PSF.
+This allows us to accelerate optimization on a coarse scale and then produce high-resolution images afterward.
+For example, we used a numerical size of {math}`(256\times256)` px and {math}`(512\times512)` px for the pupil
+and PSF, respectively, during optimization, which enables us to finish in a reasonable amount of time
+(see {numref}`fig:minflux-loss`) while ensuring sufficient sampling of the pupil function and the CRB map.
+After optimization, we perform an extra round of the forward pipeline using the optimized coefficients to yield
+images of size {math}`(2048\times2048)` px.
+
+## Technical Notes
+
+In this section, we explain the solutions to two computational challenges in the pipeline:
+- a precise formula of the partial derivatives involved in the Quantification Module
+(see {numref}`fig:minflux-flowchart-detailed` and {eq}`eq:fisher-expression`), and
+- a fast and efficient technique to compute the inverse Fourier transforms that are required in the PSF Module.
+
+(minflux-explicit-expression-of-the-fisher-information-matrix)=
+### Explicit Expression of the Partial Derivatives in the Fisher Information Matrix
+
+In [](#minflux-detection-limit), we have seen that the partial derivative
+{math}`\frac{\partial \mu_i(\boldsymbol{\theta})}{\partial \theta}`
+(equivalently {math}`\frac{\partial h_i(\boldsymbol{\theta})}{\partial \theta}` because of {eq}`eq:def-mu`)
+is needed to compute the Fisher matrix {eq}`eq:fisher-expression`.
+We show that an explicit expression of {math}`\frac{\partial h_i(\boldsymbol{\theta})}{\partial \theta}` exists,
+which enables an exact implementation of the forward model.
+
+For notational convenience, we denote the inverse Fourier transform
+{math}`g(x, y):\mathbb{R}^2\to\mathbb{C}` of the pupil function
+{math}`P(k_\text{x}, k_\text{y})` as
+```{math}
+    g(x, y) = \mathcal{F}^{-1}\left\{P(k_\text{x}, k_\text{y})\right\}(x, y).
+```
+As {math}`h(x, y)` is defined as the square modulus of {math}`g`, it can be equivalently written as the element-wise
+multiplication of {math}`g` with its complex conjugate {math}`g^*`
+```{math}
+    :label: eq:def-of-h
+    
+    h(x, y) = |g(x, y)|^2 = g(x, y)g^*(x, y).
+```
+Without loss of generality, we derive the partial derivative of {math}`h_i` with respect to {math}`x` at location
+{math}`(x - t_\text{x}, y - t_\text{y})` and write that
+```{math}
+    :label: eq:h-derivative
+    
+    \frac{\partial h}{\partial x}(x - t_\text{x}, y - t_\text{y}) 
+    &= \frac{\partial (g(x - t_\text{x}, y - t_\text{y}) g^*(x - t_\text{x}, y - t_\text{y}) )}{\partial x}\\
+    &= \frac{\partial g}{\partial x}(x - t_\text{x}, y - t_\text{y}) g^*(x - t_\text{x}, y - t_\text{y}) 
+        + \frac{\partial g^*}{\partial x}(x - t_\text{x}, y - t_\text{y}) g(x - t_\text{x}, y - t_\text{y})\\
+    &= 2 \cdot \Re{\left( \frac{\partial g}{\partial x}(x - t_\text{x}, y - t_\text{y}) 
+        g^*(x - t_\text{x}, y - t_\text{y})\right)}.
+```
+The last equality in {eq}`eq:h-derivative` is because {math}`(\frac{\partial g}{\partial x}\cdot g^*)` and
+{math}`(\frac{\partial g^*}{\partial x}\cdot g)` are complex conjugate pairs.
+Due to the shift property of the Fourier transform, we have that
+```{math}
+    :label: eq:p-bar-shifted
+    
+    g^*(x - t_\text{x}, y - t_\text{y}) = 
+    \left(\mathcal{F}^{-1}\left\{\mathrm{e}^{-\mathrm{j}(k_\text{x} t_\text{x} 
+    + k_\text{y} t_\text{y})} P(k_\text{x}, k_\text{y})\right\}(x, y)\right)^*.
+```
+Combining the differentiation and shift property of the Fourier transform, we have that
+```{math}
+    :label: eq:dpdx
+    
+    \frac{\partial g}{\partial x}(x - t_\text{x}, y - t_\text{y}) 
+    &= \mathcal{F}^{-1} \left\{ (\mathrm{j} k_\text{x})\mathrm{e}^{-\mathrm{j} 
+        (k_\text{x} t_\text{x} + k_\text{y} t_\text{y}) } \mathcal{F} 
+        \left\{ g \right\} (k_\text{x}, k_\text{y}) \right\}(x, y)\\
+    &= \mathcal{F}^{-1} \left\{ (\mathrm{j} k_\text{x})\mathrm{e}^{-\mathrm{j} 
+        (k_\text{x} t_\text{x} + k_\text{y} t_\text{y})} P(k_\text{x}, k_\text{y}) \right\}(x, y).
+```
+Combining {eq}`eq:dpdx` and {eq}`eq:p-bar-shifted` together with {eq}`eq:h-derivative`, we write the
+explicit expression for {math}`\frac{\partial h}{\partial x}(x - t_\text{x}, y - t_\text{y})` as
+```{math}
+    :label: eq:dhdx
+    \begin{aligned}
+    & \frac{\partial h}{\partial x}(x - t_\text{x}, y - t_\text{y}) = \\
+    & 2\cdot\Re {\left(
+    \mathcal{F}^{-1} \left\{ (\mathrm{j} k_\text{x})\mathrm{e}^{-\mathrm{j} (k_\text{x} t_\text{x} 
+    + k_\text{y} t_\text{y})} P(k_\text{x}, k_\text{y}) \right\} 
+    \left(\mathcal{F}^{-1}\left\{\mathrm{e}^{-\mathrm{j}(k_\text{x} t_\text{x} 
+    + k_\text{y} t_\text{y})} P(k_\text{x}, k_\text{y})\right\} (x, y)\right)^*
+    \right)}.
+    \end{aligned}
+```
+Similarly, the derivative {math}`\frac{\partial h}{\partial y}(x - t_\text{x}, y - t_\text{y})` of {math}`h`
+with respect to {math}`y` at location {math}`(x - t_\text{x}, y - t_\text{y})` is
+```{math}
+    :label: eq:dhdy
+    \begin{aligned}
+    & \frac{\partial h}{\partial y}(x - t_\text{x}, y - t_\text{y}) = \\
+    & 2\cdot\Re{ \left(
+    \mathcal{F}^{-1} \left\{ (\mathrm{j} k_\text{y})\mathrm{e}^{-\mathrm{j} 
+    (k_\text{x} t_\text{x} + k_\text{y} t_\text{y})} P(k_\text{x}, k_\text{y}) \right\} 
+    \left(\mathcal{F}^{-1}\left\{\mathrm{e}^{-\mathrm{j}(k_\text{x} t_\text{x} 
+    + k_\text{y} t_\text{y})} P(k_\text{x}, k_\text{y})\right\} (x, y)\right)^*
+    \right)}.
+    \end{aligned}
+```
+
+(minflux-zoomfft)=
+### Efficient Computation of the Generalized Inverse Fourier Transform
+
+We see from {eq}`eq:def-of-PSF`, {eq}`eq:dhdx`, and {eq}`eq:dhdy`
+that the inverse Fourier transform (IFT) is frequently required to compute the beam-propagation model and
+the partial derivatives in the Fisher information matrix.
+While the standard inverse discrete Fourier transform (IDFT) algorithm is a common choice,
+it is not suitable for our specific task.
+To produce a high-resolution PSF image, one needs to pad many zeros, which is computationally inefficient.
+Besides, IDFT can only handle the case where the size of the input and output (e.g. the pupil and the PSF)
+is the same.
+In this section, we address these challenges via the chirp Z-transform (CZT) and
+provide an efficient algorithm to compute the generalized inverse Fourier transform.
+It is of the same complexity as FFT and allows us to zoom in onto the object plane to refine the PSF function
+without zero-padding.
+This approach is applicable to other beam propagation models based on Fourier transforms
+(see next section [](#chapter-psf) for details).
+
+The chirp Z-transform of a discrete 1D signal {math}`x_n` of length {math}`N` is defined as
+```{math}
+    :label: eq:z-transform
+    y_m = \sum_{n=0}^{N-1} x_n a^{-n} w^{nm}, \quad m=0,\ldots, M-1,
+```
+where {math}`y_m` is the {math}`m`th sample of the output signal of length {math}`M`,
+with {math}`M` being not necessarily equal to {math}`N`.
+We observe that IDFT is a special case of {eq}`eq:z-transform` with {math}`a=1`,
+{math}`w=\mathrm{e}^{\frac{\mathrm{j}}{N}}`, and a scaling factor of {math}`\frac{1}{N}`.
+Graphically, the sampling of {math}`y_m` starts from {math}`(1, 0)` and covers the whole unit circle with a constant
+angular step size of {math}`\frac{2\pi}{N}` on the complex plane, see
+{numref}`fig:fft-sampling` (a).
+
+```{figure} images/minflux_sampling.*
+:name: fig:fft-sampling
+:width: 75%
+
+Sampling of {math}`N` points on the unit circle. 
+(a) IDFT samples uniformly the whole unit circle. 
+(b) zoomIDFT performs a uniform sampling of a subset of the unit circle.
+```
+
+We define a special IDFT, termed zoomIDFT
+```{math}
+    :label: eq:zoomifft
+    
+    y^z_m = \textrm{zoomIDFT}(x_n) :=  \frac{1}{N} \sum_{n=0}^{N-1} x_n \mathrm{e}^{\frac{\mathrm{j}}{N} 
+        z (n - \frac{N}{2}) (m-\frac{M}{2})}, \quad m=0,\ldots, M-1,
+```
+where {math}`z\in(0, 1]` is a zoom factor such that only {math}`z`-percent of the full unit circle is sampled.
+Further, the origin of both the input and output signals is centered instead of at the beginning as indicated by
+{math}`(n - \frac{N}{2})` and {math}`(k-\frac{M}{2})`, see {numref}`fig:fft-sampling` (b).
+
+Given the desired number of sampling points for both the Fourier and object planes, zoomIDFT allows us to control the
+area on which the pupil occupies via a constant --- the zooming factor {math}`z`.
+Ideally, {math}`z` is chosen such that the pupil fully occupies the whole plane for maximal numerical
+efficiency (see ({numref}`fig:zooming`)).
+
+```{figure} images/minflux_zooming_effect.*
+:name: fig:zooming
+
+Impact of the zooming factor. 
+First row: Pupil functions with an insufficient (a) zooming factor of 0.00875, medium (b) factor of 0.004375,
+and perfect (c) zooming of 0.0021875.
+Second row: Corresponding PSFs.
+The numerical sizes of the pupils and PSFs are {math}`(1028\times1028)` px and {math}`(2048\times2048)` px,
+respectively.
+```
+
+To efficiently compute {eq}`eq:zoomifft`, we follow the techniques proposed in {cite:p}`bluestein_linear_1970,
+rabiner_chirp_1969, leutenegger_fast_2006` and rewrite {eq}`eq:z-transform` as the convolution
+
+```{math}
+    :label: eq:conv
+    
+    y_m &= w^{\frac{m^2}{2}}\sum_{n=0}^{N-1}\left(x_n a^{-n} w^{\frac{n^2}{2}} \cdot w^{-\frac{(m-n)^2}{2}}\right)\\
+        &= w^{\frac{m^2}{2}} \left((x_n a^{-n} w^{\frac{n^2}{2}}) * w^{-\frac{n^2}{2}}\right) \\
+        &= w^{\frac{m^2}{2}} \cdot \textrm{IFFT}\left( \textrm{FFT}(x_n a^{-n} w^{\frac{n^2}{2}}) 
+            \cdot \textrm{FFT}(w^{-\frac{n^2}{2}})\right)
+
+```
+
+using the relation {math}`nm = (n^2 + m^2 - (m-n)^2) / 2` {cite:p}`bluestein_linear_1970` to separate the
+variables {math}`n` and {math}`m`.
+{eq}`eq:conv` is then efficiently computed using two precomputed FFTs and one IFFT.
+We thus shuffle the order of the terms of zoomIFFT in {eq}`eq:zoomifft` to obtain that
+
+```{math}
+    :label: eq:zoomifft-compute
+    
+    y^z_m = \mathrm{e}^{-\frac{\mathrm{j}}{2} z(m-\frac{M}{2})} \cdot 
+        \frac{1}{N}\sum_{n=0}^{N-1} x_n \mathrm{e}^{(\frac{\mathrm{j}}{2} z\frac{M}{N})(-n)} 
+        \mathrm{e}^{(\frac{\mathrm{j}}{N}z) (nm)}, 
+```
+
+where {math}`a = \mathrm{e}^{\mathrm{j} z\frac{M}{N}}`, {math}`w=\mathrm{e}^{\frac{\mathrm{j}}{N}z}`.
+Then, we use {eq}`eq:conv` to compute the CZT contained in {eq}`eq:zoomifft-compute`.

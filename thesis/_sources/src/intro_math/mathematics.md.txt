@@ -1,0 +1,519 @@
+(intro-maths-overview)=
+# Overview
+
+As seen in the previous chapter,
+biomedical optical imaging relies on the interactions between light and the biological
+object under investigation to retrieve information on its composition, structure, or functionality.
+The measurements of an imaging system, collected by the detector and usually corrupted by noise,
+are often not readily the physical quantities that we are interested in.
+For example, OPT measurements consist of projections of the object acquired from multiple angles
+and do not directly correspond to the image of the object.
+To reconstruct the desired image, we first need to understand the imaging system and
+the relationship between the target quantity and the measured data.
+This step, called the forward problem, typically involves mathematical tools to precisely describe the imaging
+principles and the data acquisition process.
+Once we have crafted a model, we can recover the unknown quantity (e.g., the 3D intensity image in the case of OPT)
+from the measurement (e.g., the sinogram of an OPT experiment) via the resolution of an inverse problem.
+We explain these two steps, the relevant mathematical concepts, and computational tools in detail.
+A generic imaging system is shown in {numref}`fig:intro-generic-system`.
+
+```{figure} images/general_imaging_principle.*
+:name: fig:intro-generic-system
+:width: 100%
+
+A generic optical imaging system.
+```
+
+We first introduce the notations for this chapter.
+We write a continuous function defined on the {math}`d`-dimensional real space as
+{math}`f(\mathbf{x})`, {math}`\mathbf{x}=(x_1, \ldots, x_d)\in\mathbb{R}^d`,
+or more compactly {math}`f(\cdot)`, or simply {math}`f`.
+For instance, a 3D sample is represented by a function {math}`f\in L_2(\mathbb{R}^3)`,
+and measurements on the detector plane (in most cases a 2D camera) are denoted by a function {math}`b\in L_2(\mathbb{R}^2)`.
+We denote a sequence by {math}`c[\boldsymbol{k}]`, {math}`\boldsymbol{k}=(k_1, \ldots, k_d)\in\mathbb{Z}^d`, or simply {math}`c[\cdot]`,
+and an operator by a calligraphic letter, e.g. {math}`\mathcal{A}`.
+A vector is written as a bold lowercase letter, e.g. {math}`\mathbf{c}`.
+A matrix (discrete version of a linear operator) or the discrete version of a non-linear operator is represented by
+a bold uppercase letter, e.g. {math}`\mathbf{A}`.
+The spaces of square-integrable and square-summable functions are denoted by {math}`L_2(\mathbb{R}^2)` and
+{math}`\ell_2(\mathbb{Z}^2)`, respectively.
+The {math}`\ell_p`-norm of a vector {math}`\mathbf{c}=(c_1, \ldots, c_N)\in\mathbb{R}^N` is defined as
+{math}`\|\mathbf{c}\|_p = \left(\sum_{l=1}^L |c_l|^p\right)^{\frac{1}{p}}`.
+We mostly encounter the {math}`\ell_2`-norm and {math}`\ell_1`-norm in this thesis.
+The symbol {math}`\nabla` refers to the gradient of either a vector or a function depending on the context.
+
+(intro-maths-forward-model)=
+# Forward Model
+
+The first step towards solving inverse problems is to construct the forward imaging model.
+The closer the model approximates reality, the more likely it is to achieve an accurate estimate of the target image.
+In this section, we explain it with the help of a generic forward operator {math}`\mathcal{A}` which encompasses
+the physical acquisition process during an experiment.
+
+(intro-maths-forward-model-continuous)=
+## Continuous Formulation
+
+We denote the unknown image of interest as {math}`f`,
+the measurements as {math}`b`,
+and the noise in the measurement as {math}`n`.
+Then, we obtain a generic forward model
+
+```{math}
+:label: eq:intro-generic-forward-model
+
+b = \mathcal{A}_{\Theta}(f) + n.
+```
+The function {math}`f\in L_2(\mathbb{R}^d)`, which represents the sample,
+is a square-integrable function on {math}`\mathbb{R}^d`, {math}`d=2,3`.
+We usually assume that {math}`f` has a compact support {math}`\Omega\subset\mathbb{R}^d`,
+where the bounded domain {math}`\Omega` is the region of interest in the sample.
+The function {math}`b\in L_2(\mathbb{R}^2)` represents the image on the 2D camera plane.
+In practice, experiments inevitably involve some kind of noise in the measurements.
+In {eq}`eq:intro-generic-forward-model`, we assume that the noise is additive.
+For instance, a common type of noise is the
+Gaussian noise where its value follows a normal distribution.
+
+The forward operator {math}`\mathcal{A}_{\Theta}: L_2(\mathbb{R}^d) \to L_2(\mathbb{R}^2)` can be linear or nonlinear.
+It often depends on a set of parameters, denoted by {math}`\Theta`, which characterizes the imaging system.
+Constructing the operator {math}`\mathcal{A}` is a critical step in any imaging task.
+It requires a solid understanding of the underlying physics, including light propagation,
+optical principles of the system, detector characteristics, and acquisition protocols, as well as appropriate
+mathematical tools for its formulation.
+The operator {math}`\mathcal{A}` is an approximation to the actual experiment, and
+one needs to find a balance between the accuracy of the model and its
+computational tractability.
+For example, the commonly adopted forward model by OPT practitioners is the 2D Radon transform applied in a
+slice-by-slice fashion, and the main parameter concerned are the rotation angles {cite:p}`Walls2005`.
+This 2D model with parallel geometry is acceptable when the system is well calibrated and
+the sample is well aligned with the rotation stage.
+However, for a poorly calibrated setup, the assumption of the parallel geometry does not necessarily hold.
+One then needs to introduce a 3D model and additional parameters into {math}`\Theta`
+while still keeping the complexity of the model manageable.  
+
+(intro-maths-forward-model-discrete)=
+## Discrete Formulation
+
+Because real-world detector comprises finite-sized pixels rather than infinitesimal sampling points,
+the continuous forward model described in {eq}`eq:intro-generic-forward-model` needs to be discretized.
+To this end, we follow the generalized sampling framework described in {cite:p}`Unser2000`.
+We introduce a reconstruction space {math}`V(\varphi)` in which the unknown function {math}`f` is represented by a
+finite sum of a sequence of coefficients {math}`c[\cdot]` multiplied by a series of shifted basis functions (dilated
+by a factor of {math}`T`)
+:
+```{math}
+:label: eq:intro-recon-space
+
+V(\varphi)=\left\{
+\sum_{\boldsymbol{k}\in\Omega_{\text{s}}}c[\boldsymbol{k}]\varphi
+\left(\frac{\cdot}{T}-\boldsymbol{k}\right),
+\quad c \in \ell_2\big(\mathbb{Z}^d\big)\right\}.
+``` 
+The discrete representation of the sample is thus a finite vector
+{math}`\mathbf{c}=\big(c[\boldsymbol{k}]\big)_{\boldsymbol{k}\in\Omega_{\text{s}}}\in\mathbb{R}^N`,
+which we assume of length {math}`N`, and {math}`\Omega_{\text{s}}\subset \mathbb{Z}^d` is the compact
+support of the coefficients.
+Then, {eq}`eq:intro-generic-forward-model` becomes
+```{math}
+:label: eq:intro-generic-forward-sampled
+
+b(\mathbf{y}) = \mathcal{A}_{\Theta}\left(
+                \sum_{\boldsymbol{k}\in\Omega_{\text{s}}}c[\boldsymbol{k}]
+                \varphi\left(\frac{\cdot}{T}-\boldsymbol{k}\right)
+                \right)(\mathbf{y}) + n(\mathbf{y}).
+```
+There are many choices for the basis function {math}`\varphi`.
+The most popular one is the rectangular function, which is a natural representation of pixels.
+In this case, the coefficients directly correspond to pixel values.
+The selection of the most suitable basis function depends on the specific task.
+For instance, in the correction of OPT artifacts where the differentiability of the basis is important,
+one can adopt the optimized Kaiser-Bessel function {cite:p}`nilchian2015optimized` which is well-suited
+for computed tomography because of its isotropy.
+
+We assume that the measurement {math}`b` on the 2D detector plane is acquired at sampled points
+{math}`\mathbf{y}_{\boldsymbol{j}} = \Lambda\boldsymbol{j} = (j_1\Lambda_1,j_2\Lambda_2)`,
+for {math}`\boldsymbol{j}\in\Omega_{\text{m}}\subset\mathbb{Z}^2`.
+The finite set {math}`\Omega_{\text{m}}` of size {math}`M` denotes the support of the measurement.
+The vector {math}`\boldsymbol{j}=(j_1,j_2)` is the index of the sampled points.
+The diagonal matrix {math}`\Lambda=\text{diag}\left\{\Lambda_1,\Lambda_2\right\}` encodes
+the sampling steps in the horizontal and vertical directions on the detector plane, with
+{math}`\Lambda_1` and {math}`\Lambda_2` corresponding to the respective dimensions.
+Similarly, the noise function is sampled at the same positions {math}`\mathbf{y}_{\boldsymbol{j}}`.
+We assemble the discrete entries {math}`b(\Lambda\boldsymbol{j})` into a measurement vector denoted by
+{math}`\mathbf{b}\in\mathbb{R}^M`, similarly for the noise vector {math}`\mathbf{n}\in\mathbb{R}^M`.
+The discrete version of {eq}`eq:intro-generic-forward-model` finally becomes
+
+```{math}
+:label: eq:intro-generic-forward-discrete
+
+\mathbf{b} = \mathbf{A}_{\Theta}(\mathbf{c}) + \mathbf{n},
+```
+where {math}`\mathbf{A}_{\Theta}: \mathbb{R}^{M} \to \mathbb{R}^N` is the discrete forward operator.
+In the special case where the forward operator is linear,
+it can be represented by a matrix {math}`\mathbf{A}_{\Theta}\in\mathbb{R}^{M\times N}` whose entry, denoted by
+{math}`[\mathbf{A}_{\Theta}]_{\boldsymbol{j}, \boldsymbol{k}}`, is
+```{math}
+:label: eq:intro-generic-forward-model-discrete
+
+[\mathbf{A}_{\Theta}]_{\boldsymbol{j}, \boldsymbol{k}} =
+                \mathcal{A}_{\Theta}
+                [\varphi]\left(\frac{\cdot}{T}-\boldsymbol{k}\right)
+                (\Lambda\boldsymbol{j}).
+```
+The vector {math}`\mathbf{c}\in\mathbb{R}^N` represents the unknown quantity of interest.
+Once reconstructed, it can be expanded via the formula in {eq}`eq:intro-recon-space` to obtain {math}`f`.
+
+(intro-maths-inverse-problem)=
+# Inverse Problem
+
+(intro-maths-inverse-problem-formulation)=
+## Formulation
+
+In many scenarios, the goal of an inverse problem is to reconstruct the sample from its measurements.
+For instance, in OPT, one is interested in obtaining the 3D volumetric intensity map of a sample from a set of its 2D
+projections.
+Mathematically, it corresponds to the following problem:
+given {math}`\mathbf{b}`, find {math}`\mathbf{c}^*`, such that
+{math}`\mathbf{b} = \mathbf{A}_{\Theta}(\mathbf{c}^*) + \mathbf{n}`.
+The system parameters {math}`\Theta` are either known or separately estimated.
+For simplicity, we omit the subscript {math}`\Theta` in {math}`\mathbf{A}`.
+
+In this thesis, we mainly focus on the case where {math}`\mathbf{A}` is a linear model.
+In practice, {math}`\mathbf{A}` may be non-invertible, implying that a solution is ill-defined
+or non-unique.
+Even when {math}`\mathbf{A}` is invertible, direct inversion (via {math}`\mathbf{A}^{-1}`
+when {math}`\mathbf{A}` is square) is often impractical in imaging due to its large size.
+When {math}`\mathbf{A}` is rectangular, the Moore-Penrose
+pseudo-inverse may be used: {math}`(\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T` for full column rank,
+or {math}`\mathbf{A}^T(\mathbf{A}\mathbf{A}^T)^{-1}` for full row rank.
+However, if {math}`\mathbf{A}` is ill-conditioned, these direct methods become numerically unstable in the
+presence of measurement noise.
+In practice, one typically formulates the inverse problem as an optimization problem
+and solve it iteratively until we have reached a good approximate solution.
+To this end, we define an objective function {math}`J(\cdot)` (also referred to as a loss or cost function)
+to be minimized.
+The approximate solution is then obtained by finding
+
+```{math}
+\mathbf{c}^* \in \text{arg}\min_{\mathbf{c}\in \mathbb{R}^N} J(\mathbf{c}).
+```
+
+Typically, one minimizes an objective that contains a data-fidelity term
+{math}`D(\mathbf{b}, \mathbf{A}(\mathbf{c}))` (also called data-discrepancy)
+which measures the distance between the collected data {math}`\mathbf{b}` and
+the current prediction {math}`\mathbf{A} (\mathbf{c})`.
+In this thesis, we most often adopt the {math}`\ell_2`-norm of the difference between them
+
+```{math}
+D(\mathbf{b}, \mathbf{A} (\cdot) ) = \frac{1}{2}\|\mathbf{b} - \mathbf{A} (\cdot)\|_2^2,
+```
+where {math}`\|\cdot\|_2` is the {math}`\ell_2`-norm of a vector.
+Minimizing the data-fidelity term ensures that the reconstructed image remains consistent with the measurement data.
+
+In other scenarios, the goal is to optimize the system parameters {math}`\Theta`.
+The inverse problem is then formulated as
+
+```{math}
+\Theta^* \in \text{arg}\min_{\Theta} J(\Theta).
+```
+
+For instance, in localization microscopy, one may seek to engineer the PSF to maximize localization precision.
+In this case, the unknowns to seek are the parameters governing the phase mask,
+and the objective is a function that quantifies the precision of estimating the coordinates of the molecule in the
+field of view.
+
+(intro-maths-regularization)=
+## Regularization: Roles and Choices
+To improve robustness of the solution against noise in the measurements, 
+it is common to introduce an additional regularization term
+{math}`\mathcal{R}(\cdot)` (also called a penalty term) to the objective function.
+For instance, the inverse problem for reconstructing the unknown {math}`\mathbf{c}` then becomes
+
+```{math}
+:label: eq:intro-math-regularized-recon
+
+\mathbf{c}^* \in \text{arg}\min_{\mathbf{c}\in \mathbb{R}^N} \left\{ \frac{1}{2}
+\|\mathbf{b} - \mathbf{A} \mathbf{c}\|_2^2 + \alpha\mathcal{R}(\mathbf{c}) \right\},
+```
+where {math}`\alpha\geq 0`, called the regularization weight, is an adjustable tradeoff factor.
+The purpose of regularization is to induce stability and
+to incorporate _a priori_ information in the form of constraints to favor a solution that exhibits
+desirable properties {cite:p}`vogel_computational_2002`.
+It is important to find a balance between the data-fidelity and the regularization terms for the best
+reconstruction results, which relies on tuning the weight {math}`\alpha`.
+One heuristic and intuitive method to select the regularization weight is the L-curve method {cite:p}`hansen_use_1993`.
+It plots the trade-off between two competing terms:
+the norm of the regularized solution versus the norm of the corresponding residual.
+The shape of this curve resembles the letter L and the _corner_ point represents a balance between the two terms.
+Specifically for imaging applications, it is also practical to evaluate the quality of the reconstructed image to
+determine the optimal regularization weight.
+
+There are various choices of regularizers from traditional to recent neural-network-based ones.
+Among the traditional ones,
+the most common is the Tikhonov ({math}`\ell_2`) type {cite:p}`tikhonov_solutions_1977`
+
+```{math}
+:label: eq:intro-math-l2
+
+\mathcal{R}(\cdot) = \frac{1}{2}\|\mathbf{L}(\cdot)\|_2^2,
+```
+where {math}`\mathbf{L}` is a suitable regularization operator.
+Common choices for {math}`\mathbf{L}` are the identity, the gradient, or the Laplacian operator.
+For instance, when {math}`\mathbf{L}` is the identity, it favors small pixel values in the image,
+while the gradient or the Laplacian penalizes large first-order and second-order derivatives, respectively,
+producing smoothened images.
+
+Another category is sparsity-based regularization.
+For instance, the {math}`\ell_1` regularizer
+
+```{math}
+:label: eq:intro-math-l1
+
+\mathcal{R}(\cdot) = \|\cdot\|_1
+```
+favors sparse solutions with few nonzero entries and is useful when the image of the sample is sparse in nature.
+
+Another candidate is total variation (TV) regularization {cite:p}`rudin_nonlinear_1992`,
+which is well suited for edge-preservation.
+The discrete total variation of a vector is defined as
+
+```{math}
+:label: eq:intro-math-tv
+
+|\cdot|_{\text{TV}} = \|\nabla (\cdot) \|_1
+```
+where the gradient {math}`(\nabla (\cdot))_l` at location index {math}`l` is defined as
+either the isotropic
+{math}`\left(\nabla_\text{x} (\cdot))_l^2 + (\nabla_\text{y} (\cdot))_l^2\right)^{\frac{1}{2}}`
+or anisotropic {math}`(|(\nabla_\text{x} (\cdot))_l| + |(\nabla_\text{y} (\cdot))_l|)` version.
+Operators {math}`\nabla_\text{x}` and {math}`\nabla_\text{y}`
+represent the finite differences in the horizontal and vertical directions, respectively.
+
+This regularization promotes piecewise-constant solutions by applying the sparsity-inducing
+{math}`\ell_1`-norm to the gradient of the image.
+It produces images with sharp edges and piecewise-constant values within regions,
+and it is also effective in reducing noise in images.
+These advantages make TV a popular choice for image reconstruction and image analysis tasks.
+However, it may produce undesirable staircase artifacts in smooth regions {cite:p}`dobson_recovery_1996`,
+and the reconstruction may lose gradual transitional textures.
+To remedy this, different approaches have been proposed,
+including nonlocal TV {cite:p}`zhang_bregmanized_2010`, Hessian-based TV {cite:p}`lefkimmiatis_hessian-based_2012`,
+and overlapping sparsity-based TV {cite:p}`liu_image_2015`.
+
+Recently, advances in neural networks and deep learning have revolutionized numerous research fields,
+and imaging is no exception.
+In 2013, an alternative regularization method called _Plug-and-Play_ priors
+{cite:p}`venkatakrishnan_plug-and-play_2013`
+expanded the framework of model-based reconstruction to include state-of-the-art neural networks.
+It allows one to plug in any denoiser which acts as an implicit regularizer in the objective function.
+The denoiser can be the classical TV regularizer, learning-based networks such as DRUNet
+{cite:p}`devalla_drunet_2018`, or state-of-the-art diffusion models {cite:p}`zhu_denoising_2023`.
+This flexible approach has demonstrated convincing performances in improving the image quality compared to traditional
+reconstruction methods {cite:p}`kamilov_plug-and-play_2023` and has become popular in biomedical imaging applications.
+However, theoretical analysis of learning-based approaches remains incomplete.
+Careful selection of denoisers is essential to ensure theoretical guarantees of convergence
+{cite:p}`romano_little_2017`.
+In this thesis, we focus on classical regularizers that are handcrafted and
+grounded in well-established theories of inverse problems.
+
+(intro-algorithms)=
+# Algorithms
+
+The optimization problem defined in {eq}`eq:intro-math-regularized-recon` is usually solved
+with an iterative algorithm tailored to the specific regularizer.
+The goal is to design an algorithm that iteratively generates a sequence
+{math}`\mathbf{c}_k, k=0, 1, \dots`, which converges to the true solution
+{math}`\mathbf{c}^*` given the measurement vector {math}`\mathbf{b}` and the forward model {math}`\mathbf{A}`.
+For practical reasons of memory, the current iteration usually depends on the previous one or two steps
+in most algorithms.
+Depending on the properties of the objective function, such as convexity, continuity, and differentiability,
+the methods and algorithms to solve the optimization problem are classified into different categories.
+
+In this thesis, we mainly focus on linear models and convex optimization problems.
+The most common algorithms that we have adopted are gradient-based or proximal-gradient methods.
+Before delving into details, we first summarize some common first-order methods
+(based on the gradient of the objective function) and second-order methods
+(based on the Hessian, i.e. second-order derivatives of the objective function).
+In {numref}`tab:intro-math-optimization-methods-first-order` and
+{numref}`tab:intro-math-optimization-methods-second-order`, we list these methods and the representative algorithms
+along with their convergence rate and related references.
+
+```{table} Common Optimization Methods and Algorithms (First-Order)
+:name: tab:intro-math-optimization-methods-first-order
+| **Methods** | **Representative Algorithms** | **Convergence Rate (Typical)** | **Problem Class** |
+|------------|---------------|------------|---------------------|
+| Gradient Methods | Basic Gradient Descent (GD) {cite:p}`cauchy_method_1847` | {math}`O(1/k)` | Smooth, <br> convex, <br> unconstrained |
+| | Stochastic Gradient Descent (SGD) {cite:p}`robbins_stochastic_1951` | {math}`O(1/\sqrt{k})` non-convex, <br> {math}`O(1/k)` strongly convex | Smooth, <br> unconstrained |
+| | Accelerated Gradient Descent (AGD) {cite:p}`nesterov_method_1983` | {math}`O(1/k^2)` | Smooth, <br> convex, <br> unconstrained |
+| Proximal Gradient Methods (PGM) | Iterative Shrinkage Thresholding Algorithm (ISTA) {cite:p}`daubechies_iterative_2004` | {math}`O(1/k)` | {math}`J = g + h`, {math}`g` smooth, convex; <br> {math}`h` non-smooth, convex |
+| | Fast ISTA (FISTA) {cite:p}`fista` | {math}`O(1/k^2)` | same as ISTA | |
+| Primal-Dual Methods | Chambolle-Pock {cite:p}`chambolle_first-order_2011` | {math}`O(1/k)` | Saddle point problems |
+| Splitting Methods | Alternating Direction Method of Multipliers (ADMM) {cite:p}`boyd_distributed_2010` | {math}`O(1/k)` | Convex separable problems in different spaces and equality constraints |
+```
+
+When the objective function is smooth, i.e., continuously differentiable,
+the family of gradient methods, including the gradient descent algorithm and its variants, can be adopted.
+For instance, 
+```{table} Common Optimization Methods and Algorithms (Second-Order)
+:name: tab:intro-math-optimization-methods-second-order
+| **Methods** | **Representative Algorithms** | **Convergence Rate** | **Problem Class** |
+|------------|---------------|------------|---------------------|
+| Newton Methods | Basic Newton Method {cite:p}`dennis_numerical_1996` | Quadratic (local) | Smooth, <br> twice-differentiable, <br> unconstrained |
+| Quasi-Newton Methods | L-BFGS {cite:p}`lbfgsb` | Superlinear | Smooth |
+```
+the objective of the following {math}`\ell_2`-regularized minimization for a linear inverse problem
+```{math}
+:label: eq:intro-math-linear-minimization-with-L2-regularization
+
+    \text{arg}\min_{\mathbf{c} \in \mathbb{R}^N} \left\{ J(\mathbf{c}) =
+    \frac{1}{2}\|\mathbf{b} - \mathbf{Ac}\|^2_2
+    + \frac{\alpha}{2}\|\mathbf{Lc}\|_2^2\right\},
+```
+is smooth.
+In this case, the accelerated gradient descent algorithm is a common choice:
+given the current iterate {math}`\mathbf{c}_k`, it computes
+```{math}
+:label: eq:intro-math-agd
+
+& \boldsymbol{d}_{k} = \mathbf{c}_k - s_k\nabla J(\mathbf{c}_k) \\
+& t_{k+1} = \frac{1 + \sqrt{1 + 4t_k^2}}{2} \\
+& \mathbf{c}_{k+1} = \boldsymbol{d}_k + \frac{t_k - 1}{t_{k+1}} (\boldsymbol{d}_k - \boldsymbol{d}_{k-1}).
+```
+The first line in {eq}`eq:intro-math-agd` is the gradient-descent step and
+{math}`\nabla J` represents the gradient of the objective.
+The last two lines in {eq}`eq:intro-math-agd` are the acceleration steps based on momentum, which was proposed by
+Nesterov {cite:p}`nesterov_method_1983`.
+If we set a constant stepsize {math}`s_k=1/L`,
+where {math}`L` is an upper bound of the Lipschitz constant of {math}`\nabla J`, the algorithm has a
+convergence rate of {math}`O(1/k^2)`.
+
+When the objective function is twice-differentiable,
+one can deploy a second-order method based on the Hessian of the objective function.
+Second-order methods require more memory as they need to store additionally the Hessian of the objective.
+Methods with reduced memory requirements have been proposed to circumvent this issue,
+such as the limited-memory Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) algorithm {cite:p}`lbfgsb`.
+Second-order methods converge much faster, especially when the Hessian (or an approximation of it)
+is explicitly provided.
+
+In this thesis, we have also encountered objective functions {math}`J` that are
+composed of a smooth part {math}`g` (e.g. the quadratic data term)
+combined with a nonsmooth part {math}`h` (e.g., the sparsity-based regularizer
+{math}`\mathcal{R}(\mathbf{c}) = \|\mathbf{Lc}\|_1` that we have introduced in [](#intro-maths-regularization)).
+In this case, we deploy the proximal gradient method, also known as the forward-backward splitting method,
+which is suitable for such a separable structure.
+The updates of the proximal gradient algorithm for the optimization problem
+{math}`\text{arg}\min_{\mathbf{c}\in \mathbb{R}^N} \left\{ J(\mathbf{c}) = g(\mathbf{c}) + h(\mathbf{c}) \right\}` are:
+Given the current iterate {math}`\mathbf{c}_k`, the next iterate is computed by
+
+```{math}
+:label: eq:intro-math-pgd
+
+\mathbf{c}_{k+1} = \text{prox}_{s_k h}(\mathbf{c}_{k} - s_k \nabla g(\mathbf{c}_{k})).
+```
+The stepsize {math}`s_k>0` is computed similarly as in the smooth case.
+The proximal operator of the function {math}`h: \mathbb{R}^N \to \mathbb{R}` is defined as the solution to
+another minimization problem (which is essentially a denoising problem)
+
+```{math}
+:label: eq:intro-math-proximal-operator
+
+\text{prox}_{h}(\cdot) = \text{arg}\min_{\boldsymbol{\eta}} \left\{
+\frac{1}{2} \|\cdot - \boldsymbol{\eta} \|_2^2 + h(\boldsymbol{\eta})
+\right\}.
+```
+
+When {math}`h(\cdot)=\alpha\|\cdot\|_1`, i.e., the {math}`\ell_1` regularizer,
+the proximal operator in {eq}`eq:intro-math-proximal-operator` admits a closed-form expression
+
+```{math}
+:label: eq:intro-math-prox-of-l1
+
+\text{prox}_{\alpha\|\cdot\|_1}(\cdot) = \tau_{\alpha}(\cdot),
+```
+where {math}`\tau_{\theta}(\cdot)` is the element-wise soft-thresholding operator
+{math}`\tau_{\theta}(\mathbf{c})_n = \max(|c_n| - \theta, 0)\text{sgn}(c_n)` {cite:p}`fista`.
+Common choices of algorithms in this case include
+the iterative thresholding algorithm (ISTA) and FISTA (its Nesterov-accelerated version) {cite:p}`fista`.
+
+When {math}`h(\cdot)=\alpha\|\nabla(\cdot)\|_1`, i.e., the TV regularizer, the corresponding proximal operator
+no longer admits a closed-form solution, and an extra inner loop is required to compute it.
+For instance, one can switch to the dual problem in {eq}`eq:intro-math-proximal-operator` which can be solved
+with a gradient descent step followed by a projection onto the {math}`L_{\infty}`-ball
+(see [](#pat2) for details).
+
+Apart from convex problems, we have also encountered nonconvex optimization in this thesis, for instance,
+the calibration of the system parameters for OPT in chapter [](#chapter-opt) and the optimization of the
+illumination pattern for MINFLUX in chapter [](#chapter-minflux).
+Since the objective functions are smooth, we have chosen gradient-based first-order algorithms in these cases
+(see respective chapters for details).
+Due to the nonconvexity, there may exist multiple local optima, and the initialization of the algorithm is important.
+It is good practice to use a warm start, i.e., a guess based on available information.
+For instance, in OPT, where the errors in the unknown parameters are typically small,
+the ideal system parameters serve as viable initialization.
+In MINFLUX, the standard donut beam pattern provides a suitable starting point.
+
+(intro-computational-aspects)=
+# Computational Aspects
+
+We have seen that successful resolution of inverse problems in an imaging application relies on an accurate
+physics-based forward model, a proper formulation of the inverse problem, and a carefully designed optimization
+algorithm.
+In this section, we address implementation and computational considerations which are also critical to successful
+inversion.
+
+Computational speed can be optimized according to the specific task at hand.
+For instance, the default approach to compute convolution between dense vectors is the fast Fourier transform;
+while for sparse kernels, direct computation in the original domain combined with a sparse representation
+of the kernel may offer better performance (see chapter [](#chapter-pa)).
+For algorithms, the optimal choice depends on the scale of the problem, the requirement of the algorithm,
+and available computational resources.
+For instance, second-order methods, while converging faster than first-order alternatives, require additional memory
+to store higher-order derivatives.
+
+For small- to medium-scale problems, it often suffices to solve them on a local machine and obtain a solution
+within a reasonable timeframe.
+For large-scale problems, remote computational resources, graphic processing unit (GPU) or
+just-in-time compilation are often essential (see chapter [](#chapter-pa)).
+
+## Matrix-Free Operators
+
+Linear models can be explicitly computed and stored as a matrix,
+which is a viable approach when the size of the operator is modest.
+However, in many applications, this becomes impractical if the size of the problem is prohibitively large.
+For instance, in a typical OPT experiment, let us assume the 3D sample is of size {math}`128^3` pixels and
+the 2D camera produces 1200 projection images each of size {math}`1024^2` pixels.
+The resulting forward matrix has ~{math}`10^{15}` entries, making explicit storage infeasible.
+
+One alternative is to implement a matrix-free operator, provided that
+the forward model can be expressed as a sequence of simple or modular operations.
+This is feasible for many imaging tasks, for instance,
+in OPT reconstruction (via the X-ray transform, see chapter [](#chapter-opt)), and
+MINFLUX optimization of the illumination pattern (via Fourier transforms, see chapter [](#chapter-minflux)).
+The core elements of any matrix-free operator are its forward and adjoint implementations.
+Numerous examples are available in open-source libraries such as _GlobalBioIm_ {cite:p}`Soubies:19`, _PyLops_
+{cite:p}`pylops`, and _Pyxu_ {cite:p}`pyxu-framework`.
+
+## Data Preprocessing
+
+When processing data from modern high-performance instruments, a common challenge is
+the sheer volume of raw measurements.
+Directly applying inversion algorithms to full-resolution data is often infeasible and frequently unnecessary.
+Preprocessing steps such as region-of-interest segmentation (to exclude irrelevant data) and downsampling
+(to reduce the data size) are essential for computational efficiency.
+A practical compromise is to solve the inverse problem at a coarse resolution, then refine the results to finer
+resolution, to balance accuracy, speed, and resource constraints (see [](#chapter-opt) and [](#chapter-minflux) for details).
+
+## Automatic Differentiation
+
+A key requirement of the iterative algorithms discussed in [](#algorithms) is
+the efficient computation of derivatives of the objective function.
+If the forward operator is a simple function, it is straightforward to compute its derivatives.
+However, some models are so elaborate that deriving explicit gradients is either intractable or impractical.
+For instance, the forward model of MINFLUX (see chapter [](#chapter-minflux))
+comprises multiple complex operations in the shape of a feed-forward neural network.
+To address this, we implement the forward model using _PyTorch_, to
+leverage its automatic differentiation feature to compute gradients numerically.
+We also benefit from the built-in optimization algorithms of _PyTorch_,
+such as stochastic gradient descent and Adam {cite:p}`kingma_adam_2015`.
+
+In summary, successful resolution of inverse problems in optical imaging depends on an accurate forward model,
+a suitable algorithm, and a carefully designed high-performance implementation.

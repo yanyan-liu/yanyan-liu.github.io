@@ -1,0 +1,11 @@
+# Introduction
+
+The topic of this thesis is to model and solve inverse problems in the field of biomedical optical imaging.
+We first provide context for this thesis, then we summarize the contributions.
+
+```{toctree}
+:maxdepth: 2
+
+background.md
+contributions.md
+```

@@ -1,0 +1,608 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Automatic Calibration" href="calibration.html"><link rel="prev" title="Background" href="background.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Characterization of Mechanical Artifacts</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="characterization-of-mechanical-artifacts">
+<span id="opt-characterization-of-mechanical-artifacts"></span><h1>Characterization of Mechanical Artifacts<a class="headerlink" href="#characterization-of-mechanical-artifacts" title="Link to this heading">¶</a></h1>
+<p>In this section, we first describe the imaging geometry of OPT using a set of system parameters (angles and shifts).
+We point out typical places where the most critical mechanical errors occur.
+Then, we present a catalog of artifacts along with a detailed description of the three most common
+types of mechanical errors.</p>
+<section id="common-opt-geometry-and-reconstruction-algorithms">
+<span id="opt-mechanical-geometry"></span><h2>Common OPT Geometry and Reconstruction Algorithms<a class="headerlink" href="#common-opt-geometry-and-reconstruction-algorithms" title="Link to this heading">¶</a></h2>
+<p>The general OPT geometry is illustrated in <a class="reference internal" href="#fig-opt-mechanical-setup"><span class="std std-numref">Fig. 10</span></a> (a).
+A 3D sample is placed in a rotating cylinder and imaged on a camera.
+This camera records 2D projections of either the absorption of the sample (transmission OPT) <span id="id1">[<a class="reference internal" href="../../../index.html#id105" title="Olli Koskela, Toni Montonen, Birhanu Belay, Edite Figueiras, Sampsa Pursiainen, and Jari Hyttinen. Gaussian Light Model in Brightfield Optical Projection Tomography. Scientific Reports, 9(1):13934, December 2019.">106</a>]</span>
+or its emitted fluorescence (emission OPT) <span id="id2">[<a class="reference internal" href="../../../index.html#id121" title="Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Resolution improvement in emission optical projection tomography. Physics in Medicine &amp; Biology, 52(10):2775–2790, apr 2007.">91</a>, <a class="reference internal" href="../../../index.html#id134" title="Jelle van der Horst and Jeroen Kalkman. Image resolution and deconvolution in optical tomography. Optics Express, 24(21):24460–24472, October 2016.">107</a>]</span>.
+These tomographic projections, not considering more intricate models of light propagation,
+are enabled in reason of the very low numerical aperture of the OPT imaging system,
+in sharp contrast with conventional optical microscopy.
+The sample is rotated around the axis of the cylinder for tomographic reconstruction.</p>
+<p>We place the sample in a 3D coordinate system (<span class="math notranslate nohighlight">\(O-xyz\)</span>) (<a class="reference internal" href="#fig-opt-mechanical-setup"><span class="std std-numref">Fig. 10</span></a> (b)).
+In an ideal setup <span id="id3">[<a class="reference internal" href="../../../index.html#id114" title="James Sharpe, Ulf Ahlgren, Paul Perry, Bill Hill, Allyson Ross, Jacob Hecksher-Sørensen, Richard Baldock, and Duncan Davidson. Optical projection tomography as a tool for 3D microscopy and gene expression studies. Science, 296(5567):541-545, 2002.">22</a>]</span>,
+the center of the cylinder is at <span class="math notranslate nohighlight">\(O\)</span> and the rotation axis would perfectly match <span class="math notranslate nohighlight">\(z\)</span>-axis.
+In our refined model, the center of the sample cylinder is at <span class="math notranslate nohighlight">\(G\)</span> and its orientation is described
+by the three angles
+<span class="math notranslate nohighlight">\(\boldsymbol{\theta}=(\boldsymbol{\varphi},\psi_1,\psi_2)\)</span> for a rigid-body rotation.
+The <span class="math notranslate nohighlight">\(P\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\boldsymbol{\varphi} = (\varphi_1, \ldots, \varphi_P)\)</span>
+represents the set of <span class="math notranslate nohighlight">\(P\)</span> rotation angles around the rotation axis,
+one for each captured projection.
+The tilted rotation axis is described by the remaining two angles <span class="math notranslate nohighlight">\(\psi_1\)</span> and
+<span class="math notranslate nohighlight">\(\psi_2\)</span> which are scalars that represent out-of-plane and in-plane tilt,
+respectively.
+The detector plane is described by a 2D coordinate system (<span class="math notranslate nohighlight">\(O'-\xi\eta\)</span>) that is perpendicular to the optical axis.</p>
+<figure class="align-default" id="fig-opt-mechanical-setup">
+<a class="reference internal image-reference" href="../../../_images/opt-setup.png"><img alt="../../../_images/opt-setup.png" src="../../../_images/opt-setup.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">(a) Diagram of OPT (ideal setup).
+Light that passes through or is emitted by the sample gets imaged on a CCD camera using a lens system.
+In this ideal configuration, a slice of the sample perpendicular to the rotation axis corresponds to information in
+the temporal sequence recorded by a row of pixels on the CCD camera.
+(b) OPT imaging system with mechanical errors.
+The lens system is omitted here for simplicity.
+The light dashed cylinder indicates the ideal position of the specimen.
+The solid cylinder represents the tilted sample (translated to <span class="math notranslate nohighlight">\(G\)</span>) that rotates around its orientation axis.
+The detector plane is described by a 2D coordinate system (<span class="math notranslate nohighlight">\(O'-\xi\eta\)</span>) perpendicular to the optical
+axis (<span class="math notranslate nohighlight">\(y\)</span> axis).
+The projection of <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(G\)</span> in the detector plane are <span class="math notranslate nohighlight">\(O'\)</span> and <span class="math notranslate nohighlight">\(G'\)</span>, respectively.
+The angle <span class="math notranslate nohighlight">\(\psi_1\)</span> represents the out-of-plane tilt angle between the orientation axis of the sample
+and <span class="math notranslate nohighlight">\(z\)</span>-axis
+direction (gray vertical arrow).
+The rotation angle <span class="math notranslate nohighlight">\(\psi_2\)</span> represents the in-plane tilt angle of the detector plane around the optical axis.</span><a class="headerlink" href="#fig-opt-mechanical-setup" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Many reconstruction algorithms are available for OPT,
+from filtered backprojection (FBP) <span id="id4">[<a class="reference internal" href="../../../index.html#id120" title="Ville Koljonen, Olli Koskela, Toni Montonen, Atena Rezaei, Birhanu Belay, Edite Figueiras, Jari Hyttinen, and Sampsa Pursiainen. A mathematical model and iterative inversion for fluorescent optical projection tomography. Physics in Medicine &amp; Biology, 64(4):045017, Febuary 2019.">108</a>, <a class="reference internal" href="../../../index.html#id122" title="A Darrell, H Meyer, K Marias, M Brady, and J Ripoll. Weighted filtered backprojection for quantitative fluorescence optical projection tomography. Physics in Medicine &amp; Biology, 53(14):3863–3881, jun 2008.">109</a>]</span> to
+optimization-based methods <span id="id5">[<a class="reference internal" href="../../../index.html#id102" title="A. Darrell, H. Meyer, U. Birk, K. Marias, M. Brady, and J. Ripoll. Maximum likelihood reconstruction for fluorescence optical projection tomography. In 2008 8th IEEE International Conference on BioInformatics and BioEngineering, volume, 1-6. 2008.">110</a>, <a class="reference internal" href="../../../index.html#id124" title="Anna K Trull, Jelle van der Horst, Willem Jan Palenstijn, Lucas J van Vliet, Tristan van Leeuwen, and Jeroen Kalkman. Point spread function based image reconstruction in optical projection tomography. Physics in Medicine &amp; Biology, 62(19):7784–7797, sep 2017.">111</a>]</span>.
+They mainly come from the field of CT,
+a canonical tomography application using X-rays with a similar parallel-beam geometry <span id="id6">[<a class="reference internal" href="../../../index.html#id112" title="Avinash C. Kak and Malcolm Slaney. Principles of Computerized Tomographic Imaging. Society for Industrial and Applied Mathematics, Philadelphia, USA, first edition, 2001.">112</a>]</span>.
+In the simplistic model where the rotation axis is assumed to be aligned with <span class="math notranslate nohighlight">\(z\)</span>-axis and when the in-plane
+tilt vanishes, one horizontal plane of the sample corresponds to one line of the pixels on the camera.
+Many reconstruction algorithms thus operate on camera images line by line, reconstructing the object plane by plane.
+A mismatch between the geometry of the setup and that assumed by the reconstruction algorithm obviously impacts the
+quality of the final reconstruction.
+This induces artifacts that have been reported previously in the literature,
+along with dedicated procedures to correct them (see <a class="reference internal" href="background.html#opt-existing-mechanical-artifacts-review"><span class="std std-ref">Previously Reported Artifacts and Correction Techniques</span></a>).</p>
+</section>
+<section id="catalog-of-mechanical-artifacts">
+<span id="opt-catalog-of-mechanical-artifacts"></span><h2>Catalog of Mechanical Artifacts<a class="headerlink" href="#catalog-of-mechanical-artifacts" title="Link to this heading">¶</a></h2>
+<p>The geometry of OPT is described by the
+cylinder center <span class="math notranslate nohighlight">\(G(x_G, y_G, z_G)\)</span> and the angles <span class="math notranslate nohighlight">\(\theta = (\boldsymbol{\varphi}, \psi_1, \psi_2)\)</span>.
+To characterize different mechanical imperfections, we introduce a catalog of imaging artifacts that stem
+from a mismatch between the <em>true</em> value and the value assumed at reconstruction for each parameter
+of our refined model.
+This catalog is useful for experimentalists to identify artifacts and correct them either experimentally
+(re-calibration) or computationally.
+We summarize in <a class="reference internal" href="#tab-opt-dict"><span class="std std-numref">Table 3</span></a> the results with references to previous works when relevant,
+accompanied by visualizations shown in <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> based on numerical simulations
+using point-like beads, a popular tool to characterize OPT systems.</p>
+<div class="table-wrapper colwidths-auto docutils container" id="tab-opt-dict">
+<table class="docutils align-default" id="tab-opt-dict">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Catalog of OPT Mechanical Artifacts</span><a class="headerlink" href="#tab-opt-dict" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error</p></th>
+<th class="head"><p>Visual Clues</p></th>
+<th class="head"><p>Dependence on FOV</p></th>
+<th class="head"><p>Dependence on <span class="math notranslate nohighlight">\(z\)</span> axis</p></th>
+<th class="head"><p>References</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Translation <span class="math notranslate nohighlight">\(x\)</span> axis</p></td>
+<td><p>Circle, Double edge</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p><span id="id7">[<a class="reference internal" href="../../../index.html#id110" title="Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Correction of artefacts in optical projection tomography. Physics in Medicine &amp; Biology, 50(19):4645–4665, sep 2005.">58</a>, <a class="reference internal" href="../../../index.html#id131" title="Hanqing Zhang, Laura Waldmann, Remy Manuel, Henrik Boije, Tatjana Haitina, and Amin Allalou. zOPT: an open source optical projection tomography system and methods for rapid 3D zebrafish imaging. Biomedical Optics Express, 11(8):4290–4305, August 2020.">103</a>, <a class="reference internal" href="../../../index.html#id132" title="Xiaoqin Tang, Merel van't Hoff, Jerry Hoogenboom, Yuanhao Guo, Fuyu Cai, Gerda Lamers, and Fons Verbeek. Fluorescence and bright-field 3D image fusion based on sinogram unification for optical projection tomography. In 2016 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), volume, 403-410. 2016.">104</a>, <a class="reference internal" href="../../../index.html#id108" title="Tilman Donath, Felix Beckmann, and Andreas Schreyer. Automated determination of the center of rotation in tomography data. Journal of the Optical Society of America A, 23(5):1048–1057, May 2006.">105</a>, <a class="reference internal" href="../../../index.html#id101" title="Udo Jochen Birk, Matthias Rieckher, Nikos Konstantinides, Alex Darrell, Ana Sarasa-Renedo, Heiko Meyer, Nektarios Tavernarakis, and Jorge Ripoll. Correction for specimen movement and rotation errors for in-vivo optical projection tomography. Biomedical Optics Express, 1(1):87–96, August 2010.">113</a>]</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Translation <span class="math notranslate nohighlight">\(y\)</span> axis</p></td>
+<td><p>Out-of-focus blur</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p><span id="id8">[<a class="reference internal" href="../../../index.html#id116" title="Daniele Ancora, Diego Di Battista, Georgia Giasafaki, Stylianos Psycharakis, Evangelos Liapis, Athanasios Zacharopoulos, and Giannis Zacharakis. Optical projection tomography via phase retrieval algorithms for hidden three dimensional imaging. In Quantitative Phase Imaging III, volume 10074, 100741E. SPIE, 2017.">99</a>, <a class="reference internal" href="../../../index.html#id105" title="Olli Koskela, Toni Montonen, Birhanu Belay, Edite Figueiras, Sampsa Pursiainen, and Jari Hyttinen. Gaussian Light Model in Brightfield Optical Projection Tomography. Scientific Reports, 9(1):13934, December 2019.">106</a>, <a class="reference internal" href="../../../index.html#id134" title="Jelle van der Horst and Jeroen Kalkman. Image resolution and deconvolution in optical tomography. Optics Express, 24(21):24460–24472, October 2016.">107</a>]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Translation <span class="math notranslate nohighlight">\(z\)</span> axis</p></td>
+<td><p>None</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tilt of rotation axis: Out-of-plane <span class="math notranslate nohighlight">\(\psi_1\)</span></p></td>
+<td><p>Various</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-even"><td><p>Tilt of rotation axis: In-plane <span class="math notranslate nohighlight">\(\psi_2\)</span></p></td>
+<td><p>Various</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p><span id="id9">[<a class="reference internal" href="../../../index.html#id115" title="Veronica C. Torres, Chengyue Li, Wei Zhou, Jovan G. Brankov, and Kenneth M. Tichauer. Characterization of an angular domain fluorescence optical projection tomography system for mesoscopic lymph node imaging. Applied Optics, 60(1):135–146, January 2021.">93</a>, <a class="reference internal" href="../../../index.html#id135" title="Pedro P. Vallejo Ramirez, Joseph Zammit, Oliver Vanderpoorten, Fergus Riche, Francois-Xavier Blé, Xiao-Hong Zhou, Bogdan Spiridon, Christopher Valentine, Simeon E. Spasov, Pelumi W. Oluwasanya, Gemma Goodfellow, Marcus J. Fantham, Omid Siddiqui, Farah Alimagham, Miranda Robbins, Andrew Stretton, Dimitrios Simatos, Oliver Hadeler, Eric J. Rees, Florian Ströhl, Romain F. Laine, and Clemens F. Kaminski. OptiJ: open-source optical projection tomography of large organ samples. Scientific Reports, 9(1):15693, October 2019.">102</a>]</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Rotation angle: Accumulative</p></td>
+<td><p>Seagull</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>N/A</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The numerical simulation is done using <em>Tomosipo</em>,
+a convenient and versatile tomographic toolbox for 3D simulations and reconstructions of any geometric setup
+<span id="id10">[<a class="reference internal" href="../../../index.html#id113" title="Allard A. Hendriksen, Dirk Schut, Willem Jan Palenstijn, Nicola Viganó, Jisoo Kim, Daniël M. Pelt, Tristan van Leeuwen, and K. Joost Batenburg. Tomosipo: fast, flexible, and convenient 3d tomography for complex scanning geometries in python. Optics Express, 29(24):40494–40513, November 2021.">23</a>]</span>.
+We use a ground-truth object of 10 scattered beads of size <span class="math notranslate nohighlight">\(6^3\)</span> pixels in the FOV with their centers on the same
+plane perpendicular to <span class="math notranslate nohighlight">\(z\)</span> axis.
+This object is placed in a cube of size <span class="math notranslate nohighlight">\(512^3\)</span> pixels.
+The number of rotation angles is 1200 over the range of 0 to 360 degrees to generate a set of 2D projections.
+The location of this plane was moved along <span class="math notranslate nohighlight">\(z\)</span> axis to observe the dependence of a certain type of mechanical
+artifacts on <span class="math notranslate nohighlight">\(z\)</span> location.
+We added different types of errors to the forward model to simulate a realistic imperfect OPT system.
+Then, we used standard FBP algorithm for reconstruction with any correction.</p>
+<figure class="align-default" id="fig-opt-mechanical-artifacts">
+<img alt="../../../_images/simulated-artifacts.png" src="../../../_images/simulated-artifacts.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Artifacts in the reconstruction of simulated beads under controlled geometric errors.
+(a)-(b) Circle artifacts due to a constant shift of -4 pixels (a) and 8 pixels (b) of the rotation center in
+<span class="math notranslate nohighlight">\(x\)</span> axis direction.
+(c)-(d) Seagull artifacts due to a negative (c) and positive (d) random accumulative error with maximum amplitude 0.03
+degrees in the rotation angles.
+(e)-(p) Various artifacts due to the tilted rotation axis.
+(e)-(h) Reconstruction at slice 192 (64 slices below the central slice).
+(i)-(l) Reconstruction at slice 256 (central slice).
+(m)-(p) Reconstruction at slice 384 (128 slices above the central slice).
+The intensities of images are normalized and saturated for better visualization.</span><a class="headerlink" href="#fig-opt-mechanical-artifacts" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Shifts along <span class="math notranslate nohighlight">\(x\)</span>-axis (orthogonal to the axis of rotation and light propagation) result in circle artifacts.
+The size of artifacts is uniform across the FOV;
+however, their severity, as is indicated by the radius of the circle,
+depends on the absolute value of the shift.
+The larger it is, the bigger the circles will be (<a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> (a) - (b)).
+This characterization can be applied to any object, by considering it as a sum of point-like elements.
+For continuous samples, their borders will appear as double edges as reported in previous OPT experiments
+<span id="id11">[<a class="reference internal" href="../../../index.html#id110" title="Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Correction of artefacts in optical projection tomography. Physics in Medicine &amp; Biology, 50(19):4645–4665, sep 2005.">58</a>]</span>.
+Shifts along the <span class="math notranslate nohighlight">\(y\)</span>-axis (direction of light propagation) cause an out-of-focus blur when parts of the sample
+move out of the depth-of-field of the imaging system.
+Shifts along the <span class="math notranslate nohighlight">\(z\)</span> axis (rotation axis) cause an overall shift of the reconstruction in the <span class="math notranslate nohighlight">\(z\)</span> direction,
+but do not generate artifacts as long as the object is still within the field of view of the camera.
+Random vibrations may also blur the final reconstruction.
+They can be included in our framework as a projection-dependent translation error.
+This is different from the offset of the rotation axis that corresponds to a systematic error shared across all
+projections.</p>
+<p>The tilt angles <span class="math notranslate nohighlight">\(\psi_1\)</span> and <span class="math notranslate nohighlight">\(\psi_2\)</span> generate artifacts of different shapes, especially when the mismatch
+is large.
+To study the impact of tilt of the rotation axis in different directions and levels of severity,
+as well as its dependence on the vertical location along <span class="math notranslate nohighlight">\(z\)</span> axis,
+we moved <span class="math notranslate nohighlight">\(z\)</span> location of the beads to three different transverse slices: slice 256 (central slice),
+slice 192 (64 slices below the central slice),
+and slice 384 (128 slices above the central slice).
+We added errors in the two tilt directions described previously with two values: 5 and 10 degrees. The result is shown
+in <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> (e) - (p).</p>
+<p>The first two columns of images of the second to the fourth rows in <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> show that
+an out-of-plane tilt results in various artifacts that appear more severe close to the boundary of the image.
+The next two columns of images of the second to the fourth rows in <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> show that
+in-plane tilt in general leads to more severe artifacts of various shapes compared to out-of-plane tilt.
+The dependence of the size of the artifacts on the location along the vertical direction is also stronger than that of
+out-of-plane tilt.
+The central slice shows the least artifacts (third row of <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a>),
+while slices far away from it show bigger artifacts (second and last row of <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a>).
+As the tilt angle increases, the artifacts become stronger if we compare first two columns or last two columns of
+the tilt images in <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a>.
+We observe circle artifacts in <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> (g), (h) and (o), which indicate that
+when the tilt angle is small, it can be approximated by a shifted rotation center problem.
+When the tile angle is relatively large,
+such an approximation does not hold anymore, as seen in <a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> (p).</p>
+<p>The last parameter describing our refined OPT geometry is the set of rotation angles <span class="math notranslate nohighlight">\(\boldsymbol\varphi\)</span>.
+On the one hand, since each rotation angle is different for each camera image,
+a random mismatch on this angle does not induce artifacts but introduces noise that degrades the image quality.
+On the other hand,
+a miscalibration of the rotation motor may introduce a positive or negative drift in the rotation angle,
+which accumulates over time.
+We simulated this kind of model mismatch and observed <em>seagull</em>-shaped artifacts in the reconstruction
+(<a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> (c) and (d)).
+Depending on the sign of the random accumulative error,
+the <em>seagull</em>-shaped artifact appears to orient either towards or away from the image center.
+The size of the <em>seagull</em> in each transverse slice depends on the distance of the bead relative to the boundary of the
+object.
+The closer to the boundary,
+the bigger the <em>seagulls</em> will be while the bead located at the exact center of the slice appears unaffected
+since it coincides with the rotation axis (<a class="reference internal" href="#fig-opt-mechanical-artifacts"><span class="std std-numref">Fig. 11</span></a> (c) and (d)).</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="calibration.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Automatic Calibration</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="background.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Background</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Characterization of Mechanical Artifacts</a><ul>
+<li><a class="reference internal" href="#common-opt-geometry-and-reconstruction-algorithms">Common OPT Geometry and Reconstruction Algorithms</a></li>
+<li><a class="reference internal" href="#catalog-of-mechanical-artifacts">Catalog of Mechanical Artifacts</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

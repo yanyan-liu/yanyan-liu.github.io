@@ -1,0 +1,834 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Summary" href="summary.html"><link rel="prev" title="Implementation" href="implementation.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Results</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html">Implementation</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="results">
+<span id="minflux-results"></span><h1>Results<a class="headerlink" href="#results" title="Link to this heading">¶</a></h1>
+<p>We present the results of two distinct groups of experiments
+aimed at optimizing beam shapes for MINFLUX.
+In the first group, we investigate the case in which all beams are translated
+versions of each other, questioning the optimality of the well-known donut beam.
+In the second one, we relax the optimization conditions to multiple beam shapes as
+it has been proposed in recent experiments <span id="id1">[<a class="reference internal" href="../../../index.html#id86" title="Jan O. Wolff, Lukas Scheiderer, Tobias Engelhardt, Johann Engelhardt, Jessica Matthias, and Stefan W. Hell. MINFLUX dissects the unimpeded walking of kinesin-1. Science, 379(6636):1004–1010, March 2023.">30</a>, <a class="reference internal" href="../../../index.html#id87" title="Takahiro Deguchi and Jonas Ries. Simple and robust 3d minflux excitation with a variable phase plate. Light: Science &amp; Applications, 13(1):134, 2024.">196</a>]</span>.</p>
+<p>Despite the inherent complexity of nonlinear model and the nonconvex optimization, the final
+beam patterns we present demonstrate remarkable robustness,
+consistently emerging across a wide range of initial conditions
+and optimization parameters.
+Following these numerical results,
+we provide a mathematical analysis that substantiates these
+beam shapes as optimal in a mathematical sense.</p>
+<section id="numerical-optimality">
+<span id="minflux-numerical-results"></span><h2>Numerical Optimality<a class="headerlink" href="#numerical-optimality" title="Link to this heading">¶</a></h2>
+<section id="donut-beam">
+<span id="minflux-donut-numerical-results"></span><h3>Donut Beam<a class="headerlink" href="#donut-beam" title="Link to this heading">¶</a></h3>
+<p>In the first group, we adopt the original MINFLUX arrangement illustrated in <a class="reference internal" href="background.html#fig-minflux-donut-baseline"><span class="std std-numref">Fig. 42</span></a> (b),
+expanded to a total of seven beams, i.e. one at the center of the FOV and other six on a circle of diameter L nm,
+to mitigate anisotropy in the CRB
+(see <a class="reference internal" href="background.html#fig-minflux-donut-baseline"><span class="std std-numref">Fig. 42</span></a> (c) and <a class="reference internal" href="#fig-minflux-one-beam-result"><span class="std std-numref">Fig. 47</span></a> (f)).
+All seven beams are constrained to have the same shape.
+This configuration simplifies the experimental implementation as it allows for a fixed
+phase mask in Fourier space, while another optical element (e.g., a galvo mirror) simply translates
+the excitation pattern.
+We initialized the optimization with a perturbed donut beam (see <a class="reference internal" href="#fig-minflux-one-beam-result"><span class="std std-numref">Fig. 47</span></a> (a)).
+To be precise, we use a vortex phase mask <span class="math notranslate nohighlight">\(\kappa\)</span> and random initial coefficients <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>.</p>
+<figure class="align-center" id="fig-minflux-one-beam-result">
+<a class="reference internal image-reference" href="../../../_images/minflux_one_beam_result.png"><img alt="../../../_images/minflux_one_beam_result.png" src="../../../_images/minflux_one_beam_result.png" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Results in the case of the standard MINFLUX setting with seven beams (one in the center of the FOV and the other six on a circle with radius <span class="math notranslate nohighlight">\(L=100\)</span> nm) and only one beam shape.
+(a) and (b): Initial and optimized excitation beam shape.
+(c) and (d): Initial and optimized phase masks of the corresponding beams in (a) and (b).
+(e) and (f): Initial and optimized CRB map.
+(g) Comparison of the line profiles in the case of the initial (dotted), optimized (solid) and baseline (dashed) CRB
+maps along the horizontal straight line through the center of the FOV as illustrated in (e).</span><a class="headerlink" href="#fig-minflux-one-beam-result" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The results of this optimization, shown in <a class="reference internal" href="#fig-minflux-one-beam-result"><span class="std std-numref">Fig. 47</span></a> (b) and (d) exhibit a clear evolution
+towards a donut shape.
+<a class="reference internal" href="#fig-minflux-one-beam-result"><span class="std std-numref">Fig. 47</span></a> (g) displays the CRB line profiles and reveals a significant decrease
+in CRB values after optimization.
+We further compare CRB line profiles along the horizontal line through the center of the FOV
+(indicated in <a class="reference internal" href="#fig-minflux-one-beam-result"><span class="std std-numref">Fig. 47</span></a> (e)) for the initial and optimized CRB maps in
+<a class="reference internal" href="#fig-minflux-one-beam-result"><span class="std std-numref">Fig. 47</span></a> (g).
+We see that the CRB values of our optimized beam closely match those of a reference donut beam with
+seven positions (both curves overlap).
+The entries of the optimized Zernike coefficients shared by all 15 polynomials in
+<a class="reference internal" href="#tab-minflux-perturbed-donut-coeffs"><span class="std std-numref">Table 7</span></a> show that the vortex term dominates
+the others, which confirms the optimality of the donut beam.</p>
+<div class="table-wrapper colwidths-auto docutils container" id="tab-minflux-perturbed-donut-coeffs">
+<table class="docutils align-default" id="tab-minflux-perturbed-donut-coeffs">
+<caption><span class="caption-number">Table 7 </span><span class="caption-text">Initial and Optimized Zernike Coefficients</span><a class="headerlink" href="#tab-minflux-perturbed-donut-coeffs" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Initial</p></th>
+<th class="head"><p>Optimized</p></th>
+<th class="head"><p>Index</p></th>
+<th class="head"><p>Initial</p></th>
+<th class="head"><p>Optimized</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0.19</p></td>
+<td><p>4.0264</p></td>
+<td><p>8</p></td>
+<td><p>-0.19</p></td>
+<td><p>-0.0073</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>-0.11</p></td>
+<td><p>-0.0001</p></td>
+<td><p>9</p></td>
+<td><p>-0.52</p></td>
+<td><p>-0.0088</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>-0.15</p></td>
+<td><p>0.0281</p></td>
+<td><p>10</p></td>
+<td><p>0.65</p></td>
+<td><p>0.0094</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>-0.60</p></td>
+<td><p>-0.0129</p></td>
+<td><p>11</p></td>
+<td><p>0.37</p></td>
+<td><p>0.0050</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>0.52</p></td>
+<td><p>0.0034</p></td>
+<td><p>12</p></td>
+<td><p>-0.66</p></td>
+<td><p>0.0001</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>-0.31</p></td>
+<td><p>0.0008</p></td>
+<td><p>13</p></td>
+<td><p>-0.62</p></td>
+<td><p>0.0014</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>0.28</p></td>
+<td><p>-0.0013</p></td>
+<td><p>14</p></td>
+<td><p>-0.05</p></td>
+<td><p>-0.0024</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>0.27</p></td>
+<td><p>-0.0021</p></td>
+<td><p>Vortex</p></td>
+<td><p>1.00</p></td>
+<td><p><strong>0.9906</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To verify the robustness of our result, we have carried out additional experiments with different numbers of
+Zernike polynomials, different random Zernike coefficients as initialization, and different levels of background.
+The results, which are provided in <a class="reference internal" href="#fig-minflux-one-beam-additional-results"><span class="std std-numref">Fig. 48</span></a> show that the optimized beam
+consistently converge to the donut shape across all scenarios and firmly establish it as a robust optimal solution
+for this MINFLUX configuration.</p>
+<figure class="align-default" id="fig-minflux-one-beam-additional-results">
+<a class="reference internal image-reference" href="../../../_images/minflux_one_beam_additional_result.png"><img alt="../../../_images/minflux_one_beam_additional_result.png" src="../../../_images/minflux_one_beam_additional_result.png" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Optimization results of additional experiments with the setup of the first group of experiments with a single beam shape.
+Top two rows: Different random initialization of Zernike coefficients.
+Middle: First 55 (instead of 15) Zernike polynomials.
+Bottom two rows: 10% background (instead of 5%).
+(a)/(h)/(o) Initial beam shape.
+(b)/(i)/(p) Optimized shape.
+(c)/(j)/(q) and (d)/(k)/(r): Corresponding phase masks of the initial and optimized beams.
+(e)/(l)/(s) and (f)/(m)/(t): CRB map of the initial and the optimized.
+(g)/(n)/(u) CRB profiles of the horizontal (represented in color magenta) and vertical (represented in color orange)
+lines through the center of the FOV for the initial (dotted), the optimized (solid), and the baseline (dashed).</span><a class="headerlink" href="#fig-minflux-one-beam-additional-results" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="half-moon-beam">
+<span id="minflux-halfmoon-beam-numerical-results"></span><h3>Half-Moon Beam<a class="headerlink" href="#half-moon-beam" title="Link to this heading">¶</a></h3>
+<p>In the second group of experiments, we introduced a configuration of two distinct pairs of beams,
+and within each pair the beams are identical.
+We arranged the centers of these beams on a circle of diameter <span class="math notranslate nohighlight">\(L=100\)</span>nm at locations
+<span class="math notranslate nohighlight">\((\frac{L}{2}, 0), (0, \frac{L}{2}), (-\frac{L}{2}, 0)\)</span> and <span class="math notranslate nohighlight">\((0, -\frac{L}{2})\)</span> in
+<span class="math notranslate nohighlight">\(x-y\)</span> coordinates.
+Such as a layout is termed as a <em>diamond</em> beam setting.
+We initialize with four perfect donut beams (see <a class="reference internal" href="background.html#fig-minflux-donut-baseline"><span class="std std-numref">Fig. 42</span></a> (b))
+as it is optimal for the standard setting.
+In <a class="reference internal" href="#fig-minflux-two-pairs-beam"><span class="std std-numref">Fig. 49</span></a> (a), we show the image of the superposition of the intensity of
+all the four donut beams and the diamond setting.</p>
+<figure class="align-default" id="fig-minflux-two-pairs-beam">
+<a class="reference internal image-reference" href="../../../_images/minflux_two_pairs_result.png"><img alt="../../../_images/minflux_two_pairs_result.png" src="../../../_images/minflux_two_pairs_result.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Diamond setting and two pairs of beam shapes.
+(a), (c), and (e): Beams on the horizontal axis for the initial (a), optimized (c), and theoretical (e) cases.
+(b), (d), and (f): Beams on the vertical axis for the initial (b), optimized (d), and theoretical (f) cases.
+(g)-(j): Phase masks for the corresponding beams on the horizontal and vertical axes for the optimized and
+theoretical cases.
+(k)-(m): CRB maps of the initial, optimized, and theoretical cases.
+(n): Horizontal line profiles through the center of the FOV of the CRB maps (k)-(m).</span><a class="headerlink" href="#fig-minflux-two-pairs-beam" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The PSF shapes evolved significantly during optimization and converged to a configuration characterized by
+two approximately symmetric peaks separated by a valley of low intensities
+(see <a class="reference internal" href="#fig-minflux-two-pairs-beam"><span class="std std-numref">Fig. 49</span></a> (c) and (d)).
+Further, we notice that the axes of the two pairs of beams are orthogonal to each other,
+oriented along the edges of the square formed by the beam centers.
+The associated phase masks of these beams are shown in <a class="reference internal" href="#fig-minflux-two-pairs-beam"><span class="std std-numref">Fig. 49</span></a> (g) and (f).
+This optimized configuration significantly improves the CRB values by a factor of two
+(see <a class="reference internal" href="#fig-minflux-two-pairs-beam"><span class="std std-numref">Fig. 49</span></a> (k) and (l)).</p>
+<p>The optimal beams resemble the existing <em>half-moon</em> beams which have been seen in <span id="id2">[<a class="reference internal" href="../../../index.html#id86" title="Jan O. Wolff, Lukas Scheiderer, Tobias Engelhardt, Johann Engelhardt, Jessica Matthias, and Stefan W. Hell. MINFLUX dissects the unimpeded walking of kinesin-1. Science, 379(6636):1004–1010, March 2023.">30</a>]</span>.
+In practice, these shape can be generated by a <span class="math notranslate nohighlight">\(\pi\)</span>-phase-shifted half disk in the pupil plane
+(<a class="reference internal" href="#fig-minflux-two-pairs-beam"><span class="std std-numref">Fig. 49</span></a> (i) and (j)).
+These theoretical half-moon beams yield slightly more uniform CRB maps compared to the optimized PSFs, as shown
+in <a class="reference internal" href="#fig-minflux-two-pairs-beam"><span class="std std-numref">Fig. 49</span></a> (l) and (m).
+A close compare of the CRB line profiles or the initial, optimized, and theoretical half-moon beams is shown in
+<a class="reference internal" href="#fig-minflux-two-pairs-beam"><span class="std std-numref">Fig. 49</span></a> (n).
+The CRB of both the optimized and the theoretical half-moon beams greatly improves upon the initial start.</p>
+<p>Similar to the first group of experiments, we tested the robustness of the optimized beam across
+various optimization conditions, including different number of Zernike polynomials and different level of background.
+The optimization consistently produces the same beam
+shape (see <a class="reference internal" href="#fig-minflux-two-pairs-beam-additional-results"><span class="std std-numref">Fig. 50</span></a>).</p>
+<figure class="align-default" id="fig-minflux-two-pairs-beam-additional-results">
+<a class="reference internal image-reference" href="../../../_images/minflux_two_pairs_additional_result.png"><img alt="../../../_images/minflux_two_pairs_additional_result.png" src="../../../_images/minflux_two_pairs_additional_result.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Optimization results of additional experiments with the setup of the second group of experiments with
+two pairs of beam shapes.
+First two rows: First 55 (instead of 15) Zernike polynomials.
+Last two rows: 10% background (instead of 5%).
+(a)/(h) The intensity of all the four optimized beams superimposed into one image.
+(b)/(i) CRB map of the optimized result.
+(c)/(j) and (d)/(k): Optimized beams at locations on the horizontal (b) and vertical (c) axis.
+(e)/(l) and (f)/(m): Corresponding phase masks of the two optimized beams.
+(g)/(n) CRB profiles of the horizontal (represented in color magenta) and vertical (represented in color orange) lines
+through the center of the FOV for the initial (dotted) and the optimized (solid).</span><a class="headerlink" href="#fig-minflux-two-pairs-beam-additional-results" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>In addition, we ran another experiment where we allowed all four beams to have independent shapes.
+It turns out that the resulting beam shape is still half-moon-like with similar CRB performance
+(see <a class="reference internal" href="#fig-minflux-four-beams-result"><span class="std std-numref">Fig. 51</span></a>).
+We thus conclude that the half-moon configuration is a stable and optimal solution.</p>
+<figure class="align-default" id="fig-minflux-four-beams-result">
+<a class="reference internal image-reference" href="../../../_images/minflux_independent_beam_result.png"><img alt="../../../_images/minflux_independent_beam_result.png" src="../../../_images/minflux_independent_beam_result.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Optimization results with the setup of the second group of experiments with four independent beams
+(instead of in two groups thereof).
+First row: Optimized beams centered at the four locations
+<span class="math notranslate nohighlight">\(((\frac{L}{2}, 0))\)</span> (a), <span class="math notranslate nohighlight">\(((0, \frac{L}{2}))\)</span> (b),
+<span class="math notranslate nohighlight">\(((-\frac{L}{2}, 0))\)</span> (c) and <span class="math notranslate nohighlight">\(((0, -\frac{L}{2}))\)</span> (d).
+Second row: Associated phase masks of beams in the first row.
+(i) and (j): Initial and optimized CRB maps.
+(k) CRB line profiles along the horizontal and vertical straight lines (magenta and orange) through
+the center of the
+CRB maps for the initial (dotted), optimized (solid), and theoretical (dashed) cases.</span><a class="headerlink" href="#fig-minflux-four-beams-result" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="computational-aspects">
+<span id="minflux-computational-aspects"></span><h3>Computational Aspects<a class="headerlink" href="#computational-aspects" title="Link to this heading">¶</a></h3>
+<p>Key optimization parameters are fixed across both experiments:</p>
+<ul class="simple">
+<li><p>In the PSF module, the wavelength of the excitation light is 640 nm.</p></li>
+<li><p>The numerical aperture of the setup is 1.42.</p></li>
+<li><p>The background <span class="math notranslate nohighlight">\(b\)</span> in <a class="reference internal" href="theory.html#equation-eq-def-of-psf">Eq. (108)</a> is set to be 5% of the mean value of <span class="math notranslate nohighlight">\(h\)</span> on the whole object plane.</p></li>
+<li><p>In the pupil module, we use the first 15 Zernike polynomials (<span class="math notranslate nohighlight">\(D=15\)</span>).</p></li>
+<li><p>The size of the object plane is <span class="math notranslate nohighlight">\((1000\times1000)\)</span> nm.</p></li>
+<li><p>The total number of photons received at each location is <span class="math notranslate nohighlight">\(N=100\)</span>.</p></li>
+<li><p>The efficiency <span class="math notranslate nohighlight">\(\alpha\)</span> of the experiment is assumed to be 1.</p></li>
+<li><p>The beam positions are defined with <span class="math notranslate nohighlight">\(L = 100\)</span> nm.</p></li>
+<li><p>The radius <span class="math notranslate nohighlight">\(\tau\)</span> of the optimization FOV is 28 nm.</p></li>
+<li><p>The regularization term is computed on a ROI <span class="math notranslate nohighlight">\(\Omega_\text{h}\)</span> of radius 170 nm, approximately the radius of the donut beam.</p></li>
+<li><p>The regularization weight <span class="math notranslate nohighlight">\(\gamma\)</span> is 0.1.</p></li>
+<li><p>The tolerance of convergence is <span class="math notranslate nohighlight">\(10^{-6}\)</span>.</p></li>
+</ul>
+<p>The computational time and the evolution of the loss of each optimization experiment presented
+are shown in <a class="reference internal" href="#fig-minflux-loss"><span class="std std-numref">Fig. 52</span></a>.</p>
+<figure class="align-default" id="fig-minflux-loss">
+<a class="reference internal image-reference" href="../../../_images/minflux_loss_evolution.png"><img alt="../../../_images/minflux_loss_evolution.png" src="../../../_images/minflux_loss_evolution.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Evolution of loss and duration of the optimization.
+(a)-(d): First group of experiments.
+(e)-(h) Second group of experiments.</span><a class="headerlink" href="#fig-minflux-loss" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The code to produce the optimization results is available online <span id="id3">[<a class="reference internal" href="../../../index.html#id305" title="https://zenodo.org/records/13857972.">204</a>]</span>.</p>
+</section>
+</section>
+<section id="theoretical-analysis-of-the-optimality">
+<span id="minflux-theoretical-results"></span><h2>Theoretical Analysis of the Optimality<a class="headerlink" href="#theoretical-analysis-of-the-optimality" title="Link to this heading">¶</a></h2>
+<p>To complement our optimization results, we carried out a theoretical analysis of the optimality.
+We demonstrate how the donut and half-moon PSFs are optimal in a specific mathematical sense.
+Precisely, the optimal PSFs maximize the norm of the gradient of the electric field at the center of
+the field of view: for a single direction in the half-moon case, and averaged over all directions for the donut PSF.
+The half-moon case relies on an analytic proof, while the donut case relies on numerical evidence.
+These results provide a heuristic explanation for the final PSF forms;
+they do not account for shifts and the estimation problem, which necessitates our Fisher-information framework.</p>
+<p>We recall the definition of the PSF intensity <span class="math notranslate nohighlight">\(h: \mathbb{R}^2 \to \mathbb{C}\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-psf-intensity">
+<div class="math notranslate nohighlight" id="equation-eq-psf-intensity">
+<span class="eqno">(136)<a class="headerlink" href="#equation-eq-psf-intensity" title="Link to this equation">¶</a></span>\[h(\mathbf{r}) = |g(\mathbf{r})|^2, \quad \mathbf{r} = (x,y),\]</div>
+</div>
+<p>where the electric field <span class="math notranslate nohighlight">\(g: \mathbb{R}^2 \to \mathbb{C}\)</span> is given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-electric-field">
+<div class="math notranslate nohighlight" id="equation-eq-electric-field">
+<span class="eqno">(137)<a class="headerlink" href="#equation-eq-electric-field" title="Link to this equation">¶</a></span>\[g(\mathbf{r}) = \mathcal{F}^{-1}\left\{ P(\mathbf{k})\right\}(\mathbf{r}),
+\quad \mathbf{k} = (k_\text{x}, k_\text{y}).\]</div>
+</div>
+<p>The pupil function <span class="math notranslate nohighlight">\((P(\mathbf{k}): \Lambda \rightarrow \mathbb{C})\)</span> is defined on a finite support
+<span class="math notranslate nohighlight">\((\Lambda \subset \mathbb{R}^2)\)</span>, given by the low-pass-filtering disk that corresponds to
+the numerical aperture, with the constraint that <span class="math notranslate nohighlight">\((P)\)</span> has unit modulus over <span class="math notranslate nohighlight">\((\Lambda)\)</span> so that</p>
+<div class="math-wrapper docutils container" id="equation-eq-pupil-constraints">
+<div class="math notranslate nohighlight" id="equation-eq-pupil-constraints">
+<span class="eqno">(138)<a class="headerlink" href="#equation-eq-pupil-constraints" title="Link to this equation">¶</a></span>\[\begin{split}    \begin{cases}
+        |P(\mathbf{k})| = 1, \qquad &amp; \mathbf{k} \in \Lambda,\\
+        P(\mathbf{k}) = 0, \qquad &amp;\text{else }.
+    \end{cases}\end{split}\]</div>
+</div>
+<p>We start by explaining our heuristic in 1D
+MINFLUX minimizes the photon flux by precisely targeting and modulating
+the emission of fluorophores near the zero region of the excitation PSF.
+We thus assume in 1D that <span class="math notranslate nohighlight">\(h(0) = g(0) = 0\)</span> and express the Maclaurin expansion of <span class="math notranslate nohighlight">\(g\)</span> as
+<span class="math notranslate nohighlight">\(g(x) = g'(0) x + \mathcal{O}(x^2)\)</span>,
+which implies that the approximated PSF <span class="math notranslate nohighlight">\(\tilde{h}(x) = |g'(0)|^2 x^2\)</span> is a centered parabola.
+We aim to maximize
+the curvature coefficient <span class="math notranslate nohighlight">\(|g'(0)|^2\)</span> to maximize the excitation change for a change in the particle position.
+This heuristic was first introduced in the original MINFLUX paper <span id="id4">[<a class="reference internal" href="../../../index.html#id61" title="Francisco Balzarotti, Yvan Eilers, Klaus C. Gwosch, Arvid H. Gynnå, Volker Westphal, Fernando D. Stefani, Johan Elf, and Stefan W. Hell. Nanometer resolution imaging and tracking of fluorescent molecules with minimal photon fluxes. Science, 355(6325):606–612, Febuary 2017.">32</a>]</span>.</p>
+<section id="minflux-theoretical-optimality-half-moon-beam">
+<span id="id5"></span><h3>Half-Moon Beam<a class="headerlink" href="#minflux-theoretical-optimality-half-moon-beam" title="Link to this heading">¶</a></h3>
+<p>To extend to 2D the 1D Maclaurin approximation, we choose a direction defined by a unit vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span>.
+The directional gradient <span class="math notranslate nohighlight">\(D_\mathbf{n} g(\mathbf{r}) \in \mathbb{C}\)</span> of <span class="math notranslate nohighlight">\(g\)</span> along a
+given direction <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> at <span class="math notranslate nohighlight">\(\mathbf{r}=\mathbf{0}\)</span> is defined as</p>
+<div class="math-wrapper docutils container" id="equation-eq-directional-gradient">
+<div class="math notranslate nohighlight" id="equation-eq-directional-gradient">
+<span class="eqno">(139)<a class="headerlink" href="#equation-eq-directional-gradient" title="Link to this equation">¶</a></span>\[    D_\mathbf{n} g(\mathbf{0}) 
+        = \left(\underset{t \to 0}{\text{lim}}
+        \left.\frac{g(\mathbf{r} + t\mathbf{n}) - g(\mathbf{r})}{ t}\right)\right|_{\mathbf{r}=\mathbf{0}}. \]</div>
+</div>
+<p>From <a class="reference internal" href="#equation-eq-pupil-constraints">Eq. (138)</a> and the properties of Fourier transform,
+<a class="reference internal" href="#equation-eq-directional-gradient">Eq. (139)</a> can be expressed as</p>
+<div class="math-wrapper docutils container" id="equation-eq-directional-gradient-ft">
+<div class="math notranslate nohighlight" id="equation-eq-directional-gradient-ft">
+<span class="eqno">(140)<a class="headerlink" href="#equation-eq-directional-gradient-ft" title="Link to this equation">¶</a></span>\[\begin{split}    D_\mathbf{n} g(\mathbf{0}) 
+    &amp;= \mathcal{F}^{-1} \left\{\mathrm{j} (\mathbf{k} \cdot \mathbf{n})P(\mathbf{k}) \right\}(\mathbf{0}) \\
+    &amp;= \frac{\mathrm{j}}{2\pi}\iint_\Lambda P(\mathbf{k}) (\mathbf{k} \cdot \mathbf{n}) \mathrm{d} \mathbf{k}. \end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\cdot\)</span> denotes the scalar product between two vectors.
+Our aim is to find the pupil function <span class="math notranslate nohighlight">\(P\)</span> that maximizes the directional metric</p>
+<div class="math-wrapper docutils container" id="equation-eq-directional-metric">
+<div class="math notranslate nohighlight" id="equation-eq-directional-metric">
+<span class="eqno">(141)<a class="headerlink" href="#equation-eq-directional-metric" title="Link to this equation">¶</a></span>\[    m_\mathbf{n}(P) = \left|\iint_\Lambda P(\mathbf{k}) (\mathbf{k} \cdot \mathbf{n}) \mathrm{d} \mathbf{k}\right|^2.\]</div>
+</div>
+<p>Using the triangular inequality and <a class="reference internal" href="#equation-eq-pupil-constraints">Eq. (138)</a>, we have that</p>
+<div class="math-wrapper docutils container" id="equation-eq-half-moon-optimal-demonstration">
+<div class="math notranslate nohighlight" id="equation-eq-half-moon-optimal-demonstration">
+<span class="eqno">(142)<a class="headerlink" href="#equation-eq-half-moon-optimal-demonstration" title="Link to this equation">¶</a></span>\[\begin{split}    m_\mathbf{n}(P) &amp;
+    \leq \left(\iint_\Lambda \left| P(\mathbf{k}) (\mathbf{k} \cdot \mathbf{n}) \right|\mathrm{d}\mathbf{k} \right)^2 \\
+    &amp;= \left(\iint_\Lambda \left| P(\mathbf{k})\right| 
+        \left| (\mathbf{k} \cdot \mathbf{n}) \right|\mathrm{d}\mathbf{k} \right)^2 \\
+    &amp;= \left(\iint_\Lambda  \left| (\mathbf{k} \cdot \mathbf{n}) \right|\mathrm{d}\mathbf{k} \right)^2.\end{split}\]</div>
+</div>
+<p>Equality is achieved when <span class="math notranslate nohighlight">\(P(\mathbf{k}) (\mathbf{k} \cdot \mathbf{n}) = \mathrm{e}^{\mathrm{j} \alpha}\)</span>
+for a constant <span class="math notranslate nohighlight">\(\alpha\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{k} \in \Lambda\)</span>.
+This yields that
+<span class="math notranslate nohighlight">\(P(\mathbf{k}) = \mathrm{e}^{-\mathrm{j}\operatorname{Arg}(\mathbf{k} \cdot \mathbf{n}) + \alpha}\)</span>
+and corresponds to a half-moon pupil function as depicted in <a class="reference internal" href="#fig-projected-power-iterations-result"><span class="std std-numref">Fig. 53</span></a> (b).
+This half-moon pupil function is characterized by a <span class="math notranslate nohighlight">\(\pi\)</span>-phase jump between the two half disks.
+It yields the optimal PSF that maximizes the gradient of the electric field in a single direction.</p>
+<p>If one wants to minimize a single-directional gradient norm, the optimal pupil function corresponds to
+a half-moon PSF.
+This supports the result of our CRB optimization as we obtain two PSFs that maximize gradients
+along orthogonal directions to solve our 2D localization-estimation problem.</p>
+<figure class="align-default" id="fig-projected-power-iterations-result">
+<a class="reference internal image-reference" href="../../../_images/minflux_math_result.png"><img alt="../../../_images/minflux_math_result.png" src="../../../_images/minflux_math_result.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Numerical results of the projected power iterations.
+(a)-(b): Initial guess (a) and final outcome (b) of the pupil of optimization for a single given direction
+<span class="math notranslate nohighlight">\((\mathbf{n}=(1, 0))\)</span>.
+(c)-(d): Initial guess (c) and final outcome (d) of the pupil of optimization averaged over all directions on
+the unit circle.
+Both initial guesses (a) and (c) are random phase masks with values between <span class="math notranslate nohighlight">\(((-\pi))\)</span> and <span class="math notranslate nohighlight">\((\pi)\)</span>.</span><a class="headerlink" href="#fig-projected-power-iterations-result" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="minflux-theoretical-optimality-donut-beam">
+<span id="id6"></span><h3>Donut Beam<a class="headerlink" href="#minflux-theoretical-optimality-donut-beam" title="Link to this heading">¶</a></h3>
+<p>Another desirable metric to optimize is the isotropic version of <span class="math notranslate nohighlight">\(m_\mathbf{n}\)</span>, averaging over all directions
+<span class="math notranslate nohighlight">\(\mathbf{n}\)</span> on the unit circle <span class="math notranslate nohighlight">\(O\)</span>. This metric is</p>
+<div class="math-wrapper docutils container" id="equation-eq-isotropic-metric">
+<div class="math notranslate nohighlight" id="equation-eq-isotropic-metric">
+<span class="eqno">(143)<a class="headerlink" href="#equation-eq-isotropic-metric" title="Link to this equation">¶</a></span>\[    m_O(P) = \int_O \left|\iint_\Lambda P(\mathbf{k}) (\mathbf{k} \cdot \mathbf{n}) \mathrm{d} \mathbf{k}\right|^2
+    \mathrm{d} \mathbf{n}.\]</div>
+</div>
+<p>This expression is less straightforward to maximize.
+Still, we can reformulate it as a quadratic-programming problem in the Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> of
+compactly supported functions <span class="math notranslate nohighlight">\(f: \Lambda \rightarrow \mathbb{C}\)</span> with the Hermitian product
+<span class="math notranslate nohighlight">\(\langle f^\mathrm{H}, g\rangle = \iint_\Lambda f^*(\mathbf{k}) g(\mathbf{k})\mathrm{d}\mathbf{k}\)</span>.
+For convenience, we will denote by <span class="math notranslate nohighlight">\(p \in \mathcal{H}\)</span> the pupil function and, for any unit vector
+<span class="math notranslate nohighlight">\(\mathbf{n}\)</span>, <span class="math notranslate nohighlight">\(k_\mathbf{n} \in \mathcal{H}\)</span> as</p>
+<div class="math-wrapper docutils container" id="equation-eq-def-k-scalar-n-hilbert">
+<div class="math notranslate nohighlight" id="equation-eq-def-k-scalar-n-hilbert">
+<span class="eqno">(144)<a class="headerlink" href="#equation-eq-def-k-scalar-n-hilbert" title="Link to this equation">¶</a></span>\[    k_\mathbf{n}: \mathbf{k} \rightarrow (\mathbf{k} \cdot \mathbf{n})^*.\]</div>
+</div>
+<p>The metric to optimize can be rewritten as</p>
+<div class="math-wrapper docutils container" id="equation-eq-exchange-operator-place">
+<div class="math notranslate nohighlight" id="equation-eq-exchange-operator-place">
+<span class="eqno">(145)<a class="headerlink" href="#equation-eq-exchange-operator-place" title="Link to this equation">¶</a></span>\[\begin{split}    m_O(P) 
+    &amp;= \int_O |k_\mathbf{n}^\mathrm{H} p|^2 \mathrm{d}\mathbf{n} \\
+    &amp;= \int_O p^\mathrm{H} k_\mathbf{n} k_\mathbf{n}^\mathrm{H} p \mathrm{d}\mathbf{n} \\     
+    &amp;= p^\mathrm{H} \left(\int_O k_\mathbf{n} k_\mathbf{n}^\mathrm{H} \mathrm{d}\mathbf{n}\right) p  \\
+    &amp;= p^\mathrm{H} K p,\end{split}\]</div>
+</div>
+<p>where we have introduced the symmetric linear operator
+<span class="math notranslate nohighlight">\(K = \int_O k_\mathbf{n} k_\mathbf{n}^\mathrm{H} \mathrm{d}\mathbf{n}\)</span>,
+operating in the Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>.
+To obtain <a class="reference internal" href="#equation-eq-exchange-operator-place">Eq. (145)</a>, the reordering of the integrals is legitimated by the compact support of functions in
+<span class="math notranslate nohighlight">\(\mathcal{H}\)</span>.</p>
+<p>Hence, we want to maximize this quadratic form over the set of pupil functions <span class="math notranslate nohighlight">\(p \in \mathcal{H}\)</span>
+with the unit element-wise norm constraint of <a class="reference internal" href="#equation-eq-pupil-constraints">Eq. (138)</a>. We compute the solution numerically
+using projected power iterations as</p>
+<div class="math-wrapper docutils container" id="equation-eq-projected-power-iterations">
+<div class="math notranslate nohighlight" id="equation-eq-projected-power-iterations">
+<span class="eqno">(146)<a class="headerlink" href="#equation-eq-projected-power-iterations" title="Link to this equation">¶</a></span>\[\begin{split}    \begin{cases}
+        p_0 : \mathbf{k} \rightarrow 1, \\
+        p_{i+1} = \text{Proj}( K p_i ), \text{ for } i = 0, 1, \ldots.
+    \end{cases}\end{split}\]</div>
+</div>
+<p>with the projector on the constraint set defined as:</p>
+<div class="math-wrapper docutils container" id="equation-eq-projector-definition">
+<div class="math notranslate nohighlight" id="equation-eq-projector-definition">
+<span class="eqno">(147)<a class="headerlink" href="#equation-eq-projector-definition" title="Link to this equation">¶</a></span>\[\begin{split}    \text{Proj}(f): \mathbf{k} \rightarrow \begin{cases}
+        \frac{f(\mathbf{k})}{|f(\mathbf{k})|}, \quad &amp; f(\mathbf{k}) \neq 0 \\
+        1, \quad &amp; \text{ otherwise.}
+    \end{cases}\end{split}\]</div>
+</div>
+<p>We see in <a class="reference internal" href="#fig-projected-power-iterations-result"><span class="std std-numref">Fig. 53</span></a> (b) the results of these power iterations.
+They yield the phase ramp phase characteristics of the donut PSF.
+The integral over <span class="math notranslate nohighlight">\(\mathbf{n} \in O\)</span> is discretized uniformly over the unit circle with 100 terms.
+The pupil function <span class="math notranslate nohighlight">\(p \in \mathcal{H}\)</span> is discretized over a uniform grid for <span class="math notranslate nohighlight">\((k_\text{x}, k_\text{y})\)</span>,
+as a <span class="math notranslate nohighlight">\((2048\times2048)\)</span> px image.
+A total of 100 power iterations is performed.</p>
+<p>The projected power iterations employed for our complex-valued quadratic-programming problem with quadratic
+constraints lack theoretical convergence guarantees.
+Similar formulations arise in other applications, such as electromagnetic beamforming <span id="id7">[<a class="reference internal" href="../../../index.html#id91" title="Chenying He, Zhengyi Zhan, Chuankang Li, Xiaofan Sun, Yong Liu, Cuifang Kuang, and Xu Liu. Effects of Optical Aberrations on Localization of Minflux Super-Resolution Microscopy. SSRN Electronic Journal, 2022.">205</a>]</span>.
+However, by repeating the power iterations with different initial guesses,
+the donut pupil function consistently emerges as the solution, which demonstrates its robustness.</p>
+<p>If one wants to minimize the directional derivative norm averaged along all directions,
+the optimal pupil function corresponds to a donut PSF.
+This supports the result of our CRB optimization as we obtain the donut PSF when only a single shifted PSF is allowed.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="summary.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Summary</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="implementation.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Implementation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Results</a><ul>
+<li><a class="reference internal" href="#numerical-optimality">Numerical Optimality</a><ul>
+<li><a class="reference internal" href="#donut-beam">Donut Beam</a></li>
+<li><a class="reference internal" href="#half-moon-beam">Half-Moon Beam</a></li>
+<li><a class="reference internal" href="#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#theoretical-analysis-of-the-optimality">Theoretical Analysis of the Optimality</a><ul>
+<li><a class="reference internal" href="#minflux-theoretical-optimality-half-moon-beam">Half-Moon Beam</a></li>
+<li><a class="reference internal" href="#minflux-theoretical-optimality-donut-beam">Donut Beam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

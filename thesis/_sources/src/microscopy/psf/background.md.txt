@@ -1,0 +1,120 @@
+(psf-background)=
+# Background
+
+In the previous section, we have seen that the point spread function plays a key role in the localization precision of
+MINFLUX.
+In the broader context of localization microscopy, besides PSF engineering, the characterization of PSF is crucial
+for many applications such as image deconvolution.
+While it is possible to directly measure the PSF, this approach is time-consuming and
+specific to one particular microscope.
+In practice, a theoretical model to compute an approximate PSF given the specifications of a microscope is beneficial
+and necessary.
+In this part, we focus on the precise modeling and computation of PSFs.
+
+## Overview of PSF for Microscopy
+
+Monitoring and assessment of point psread functions have been longstanding routines for microscopy,
+supported by the development of specific tools {cite:p}`matthews2010metroloj, theer2014psfj, miora2024calculating`
+and the creation of a consortium to standardize best practices {cite:p}`nelson2022monitoring`.
+A detailed characterization of the PSF is essential to the design of computational imaging processes
+such as single-molecule localization microscopy {cite:p}`lelek2021single` and
+super-resolution microscopy, including 3D deconvolution microscopy {cite:p}`sibarita2005deconvolution,
+sage2017deconvolutionlab2`, structured illumination microscopy
+{cite:p}`heintzmann1999laterally, gustafsson2000surpassing`,
+fluctuation microscopy {cite:p}`dertinger2009fast,stergiopoulou_col0rme_2022`,
+STED {cite:p}`hell_far-field_2007`,
+and MINFLUX {cite:p}`balzarotti_nanometer_2017` that we have shown in the previous part.
+
+Computational PSF models have often been applied in fluorescence microscopy.
+For example, the fitting of a theoretical PSF to a measured one can improve accuracy
+{cite:p}`kirshner20133, li2018real`.
+Detailed models enable the quantification of the 3D uncertainty {cite:p}`dong2021fundamental`,
+while the engineering of PSFs may take full advantage of parametric models
+{cite:p}`shechtman_optimal_2014, opatovski2024depth, liu_point_2015`.
+They are a key component of high-quality single-molecule localization microscopy (SMLM) images
+{cite:p}`sinko2014teststorm, sage2015quantitative`,
+including single-particle tracking {cite:p}`wieser2008tracking, shen2017single`
+and virtual SMLM microscopes {cite:p}`bourgeois2023single`.
+
+The PSF can be measured experimentally from a z-stack of tiny fluorescent beads
+{cite:p}`sibarita2005deconvolution, marin2021pymevisualize`.
+However, a theoretical PSF is often required.
+Here, the challenge lies in the accurate model of light propagation for imaging systems with high numerical aperture
+(NA).
+Detailed models have been proposed {cite:p}`richards1959electromagnetic, leutenegger_fast_2006, aguet2009super,
+Novotny_Hecht_2012` to
+
+- go beyond simple paraxial approximations,
+- take into account the vectorial nature of the electric field, and
+- include various aberration factors such as the Gibson-Lanni aberrations due to refraction at planar interfaces {cite:p}`Gibson:92`.
+
+Several software packages have been developed to generate precise theoretical 3D PSFs that include various
+features and aberrations.
+Among these, the Huygens PSF software {cite:p}`huygens-software` is well-known in the microscopic community,
+and the Java-based ImageJ/FIJI plugin, PSF Generator {cite:p}`kirshner20133`,
+has also been widely used.
+Other open-source alternatives include MATLAB-based solutions {cite:p}`nasse2010realistic,miora2024calculating,
+schneider2024interactive` as well as Python-based tools {cite:p}`caprile2022pyfocus, prigent2023spitfir`.
+
+## State of the Art
+
+Electromagnetic waves in optical systems are fundamentally described by the Helmholtz wave equations,
+yet solving these equations in full generality is computationally intractable.
+Various approximations and integral formulations have thus been developed.
+The cornerstone for precise PSF models in high-NA systems is the Richards-Wolf integral
+{cite:p}`richards1959electromagnetic`,
+which can be viewed as a vectorial extension of the Debye integral {cite:p}`debye1908lichtdruck`.
+The conditions of validity for the Richards-Wolf integral have been thoroughly discussed in
+{cite:p}`wolf1981conditions`.
+While alternative light propagation models exist,
+the Huygens-Fresnel approach has been shown to be equivalent,
+to some extent, for PSF calculations {cite:p}`egner1999equivalence`.
+
+This has been the basis of a line of work for PSF models based on Bessel functions,
+which we will later refer to as the spherical parametrization of the Richards-Wolf integral.
+This approach includes simpler formulations such as the Kirchhoff model and
+more sophisticated vectorial representations {cite:p}`aguet2009super, Novotny_Hecht_2012`.
+These models have progressively been refined by incorporating various correction factors
+to account for additional physical processes:
+- the Gibson-Lanni model for spherical aberrations due to refractive index mismatch {cite:p}`Gibson:92`
+(later generalized in {cite:p}`torok1995electromagnetic,torok1997electromagnetic`),
+- apodization factors for energy conservation {cite:p}`richards1959electromagnetic`, and
+- Fresnel transmission coefficients for accurate interface modeling {cite:p}`aguet2009super`.
+
+Models using this spherical parametrization have been implemented in various software libraries in Java
+{cite:p}`kirshner20133` and Python {cite:p}`caprile2022pyfocus`,
+which makes it widely accessible to researchers,
+albeit with some limitations in computational efficiency and integration with deep-learning frameworks.
+
+Another line of work on PSF modeling is based on Fourier transforms,
+both in scalar {cite:p}`goodman_introduction_2017` and
+vectorial {cite:p}`leutenegger_fast_2006` formulations.
+These models are based on a Cartesian parametrization of the underlying Richards-Wolf integral,
+and they represent a more general counterpart of the spherical parametrization.
+Recently, these high-NA Fourier models have been implemented in MATLAB {cite:p}`miora2024calculating`
+and Tensorflow as part of a PSF-fitting library {cite:p}`liu2024universal`.
+Adequate sampling of the Fourier transform is crucial for obtaining high-resolution PSFs and avoiding aliasing.
+A common trick based on the chirp Z transform is usually implemented to achieve it
+{cite:p}`leutenegger_fast_2006, miora2024calculating, liu_point_2015`, as we have seen in
+section [](#minflux-zoomfft) of [](#chapter-minflux).
+
+## Motivation and Contribution
+
+Different models have been proposed based on 2D Fourier transforms or 1D Bessel integrals.
+The most precise ones combine a vectorial description of the electric field and precise aberration models.
+However, it may be unclear which model to choose as there is no comprehensive comparison between the
+Fourier and Bessel approaches yet.
+Moreover, many existing libraries are written in Java (e.g., the existing PSF generator) or MATLAB,
+which hinders their integration into deep-learning algorithms.
+
+In this section, we start from the original Richards-Wolf integral and revisit both approaches systematically.
+We present a unifying framework in which we prove the equivalence between the Fourier and Bessel strategies and
+detail a variety of correction factors applicable to both of them.
+Then, we provide a high-performance implementation of our theoretical framework in the form of an open-source
+library that is built on top of PyTorch, a popular library for deep learning.
+It enables us to benchmark the accuracy and computational speed of different models and allows for an in-depth
+comparison of existing models for the first time.
+We show that the Bessel strategy is optimal for axisymmetric beams, while the Fourier approach can be applied to
+more general scenarios.
+Our work enables the efficient computation of a point spread function on CPU or GPU, which can then be included
+in simulation and optimization pipelines.

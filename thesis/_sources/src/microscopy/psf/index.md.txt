@@ -1,0 +1,27 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(chapter-psf)=
+# A Unifying Framework for the Computation of Point Spread Functions
+
+```{note}
+This section is based on the following publication:
+
+Y. Liu, V. Stergiopoulou, J. Chuah, E. Bezzam, G.-J. Both, M. Unser, D. Sage,
+and J. Dong.
+"Revisiting PSF models: Unifying framework and high‐performance implementation,"
+_Journal of Microscopy_, 1-13, (2025).
+```
+
+```{toctree}
+:maxdepth: 2
+
+background.md
+theory.md
+implementation.md
+results.md
+summary.md
+```

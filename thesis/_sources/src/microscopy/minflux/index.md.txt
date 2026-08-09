@@ -1,0 +1,30 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(chapter-minflux)=
+# Optimal Excitation Patterns in MINFLUX via PSF Engineering
+
+```{note}
+This section is based on the following publication:
+
+Y. Liu, J. Dong, J. Augusto Maya, F. Balzarotti, and M. Unser,
+"Point-spread-function engineering in MINFLUX: Optimality of donut and half-moon excitation patterns,"
+_Optics Letters_ 50, 37 (2025).
+
+It is a collaboration with the
+[Vienna BioCenter](https://www.imp.ac.at/groups/francisco-balzarotti).
+```
+
+```{toctree}
+:maxdepth: 2
+
+background.md
+theory.md
+implementation.md
+results.md
+summary.md
+
+```

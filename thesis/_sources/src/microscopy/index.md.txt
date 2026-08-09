@@ -1,0 +1,23 @@
+(lm-chapter)=
+# Engineering of Point Spread Functions for Localization Microscopy
+
+```{note}
+This chapter is based on the following publications:
+
+- Y. Liu, J. Dong, J. Augusto Maya, F. Balzarotti, and M. Unser,
+"Point-spread-function engineering in MINFLUX: Optimality of donut and half-moon excitation patterns,"
+_Optics Letters_ 50, 37 (2025).
+
+- Y. Liu, V. Stergiopoulou, J. Chuah, E. Bezzam, G.-J. Both, M. Unser, D. Sage,
+and J. Dong.
+"Revisiting PSF models: Unifying framework and high‐performance implementation,"
+_Journal of Microscopy_, 1-13, (2025).
+```
+
+```{toctree}
+:maxdepth: 2
+
+introduction.md
+minflux/index.md
+psf/index.md
+```

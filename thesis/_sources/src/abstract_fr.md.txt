@@ -1,0 +1,42 @@
+# Résumé
+
+À l’intersection de l’imagerie computationnelle et de l’optique biomédicale, cette thèse
+combine des modèles physiques précis et des méthodes computationnelles pour résoudre
+des problèmes inverses en imagerie optique.
+Nous nous concentrons sur trois modalités d’imagerie où nous repoussons les limites en termes de profondeur d’imagerie
+et de résolution spatiale :
+la tomographie optique par projection (OPT) ;
+l’imagerie photoacoustique (PAI) ;
+et la microscopie de localisation de molécules uniques (SMLM).
+L’OPT et la PAI surmontent la limite de diffusion pour imager plus en profondeur, tandis que
+la SMLM brise la limite de diffraction pour obtenir la superrésolution.
+
+La première modalité, l’OPT, produit des images 3D haute résolution d’échantillons allant du millimètre au centimètre,
+mais la qualité des images est sensible
+aux déviations entre le modèle et le dispositif expérimental.
+Nous proposons des modèles mathématiques précis,
+ainsi que des algorithmes de calibration et de reconstruction efficaces du point de vue computationnel.
+Ce travail aide les praticiens de l’OPT à améliorer la résolution de leurs images en
+identifiant l’origine de leurs artéfacts et en les corrigeant.
+
+La deuxième modalité, la PAI, combine l’excitation optique et la détection acoustique.
+Elle repose sur le marquage des rapporteurs protéiques photocommutables pour réaliser la
+détection synchrone à haute spécificité de ces marqueurs, à des profondeurs millimétriques.
+Nous proposons un modèle mathématique détaillé de l’évolution des signaux détectés.
+Il nous permet de développer un algorithme de séparation basé sur la régularisation parcimonieuse
+pour retrouver les cartes de concentration des protéines directement à partir des mesures acoustiques.
+
+Enfin, la SMLM permet la localisation de molécules avec une résolution nanométrique.
+Dans ce contexte, la conception soignée et la modélisation précise de la fonction d’étalement du point (PSF)
+sont essentielles pour de nombreuses applications.
+Nous présentons d’abord une chaîne d’optimisation rapide et peu coûteuse
+pour trouver les motifs d’illumination qui atteignent la meilleure précision de localisation pour MINFLUX, une technique SMLM récente basée sur des modèles d'excitation soigneusement conçus.
+Ensuite, nous proposons un cadre unificateur pour les modèles de PSF vectoriels à haute ouverture numérique et une
+implémentation haute performance sous la forme d’une bibliothèque open source, _PSF Generator_.
+
+En résumé, cette thèse montre comment des modèles rigoureux, des algorithmes adaptés et une implémentation efficace sont fondamentaux pour l’amélioration de la qualité d’image
+dans les techniques d’imagerie optique.
+
+Mots-clés : optique biomédicale, imagerie optique, imagerie computationnelle, problèmes inverses, optimisation,
+tomographie optique par projection, imagerie photoacoustique, mésoscopie photoacoustique, photocommutation, MINFLUX,
+microscopie de localisation de molécules uniques, fonction d’étalement du point, open source

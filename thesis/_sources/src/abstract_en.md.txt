@@ -1,0 +1,39 @@
+# Abstract
+
+At the intersection of computational imaging and biomedical optics, this thesis
+applies physics-based modeling and computational methods to solve
+inverse problems in optical imaging.
+We focus on three representative imaging modalities where we push the limits of imaging depth and spatial resolution:
+optical projection tomography (OPT); photoacoustic imaging (PAI); and single-molecule localization microscopy (SMLM).
+OPT and PAI overcome the diffusion limit to enable greater imaging depths, while
+SMLM breaks the diffraction limit to achieve super-resolution.
+
+The first modality, OPT, produces high-resolution 3D images of samples ranging from millimeter to centimeters,
+but the quality of images is sensitive
+to mismatches between the model and experimental setup.
+We propose refined mathematical models,
+along with computationally efficient calibration and reconstruction algorithms.
+This work helps OPT practitioners to improve the resolution of their images by
+identifying the root of their artifacts and correcting them.
+
+The second modality, PAI, combines optical excitation and acoustic detection.
+It relies on the labeling of photo-switching protein reporters to achieve
+high-specificity lock-in detection of these labels, at millimeter depth.
+We propose a detailed mathematical model of the evolution of the detected signals.
+It allows us to develop an unmixing algorithm based on sparse regularization
+to retrieve concentration maps of the proteins directly from acoustic measurements.
+
+Finally, SMLM enables localization of molecules at nanometer resolution.
+There, careful design and accurate modeling of the point spread function (PSF) are important to many applications.
+We first present a fast and low-cost optimization pipeline
+to investigate illumination profiles that achieve the best localization precision for MINFLUX, a recent SMLM technique
+based on carefully engineered excitation patterns.
+Then, we propose a unifying framework for high-numerical-aperture vectorial PSF models and an efficient
+implementation as an open-source library, _PSF Generator_.
+
+In summary, this thesis demonstrates that rigorous models, tailored algorithms, and efficient implementation
+are fundamental for the improvement of the image quality in optical imaging techniques.
+
+**Keywords**: biomedical optics, optical imaging, computational imaging, inverse problems, optimization,
+optical projection tomography, photoacoustic tomography, photoacoustic mesoscopy, photo-switching, MINFLUX,
+single-molecule localization microscopy, point spread function, open source

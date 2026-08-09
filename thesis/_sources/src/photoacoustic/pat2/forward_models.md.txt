@@ -1,0 +1,463 @@
+(pat2-forward-pipeline)=
+# Forward Models: from Concentration Maps to Acoustic Signals
+
+(pat2-photo-switching-model)=
+## Photo-Switching Model
+
+We carry out our modeling on a 2D sample during one OFF-switching cycle.
+We define the sample to be imaged as a function of spatial locations {math}`\mathbf{r}=(x, z)\in\mathbb{R}^2`
+with a compact support {math}`\Omega\subset\mathbb{R}^2`.
+The forward model of photo-switching has been previously derived in section [](#pat1-modeling), and
+we briefly recall it here
+```{math}
+:label: eq:final-H-pat2
+    H(\mathbf{r}, t) = 
+    \Phi(\mathbf{r})\left(\sum_{p=1}^{P}
+    \left(\overline{\varepsilon}_p
+    \text{e}^{-k_p\Phi(\mathbf{r})t} +
+    \varepsilon_p^{\text{OFF}}\right)
+    c_p(\mathbf{r})\right),
+```
+where {math}`c_p(\mathbf{r})` is the spatial distribution map of the {math}`p`th species and the unknown quantity that
+we are interested in.
+The non-switching background is included in {eq}`eq:final-H-pat2` as the {math}`P`th reporter with {math}`k_P=0` and
+{math}`\overline{\varepsilon}_P=0`.
+
+(pat2-optical-model)=
+## Optical Model
+
+We precompute the fluence map {math}`\Phi^0(\mathbf{r})` without the contribution of the reporters
+and assume that {math}`\Phi(\mathbf{r}) \approx \Phi^0(\mathbf{r})`, similar to the case for PAT.
+Illumination is wide-field and can be assumed homogeneous when it reaches the sample surface.
+We model it with a function {math}`S(\mathbf{r})`
+that describes a line segment with center {math}`\mathbf{r}_c = (x_c, 0)`, of length {math}`W>0` and
+uniform intensity {math}`I_0>0`
+```{math}
+    :label: eq:light-source-pat2
+    S(\mathbf{r}) = \left\{
+        \begin{array}{ll}
+        I_0, & \text{if } |x-x_c|<\frac{W}{2}\\
+        0, & \text{else}.
+        \end{array}
+    \right.
+```
+
+We set the absorption coefficient map {math}`\mu_a(\mathbf{r})` and scattering coefficient map {math}`\mu_s(\mathbf{r})`
+the same as the counterparts of the nonswitching background because we assume the contribution from reporters
+to be negligible.
+The reduced scattering coefficient {math}`\mu_s'(\mathbf{r})` is defined as
+```{math}
+:label: eq:def-of-mu_s'
+\mu_s'(\mathbf{r}) = (1-g)\mu_s(\mathbf{r}),
+```
+where the anisotropy factor {math}`g\in(0, 1)` is set to a typical value of {math}`0.9`.
+Following a similar approach to section [](#pat-compute-fluence) in the previous part, we solve the pair of equations
+{eq}`eq:de` and {eq}`eq:bc` combined with the illumination in {eq}`eq:light-source-pat2`,
+to obtain a map of the fluence distribution within the sample which we use to construct the forward model
+{eq}`eq:final-H-pat2` for photo-switching PAM.
+
+(pat2-pa-effect)=
+## Photoacoustic Effect
+
+The deposited optical energy {math}`H` absorbed by the tissue leads to a local rise in temperature.
+It causes a thermo-elastic expansion of the tissue and produces acoustic waves that propagate through the sample.
+The detector on the sample surface records acoustic waves as measurements.
+
+Because acoustic propagation and detection is independent for each pulse and its mathematical model takes the
+same form, we there from omit the notation {math}`t` in the modeling of a single acoustic process for simplicity.
+The generated initial pressure (acoustic) field {math}`b(\mathbf{r})` is proportional to the optical energy such that
+```{math}
+:label: eq:pa-effect
+    b(\mathbf{r}) = \iota(\mathbf{r}) H(\mathbf{r}),
+```
+where {math}`\iota(\mathbf{r})` is the unitless Grueneisen coefficient.
+It indicates the efficiency of conversion between heat and pressure,
+and we assume it to be constant and set its value to 1 for simplicity
+{cite:p}`haltmeier_single-stage_2015, javaherian_direct_2019`.
+
+(pat2-acoustic-model)=
+## Acoustic Model
+
+```{figure} images/spr.*
+:name: fig:acoustic-signal-generation
+:width: 80%
+
+(a) Spatial response of the transducer.
+Blue area represents the sensitivity field of the transducer.
+Dots represent the center of the transducer (T),
+the focal spot (F) and a point PA source (M).
+(b)-(f) Illustration of the generation of acoustic signals.
+SPR: spatial response of the transducer.
+EIR: electrical impulse response of the transducer.
+(b) and (b'): Sample.
+Background is in gray, green and orange discs represent two photoswitching reporters.
+Dashed horizontal red line represents location of the focal plane.
+Dashed gray lines in (b) and (b') indicate the horizontal line of pixels of interest, one above (b) and
+one below (b') the focal plane.
+(c) and (c'): Masked SPR, i.e. map of the weighted curves that corresponds to the depth of interest in (b) and (b'),
+ respectively.
+(d) and (d'): Outcome of the convolution between the sample and the masked SPR (c) and (c').
+Focal plane (red dash line) indicates where to extract the line of pixels.
+(e) Outcome of the spatial integration step by stacking the extracted lines at the corresponding locations indicated
+in (b) and (b').
+The narrow vertical box indicates a line of pixels on which we filter with the EIR of the transducer (f).
+```
+
+During one acoustic process, ultrasonic waves originating from sources within the sample propagate through
+the sample and are detected by the transducer array on the sample surface.
+We assume a constant speed of sound {math}`c_0` and an acoustically homogeneous and non-attenuating medium.
+We denote by {math}`\tau` the acoustic propagation time (microsecond scale, propagation of sound over a few millimeters)
+to distinguish it from the switching time {math}`t` (millisecond scale, repetition rate of the laser).
+
+Following the principles of SAFT, we assume
+that signal from the focal point arrives at the same time on all the area of the transducer element,
+owing to its parabolic geometry,
+Therefore, we use the focal spot as a reference and propagate back to it.
+We denote the transducer position by {math}`\mathbf{r}_{\text{T}}=(x_{\text{T}}, 0)`,
+the focal length by a constant {math}`f>0`, and location of the focal spot by
+{math}`\mathbf{r}_{\text{F}}=(x_{\text{T}}, z_{\text{F}})`.
+The detected signal {math}`q(x_{\text{T}}, \tau)` on the transducer at time {math}`\tau`,
+comes from the contributions of all the point sources
+lying on the (upper) semicircle
+{math}`C_1^{(x_{\text{T}}, \tau)} = \left\{ \mathbf{r} : |\mathbf{r} - \mathbf{r}_{\text{F}}| =
+f - c_0\tau, z<z_{\text{F}} \right\}` centered at
+{math}`\mathbf{r}_{\text{F}}` with radius {math}`(f-c_0\tau)` when {math}`c_0\tau < f`,
+and on another (lower) semicircle
+{math}`C_2^{(x_{\text{T}}, \tau)} = \left\{ \mathbf{r} : |\mathbf{r} - \mathbf{r}_{\text{F}}| =
+c_0\tau - f, z>z_{\text{F}} \right\}` when {math}`c_0\tau > f`.
+At the focal spot {math}`\mathbf{r}_\text{F}`, i.e., when {math}`c_0\tau=f`,
+{math}`q` is defined directly as {math}`b(\mathbf{r}_\text{F})`.
+Further, we take into account the influence of the sensitivity of the transducer,
+described by its (shifted) spatial response function {math}`h(\mathbf{r} - \mathbf{r}_{\text{T}})`
+at the location {math}`\mathbf{r}` of the point source (see {numref}`fig:acoustic-signal-generation` (a)).
+Hence, we integrate the weighted amplitude {math}`b(\mathbf{r})h(\mathbf{r} - \mathbf{r}_{\text{T}})`
+on {math}`C_1^{(x_{\text{T}}, \tau)}` when {math}`c_0\tau < f` as
+```{math}
+:label: eq:q-above-1d
+    q(x_{\text{T}}, \tau) = \int_{C_1^{(x_{\text{T}}, \tau)}}
+    b(\mathbf{r})h(\mathbf{r} - \mathbf{r}_{\text{T}}) \text{d}s,
+```
+and on {math}`C_2^{(x_{\text{T}}, \tau)}` when {math}`c_0\tau > f` as
+```{math}
+:label: eq:q-below-1d
+    q(x_{\text{T}}, \tau) = \int_{C_2^{(x_{\text{T}}, \tau)}}
+    b(\mathbf{r})h(\mathbf{r} - \mathbf{r}_{\text{T}}) \text{d}s,
+```
+where {math}`\text{d}s` is the 1D arc-length element.
+We denote {math}`r_\tau=f-c_0\tau` for the sake of simplicity.
+
+By representing the 1D line integral as a constrained 2D integral via a Dirac delta function,
+we formulate  {eq}`eq:q-above-1d` equivalently as
+```{math}
+:label: eq:q-above-2d
+    q(x_{\text{T}}, \tau) = 
+    \int_{\mathbb{R}}\text{d}x \int_{-\infty}^{z_{\text{F}}}\text{d}z \;
+    b(x, z)  h(x - x_{\text{T}}, z - z_{\text{F}})
+    \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 - r_\tau^2 \right) (2r_\tau),
+```
+where {math}`2r_\tau` represents the Jacobian correction to account for the change of variables in the Dirac delta function.
+Similarly, for  {eq}`eq:q-below-1d`, we obtain
+```{math}
+    :label: eq:q-below-2d
+    q(x_{\text{T}}, \tau) = 
+    \int_{\mathbb{R}}\text{d}x \int_{z_{\text{F}}}^{\infty}\text{d}z \;
+    b(x, z) h(x - x_{\text{T}}, z - z_{\text{F}})
+    \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 - r_\tau^2 \right) (2r_\tau).
+```
+
+Next, we take into account the electrical impulse response {math}`v(\tau)` of the transducer
+and model its effect as the temporal convolution of {math}`q(x_{\text{T}}, \tau)` with {math}`v(\tau)`
+```{math}
+    :label: eq:acoustic-temporal-conv
+    p(x_{\text{T}}, \tau) = \int_{\mathbb{R}} q(x_{\text{T}}, \tau')  v(\tau - \tau') \text{d}\tau',
+```
+where {math}`p(x_{\text{T}}, \tau)` is the noise-free acoustic signal detected on the transducer.
+
+(pat2-pull-forward)=
+## Full Forward
+
+Putting every piece of the puzzle together, we have the full forward process of photo-switching PAM
+as shown in {numref}`fig:pat2-full-pipeline`.
+
+```{figure} images/full_pipeline.*
+:name: fig:pat2-full-pipeline
+:width: 100%
+
+Forward pipeline and inversion approaches.
+Solid and dashed arrows represent forward and inversion processes, respectively.
+```
+This pipeline takes concentration maps as input, enters them in the multiplexing module where
+the optical process is applied {math}`N` times for {math}`N` photo-switching pulses
+to obtain a stack of {math}`N` PA images.
+These images are fed to the acoustic module where an acoustic detection process is applied to each of them.
+The final output is a stack of acoustic images (measurements).
+The goal of unmixing is to recover unknown concentration maps.
+
+There are two ways to accomplish this (see {numref}`fig:pat2-full-pipeline`).
+A commonly adopted approach is two-step unmixing.
+One first reconstructs the PA images by solving an inverse problem involving the acoustic process;
+then, one apply an unmixing algorithm on them.
+An alternative approach is to solve a global inverse problem that recovers concentration maps
+directly from acoustic measurements.
+These two approaches will be detailed in [](#pat2-inverse-problem).
+
+(pat2-numerical-implementation)=
+# Numerical Implementation
+
+We discretize the 2D object domain {math}`\Omega` into a collection of points
+{math}`\Delta\boldsymbol{i} = (\Delta_1 i_1, \Delta_2 i_2)`,
+where {math}`\boldsymbol{i} = (i_1, i_2) \in \Omega_{\text{2D}}\subset \mathbb{Z}^2` is the index of sampled points,
+{math}`i_1 = 0, \ldots, L_\text{x} - 1`, and {math}`i_2=0, \ldots, L_\text{z} - 1`.
+The diagonal matrix {math}`\Delta = \text{diag}\left\{\Delta_1, \Delta_2\right\}`
+defines the stepsize {math}`\Delta_1` and {math}`\Delta_2` for the lateral and axial direction, respectively.
+Switching time {math}`t` is sampled at {math}`N` pulses such that {math}`t_n = \Delta_{\text{t}} n`,
+{math}`n=0, \ldots, N-1`, with {math}`\Delta_{\text{t}}` the temporal stepsize which is determined
+by the laser repetition rate during switching.
+
+(pat2-discrete-photo-switching-model)=
+## Discrete Photo-Switching Model
+
+The discretization of {eq}`eq:final-H-pat2` follows the same procedure as in [](#pat1-forward-model-discrete).
+We briefly recall the equation here for completeness:
+```{math}
+\mathbf{H} = \mathbf{S}\mathbf{c},
+```
+with the deposited energy vector {math}`\mathbf{H} \in \mathbb{R}^{NL}`,
+concentration maps {math}`\mathbf{c} \in \mathbb{R}^{PL}`,
+and the pooled system matrix {math}`\mathbf{S} \in \mathbb{R}^{NL \times PL}`.
+
+We compute the fluence map by applying the finite element method to
+the diffusion equation {eq}`eq:de` with the boundary condition {eq}`eq:bc` and the light source defined in
+{eq}`eq:light-source-pat2` and by following the same methodology described in
+[](#pat1-diffusion-equation-implementation).
+
+(pat2-discrete-acoustic-model)=
+## Discrete Acoustic Model
+
+Implementation of the acoustic model lies in the discretization of
+{eq}`eq:q-above-2d` and {eq}`eq:q-below-2d`, where {math}`q(x_{\text{T}}, \tau)`
+depends on both space and time.
+Here, we introduce a convenient variable {math}`y = c_0\tau` and express {math}`q(x_{\text{T}}, \tau)`
+equivalently in pure spatial coordinates as {math}`q(x_{\text{T}}, y)` via a change of variables.
+We discretize the measurement domain into a grid of pixels {math}`\Gamma\boldsymbol{m}`,
+where {math}`\boldsymbol{m}=(m_1, m_2) \in \Theta_{\text{2D}}\subset\mathbb{Z}_2` is the pixel index,
+{math}`m_1=0, \ldots, M_1 - 1`, and {math}`m_2=0, \ldots, M_2 - 1`.
+The set of indices {math}`\Theta_{\text{2D}}` has {math}`M = M_1M_2` elements.
+The diagonal matrix {math}`\Gamma = \text{diag}(\gamma_1, \gamma_2)`
+contains the sampling stepsize {math}`\gamma_1` and {math}`\gamma_2` for the lateral and axial direction, respectively.
+
+We define the forward model described in {eq}`eq:q-above-2d`
+as a linear operator {math}`\mathcal{L}:L_2(\mathbb{R}^2)\to L_2(\mathbb{R}^2)`
+and write {eq}`eq:q-above-2d` equivalently as
+```{math}
+:label: eq:q-above-compact
+    q(x_{\text{T}}, y) = \mathcal{L}\{b\}(x_{\text{T}}, y).
+```
+Similarly, the discretized measurement function {math}`q:\Theta_{\text{2D}}\to\mathbb{R}` can be written as
+```{math}
+:label: eq:q-above-compact-discrete
+    q[\boldsymbol{m}] = \mathcal{L}\{b\}
+    (\Gamma\boldsymbol{m}).
+```
+We represent the compactly supported function {math}`b(\mathbf{r})` (equivalently {math}`H(\mathbf{r})`,
+c.f {eq}`eq:pa-effect`) via a series of shifted basis functions {math}`\varphi`
+```{math}
+:label: eq:b-on-basis
+    b(\mathbf{r})
+    = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}} \beta[\boldsymbol{k}] \varphi(\mathbf{r} / \Delta - \boldsymbol{k}), \quad \mathbf{r}\in \Omega.
+```
+Here, we choose the basis function {math}`\varphi(\mathbf{r})` to be the 2D rectangular function
+{math}`\text{rect}(\mathbf{r})` to represent regular pixel grid, where
+```{math}
+    \text{rect}(\mathbf{r}) = \left\{
+    \begin{aligned}
+        1, & \quad -\frac{1}{2}\leq x \leq \frac{1}{2} \text{ and } -\frac{1}{2}\leq z \leq \frac{1}{2}, \\
+    0, & \quad \text{ else}.
+    \end{aligned}\right.
+```
+Thanks to the linearity of {math}`\mathcal{L}`, we obtain
+```{math}
+:label: eq:q-above-on-basis
+        q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}}\beta[\boldsymbol{k}] \mathcal{L}\{\varphi(\cdot / \Delta -\boldsymbol{k})\}(\Gamma\boldsymbol{m}),
+```
+where the quantity {math}`\mathcal{L}\{\varphi(\cdot / \Delta -\boldsymbol{k})\}(\Gamma\boldsymbol{m})`
+has the expression
+```{math}
+:label: eq:L-above
+     \mathcal{L}\{\varphi(\cdot / \Delta -\boldsymbol{k})\}(\Gamma\boldsymbol{m}) =  \int_{I_{\text{x}}}\int_{I_{\text{z}}} h(\mathbf{r} - \mathbf{r}_T) \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 -r_\tau^2 \right) (2r_\tau)\text{d}z\text{d}x,
+```
+with {math}`I_{\text{x}} = [(k_1 - 1/2)\Delta_1, (k_1 + 1/2)\Delta_1]`,
+and {math}`I_{\text{z}} = [(k_2 - 1/2)\Delta_2, (k_2 + 1/2)\Delta_2]`.
+
+To compute a discrete version of this integral,
+we express the function {math}`h(\mathbf{r})` on the same rectangular basis with the same grid
+and support as {math}`b(\mathbf{r})`:
+```{math}
+:label: eq:h_T-on-basis
+    h(\mathbf{r}) = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}} \eta[\boldsymbol{k}]
+    \text{rect}(\mathbf{r} / \Delta -\boldsymbol{k}), \quad \mathbf{r}\in \Omega.
+```
+We also assume that the discretization grids {math}`\Omega_{\text{2D}}` and {math}`\Theta_{\text{2D}}` match
+and that {math}`\boldsymbol{r}_{\text{T}} = (x_\text{T},  z_\text{F}) = \Delta \boldsymbol{k}_{\text{T}}`
+with {math}`\boldsymbol{k}_{\text{T}} \in \mathbb{Z}^2` the indices of the transducer focal position.
+Then,
+```{math}
+:label: eq:h_T-shifted-on-basis
+    h(\mathbf{r} - \boldsymbol{r}_{\text{T}}) = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}}
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}] \text{rect}(\mathbf{r} / \Delta -\boldsymbol{k}),
+    \quad \mathbf{r}\in \Omega.
+```
+
+In {eq}`eq:L-above`, {math}`h` is constant in the support {math}`(I_\text{x} \times I_\text{z})`, such that:
+```{math}
+:label: eq:L-above2
+     \mathcal{L}\{\varphi(\cdot-\boldsymbol{k})\}(\Gamma\boldsymbol{m}) = 
+     \eta[\boldsymbol{k}-\boldsymbol{k}_\text{T}]
+     \int_{I_{\text{x}}}\int_{I_{\text{z}}}
+     \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 - r_\tau^2 \right) (2r_\tau)\text{d}z\text{d}x,
+```
+The integral in  {eq}`eq:L-above2`
+reduces to computing the arc length of the semicircle intersecting with the 2D box defined by
+{math}`(I_{\text{x}}\times I_{\text{z}})`, which we denote by {math}`s_{\boldsymbol{m}}[\boldsymbol{k}]`.
+Therefore, {eq}`eq:q-above-on-basis` becomes
+```{math}
+:label: eq:q-above-simplified
+    q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}} \beta[\boldsymbol{k}]
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}]  s_{\boldsymbol{m}}[\boldsymbol{k}].
+```
+
+The precise computation of {math}`s_{\boldsymbol{m}}[\boldsymbol{k}]` for all spatial locations is expensive,
+especially for large-scale reconstructions.
+For computational speed, we use a unit length of 1 for all pixels that intersect with the semicircle.
+ {eq}`eq:q-above-simplified` simplifies to
+```{math}
+:label: eq:q-above-final
+    q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Lambda_+^{\boldsymbol{m}}}\beta[\boldsymbol{k}]
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}],
+```
+where we denote by {math}`\Lambda_+^{\boldsymbol{m}}` the discrete upper semicircle.
+It is the set of pixel indices {math}`\boldsymbol{k}` whose corresponding pixels intersect with
+the continuous upper semicircle {math}`C_+^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}`
+```{math}
+:label: eq:discrete-upper-circle
+     C_+^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}= \left\{ (x, z): (x - x_{\text{T}, m_1})^2 + (z - z_{\text{F}})^2 =
+     r_{\tau}^2 \text{ and } z< z_{\text{F}}\right\},
+```
+where {math}`x_{\text{T}, m_1}` is the location of the transducer on the measurement grid.
+
+Similarly, in the case of the lower semicircle, we have
+```{math}
+    :label: eq:q-below-final
+    q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Lambda_-^{\boldsymbol{m}}}\beta[\boldsymbol{k}]
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}],
+```
+where {math}`\Lambda_-^{\boldsymbol{m}}` is the discrete lower semicircle whose corresponding pixels intersect with the continuous lower semicircle {math}`C_-^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}`
+```{math}
+:label: eq:discrete-lower-circle
+     C_-^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}= \left\{ (x, z): (x - x_{\text{T}, m_1})^2 + (z - z_{\text{F}})^2 =
+     r_{\tau}^2 \text{ and } z> z_{\text{F}}\right\}.
+```
+In our implementation, {math}`\Lambda_+^{\boldsymbol{m}}` and {math}`\Lambda_-^{\boldsymbol{m}}`
+are generated via a function
+[`skimage.draw.circle_perimeter`](https://scikit-image.org/docs/0.25.x/api/skimage.draw.html\#skimage.draw.circle\_perimeter)
+from the imaging processing library _scikit-image_ {cite}`skimage`.
+{eq}`eq:q-above-final` (and similarly, {eq}`eq:q-below-final`) can be implemented based on the following steps:
+for each measurement location {math}`\boldsymbol{m}`,
+
+1) Shift {math}`\eta` to grid location of the transducer, then, element-wise multiply {math}`\beta` with it;
+2) Generate the semicircle mask {math}`\Lambda_+^{\boldsymbol{m}}` and apply it to the outcome of Step 1);
+3) Sum up all masked pixels {math}`\boldsymbol{k}` to obtain {math}`q[\boldsymbol{m}]`.
+
+Since the radius of the semicircle is the same for a given depth, we can generate a row of the image
+{math}`q` at once.
+To avoid explicitly constructing the forward matrix by computing {eq}`eq:q-above-final`
+for each pixel {math}`\boldsymbol{m}`,
+we interpret {eq}`eq:q-above-final` equivalently as follows:
+the pixel value {math}`q[\boldsymbol{m}]` is the result of the correlation between a 2D image {math}`\beta`
+and a 2D image {math}`\eta` multiplied by a binary mask,
+then evaluated at location {math}`\boldsymbol{k}_{\text{T}}`.
+We thus implement {eq}`eq:q-above-final` (similarly {eq}`eq:q-below-final`) based on the following steps:
+1) Generate the semicircle mask at current depth {math}`k_{2}`;
+2) Element-wise multiply it with the SPR image (see {numref}`fig:acoustic-signal-generation` (c) and (c'));
+3) Correlate the PA image {math}`\beta` with the masked SPR image;
+4) Extract the horizontal slice at focal plane {math}`k_{\text{T}, 2}` from the outcome of Step 3);
+5) Perform Step 1) to 4) for all depths and stack the horizontal slices according to their respective location to
+produce the 2D image {math}`q`.
+The temporal convolution step is applied to each column of the 2D image {math}`q` via standard convolution in 1D.
+We provide an illustration of the acoustic signal-generation process in {numref}`fig:acoustic-signal-generation`.
+
+We write the forward model for a single acoustic process at switching time point {math}`t_n` as the linear system
+```{math}
+    :label: eq:acoustic-discrete-single
+    \mathbf{p}^n = \mathbf{W} \mathbf{b}^n,
+```
+where {math}`\mathbf{b}^n` and {math}`\mathbf{p}^n \in\mathbb{R}^{L}` are the vector representation
+of the PA image {math}`\beta` and the acoustic image {math}`p` at {math}`t_n`, respectively.
+We construct the acoustic forward operator {math}`\mathbf{W}\in\mathbb{R}^{L \times L}` as a matrix-free linear
+operator following the interpretation in {numref}`fig:acoustic-signal-generation`.
+
+Finally, we build the acoustic forward operator {math}`\mathbf{W}_{\text{tot}}`
+for {math}`N` switching pulses during an OFF-switching cycle and obtain
+```{math}
+:label: eq:acoustic-full-forward
+
+    \underbrace{
+    \begin{bmatrix}
+        \mathbf{p}^{0} \\
+        \mathbf{p}^{1} \\
+        \vdots \\
+        \mathbf{p}^{N-1}
+    \end{bmatrix}
+    }_{\mathbf{p}}
+    =
+    \underbrace{
+    \begin{bmatrix}
+        \mathbf{W} & 
+        \mathbf{0} &     
+        \cdots & 
+        \mathbf{0} \\
+        \mathbf{0} & 
+        \mathbf{W} &
+        \cdots & 
+        \vdots \\
+        \vdots & 
+        \cdots &    
+        \ddots &
+        \mathbf{0} \\
+        \mathbf{0} & 
+        \cdots & 
+        \mathbf{0} &     
+        \mathbf{W} \\
+    \end{bmatrix}}
+    _{\mathbf{W}_{\text{tot}}}
+    \underbrace{
+    \begin{bmatrix}
+        \mathbf{b}^{0} \\
+        \mathbf{b}^{1} \\
+        \vdots \\
+        \mathbf{b}^{N-1}
+    \end{bmatrix}}
+    _{\mathbf{b}}  + \quad\mathbf{n}.
+```
+In {eq}`eq:acoustic-full-forward`,
+{math}`\mathbf{b}\in\mathbb{R}^{NL}` is the vector of the initial pressure of all {math}`N` pulses,
+{math}`\mathbf{W}_{\text{tot}}\in\mathbb{R}^{NL\times NL}` is the system matrix,
+{math}`\mathbf{p}\in\mathbb{R}^{NL}` is the vector of the acoustic measurement of all {math}`N` pulses,
+and the vector {math}`\mathbf{n}\in\mathbb{R}^{NL}` represents measurement noise.
+Note that both {math}`\mathbf{W}` and {math}`\mathbf{W}_{\text{tot}}` are matrix-free linear operators.
+
+## Complete Forward Pipeline
+
+We denote the forward operator of the complete pipeline as {math}`\mathbf{A}\in\mathbb{R}^{NL\times PL}`.
+It is a composition of the photo-switching forward operator {math}`\mathbf{S}` and the complete acoustic
+forward matrix {math}`\mathbf{W}_{\text{tot}}`:
+```{math}
+:label: eq:full-forward
+    \mathbf{A} = \mathbf{W}_{\text{tot}}\mathbf{S}.
+```
+The forward pipeline takes the vector {math}`\mathbf{c}` of concentration maps as input,
+applies the photo-switching operator {math}`\mathbf{S}` in which the optical process is applied {math}`N`
+times for {math}`N` photo-switching pulses to obtain a stack of {math}`N` PA images {math}`\mathbf{H}`
+(or equivalently {math}`\mathbf{b}`, cf. {eq}`eq:pa-effect`).
+They are then fed to the acoustic module where the acoustic detection process is applied to each PA image.
+The final measurement is a stack of acoustic signals {math}`\mathbf{p}`.

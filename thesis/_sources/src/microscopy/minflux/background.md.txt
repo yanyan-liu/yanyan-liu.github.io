@@ -1,0 +1,67 @@
+(minflux-background)=
+# Background
+
+Proposed in 2017, Maximally INFormative Luminescence eXcitation (MINFLUX) is an emergent localization strategy
+that reduces the number of photons required to achieve a given localization precision
+in comparison to camera-based approaches {cite:p}`balzarotti_nanometer_2017` (2017).
+It relies on utilizing tailored excitation beam patterns sequentially to probe the location of a fluorophore.
+MINFLUX achieves single-digit nanometer isotropic localization precision in three dimensions of fixed and living
+cells {cite:p}`gwosch_minflux_2020` and sub-millisecond time resolution for single-molecule tracking
+{cite:p}`eilers_minflux_2018`.
+Using minimal number of photons, MINFLUX reduces photobleaching and enables long observation time, which makes it a
+suitable technique to study cellular dynamics at the molecular level {cite:p}`wolff_minflux_2023, carsten_minflux_2023`.
+
+(minflux-principle)=
+## Principle of MINFLUX
+
+The general principle of MINFLUX is as follows.
+The excitation light goes through a beam shaper such as a spatial light modulator (SLM) that modifies the pupil phase
+ such that the resulting beam pattern has a zero of intensity at the focal plane where the sample is placed
+ ({numref}`fig:minflux-donut-baseline` (a) and (b)).
+
+```{figure} images/minflux_setup.*
+:name: fig:minflux-donut-baseline
+:width: 75%
+(a) Diagram of MINFLUX. 
+Excitation and emission light are illustrated in green and orange, respectively. 
+The fluorophore is represented by a yellow star. 
+SLM: spatial light modulator.
+APD: avalanche photon diode.
+(b) Intensity distribution of a donut beam on the {math}`xy`-plane.
+The four dots in cyan represent the location of the center of the four donut beams in a standard MINFLUX experiment. 
+Three of these dots lie on a circle with diameter {math}`L=100` nm (dashed yellow circle).
+The dotted red circle with radius {math}`\tau=28` nm represents the boundary of the FOV {math}`\Gamma_\tau` of
+optimization.
+(c) The CRB map (in nm) in the FOV {math}`\Gamma_\tau` of a standard MINFLUX experiment with beam setting as in (b)
+for 100 photons.
+The labels on the horizontal and vertical axes describe the relative distance in nanometers to the center of the FOV
+for the CRB maps.
+```
+
+Such an isotropic shape has a characteristic low intensity at its center, thus termed the _zero_ of the beam.
+Measurements in MINFLUX correspond to the fluorescence photon counts for different excitation beams,
+collected by an avalanche photodiode (APD).
+The counts are then used to infer the spatial location of the fluorescent target.
+In the original MINFLUX experiment {cite:p}`balzarotti_nanometer_2017`, four donut beams are used and arranged into
+ a specific spatial layout: one at the center of the object plane and the other three on a circle of diameter {math}`L`
+ ({numref}`fig:minflux-donut-baseline` (b)) to obtain sufficient information for the inference step.
+The smaller {math}`L` is, the better the localization precision and the smaller the field of view (FOV) where the
+precision is high.
+
+## Motivation and Contribution
+
+Two beam shapes, the donut {cite:p}`balzarotti_nanometer_2017` and half-moon beams {cite:p}`wolff_minflux_2023`,
+have been proposed for MINFLUX experiments,
+yet their optimality remains an open question.
+In this section, we deploy a framework based on PSF engineering to determine optimal excitation patterns for MINFLUX.
+Our framework is a pipeline that takes the coefficients of the Zernike polynomials as input and outputs a loss value
+of the corresponding experimental setup.
+It is composed of sequential modules that model the synthesis of the pupil mask, the light propagation,
+MINFLUX detection, the statistical quantification of the localization precision,
+and the definition of the loss function.
+The framework is efficiently implemented in PyTorch to leverage the automatic differentiation functionality
+and powerful optimization algorithms.
+We show that the conventional donut beam is a robust optimum when the excitation beams are all constrained to the same
+shape.
+Further, our framework yields two pairs of half-moon beams (orthogonal to each other) which can
+improve the theoretical localization precision by a factor of about two.

@@ -1,0 +1,208 @@
+(pat2-inverse-problem)=
+# Inverse Problems
+
+The goal of unmixing is to recover the vector {math}`\mathbf{c}` of unknown concentration maps from
+acoustic measurements {math}`\mathbf{p}` via the following linear system
+```{math}
+    :label: eq:full-forward-system
+    \mathbf{p} = \mathbf{W}_{\text{tot}}\mathbf{S} \mathbf{c} + \mathbf{n},
+```
+where {math}`\mathbf{n}` represents measurement noise.
+
+## Two-step Approach
+
+In the two-step approach, one states a minimization problem to find solution {math}`\bar{\mathbf{b}}` to the acoustic
+problem in {eq}`eq:acoustic-full-forward`
+```{math}
+    :label: eq:acoustic-inverse
+    \overline{\mathbf{b}} \in \arg\min_{\mathbf{b}\in\mathbb{R}^{NL}} \left\{\frac{1}{2} \|\mathbf{W}_{\text{tot}}
+    \mathbf{b} - \mathbf{p}\|^2_2 + \mathcal{R}_1(\mathbf{b}) + \delta_{\geq 0}(\mathbf{b}) \right\},
+```
+where the indicator function {math}`\delta_{\geq 0}(\mathbf{x})` enforces nonnegativity
+and is defined for a vector {math}`\mathbf{x}\in\mathbb{R}^N` as
+```{math}
+    \delta_{\geq0}(\mathbf{x}) = \left\{
+    \begin{aligned}
+        &0, \quad \text{if } x_n \geq 0, \quad n=1, \ldots, N\\
+        &+\infty, \quad \text{else}.
+    \end{aligned}
+    \right.
+```
+One then solves the unmixing problem by determining
+```{math}
+    :label: eq:unmixing
+    \overline{\mathbf{c}} \in \arg\min_{\mathbf{c}\in\mathbb{R}^{PL}}
+    \left\{\frac{1}{2} \|\mathbf{S} \mathbf{c} - \overline{\mathbf{b}}\|^2_2 + \mathcal{R}_2 (\mathbf{c}) +
+    \delta_{\geq 0}(\mathbf{c})\right\}.
+```
+The regularization terms {math}`\mathcal{R}_1(\cdot)`  and {math}`\mathcal{R}_2(\cdot)` are optional.
+Here we chose to apply total-variation (TV) on {math}`\mathbf{b}` for smoothness in the reconstructed images
+and a combination of {math}`\ell_1` and TV on {math}`\mathbf{c}` which was shown effective in the precious part:
+```{math}
+    :label: eq:reg-tv
+    \mathcal{R}_1(\mathbf{b}) = \nu_1
+    \left(\sum_{n=0}^{N-1}|\mathbf{b}^n|_\text{TV}\right), 
+```
+```{math}
+    :label: eq:reg-unmixing
+    \mathcal{R}_2(\mathbf{c}) = \nu_2 
+    \left( \sum_{i_1=0}^{L_{\text{x}} - 1} \sum_{i_2=0}^{L_{\text{z}} - 1} \|\mathbf{c}_{i_1, i_2}\|_1 \right)
+    + \nu_3 \left(\sum_{p=1}^{P}|\mathbf{c}^p|_\text{TV}\right), 
+```
+{math}`\nu_1, \nu_2` and {math}`\nu_3` are nonnegative regularization weights.
+We adopt anisotropic TV for computational speed.
+It enforces sparsity in the gradient domain and is defined as
+```{math}
+    |\cdot|_{\text{TV}} = \|\nabla_\text{x} (\cdot)\|_1 + \|\nabla_\text{z} (\cdot)\|_1.
+```
+where {math}`\nabla_\text{x}` and {math}`\nabla_\text{z}` are the finite difference operators in lateral and axial
+directions, respectively.
+
+## One-step Approach
+
+We formulate the outcome of the one-step inversion as solution {math}`\hat{\mathbf{c}}` to the minimization
+problem
+```{math}
+    :label: eq:one-step
+    \hat{\mathbf{c}} \in \arg\min_{\mathbf{c}\in\mathbb{R}^{PL}} \left\{\frac{1}{2}
+    \|\mathbf{A} \mathbf{c} - \mathbf{p}\|^2_2 + \mathcal{R}_3(\mathbf{c}) +\delta_{\geq0}(\mathbf{c}) \right\},
+```
+where {math}`\mathbf{A}=\mathbf{W}_{\text{tot}}\mathbf{S}` is the composite forward operator,
+{math}`\mathcal{R}_3(\mathbf{c})` is a regularization term defined as
+```{math}
+    :label: eq:reg-tv-l1-one
+    \mathcal{R}_3(\mathbf{c}) = \lambda_1
+    \left(\sum_{p=1}^P |\mathbf{c}^{p}|_\text{TV}\right)
+    +
+    \lambda_2 \left(\sum_{i_1=0}^{L_{\text{x}} - 1} \sum_{i_2=0}^{L_{\text{z}} - 1} \|\mathbf{c}_{i_1, i_2}\|_1
+    \right)
+    + \lambda_3 \left(\sum_{n=0}^{N-1}|(\mathbf{S}\mathbf{c})^n|_{\text{TV}}\right), 
+```
+and nonnegative constants {math}`\lambda_1`, {math}`\lambda_2` and {math}`\lambda_3`
+are the respective regularization weights.
+The first term in {eq}`eq:reg-tv-l1-one` applies TV to the spatial concentration maps {math}`\mathbf{c}^p\in\mathbb{R}^{L}`,
+{math}`p=1, \ldots, P` of all {math}`P` species to reduce noise and achieve a smooth reconstruction.
+The second term in {eq}`eq:reg-tv-l1-one` applies sparsity-promoting {math}`\ell_1`-norm to each pixel
+in the concentration map {math}`\mathbf{c}_{i_1, i_2}\in\mathbb{R}^P`,
+{math}`i_1=0, \ldots, (L_{\text{x}} - 1), i_2=0, \ldots, (L_{\text{z}}-1)`,
+in order to minimize cross-talk between different species.
+The last regularizer in {eq}`eq:reg-tv-l1-one` applies TV to spatial intensity maps of PA images
+{math}`\mathbf{H}^n=(\mathbf{S}\mathbf{c})^n\in\mathbb{R}^{L}`, {math}`n=0, \ldots, (N-1)`
+of all {math}`N` switching pulses to enforce a smoothing effect on the intermediate PA images.
+
+## Algorithm
+
+The objective functions of the minimization problems in {eq}`eq:acoustic-inverse`, {eq}`eq:unmixing`,
+and {eq}`eq:one-step` share a similar structure of a smooth part (quadratic data-fidelity term),
+which we denote by {math}`f`, and a nonsmooth part
+(sparsity-based regularization term and nonnegativity constraint), which we denote by {math}`w`.
+Further, the three regularizers introduced in {eq}`eq:reg-tv`, {eq}`eq:reg-unmixing`, and {eq}`eq:reg-tv-l1-one`
+can be rewritten in the form of the {math}`L_1`-norm of an operator {math}`\mathbf{L}`
+as {math}`\mathcal{R}(\cdot) = \|\mathbf{L}(\cdot)\|_1`.
+For example, {math}`\mathbf{L}` for {math}`\mathcal{R}_3` is
+```{math}
+    \mathbf{L} = \begin{bmatrix}
+        \mathbf{L}_1 \\
+        \mathbf{L}_2 \\
+        \mathbf{L}_3
+    \end{bmatrix},
+```
+where
+```{math}
+    \mathbf{L}_1 = \lambda_1
+    \begin{bmatrix}
+        \nabla_\text{x}\\
+        \nabla_\text{z}
+    \end{bmatrix}, \quad
+    \mathbf{L}_2 = \lambda_2
+    \begin{bmatrix}
+        \nabla_\text{x} \cdot \mathbf{S}\\
+        \nabla_\text{z} \cdot \mathbf{S}
+    \end{bmatrix}, \quad
+    \mathbf{L}_3 = \lambda_3 \mathbf{I},
+```
+and {math}`\mathbf{I}` is the identity operator.
+The operators {math}`\mathbf{L}` of {math}`\mathcal{R}_1` and {math}`\mathcal{R}_2` are similar
+and thus omitted here in the interest of space.
+
+We use {eq}`eq:one-step` as an example to show how to obtain the solution,
+as {eq}`eq:acoustic-inverse` and {eq}`eq:unmixing` follow the same approach.
+The objective function in {eq}`eq:one-step` is composed of a smooth part
+{math}`f(\cdot)=\frac{1}{2} \|\mathbf{A} \cdot - \mathbf{p}\|^2_2`
+and a nonsmooth part {math}`w(\cdot)=\mathcal{R}_3(\cdot) + \delta_{\geq0}(\cdot)`.
+We thus deploy a proximal-gradient method combined with the fast iterative shrinkage thresholding algorithm
+(FISTA) {cite:p}`fista` to obtain the solution.
+Detailed steps are presented in {prf:ref}`alg:prox-outer`.
+There, the key is the computation of the proximal operator {math}`\text{prox}_{\alpha_1 w}(\mathbf{\cdot})`
+which is defined as
+```{math}
+:label: eq:prox
+    \text{prox}_{\alpha_1 w}(\mathbf{z}) = 
+    \arg\min_{\mathbf{y}\in\mathbb{R}^{PL}}\left\{
+    \frac{1}{2} \|\mathbf{y} - \mathbf{z}\|_2^2 + \alpha_1 \mathcal{R}_3(\mathbf{y}) + \delta_{\geq0}(\mathbf{y})
+    \right\},
+```
+where {math}`\alpha_1>0` is the stepsize and we set it as the reciprocal of the largest eigenvalue of
+{math}`\mathbf{A}^T\mathbf{A}`.
+To obtain the proximal operator, we resort to the dual problem of the minimization in {eq}`eq:prox` instead
+{cite:p}`tibshirani_solution_2011` and establish the solution to the dual problem of {eq}`eq:prox` as
+```{math}
+\label{eq:prox-dual}
+    \bar{\mathbf{u}} \in \text{arg}\min_{\mathbf{u}\in\mathbb{R}^{2NL+3PL}} \left\{\frac{1}{2}\| \mathbf{z} - \mathbf{L}^T \mathbf{u} \|^2_2\right\}, \quad \text{s.t.} \quad \|\mathbf{u}\|_{\infty} \le \alpha_1 \text{ and } \mathbf{L}^T\mathbf{u}<\mathbf{z}.
+```
+We solve the dual problem using accelerated gradient descent
+(another FISTA, similar to the approach in {cite:p}`pourya_delaunay_2023`)
+followed by a projection onto the {math}`L_{\infty}`-ball during optimization,
+where the projection operator {math}`\text{proj}_{\alpha}(\cdot)` applies element-wise to a vector {math}`\mathbf{x}\in\mathbb{R}^N` and is defined as
+```{math}
+    \text{proj}_{\alpha}(\mathbf{x})_n = \left\{
+    \begin{aligned}
+        & x_n, \quad |x_n| \leq \alpha \\
+        & \alpha, \quad x_n > \alpha \\
+        & -\alpha, \quad x_n < -\alpha
+    \end{aligned}
+    \right.
+    \quad n=1, \ldots, N.
+```
+Finally, we retrieve the proximal operator in {eq}`eq:prox`
+via {math}`\text{prox}_{\alpha w}(\mathbf{z})=\max(\mathbf{z} - \mathbf{L}^T\bar{\mathbf{u}}, \mathbf{0})`
+(See {prf:ref}`alg:prox-inner`).
+
+```{prf:algorithm} Proximal Gradient Algorithm for the Main Problem
+:label: alg:prox-outer
+
+**Input**: initial guess {math}`\mathbf{c}_0=\mathbf{0}`, {math}`\boldsymbol{\xi}_0=\mathbf{0}`, the maximal number of iterations {math}`K_1`, stopping thresholds {math}`\varepsilon_1>0`, and {math}`\varepsilon_2>0`
+
+1. Set {math}`k=0`, {math}`t_0=1`, and cost {math}`f_0=\infty`
+2. Compute stepsize {math}`\alpha=1/\text{eig}_{\max}(\mathbf{A}^T\mathbf{A})`
+3. While {math}`k \le K_1`:
+    1. {math}`\mathbf{c}_{k+1} = \text{prox}_{\alpha w}
+     \left(\ \boldsymbol{\xi}_k - \alpha \left(\mathbf{A}^T\mathbf{A}
+     \boldsymbol{\xi}_k - \mathbf{A}^T \mathbf{p}\right)\right)`
+     2. {math}`t_{k+1} = \frac{1+\sqrt{4 t_k^2 + 1}}{2}`
+     3. {math}`\boldsymbol{\xi}_k = \mathbf{c}_{k+1} + \frac{t_k - 1}{t_k + 1}(\mathbf{c}_{k+1} - \mathbf{c}_k)`
+     4. If {math}`k>1` and {math}`\frac{|f_k - f_{k-1}|}{|f_{k-1}|} < \varepsilon_1` or {math}`\frac{\|\boldsymbol{\xi}_{k} - \boldsymbol{\xi}_{k-1}\|_2}{\|\boldsymbol{\xi}_{k-1}\|_2} < \varepsilon_2`:
+            
+        break
+     
+     5. {math}`k \leftarrow k+1`   
+
+**Output** {math}`\mathbf{c}_{k+1}`
+```
+
+```{prf:algorithm} Computation of the Proximal Operator
+:label: alg:prox-inner
+
+**Input** initial guess {math}`\mathbf{u}_0=\mathbf{0}`, {math}`\boldsymbol{\eta}_0=\mathbf{0}` , and the maximal number of iterations {math}`K_2`
+
+1. Set {math}`t_0=1`
+2. Compute stepsize {math}`\beta=1/\text{eig}_{\max}(\mathbf{L}\mathbf{L}^T)`
+3. For {math}`k=0:K_2`:
+ 
+    1. {math}`\mathbf{u}_{k+1} = \text{proj}_{\alpha_1} \left(\ \boldsymbol{\eta}_k - \alpha_2 \left(\mathbf{L} \mathbf{L}^T \boldsymbol{\eta}_k - \mathbf{L} \mathbf{z}\right) \right)`
+    2. {math}`t_{k+1} = \frac{1+\sqrt{4 t_k^2 + 1}}{2}`
+    3. {math}`\boldsymbol{\eta}_k = \mathbf{u}_{k+1} + \frac{t_k - 1}{t_k + 1}(\mathbf{u}_{k+1} - \mathbf{u}_k)`
+            
+
+**Output** {math}`\max(\mathbf{z} - \mathbf{L}^T \mathbf{u}_{k+1}, \mathbf{0})`
+```

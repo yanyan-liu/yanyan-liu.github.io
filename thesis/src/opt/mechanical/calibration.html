@@ -1,0 +1,594 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Results" href="results.html"><link rel="prev" title="Characterization of Mechanical Artifacts" href="classification.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Automatic Calibration</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="automatic-calibration">
+<span id="opt-calibration"></span><h1>Automatic Calibration<a class="headerlink" href="#automatic-calibration" title="Link to this heading">¶</a></h1>
+<p>In this section, we propose a computational framework that is able to detect the model mismatch
+between the forward model and measurement data.
+We start with a 3D forward model that fully characterizes our refined OPT geometry,
+including the 3D tilt that is out of reach of existing 2D methods.
+Then, we formulate the calibration of the system parameters as a multiscale joint reconstruction-calibration
+optimization problem.
+It outputs a set of calibrated system parameters that enables us to improve the reconstruction quality.
+This multiscale scheme allows us to overcome the memory bottleneck of 3D models and
+helps us to accelerate the calibration.</p>
+<section id="forward-model-and-characterization-of-mechanical-errors">
+<span id="opt-forward-model"></span><h2>Forward Model and Characterization of Mechanical Errors<a class="headerlink" href="#forward-model-and-characterization-of-mechanical-errors" title="Link to this heading">¶</a></h2>
+<p>The coordinate system to describe OPT geometry is the same as in <a class="reference internal" href="classification.html#fig-opt-mechanical-setup"><span class="std std-numref">Fig. 10</span></a> (b).
+When there exist mechanical errors, we describe the angular errors as a perturbation vector
+<span class="math notranslate nohighlight">\(\boldsymbol{\delta}=(\boldsymbol{\delta}_{\boldsymbol{\varphi}},\delta_{\psi_1},\delta_{\psi_2})\)</span>.
+The actual angles <span class="math notranslate nohighlight">\(\boldsymbol{\theta}={\boldsymbol{\theta}}^*+\boldsymbol{\delta}\)</span> can be expressed as a
+sum of the error vector
+<span class="math notranslate nohighlight">\(\boldsymbol{\delta}\)</span> and the ideal angle vector
+<span class="math notranslate nohighlight">\({\boldsymbol{\theta}}^* = (\boldsymbol{\varphi}^*, \psi_1^*, \psi_2^*)\)</span>
+that characterizes an ideal OPT system: equidistant rotation angles <span class="math notranslate nohighlight">\(\boldsymbol{\varphi}^*\)</span> between 0 and
+360 degrees and <span class="math notranslate nohighlight">\(\psi_1^* = \psi_2^* = 0\)</span>.
+In addition, translation error of the sample is described by a 2D vector
+<span class="math notranslate nohighlight">\(\boldsymbol{t}=(t_1,t_2)\in\mathbb{R}^2\)</span> in the detector plane, and the ideal <span class="math notranslate nohighlight">\(\boldsymbol{t}^*=(0, 0)\)</span>.</p>
+<p>We omit optical effects to keep the forward model computationally efficient, which is often accepted
+in focal-sheet-scanning OPT setups <span id="id1">[<a class="reference internal" href="../../../index.html#id133" title="François Marelli and Michael Liebling. Optics versus computation: influence of illumination and reconstruction model accuracy in focal-plane-scanning optical projection tomography. In 2021 IEEE 18th International Symposium on Biomedical Imaging (ISBI), volume, 567-570. 2021.">114</a>]</span>.
+To fully characterize mechanical errors, we adopt the 3D X-ray transform
+<span class="math notranslate nohighlight">\(\mathcal{P}_{\boldsymbol{\theta}}:L_2\left(\mathbb{R}^3\right)\rightarrow L_2\left(\mathbb{R}^2\right)\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-opt-continuous-forward">
+<div class="math notranslate nohighlight" id="equation-eq-opt-continuous-forward">
+<span class="eqno">(20)<a class="headerlink" href="#equation-eq-opt-continuous-forward" title="Link to this equation">¶</a></span>\[b^{\boldsymbol{\theta},\boldsymbol{t}}(\boldsymbol{v})=
+\mathcal{P}_{\boldsymbol{\theta}}\{f(\boldsymbol{u})\}(\boldsymbol{v}-\boldsymbol{t})+ n(\boldsymbol{v}),\]</div>
+</div>
+<p>It provides a mathematical description of straight-ray projections of a sample at any 3D pose
+<span id="id2">[<a class="reference internal" href="../../../index.html#id117" title="Mona Zehni, Laurene Donati, Emmanuel Soubies, Zhizhen Zhao, and Michael Unser. Joint Angular Refinement and Reconstruction for Single-Particle Cryo-EM. IEEE Transactions on Image Processing, 29:6151–6163, 2020.">87</a>]</span>.
+The compactly supported function <span class="math notranslate nohighlight">\(f(\boldsymbol{u})\in L_2(\mathbb{R}^3)\)</span>,
+<span class="math notranslate nohighlight">\(\boldsymbol{u}=(x,y,z)\)</span> represents the 3D sample to be reconstructed.
+Measurement in the detector plane is denoted by <span class="math notranslate nohighlight">\(b^{\boldsymbol{\theta},\,\boldsymbol{t}}(\boldsymbol{v})\)</span>
+for a location <span class="math notranslate nohighlight">\(\boldsymbol{v}=(\xi,\eta)\)</span>, a sample orientation <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>,
+and a shift vector <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span>.
+The additive random noise is denoted by <span class="math notranslate nohighlight">\(n(\boldsymbol{v})\)</span>.</p>
+<p>To numerically implement the forward model, we follow the discretization framework detailed in section
+<a class="reference internal" href="../../intro_math/mathematics.html#intro-maths-forward-model-discrete"><span class="std std-ref">Discrete Formulation</span></a> of the previous chapter <a class="reference internal" href="../../intro_math/index.html#intro-modeling-and-solving-inverse-problems"><span class="std std-ref">Modeling and Solving of Inverse Problems</span></a>.
+We assume that measurement <span class="math notranslate nohighlight">\(b^{\boldsymbol{\theta},\boldsymbol{t}}(\boldsymbol{v})\)</span>
+is acquired at sampled points
+<span class="math notranslate nohighlight">\(\boldsymbol{v}_{\boldsymbol{j}} = \Delta\boldsymbol{j} = (j_1\Delta_1,j_2\Delta_2)\)</span>,
+where <span class="math notranslate nohighlight">\(\boldsymbol{j}=(j_1,j_2)\in\Omega_{\text{2D}}\subset\mathbb{Z}^2\)</span> is the index of the sampled
+points.
+The diagonal matrix <span class="math notranslate nohighlight">\(\Delta=\text{diag}\left\{\Delta_1,\Delta_2\right\}\)</span> contains the sampling steps
+in the <span class="math notranslate nohighlight">\(\xi\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> directions on the detector plane, respectively.
+The set <span class="math notranslate nohighlight">\(\Omega_{\text{2D}}\)</span> denotes the support of the measurement which consists of <span class="math notranslate nohighlight">\(M\)</span> elements in total.
+Plugging in this formulation into <a class="reference internal" href="#equation-eq-opt-continuous-forward">Eq. (20)</a>, we obtain</p>
+<div class="math-wrapper docutils container" id="equation-eq-opt-discrete-measurement">
+<div class="math notranslate nohighlight" id="equation-eq-opt-discrete-measurement">
+<span class="eqno">(21)<a class="headerlink" href="#equation-eq-opt-discrete-measurement" title="Link to this equation">¶</a></span>\[b^{\boldsymbol{\theta},\boldsymbol{t}}(\Delta\boldsymbol{j})=\mathcal{P}_{\boldsymbol{\theta}}\{f(\boldsymbol{u})\}
+(\Delta\boldsymbol{j}-\boldsymbol{t})+n(\Delta\boldsymbol{j}).\]</div>
+</div>
+<p>Furthermore, we represent the 3D sample using a generalized sampling framework in <span id="id3">[<a class="reference internal" href="../../../index.html#id106" title="Michael Unser. Sampling—50 Years after Shannon. Proceedings of the IEEE, 88(4):569-587, 2000.">59</a>]</span> which we
+have described in the previous chapter <a class="reference internal" href="../../intro_math/index.html#intro-modeling-and-solving-inverse-problems"><span class="std std-ref">Modeling and Solving of Inverse Problems</span></a>.
+We introduce a special reconstruction space <span class="math notranslate nohighlight">\(V(\varphi)\)</span> in which <span class="math notranslate nohighlight">\(f\)</span> is represented by a
+finite sum of a sequence of coefficients <span class="math notranslate nohighlight">\(c[\cdot]\)</span> multiplied by a series of shifted basis functions
+(with a sampling step of 1):</p>
+<div class="math-wrapper docutils container" id="equation-eq-opt-mechanical-recon-space">
+<div class="math notranslate nohighlight" id="equation-eq-opt-mechanical-recon-space">
+<span class="eqno">(22)<a class="headerlink" href="#equation-eq-opt-mechanical-recon-space" title="Link to this equation">¶</a></span>\[V(\varphi)=\left\{\sum_{\boldsymbol{k}\in\Omega_{3D}}c[\boldsymbol{k}]
+\varphi(\cdot-\boldsymbol{k}), 
+\quad c \in \ell_2\big(\mathbb{Z}^3\big)\right\}.\]</div>
+</div>
+<p>The 3D volume is thus represented by a vector <span class="math notranslate nohighlight">\(\mathbf{c}=\big(c[\boldsymbol{k}]\big)_{\boldsymbol{k} \in\Omega_{\mathrm{3D}}}\in\mathbb{R}^N\)</span>, and <span class="math notranslate nohighlight">\(\Omega_{\mathrm{3D}}\subset \mathbb{Z}^3\)</span> is the compact
+support of the coefficients.
+While the standard discretization uses rectangular basis functions, here we choose the optimized Kaiser-Bessel Window
+Function (KBWF) as they are well suited for tomographic settings
+<span id="id4">[<a class="reference internal" href="../../../index.html#id100" title="Masih Nilchian, John Paul Ward, Cédric Vonesch, and Michael A. Unser. Optimized kaiser–bessel window functions for computed tomography. IEEE Transactions on Image Processing, 24:3826-3833, 2015.">60</a>, <a class="reference internal" href="../../../index.html#id99" title="Robert M. Lewitt. Multidimensional digital image representations using generalized kaiser-bessel window functions. Journal of the Optical Society of America. A, Optics and image science, 7 10:1834-46, 1990.">115</a>]</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-optimized-kbwf">
+<div class="math notranslate nohighlight" id="equation-eq-optimized-kbwf">
+<span class="eqno">(23)<a class="headerlink" href="#equation-eq-optimized-kbwf" title="Link to this equation">¶</a></span>\[\begin{split}    \varphi(\boldsymbol{u})= \left\{
+    \begin{aligned}
+        &amp; \dfrac{\Big(1-\big(\frac{\lVert\boldsymbol{u}\rVert}{a}\big)^2\Big)^{\frac{m}{2}}I_m\Big(\alpha\sqrt{1-\big(
+        \frac{\lVert\boldsymbol{u}\rVert}{a}\big)^2}\Big)}{I_m(\alpha)} \quad \text{if } 0\leq
+        \lVert\boldsymbol{u}\rVert \leq a, \\
+        &amp; 0 \quad \text{otherwise,}
+    \end{aligned}
+    \right.\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(a&gt;0\)</span> is the support radius that controls the smoothness of the KBWF, <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span> is the window taper
+that determines the shape of the KBWF and <span class="math notranslate nohighlight">\(I_m\)</span> is the modified Bessel function of order <span class="math notranslate nohighlight">\(m\)</span>.
+In our experiments, we used the following set of parameters: <span class="math notranslate nohighlight">\(a=4\)</span>, <span class="math notranslate nohighlight">\(\alpha=19\)</span> and <span class="math notranslate nohighlight">\(m=2\)</span>.
+The advantage of KBWFs is that they are isotropic, compactly supported, and its X-ray transform
+<span class="math notranslate nohighlight">\(\mathcal{P}_{\boldsymbol{\theta}}[\varphi]\)</span> is independent of <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> thus greatly reducing
+computational time <span id="id5">[<a class="reference internal" href="../../../index.html#id98" title="Laurene Donati, Masih Nilchian, Carlos Oscar Sanchez Sorzano, and Michael A. Unser. Fast multiscale reconstruction for cryo-em. Journal of Structural Biology, 204:543 - 554, 2018.">116</a>]</span>.
+Besides, it is convenient to compute analytic gradients for the tilt angles and shifts
+<span id="id6">[<a class="reference internal" href="../../../index.html#id117" title="Mona Zehni, Laurene Donati, Emmanuel Soubies, Zhizhen Zhao, and Michael Unser. Joint Angular Refinement and Reconstruction for Single-Particle Cryo-EM. IEEE Transactions on Image Processing, 29:6151–6163, 2020.">87</a>]</span>.
+As a result, we use coefficient vector <span class="math notranslate nohighlight">\(\mathbf{c}\in\mathbb{R}^N\)</span> to equivalently represent the 3D volume
+during reconstruction.
+Once <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is recovered, the corresponding volume can be retrieved by expanding
+<span class="math notranslate nohighlight">\(\mathbf{c}\)</span> through the formula in <a class="reference internal" href="#equation-eq-opt-mechanical-recon-space">Eq. (22)</a>.</p>
+<p>Substituting <span class="math notranslate nohighlight">\(f\)</span> with KBWFs yields the discrete forward model
+<span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span></p>
+<div class="math-wrapper docutils container" id="equation-src-opt-mechanical-calibration-0">
+<div class="math notranslate nohighlight" id="equation-src-opt-mechanical-calibration-0">
+<span class="eqno">(24)<a class="headerlink" href="#equation-src-opt-mechanical-calibration-0" title="Link to this equation">¶</a></span>\[    b^{\boldsymbol{\theta},\boldsymbol{t}}(\Delta\boldsymbol{j})=\sum_{\boldsymbol{k}\in\Omega_{3D}}c[\boldsymbol{k}]
+    \mathcal{P}_{\boldsymbol{\theta}}[\varphi](\Delta\boldsymbol{j}-
+    \mathbf{M}_{\boldsymbol{\theta}^{\perp}}\boldsymbol{k}-\boldsymbol{t})+n(\Delta\boldsymbol{j}),\]</div>
+</div>
+<p>where is <span class="math notranslate nohighlight">\(\mathbf{M}_{\boldsymbol{\theta}^{\perp}}\)</span> is the orthogonal projector matrix
+(see <span id="id7">[<a class="reference internal" href="../../../index.html#id117" title="Mona Zehni, Laurene Donati, Emmanuel Soubies, Zhizhen Zhao, and Michael Unser. Joint Angular Refinement and Reconstruction for Single-Particle Cryo-EM. IEEE Transactions on Image Processing, 29:6151–6163, 2020.">87</a>]</span> for details).
+By stacking the measurement vectors
+<span class="math notranslate nohighlight">\(b^{\boldsymbol{\theta},\boldsymbol{t}}(\Delta\boldsymbol{j})_{\boldsymbol{j}\in\Omega_{\text{2D}}}\)</span>,
+the system matrices <span class="math notranslate nohighlight">\(\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t})[\boldsymbol{j},\boldsymbol{k}]= \mathcal{P}_{\boldsymbol{\theta}}[\varphi](\Delta\boldsymbol{j}- \mathbf{M}_{\boldsymbol{\theta}^{\perp}}\boldsymbol{k}-\boldsymbol{t}) \in\mathbb{R}^{M \times N}\)</span>,
+and the noise vector <span class="math notranslate nohighlight">\(\mathbf{n}=n(\Delta\boldsymbol{j})_{\boldsymbol{j}\in\Omega_{\text{2D}}}\)</span>
+at all <span class="math notranslate nohighlight">\(P\)</span> orientations, we obtain the following linear system</p>
+<div class="math-wrapper docutils container" id="equation-eq-opt-discrete-forward">
+<div class="math notranslate nohighlight" id="equation-eq-opt-discrete-forward">
+<span class="eqno">(25)<a class="headerlink" href="#equation-eq-opt-discrete-forward" title="Link to this equation">¶</a></span>\[\mathbf{b}=\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t})\;\mathbf{c} + \mathbf{n},\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{b}, \mathbf{n} \in\mathbb{R}^{MP}\)</span>
+are the discrete measurement and noise vectors of <span class="math notranslate nohighlight">\(P\)</span> projections, and the system matrix
+<span class="math notranslate nohighlight">\(\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t}) \in \mathbb{R}^{MP \times N}\)</span> is a function of
+system parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span>.
+The 3D volume is represented by a finite-dimensional coefficient vector <span class="math notranslate nohighlight">\(\mathbf{c}\in\mathbb{R}^N\)</span>.</p>
+</section>
+<section id="multiscale-joint-reconstruction-calibration-algorithm">
+<span id="opt-calibration-algorithm"></span><h2>Multiscale Joint Reconstruction-Calibration Algorithm<a class="headerlink" href="#multiscale-joint-reconstruction-calibration-algorithm" title="Link to this heading">¶</a></h2>
+<p>The measurement data generated by a real OPT experiment usually has a very large size.
+For instance, current cameras can acquire OPT images up to <span class="math notranslate nohighlight">\(2048^2\)</span> pixels with pixel size less than 1
+<span class="math notranslate nohighlight">\(\mu\)</span>m per projection <span id="id8">[<a class="reference internal" href="../../../index.html#id140" title="Cédric Schmidt, Arielle L. Planchette, David Nguyen, Gabriel Giardina, Yoan Neuenschwander, Mathieu Di Franco, Alessio Mylonas, Adrien C. Descloux, Enrico Pomarico, Aleksandra Radenovic, and Jérôme Extermann. High resolution optical projection tomography platform for multispectral imaging of the mouse gut. Biomedical Optics Express, 12(6):3619–3629, June 2021.">13</a>]</span>.
+Moreover, the rotation motor can achieve a step angle as precise as 0.3 degrees, resulting in 1200 projections.
+Therefore, storing a vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> can take up several tens of gigabytes.
+3D reconstruction and calibration on such large datasets are
+infeasible either memory-wise on GPU or speed-wise on CPU.
+We thus propose a multiscale scheme (see <a class="reference internal" href="#fig-opt-calibration-flowchart"><span class="std std-numref">Fig. 12</span></a>)
+to overcome the computational bottleneck.
+We run our calibration algorithm on downsampled measurement data at a computationally feasible scale.</p>
+<figure class="align-default" id="fig-opt-calibration-flowchart">
+<a class="reference internal image-reference" href="../../../_images/flowchart.png"><img alt="../../../_images/flowchart.png" src="../../../_images/flowchart.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Workflow of the multiscale calibration-reconstruction algorithm.
+We first perform a joint reconstruction-calibration at coarse scale, then,
+use calibrated parameters for final reconstruction at fine scale.</span><a class="headerlink" href="#fig-opt-calibration-flowchart" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="proof algorithm admonition" id="algo:opt-global-recon">
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (OPT Joint Reconstruction-Calibration)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Input</strong>:
+Downsampled measurement <span class="math notranslate nohighlight">\(\mathbf{b}_{\text{c}}\)</span> for coarse calibration,
+measurement <span class="math notranslate nohighlight">\(\mathbf{b}_{\text{r}}\)</span> for fine reconstruction,
+initial guesses <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^*\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{t}^*\)</span> that correspond to an ideal system,
+forward model <span class="math notranslate nohighlight">\(\mathbf{H}_{\text{c}}\)</span> at the coarse scale,
+maximal number <span class="math notranslate nohighlight">\(K\)</span> of global iterations</p>
+<ol class="arabic">
+<li><p><span class="math notranslate nohighlight">\(k = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\theta}^k = \boldsymbol{\theta}^*, \boldsymbol{t}^k=\boldsymbol{t}^*\)</span>,
+<span class="math notranslate nohighlight">\(\mathbf{c}_{\text{c}}^k=\mathbf{0}\)</span> (initial guess of the coefficient vector for coarse calibration)</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(k=1 \text{ to } K\)</span>:</p>
+<p>i. <span class="math notranslate nohighlight">\(\mathbf{c}_{\text{c}}^k \leftarrow\arg\underset{\mathbf{c}_{\text{c}}}{\min}\left\{\|\mathbf{H}_{\text{c}} (\boldsymbol{\theta}^{k-1},\boldsymbol{t}^{k-1})\mathbf{c}_{\text{c}} - \mathbf{b}_{\text{c}}\|^2_2\right\}\)</span></p>
+<p>ii. <span class="math notranslate nohighlight">\((\boldsymbol{\theta}^k,\boldsymbol{t}^k)\leftarrow\arg\underset{\boldsymbol{\theta}\in\mathbb{R}^{P+2}, \,\boldsymbol{t}\in\mathbb{R}^{2}}{\min}\left\{\|\mathbf{H}_{\text{c}}(\boldsymbol{\theta},\boldsymbol{t})  \mathbf{c}_{\text{c}}^k- \mathbf{b}_{\text{c}}\|^2_2\right\}\)</span></p>
+</li>
+<li><p>Set the optimized parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{opt} = \boldsymbol{\theta}^K, \boldsymbol{t}^{opt} = \boldsymbol{t}^K\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{c}^{opt} \leftarrow\arg\underset{\mathbf{c}\in\mathbb{R}^N}{\min}\left\{\|\mathbf{H} (\boldsymbol{\theta}^{opt},\boldsymbol{t}^{opt})\mathbf{c} - \mathbf{b}_{\text{r}}\|^2_2\right\}\)</span> (Reconstruction
+at fine scale)</p></li>
+</ol>
+<p><strong>Return</strong>: <span class="math notranslate nohighlight">\(\mathbf{c}^{opt}\)</span></p>
+</section>
+</div><p>The inverse problem here is formulated as:</p>
+<div class="math-wrapper docutils container" id="equation-eq-opt-global-minimization">
+<div class="math notranslate nohighlight" id="equation-eq-opt-global-minimization">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eq-opt-global-minimization" title="Link to this equation">¶</a></span>\[    \mathbf{c}^{opt},(\boldsymbol{\theta}^{opt},\boldsymbol{t}^{opt})\in\arg\underset{\mathbf{c},\boldsymbol{\theta},
+    \boldsymbol{t}}{\min}\left\{\frac{1}{2}\|\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t})
+    \mathbf{c}-\mathbf{b}\|^2_2\right\}.\]</div>
+</div>
+<p>The joint reconstruction-calibration algorithm is detailed in <a class="reference internal" href="#algo:opt-global-recon">Algorithm 1</a>.
+It consists of recovering the coefficient vector <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>
+by solving the optimization problem in Step i and calibrating the system parameters
+<span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span> by
+solving another optimization problem in Step ii in alternating fashion.
+We start with an initial guess of system parameter <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^0=\boldsymbol{\theta}^*\)</span>
+and <span class="math notranslate nohighlight">\(\boldsymbol{t}^0=\boldsymbol{t}^*\)</span> that corresponds to an ideal setup.</p>
+<p>Motivated by our observations in <a class="reference internal" href="classification.html#opt-catalog-of-mechanical-artifacts"><span class="std std-ref">Catalog of Mechanical Artifacts</span></a>
+that the radius of circle artifacts is directly related to the amount of translation,
+we shift projections over the range of values estimated from the severity of artifacts,
+apply the FBP algorithm to observe the evolution of circle artifacts in the reconstruction,
+then choose the value such that circle artifacts are sufficiently suppressed as the initial guess for
+<span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span>.
+This allows us to attain a good initial guess for <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span> rapidly,
+which is crucial for the success of the calibration algorithm as Step ii is a non-convex optimization problem.
+The calibrated system parameters are then used to reconstruct an artifact-free 3D image by running Step 5 in
+<a class="reference internal" href="#algo:opt-global-recon">Algorithm 1</a> at fine scale,
+as described in <a class="reference internal" href="#fig-opt-calibration-flowchart"><span class="std std-numref">Fig. 12</span></a>.
+We use accelerated gradient descent <span id="id9">[<a class="reference internal" href="../../../index.html#id51" title="Y. E. Nesterov. A method for unconstrained convex minimization problem with the rate of convergence o(1/k^2). Dokl. Akad. Nauk SSSR, 269(3):543-547, 1983.">75</a>]</span> to solve the optimization problems in
+Step i and 5, and semi-coordinate-wise gradient descent <span id="id10">[<a class="reference internal" href="../../../index.html#id117" title="Mona Zehni, Laurene Donati, Emmanuel Soubies, Zhizhen Zhao, and Michael Unser. Joint Angular Refinement and Reconstruction for Single-Particle Cryo-EM. IEEE Transactions on Image Processing, 29:6151–6163, 2020.">87</a>]</span> for Step ii.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="results.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Results</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="classification.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Characterization of Mechanical Artifacts</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Automatic Calibration</a><ul>
+<li><a class="reference internal" href="#forward-model-and-characterization-of-mechanical-errors">Forward Model and Characterization of Mechanical Errors</a></li>
+<li><a class="reference internal" href="#multiscale-joint-reconstruction-calibration-algorithm">Multiscale Joint Reconstruction-Calibration Algorithm</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

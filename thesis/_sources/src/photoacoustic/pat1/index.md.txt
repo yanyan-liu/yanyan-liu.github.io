@@ -1,0 +1,30 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(pat1)=
+# Part I: Model-Based Unmixing from Intermediate PA Images
+
+```{note}
+This section is based on the following publication:
+
+Y. Liu, J. Chuah, Y. Huang, A. C. Stiel, M. Unser, and J. Dong,
+"Model-based temporal unmixing towards quantitative photo-switching optoacoustic tomography,"
+_Optics Express_ 33, 6216 (2025).
+
+It is a collaboration with Helmholtz Zentrum München.
+```
+
+```{toctree}
+:maxdepth: 2
+
+background.md
+theory.md
+materials.md
+fluence.md
+results.md
+summary.md
+
+```

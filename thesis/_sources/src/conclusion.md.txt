@@ -1,0 +1,172 @@
+# Conclusion
+
+In this thesis, we have applied physics-based modeling to solve inverse problems in
+three representative modalities that push the limits of optical imaging.
+
+Optical projection tomography (OPT) and photo-switching photoacoustic imaging (PAI) go beyond the optical
+diffusion limit for large imaging depth.
+OPT adopts optical clearing to reduce scattering while
+PAI capitalizes on the photoacoustic effect and low ultrasonic scattering,
+both enabling deep-tissue imaging at high resolution.
+Combined with photo-switching proteins, PAI further enhances its sensitivity and specificity.
+
+Single molecule localization microscopy (SMLM), such as STED and MINFLUX,
+overcomes the optical diffraction limit for
+resolution as fine as a few nanometers via the design and engineering of their point spread function (PSF).
+
+While algorithms developed in this thesis are tailored to specific modalities,
+they embody the spirit of computational imaging and share a common methodology
+with the following steps:
+
+- Understand principles of the modality by interacting closely with practitioners in the field;
+- Describe the imaging system with a sufficiently accurate and efficient forward-imaging model;
+- Formulate tasks as mathematical inverse problems, typically in the form of optimization problems;
+- Deploy fast (iterative) algorithms to obtain a solution.
+
+In each modality, the inverse problem to solve introduces different challenges.
+In OPT, reconstructed images may suffer from artifacts due to mismatches between the forward model and 
+actual experimental realization, in particular, mechanical errors and the refractive index mismatch.
+Tasks there have been to characterize artifacts, propose tailored forward models for specific types of
+artifacts, and design fast and efficient correction algorithms.
+In photo-switching PAI, we have developed a mathematical framework that accurately models physical
+processes during a photo-switching experiment and proposed a regularized unmixing algorithm to disentangle
+different species of protein reporters for PA tomography and mesoscopy.
+For SMLM, the focus has been engineering and computation of PSFs: first, a study to investigate the optimal
+excitation patterns in MINFLUX; then, the development of a unifying theory to model and compute PSFs
+in the broader context of SMLM.
+
+## Contributions
+
+### Correction of Artifacts in Optical Projection Tomography
+
+In [Chapter 4](#chapter-opt), we have provided a systematic characterization and fast-and-efficient correction methods
+of two specific types of artifacts that our collaborators have observed:
+
+- mechanical artifacts due to imperfect instrumentation of sample placement and rotation stage (with the Computational Bioimaging Group at [Idiap](https://www.idiap.ch/));
+- optical artifacts caused by the mismatch of refractive indices between the sample and immersion liquid
+(with the [University of Applied Sciences of Western Switzerland](https://www.unige.ch/gap/biophotonics/former-members/cedric_schmidt)).
+
+For [mechanical artifacts](#opt-mechanical), we have introduced a 3D imaging model that enables us to describe the geometry
+and characterize possible mechanical errors of the system.
+We have summarized various types of mechanical artifacts in a catalog, along with detailed explanation of their cause,
+related correction methods, and visual clues, to help OPT practitioners calibrate their system.
+We have presented a multiscale joint reconstruction-calibration algorithm tailored for large-sized OPT datasets.
+Validated on phantom and experimental datasets, our framework is able to
+recover unknown system parameters and yield distortion-free volumetric reconstructions.
+
+For [optical artifacts](#opt-optical) due to refractive index mismatch between the sample and immersion liquid,
+the standard parallel-beam model is inaccurate for refracted light paths.
+We have proposed a ray-optics-based cone-beam model that better describes this effect
+and a corresponding fast correction method via the well-established FDK algorithm for cone-beam geometry.
+We have also introduced a reliable method for automatic determination of the origin of the cone beam, a parameter
+required by the reconstruction, to circumvent practical difficulties in applying the algorithm.
+Our method has successfully mitigated the _seagull_-shaped artifacts observed in the reconstructed images
+of fluorescent beads.
+
+### Temporal Unmixing for Photo-Switching Photoacoustic Imaging
+
+In [Chapter 5](#chapter-pa), we have collaborated with the Helmholtz Zentrum München within the European consortium
+[_SWOPT_](https://swopt.munichimaging.eu/).
+We have developed a model-based temporal unmixing framework, tailored to the consortium's hardware and
+novel photo-switching proteins, in two parts.
+
+In [Part I](#pat1), we have carefully modeled the dynamics of photo-switching signals based on the underlying physics
+(impact of light fluence and properties of proteins), and designed an unmixing algorithm to disentangle different
+species of reporters from pre-reconstructed PA images.
+For robustness against noise and clean unmixing results, we have adopted a combination of {math}`\ell_1`
+(on the number of species) and total-variation (on space) regularization.
+Our approach aggregates information from neighboring pixels and achieves
+more coherent intensity spatial maps as compared to existing pixelwise approaches.
+Validated on various phantoms and experiments, our unmixing approach enables efficient quantitative analysis
+of temporally multiplexed PA signals for photo-switching PA tomography.
+
+In [Part II](#pat2), building on Part I, we have included the acoustic model, leading to a global unmixing framework for
+photo-switching PA mesoscopy which consists of widefield illumination from a fixed laser
+and a linear array of ultrasound transducers.
+Our acoustic model follows principles of the synthetic aperture focusing technique (originally from ultrasound imaging),
+and accounts for transducer responses.
+We have joined photo-switching and acoustic forward operators as one composite operator,
+enabling one-step regularized reconstruction.
+This approach allows us to recover concentration maps directly from acoustic signals.
+Validated on numerous configurations, it has demonstrated robustness in terms of fluence estimation
+and measurement noise, as compared to two-step or unregularized methods.
+Computationally, we have efficiently implemented forward models as matrix-free operators,
+which has circumvented memory issues in other model-based approaches and enabled fast iterative algorithms.
+
+### Engineering of Point Spread Functions for Localization Microscopy
+
+In [Chapter 6](#lm-chapter), we have explored engineering and precise computation of PSFs.
+
+First, we have investigated the optimality of two excitation patterns,
+four donut beams and two pairs of half-moon beams, for MINFLUX
+(in collaboration with the [Vienna BioCenter](https://www.imp.ac.at/groups/francisco-balzarotti)).
+We have designed a fast and cost-efficient computational optimization pipeline that comprises models of
+light propagation, MINFLUX detection, and localization precision quantification via the Cramér-Rao bound.
+We have shown that the donut-based pattern is optimal when the four beams are constrained to the same shape,
+while two pairs of half-moon pattern further improves the precision by approximately twofold.
+Additionally, we have provided a mathematical analysis of the optimality and underlying physical intuitions.
+
+Then, we have viewed the computation of PSFs in the broader context of localization microscopy
+and introduced a unifying theory for a systematic modeling and computation of PSFs.
+We have shown that existing PSF models (based on the Richards-Wolf model) are in fact two separate parameterizations
+of the same propagation integral,
+which has enabled us to generalize diverse correction factors and apply them to both models.
+Eventually, the choice of models is simplified to scalar versus vectorial cases
+with Cartesian or spherical parameterization, optionally adding correction factors on top.
+To complement our theoretical framework, we have developed _PSF Generator_, an PyTorch-based open-source library
+that efficiently implements these models, which makes precise computation of PSFs more accessible to the microscopy
+community and beyond.
+
+## Outlook
+
+In [Chapter 4](#chapter-opt), we have proposed a 3D model to characterize mechanical artifacts and a multiscale
+joint reconstruction-calibration algorithm to correct them.
+Our approach is applicable to both transmission and emission OPT, and it can be further adapted to
+calibrate similar rotation-based tomographic imaging systems, such as X-ray CT.
+It is also possible to include the PSF of the system in our forward model to account for out-of-focus blur, a common
+issue for widefield OPT systems.
+Another potential improvement is introducing regularization, such as total-variation, to the final reconstruction
+step to enhance the image quality.
+
+For optical artifacts in emission OPT,
+we presented a cone-beam model to approximate refractive index mismatch at the interface of
+the cylinder agarose gel and immersion liquid, which we interpret as a virtual lens.
+This model can be extended to take into account the refractive index mismatch
+on both sides of the sample in transmission OPT.
+The cone-beam reconstruction method to correct _seagull_ artifacts was validated on fluorescent beads.
+It could be applied to non-pointwise samples, for example by introducing a few fiducial markers to
+calibrate the center of the cone beam automatically.
+
+In [Chapter 5](#chapter-pa), we have developed a model-based temporal unmixing framework for photo-switching PAT and PAM.
+The unmixing algorithm solves a regularized optimization problem using sparsity-based classical regularizers.
+Our approach may potentially be improved by including neural-network-based regularizers.
+In our framework, we adopted a linear photo-switching forward model by assuming a time-independent fluence.
+A future direction is to extend it to a nonlinear model by incorporating time-dependent fluence to
+the switching forward model.
+This is useful when light fluence varies substantially during switching.
+A possible unmixing approach in this case is to solve a joint unmixing and fluence estimation problem.
+Additionally, our acoustic model is designed to incorporate further transducer properties
+(simulated or measured) to enhance the quality of acoustic reconstruction for customized setups.
+Lastly, our global framework could be extended to 3D photo-switching PAM.
+
+In [Chapter 6](#lm-chapter), we first investigated optimal excitation patterns in MINFLUX via a computational framework
+that includes a scalar Fourier light propagation model.
+It could be replaced with a more precise vectorial model (e.g. vectorial Cartesian model in our
+unifying framework of PSFs) for high-NA systems.
+A future direction is the extension of our optimization framework to 3D localization, by adopting a 3D propagation model.
+
+We then introduced a unifying theory to model and compute PSFs for localization microscopy,
+and published a complementary open-source _PyTorch_ library.
+The theoretical model can be extended beyond single-pass focusing to incorporate the physics of the particle emission
+and accommodate dedicated models for specific microscopes, such as confocal and two-photon microscopy.
+Finally, our library should be updated regularly to incorporate newest theoretical and technical advancements. 
+
+In summary, we have shown that the framework of physics-based modeling, tailored regularization,
+modern computational tools, and interdisciplinary collaboration has helped practitioners
+overcome challenges in their modalities and improve image quality for their experiments.
+While machine learning offers powerful tools for biomedical imaging, there also remains a fundamental need for robust,
+physics-grounded reconstruction algorithms, designed for physical systems to address practical questions,
+that ensure reliability and interpretability in biological applications.
+By addressing the reconstruction stage of the imaging pipeline, this thesis also lays groundwork for
+subsequent image analysis tasks that extract further biological information and unlock deeper biological insights.
+We hope that the work conducted in this thesis supports ongoing biological research and future physics-informed learning methods.

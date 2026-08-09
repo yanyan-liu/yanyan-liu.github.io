@@ -1,0 +1,11 @@
+(intro-biomedical-optical-imaging)=
+# Biomedical Optical Imaging
+
+This chapter provides an overview of basic principles and components of an imaging pipeline, followed by a discussion
+on resolution and imaging depth, which are two important aspects of biomedical optical imaging.
+
+```{toctree}
+:maxdepth: 2
+
+optical_imaging.md
+```

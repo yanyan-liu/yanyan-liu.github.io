@@ -1,0 +1,219 @@
+(opt-calibration)=
+# Automatic Calibration
+
+In this section, we propose a computational framework that is able to detect the model mismatch
+between the forward model and measurement data.
+We start with a 3D forward model that fully characterizes our refined OPT geometry,
+including the 3D tilt that is out of reach of existing 2D methods.
+Then, we formulate the calibration of the system parameters as a multiscale joint reconstruction-calibration
+optimization problem.
+It outputs a set of calibrated system parameters that enables us to improve the reconstruction quality.
+This multiscale scheme allows us to overcome the memory bottleneck of 3D models and
+helps us to accelerate the calibration.
+
+(opt-forward-model)=
+## Forward Model and Characterization of Mechanical Errors
+
+The coordinate system to describe OPT geometry is the same as in {numref}`fig:opt-mechanical-setup` (b).
+When there exist mechanical errors, we describe the angular errors as a perturbation vector
+{math}`\boldsymbol{\delta}=(\boldsymbol{\delta}_{\boldsymbol{\varphi}},\delta_{\psi_1},\delta_{\psi_2})`.
+The actual angles {math}`\boldsymbol{\theta}={\boldsymbol{\theta}}^*+\boldsymbol{\delta}` can be expressed as a
+sum of the error vector
+{math}`\boldsymbol{\delta}` and the ideal angle vector
+{math}`{\boldsymbol{\theta}}^* = (\boldsymbol{\varphi}^*, \psi_1^*, \psi_2^*)`
+that characterizes an ideal OPT system: equidistant rotation angles {math}`\boldsymbol{\varphi}^*` between 0 and
+360 degrees and {math}`\psi_1^* = \psi_2^* = 0`.
+In addition, translation error of the sample is described by a 2D vector
+{math}`\boldsymbol{t}=(t_1,t_2)\in\mathbb{R}^2` in the detector plane, and the ideal {math}`\boldsymbol{t}^*=(0, 0)`.
+
+We omit optical effects to keep the forward model computationally efficient, which is often accepted
+in focal-sheet-scanning OPT setups {cite:p}`Marelli:21`.
+To fully characterize mechanical errors, we adopt the 3D X-ray transform
+{math}`\mathcal{P}_{\boldsymbol{\theta}}:L_2\left(\mathbb{R}^3\right)\rightarrow L_2\left(\mathbb{R}^2\right)`:
+
+```{math}
+:label: eq:opt-continuous-forward
+
+b^{\boldsymbol{\theta},\boldsymbol{t}}(\boldsymbol{v})=
+\mathcal{P}_{\boldsymbol{\theta}}\{f(\boldsymbol{u})\}(\boldsymbol{v}-\boldsymbol{t})+ n(\boldsymbol{v}),
+```
+It provides a mathematical description of straight-ray projections of a sample at any 3D pose
+{cite:p}`zehni_joint_2020`.
+The compactly supported function {math}`f(\boldsymbol{u})\in L_2(\mathbb{R}^3)`,
+{math}`\boldsymbol{u}=(x,y,z)` represents the 3D sample to be reconstructed.
+Measurement in the detector plane is denoted by {math}`b^{\boldsymbol{\theta},\,\boldsymbol{t}}(\boldsymbol{v})`
+for a location {math}`\boldsymbol{v}=(\xi,\eta)`, a sample orientation {math}`\boldsymbol{\theta}`,
+and a shift vector {math}`\boldsymbol{t}`.
+The additive random noise is denoted by {math}`n(\boldsymbol{v})`.
+
+To numerically implement the forward model, we follow the discretization framework detailed in section
+[](#intro-maths-forward-model-discrete) of the previous chapter [](#intro-modeling-and-solving-inverse-problems).
+We assume that measurement {math}`b^{\boldsymbol{\theta},\boldsymbol{t}}(\boldsymbol{v})`
+is acquired at sampled points
+{math}`\boldsymbol{v}_{\boldsymbol{j}} = \Delta\boldsymbol{j} = (j_1\Delta_1,j_2\Delta_2)`,
+where {math}`\boldsymbol{j}=(j_1,j_2)\in\Omega_{\text{2D}}\subset\mathbb{Z}^2` is the index of the sampled
+points.
+The diagonal matrix {math}`\Delta=\text{diag}\left\{\Delta_1,\Delta_2\right\}` contains the sampling steps
+in the {math}`\xi` and {math}`\eta` directions on the detector plane, respectively.
+The set {math}`\Omega_{\text{2D}}` denotes the support of the measurement which consists of {math}`M` elements in total.
+Plugging in this formulation into {eq}`eq:opt-continuous-forward`, we obtain
+
+```{math}
+:label: eq:opt-discrete-measurement
+
+b^{\boldsymbol{\theta},\boldsymbol{t}}(\Delta\boldsymbol{j})=\mathcal{P}_{\boldsymbol{\theta}}\{f(\boldsymbol{u})\}
+(\Delta\boldsymbol{j}-\boldsymbol{t})+n(\Delta\boldsymbol{j}).
+```
+
+Furthermore, we represent the 3D sample using a generalized sampling framework in {cite:p}`Unser2000` which we
+have described in the previous chapter [](#intro-modeling-and-solving-inverse-problems).
+We introduce a special reconstruction space {math}`V(\varphi)` in which {math}`f` is represented by a
+finite sum of a sequence of coefficients {math}`c[\cdot]` multiplied by a series of shifted basis functions
+(with a sampling step of 1):
+```{math}
+:label: eq:opt-mechanical-recon-space
+
+V(\varphi)=\left\{\sum_{\boldsymbol{k}\in\Omega_{3D}}c[\boldsymbol{k}]
+\varphi(\cdot-\boldsymbol{k}), 
+\quad c \in \ell_2\big(\mathbb{Z}^3\big)\right\}.
+```
+The 3D volume is thus represented by a vector {math}`\mathbf{c}=\big(c[\boldsymbol{k}]\big)_{\boldsymbol{k}
+\in\Omega_{\mathrm{3D}}}\in\mathbb{R}^N`, and {math}`\Omega_{\mathrm{3D}}\subset \mathbb{Z}^3` is the compact
+support of the coefficients.
+While the standard discretization uses rectangular basis functions, here we choose the optimized Kaiser-Bessel Window
+Function (KBWF) as they are well suited for tomographic settings
+{cite:p}`lewitt1990multidimensional, nilchian2015optimized`
+```{math}
+:label: eq:optimized-KBWF
+    \varphi(\boldsymbol{u})= \left\{
+    \begin{aligned}
+        & \dfrac{\Big(1-\big(\frac{\lVert\boldsymbol{u}\rVert}{a}\big)^2\Big)^{\frac{m}{2}}I_m\Big(\alpha\sqrt{1-\big(
+        \frac{\lVert\boldsymbol{u}\rVert}{a}\big)^2}\Big)}{I_m(\alpha)} \quad \text{if } 0\leq
+        \lVert\boldsymbol{u}\rVert \leq a, \\
+        & 0 \quad \text{otherwise,}
+    \end{aligned}
+    \right.
+```
+where {math}`a>0` is the support radius that controls the smoothness of the KBWF, {math}`\alpha>0` is the window taper
+that determines the shape of the KBWF and {math}`I_m` is the modified Bessel function of order {math}`m`.
+In our experiments, we used the following set of parameters: {math}`a=4`, {math}`\alpha=19` and {math}`m=2`.
+The advantage of KBWFs is that they are isotropic, compactly supported, and its X-ray transform
+{math}`\mathcal{P}_{\boldsymbol{\theta}}[\varphi]` is independent of {math}`\boldsymbol{\theta}` thus greatly reducing
+computational time {cite:p}`Donati2018`.
+Besides, it is convenient to compute analytic gradients for the tilt angles and shifts
+{cite:p}`zehni_joint_2020`.
+As a result, we use coefficient vector {math}`\mathbf{c}\in\mathbb{R}^N` to equivalently represent the 3D volume
+during reconstruction.
+Once {math}`\mathbf{c}` is recovered, the corresponding volume can be retrieved by expanding
+{math}`\mathbf{c}` through the formula in {eq}`eq:opt-mechanical-recon-space`.
+
+Substituting {math}`f` with KBWFs yields the discrete forward model
+{math}`\boldsymbol{\theta}`
+```{math}
+    b^{\boldsymbol{\theta},\boldsymbol{t}}(\Delta\boldsymbol{j})=\sum_{\boldsymbol{k}\in\Omega_{3D}}c[\boldsymbol{k}]
+    \mathcal{P}_{\boldsymbol{\theta}}[\varphi](\Delta\boldsymbol{j}-
+    \mathbf{M}_{\boldsymbol{\theta}^{\perp}}\boldsymbol{k}-\boldsymbol{t})+n(\Delta\boldsymbol{j}),
+```
+where is {math}`\mathbf{M}_{\boldsymbol{\theta}^{\perp}}` is the orthogonal projector matrix
+(see {cite:p}`zehni_joint_2020` for details).
+By stacking the measurement vectors
+{math}`b^{\boldsymbol{\theta},\boldsymbol{t}}(\Delta\boldsymbol{j})_{\boldsymbol{j}\in\Omega_{\text{2D}}}`,
+the system matrices {math}`\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t})[\boldsymbol{j},\boldsymbol{k}]=
+\mathcal{P}_{\boldsymbol{\theta}}[\varphi](\Delta\boldsymbol{j}-
+\mathbf{M}_{\boldsymbol{\theta}^{\perp}}\boldsymbol{k}-\boldsymbol{t})
+\in\mathbb{R}^{M \times N}`,
+and the noise vector {math}`\mathbf{n}=n(\Delta\boldsymbol{j})_{\boldsymbol{j}\in\Omega_{\text{2D}}}`
+at all {math}`P` orientations, we obtain the following linear system
+```{math}
+:label: eq:opt-discrete-forward
+
+\mathbf{b}=\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t})\;\mathbf{c} + \mathbf{n},
+```
+where {math}`\mathbf{b}, \mathbf{n} \in\mathbb{R}^{MP}`
+are the discrete measurement and noise vectors of {math}`P` projections, and the system matrix
+{math}`\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t}) \in \mathbb{R}^{MP \times N}` is a function of
+system parameters {math}`\boldsymbol{\theta}` and {math}`\boldsymbol{t}`.
+The 3D volume is represented by a finite-dimensional coefficient vector {math}`\mathbf{c}\in\mathbb{R}^N`.
+
+(opt-calibration-algorithm)=
+## Multiscale Joint Reconstruction-Calibration Algorithm
+
+The measurement data generated by a real OPT experiment usually has a very large size.
+For instance, current cameras can acquire OPT images up to {math}`2048^2` pixels with pixel size less than 1
+{math}`\mu`m per projection {cite:p}`Schmidt:21`.
+Moreover, the rotation motor can achieve a step angle as precise as 0.3 degrees, resulting in 1200 projections.
+Therefore, storing a vector {math}`\mathbf{b}` can take up several tens of gigabytes.
+3D reconstruction and calibration on such large datasets are
+infeasible either memory-wise on GPU or speed-wise on CPU.
+We thus propose a multiscale scheme (see {numref}`fig:opt-calibration-flowchart`)
+to overcome the computational bottleneck.
+We run our calibration algorithm on downsampled measurement data at a computationally feasible scale.
+
+```{figure} images/flowchart.*
+:name: fig:opt-calibration-flowchart
+:width: 100%
+
+Workflow of the multiscale calibration-reconstruction algorithm. 
+We first perform a joint reconstruction-calibration at coarse scale, then, 
+use calibrated parameters for final reconstruction at fine scale. 
+```
+
+```{prf:algorithm} OPT Joint Reconstruction-Calibration
+:label: algo:opt-global-recon
+
+**Input**: 
+Downsampled measurement {math}`\mathbf{b}_{\text{c}}` for coarse calibration,
+measurement {math}`\mathbf{b}_{\text{r}}` for fine reconstruction,
+initial guesses {math}`\boldsymbol{\theta}^*` and {math}`\boldsymbol{t}^*` that correspond to an ideal system,
+forward model {math}`\mathbf{H}_{\text{c}}` at the coarse scale,
+maximal number {math}`K` of global iterations
+
+1. {math}`k = 0`
+2. {math}`\boldsymbol{\theta}^k = \boldsymbol{\theta}^*, \boldsymbol{t}^k=\boldsymbol{t}^*`,
+{math}`\mathbf{c}_{\text{c}}^k=\mathbf{0}` (initial guess of the coefficient vector for coarse calibration)
+3. For {math}`k=1 \text{ to } K`:
+
+    i. {math}`\mathbf{c}_{\text{c}}^k \leftarrow\arg\underset{\mathbf{c}_{\text{c}}}{\min}\left\{\|\mathbf{H}_{\text{c}}
+(\boldsymbol{\theta}^{k-1},\boldsymbol{t}^{k-1})\mathbf{c}_{\text{c}} - \mathbf{b}_{\text{c}}\|^2_2\right\}`
+
+    ii. {math}`(\boldsymbol{\theta}^k,\boldsymbol{t}^k)\leftarrow\arg\underset{\boldsymbol{\theta}\in\mathbb{R}^{P+2},
+\,\boldsymbol{t}\in\mathbb{R}^{2}}{\min}\left\{\|\mathbf{H}_{\text{c}}(\boldsymbol{\theta},\boldsymbol{t})
+    \mathbf{c}_{\text{c}}^k- \mathbf{b}_{\text{c}}\|^2_2\right\}`
+4. Set the optimized parameters {math}`\boldsymbol{\theta}^{opt} = \boldsymbol{\theta}^K, \boldsymbol{t}^{opt} = \boldsymbol{t}^K`
+5. {math}`\mathbf{c}^{opt} \leftarrow\arg\underset{\mathbf{c}\in\mathbb{R}^N}{\min}\left\{\|\mathbf{H}
+(\boldsymbol{\theta}^{opt},\boldsymbol{t}^{opt})\mathbf{c} - \mathbf{b}_{\text{r}}\|^2_2\right\}` (Reconstruction
+at fine scale)
+
+**Return**: {math}`\mathbf{c}^{opt}`
+```
+
+The inverse problem here is formulated as:
+
+```{math}
+    :label: eq:opt-global-minimization
+    \mathbf{c}^{opt},(\boldsymbol{\theta}^{opt},\boldsymbol{t}^{opt})\in\arg\underset{\mathbf{c},\boldsymbol{\theta},
+    \boldsymbol{t}}{\min}\left\{\frac{1}{2}\|\mathbf{H}(\boldsymbol{\theta},\boldsymbol{t})
+    \mathbf{c}-\mathbf{b}\|^2_2\right\}.
+```
+
+The joint reconstruction-calibration algorithm is detailed in {prf:ref}`algo:opt-global-recon`.
+It consists of recovering the coefficient vector {math}`\mathbf{c}`
+by solving the optimization problem in Step i and calibrating the system parameters
+{math}`\boldsymbol{\theta}` and {math}`\boldsymbol{t}` by
+solving another optimization problem in Step ii in alternating fashion.
+We start with an initial guess of system parameter {math}`\boldsymbol{\theta}^0=\boldsymbol{\theta}^*`
+and {math}`\boldsymbol{t}^0=\boldsymbol{t}^*` that corresponds to an ideal setup.
+
+Motivated by our observations in [](#opt-catalog-of-mechanical-artifacts)
+that the radius of circle artifacts is directly related to the amount of translation,
+we shift projections over the range of values estimated from the severity of artifacts,
+apply the FBP algorithm to observe the evolution of circle artifacts in the reconstruction,
+then choose the value such that circle artifacts are sufficiently suppressed as the initial guess for
+{math}`\boldsymbol{t}`.
+This allows us to attain a good initial guess for {math}`\boldsymbol{t}` rapidly,
+which is crucial for the success of the calibration algorithm as Step ii is a non-convex optimization problem.
+The calibrated system parameters are then used to reconstruct an artifact-free 3D image by running Step 5 in
+{prf:ref}`algo:opt-global-recon` at fine scale,
+as described in {numref}`fig:opt-calibration-flowchart`.
+We use accelerated gradient descent {cite:p}`nesterov_method_1983` to solve the optimization problems in
+Step i and 5, and semi-coordinate-wise gradient descent {cite:p}`zehni_joint_2020` for Step ii.

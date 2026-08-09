@@ -1,0 +1,29 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(opt-optical)=
+# Optical Artifacts Due to Refractive-Index Mismatch
+
+```{note}
+This section is based on the following publication:
+
+Y. Liu, J. Dong, C. Schmidt, A. Boquet-Pujadas, J. Extermann, and M. Unser,
+"Artifacts in optical projection tomography due to refractive-index mismatch: Model and correction,"
+_Optics Letters_ 47, 2618 (2022).
+
+It is a collaboration with
+the [University of Applied Sciences of Western Switzerland](https://www.unige.ch/gap/biophotonics/former-members/cedric_schmidt).
+```
+
+```{toctree}
+:maxdepth: 2
+
+background.md
+modeling.md
+results.md
+summary.md
+
+```

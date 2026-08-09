@@ -1,0 +1,794 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Implementation" href="implementation.html"><link rel="prev" title="Background" href="background.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>A Unifying Theory of PSF Models</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="a-unifying-theory-of-psf-models">
+<span id="psf-theory"></span><h1>A Unifying Theory of PSF Models<a class="headerlink" href="#a-unifying-theory-of-psf-models" title="Link to this heading">¶</a></h1>
+<section id="the-richards-wolf-model-starting-point">
+<span id="psf-rw-model"></span><h2>The Richards-Wolf Model: Starting Point<a class="headerlink" href="#the-richards-wolf-model-starting-point" title="Link to this heading">¶</a></h2>
+<figure class="align-center" id="fig-psf-geometry">
+<a class="reference internal image-reference" href="../../../_images/geometry.png"><img alt="../../../_images/geometry.png" src="../../../_images/geometry.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Geometry of the focusing of optical fields.
+An incident field <span class="math notranslate nohighlight">\(\mathbf{e}_\mathrm{inc}\)</span> is transformed by a focusing element into a converging spherical
+wave <span class="math notranslate nohighlight">\(\mathbf{e}_\infty\)</span>.
+These fields are parametrized by a unit vector <span class="math notranslate nohighlight">\(\mathbf{s}\)</span>, either in Cartesian coordinates
+<span class="math notranslate nohighlight">\((s_x, s_y, s_z)\)</span> or spherical coordinates <span class="math notranslate nohighlight">\((\theta, \phi)\)</span>.
+The focus field <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is parametrized by <span class="math notranslate nohighlight">\(\boldsymbol{\rho} = (x, y, z)\)</span>,
+rewritten here to introduce cylindrical coordinates <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(\varphi\)</span>.</span><a class="headerlink" href="#fig-psf-geometry" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>As depicted in <a class="reference internal" href="#fig-psf-geometry"><span class="std std-numref">Fig. 54</span></a>, one obtains the PSF by computing the propagation of light after
+going through a focusing element, typically a microscope objective or lens.
+The incident field <span class="math notranslate nohighlight">\(\mathbf{e}_\mathrm{inc}(\mathbf{s})\)</span>,
+also called pupil function, is represented by a disk with a maximal cutoff angle defined by the NA of the
+imaging system.
+The focusing element transforms the planar incident field into a spherical wave,
+<span class="math notranslate nohighlight">\(\mathbf{e}_\infty(\mathbf{s})\)</span>, evaluated on the Gaussian reference sphere.
+This corresponds to an ensemble of far fields propagating with a direction <span class="math notranslate nohighlight">\(\mathbf{s}\)</span> and converge
+to the focal point <span class="math notranslate nohighlight">\(O\)</span>.
+Our goal is to compute the focused electric field <span class="math notranslate nohighlight">\(\mathbf{E}(\boldsymbol{\rho})\)</span> near
+<span class="math notranslate nohighlight">\(O\)</span>.
+Thanks to the reciprocity of light propagation,
+this model can also be extended to the emission of a point source to the
+back focal plane of a microscope objective,
+but this is not the focus of the current study.</p>
+<p>The model introduced by Richards and Wolf <span id="id1">[<a class="reference internal" href="../../../index.html#id155" title="Bernard Richards and Emil Wolf. Electromagnetic diffraction in optical systems, II. Structure of the image field in an aplanatic system. Proceedings of the Royal Society of London. Series A. Mathematical and Physical Sciences, 253(1274):358–379, 1959.">227</a>]</span> is the starting point
+that allows us to derive all the precise PSF models described in previous works.
+The focal field is given by a sum of plane waves with the direction <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x,s_y,s_z)\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-initial-vectorial">
+<div class="math notranslate nohighlight" id="equation-eq-initial-vectorial">
+<span class="eqno">(148)<a class="headerlink" href="#equation-eq-initial-vectorial" title="Link to this equation">¶</a></span>\[    \mathbf{E}(\boldsymbol{\rho}) 
+    = -\frac{\mathrm{i} fk}{2\pi}\iint\limits_{\Omega}\mathbf{e}_\infty(\mathbf{s})
+    \exp{\left\{\mathrm{i}k\mathbf{s}\cdot\boldsymbol{\rho}\right\}} \mathrm{d}\Omega,\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\rho} = (x,y,z) = (\rho\cos\varphi, \rho\sin\varphi,z)\)</span>
+is the position vector in the focal region of the lens,
+<span class="math notranslate nohighlight">\(\mathbf{s} = (s_x,s_y,s_z) = (\sin\theta \cos\phi, \sin\theta \sin\phi, \cos\theta)\)</span>
+is a unit vector describing the direction of an incoming ray,
+<span class="math notranslate nohighlight">\(f\)</span> is the focal length of the lens,
+<span class="math notranslate nohighlight">\(k = \frac{2\pi n}{\lambda}\)</span> is the wavenumber,
+<span class="math notranslate nohighlight">\(\lambda\)</span> is the wavelength,
+<span class="math notranslate nohighlight">\(n\)</span> is the refractive index of the propagation medium, and <span class="math notranslate nohighlight">\(\mathbf{e}_\infty(\mathbf{s})\)</span>
+describes the field distribution on the Gaussian reference sphere.
+We integrate over the set <span class="math notranslate nohighlight">\(\Omega\)</span> of solid angles defined on a region
+<span class="math notranslate nohighlight">\(s_x^2 + s_y^2 \leq s_\mathrm{max}^2\)</span>,
+where <span class="math notranslate nohighlight">\(s_\mathrm{max} = \frac{\mathrm{NA}}{n_i}\)</span> is the cutoff determined by the NA
+and <span class="math notranslate nohighlight">\(n_i\)</span> is the refractive index of the immersion medium.
+The angle <span class="math notranslate nohighlight">\(\theta\)</span> is therefore defined within the immersion medium.
+We first describe different classes of models based on this simplified concise equation and introduce the correction
+factors later.</p>
+</section>
+<section id="scalar-models">
+<span id="psf-scalar-models"></span><h2>Scalar Models<a class="headerlink" href="#scalar-models" title="Link to this heading">¶</a></h2>
+<p>As a first step, it is common to reply a scalar approximation to simplify calculations,
+especially in low-NA scenarios.
+In this case, the far field is equal to the incident field,
+so that <span class="math notranslate nohighlight">\(e_\infty(\mathbf{s}) = e_\mathrm{inc}(\mathbf{s})\)</span>
+The focal field is then given by:</p>
+<div class="math-wrapper docutils container" id="equation-eq-initial-scalar">
+<div class="math notranslate nohighlight" id="equation-eq-initial-scalar">
+<span class="eqno">(149)<a class="headerlink" href="#equation-eq-initial-scalar" title="Link to this equation">¶</a></span>\[    E(\boldsymbol{\rho}) 
+    = -\frac{\mathrm{i} fk}{2\pi}\iint\limits_{\Omega}e_\infty(s_x,s_y)
+    \exp{\left\{\mathrm{i}k\mathbf{s}\cdot\boldsymbol{\rho}\right\}} \mathrm{d}\Omega.\]</div>
+</div>
+<p>This expression involves a two-dimensional integral over the pupil disk.
+Two possible parametrizations yield the two classes of models described previously.</p>
+<section id="cartesian-parameterization">
+<span id="psf-scalar-cartesian-parameterization"></span><h3>Cartesian parameterization<a class="headerlink" href="#cartesian-parameterization" title="Link to this heading">¶</a></h3>
+<p>The Cartesian parametrization utilizes both <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> coordinates
+with <span class="math notranslate nohighlight">\(\mathrm{d}\Omega = \mathrm{d}s_x \mathrm{d}s_y / s_z\)</span>, resulting in:</p>
+<div class="math-wrapper docutils container" id="equation-eq-cartesian-scalar">
+<div class="math notranslate nohighlight" id="equation-eq-cartesian-scalar">
+<span class="eqno">(150)<a class="headerlink" href="#equation-eq-cartesian-scalar" title="Link to this equation">¶</a></span>\[    E(\boldsymbol{\rho}) 
+    = -\frac{\mathrm{i} fk}{2\pi}\iint\limits_{s_x^2 + s_y^2 \leq s_{\max}^2} \frac{e_\infty(s_x,s_y)}{s_z}
+    \exp{\left\{\mathrm{i}ks_z z\right\}} \exp{\left\{\mathrm{i} k (s_x x + s_y y)\right\}}
+    \mathrm{d}s_x \mathrm{d}s_y.\]</div>
+</div>
+<p>In this form,
+the focused field at a <span class="math notranslate nohighlight">\(z\)</span>-transverse plane is given by the 2D inverse Fourier transform
+of <span class="math notranslate nohighlight">\((e_\infty(s_x,s_y)\exp{\left\{\mathrm{i} k s_z z\right\}} / s_z)\)</span>,
+where <span class="math notranslate nohighlight">\(s_z = \sqrt{1-s_x^2-s_y^2}\)</span>.
+Thus, the Cartesian parametrization of the Richards-Wolf integral leverages the speed and efficiency of
+the Fast Fourier Transform (FFT) algorithm.</p>
+</section>
+<section id="spherical-parameterization">
+<span id="psf-scalar-spherical-parametrization"></span><h3>Spherical parameterization<a class="headerlink" href="#spherical-parameterization" title="Link to this heading">¶</a></h3>
+<p>Alternatively,
+the spherical approach parametrizes the problem with two angles
+<span class="math notranslate nohighlight">\(\theta \in [0, \theta_{\max}]\)</span>
+(the maximum angle <span class="math notranslate nohighlight">\(\theta_{\max}\)</span> is determined by the NA)
+and <span class="math notranslate nohighlight">\(\phi \in [0, 2\pi]\)</span>, as depicted in <a class="reference internal" href="#fig-psf-geometry"><span class="std std-numref">Fig. 54</span></a>.
+With <span class="math notranslate nohighlight">\(\boldsymbol{\rho} = (x,y,z) = (\rho\cos\varphi, \rho\sin\varphi, z)\)</span>
+and <span class="math notranslate nohighlight">\(\mathrm{d}\Omega = \sin\theta \mathrm{d}\theta \mathrm{d}\phi\)</span>,
+the field in the focal region can be rewritten as:</p>
+<div class="math-wrapper docutils container" id="equation-eq-polar-scalar">
+<div class="math notranslate nohighlight" id="equation-eq-polar-scalar">
+<span class="eqno">(151)<a class="headerlink" href="#equation-eq-polar-scalar" title="Link to this equation">¶</a></span>\[    E(\boldsymbol{\rho}) 
+    = -\frac{\mathrm{i} fk}{2\pi} \int_0^{\theta_{\max}} \mathrm{d}\theta 
+    \int_0^{2\pi} \mathrm{d}\phi e_\infty(\theta,\phi) 
+    \exp{\left\{\mathrm{i}k\rho\sin\theta\cos(\phi-\varphi)\right\}}
+    \exp{\left\{\mathrm{i}kz\cos\theta\right\}} \sin\theta.\]</div>
+</div>
+<p><a class="reference internal" href="#equation-eq-polar-scalar">Eq. (151)</a> can be further simplified
+if one assumes that the pupil function is axisymmetric (rotational invariant),
+i.e. <span class="math notranslate nohighlight">\(e_\infty(\theta, \phi) = e_\infty(\theta)\)</span>.
+In this case the integral over <span class="math notranslate nohighlight">\(\phi\)</span> in <a class="reference internal" href="#equation-eq-polar-scalar">Eq. (151)</a>
+can be computed explicitly using the Bessel function <span class="math notranslate nohighlight">\(J_0\)</span>, which leads to</p>
+<div class="math-wrapper docutils container" id="equation-eq-polar-scalar-final">
+<div class="math notranslate nohighlight" id="equation-eq-polar-scalar-final">
+<span class="eqno">(152)<a class="headerlink" href="#equation-eq-polar-scalar-final" title="Link to this equation">¶</a></span>\[    E(\boldsymbol{\rho}) 
+    = -\mathrm{i} fk \int_0^{\theta_{\max}} \mathrm{d}\theta e_\infty(\theta) J_0(k \rho \sin \theta)
+    \exp{\left\{\mathrm{i}kz\cos\theta\right\}} \sin\theta.\]</div>
+</div>
+<p>Here, we have used the following identities
+where <span class="math notranslate nohighlight">\(J_n\)</span> is the Bessel function of <span class="math notranslate nohighlight">\(n\)</span>th-order of the first kind:</p>
+<div class="math-wrapper docutils container" id="equation-eq-spherical-identity-1">
+<div class="math notranslate nohighlight" id="equation-eq-spherical-identity-1">
+<span class="eqno">(153)<a class="headerlink" href="#equation-eq-spherical-identity-1" title="Link to this equation">¶</a></span>\[    \int_{0}^{2\pi} \cos(n\phi) \exp{\left\{\mathrm{i} x \cos(\phi-\varphi)\right\}}\mathrm{d}\phi = 
+    2\pi(\mathrm{i})^n J_n(x)\cos(n\varphi)\]</div>
+</div>
+<div class="math-wrapper docutils container" id="equation-eq-spherical-identity-2">
+<div class="math notranslate nohighlight" id="equation-eq-spherical-identity-2">
+<span class="eqno">(154)<a class="headerlink" href="#equation-eq-spherical-identity-2" title="Link to this equation">¶</a></span>\[    \int_{0}^{2\pi} \sin(n\phi) \exp{\left\{\mathrm{i} x \cos(\phi-\varphi)\right\}}\mathrm{d}\phi = 
+    2\pi(\mathrm{i})^n J_n(x)\sin(n\varphi)\]</div>
+</div>
+<p>Defocus is included in these models using the defocus phase factor
+<span class="math notranslate nohighlight">\(\exp{\left\{\mathrm{i}k s_z z\right\}} = \exp{\left\{\mathrm{i}kz \cos\theta\right\}}\)</span>
+where <span class="math notranslate nohighlight">\(z\)</span> is the defocus distance.
+This expression, also known as angular spectrum propagation <span id="id2">[<a class="reference internal" href="../../../index.html#id153" title="Joseph W. Goodman. Introduction to Fourier optics. W.H. Freeman, Macmillan Learning, New York, USA, fourth edition, 2017.">43</a>]</span>,
+accurately models the propagation of electric field in a homogeneous medium.</p>
+</section>
+</section>
+<section id="vectorial-models">
+<span id="psf-vectorial-models"></span><h2>Vectorial Models<a class="headerlink" href="#vectorial-models" title="Link to this heading">¶</a></h2>
+<p>As the electric field is a vectorial quantity,
+vectorial propagation models are necessary to accurately account for the propagation
+and crosstalk between the different components of the vector field.
+Precise vectorial models are crucial for high-NA systems,
+where the need to consider high angles arises.</p>
+<p>In the vectorial model,
+the dependence of the far field <span class="math notranslate nohighlight">\(\mathbf{e}_\infty(\mathbf{s})\)</span> on the incident field
+<span class="math notranslate nohighlight">\(\mathbf{e}_{\mathrm{inc}}(\mathbf{s})\)</span> now requires us to perform the basis change from a cylindrical
+to a spherical coordinate system, as in</p>
+<div class="math-wrapper docutils container" id="equation-eq-field-gaussian-sphere">
+<div class="math notranslate nohighlight" id="equation-eq-field-gaussian-sphere">
+<span class="eqno">(155)<a class="headerlink" href="#equation-eq-field-gaussian-sphere" title="Link to this equation">¶</a></span>\[\begin{split}    \begin{aligned}
+    \mathbf{e}_\infty(\theta,\phi) = &amp;
+    \begin{bmatrix} 
+        q_s(1-\cos2\phi) + q_p(1+\cos2\phi)\cos\theta \\
+        (-q_s+q_p\cos\theta)\sin2\phi \\
+        -2 q_p \cos\phi \sin\theta
+    \end{bmatrix}
+    \frac{e_\mathrm{inc}^x(\theta,\phi)}{2} \\
+    &amp; +
+    \begin{bmatrix}
+        (-q_s+q_p\cos\theta)\sin2\phi \\
+        q_s (1+\cos2\phi) + q_p (1-\cos2\phi) \cos\theta \\
+        - 2 q_p \sin\phi \sin\theta
+    \end{bmatrix}
+    \frac{e_\mathrm{inc}^y(\theta,\phi)}{2}
+    \end{aligned}\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{e}_\mathrm{inc} = [e_\mathrm{inc}^x, e_\mathrm{inc}^y, 0]\)</span>.
+The so-called Fresnel transmission coefficients <span class="math notranslate nohighlight">\(q_s\)</span> and <span class="math notranslate nohighlight">\(q_p\)</span> have been introduced
+to account for partial reflection at interfaces, which depend on the polarization
+state and the incidence angle.
+For each polarization, the coefficients correspond to the product of all transmission coefficients for each interface
+from medium <span class="math notranslate nohighlight">\(m\)</span> to <span class="math notranslate nohighlight">\(m+1\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-src-microscopy-psf-theory-0">
+<div class="math notranslate nohighlight" id="equation-src-microscopy-psf-theory-0">
+<span class="eqno">(156)<a class="headerlink" href="#equation-src-microscopy-psf-theory-0" title="Link to this equation">¶</a></span>\[    q_s^{m} = \frac{2 n_m \cos{\theta_m}}{n_m\cos\theta_m + n_{m+1}\cos{\theta_{m+1}}},\]</div>
+</div>
+<div class="math-wrapper docutils container" id="equation-src-microscopy-psf-theory-1">
+<div class="math notranslate nohighlight" id="equation-src-microscopy-psf-theory-1">
+<span class="eqno">(157)<a class="headerlink" href="#equation-src-microscopy-psf-theory-1" title="Link to this equation">¶</a></span>\[    q_p^{m} = \frac{2 n_m \cos{\theta_m}}{n_{m+1}\cos\theta_m + n_{m}\cos{\theta_{m+1}}}.\]</div>
+</div>
+<p>It is worth noting that in the low-NA limit (<span class="math notranslate nohighlight">\(\theta=0\)</span>) with <span class="math notranslate nohighlight">\(q_s = q_p = 1\)</span>,
+<a class="reference internal" href="#equation-eq-field-gaussian-sphere">Eq. (155)</a> simplifies to
+<span class="math notranslate nohighlight">\(\mathbf{e}_\infty(\theta,\phi) = \mathbf{e}_{\mathrm{inc}}(\theta,\phi)\)</span>.
+This explains why the scalar model did not account for this geometric change of variables.</p>
+<section id="psf-vectorial-cartesian-parameterization">
+<span id="id3"></span><h3>Cartesian Parameterization<a class="headerlink" href="#psf-vectorial-cartesian-parameterization" title="Link to this heading">¶</a></h3>
+<p>The Cartesian parametrization of the vectorial model consists of the following integral</p>
+<div class="math-wrapper docutils container" id="equation-eq-cartesian-vectorial">
+<div class="math notranslate nohighlight" id="equation-eq-cartesian-vectorial">
+<span class="eqno">(158)<a class="headerlink" href="#equation-eq-cartesian-vectorial" title="Link to this equation">¶</a></span>\[    \mathbf{E}(\boldsymbol{\rho}) 
+    = -\frac{\mathrm{i} fk}{2\pi}\iint\limits_{s_x^2+s_y^2 \leq s_{\max}^2}\frac{\mathbf{e}_\infty(s_x, s_y)}{s_z}
+    \exp{\left\{\mathrm{i}k s_z z\right\}}\exp{\left\{\mathrm{i}k(s_x x + s_y y)\right\}} \mathrm{d}s_x \mathrm{d}s_y,\]</div>
+</div>
+<p>which essentially boils down to the computation of the inverse Fourier Transform of
+<span class="math notranslate nohighlight">\((\mathbf{e}_\infty(s_x, s_y) \exp{\left\{\mathrm{i}k s_z z\right\}}/s_z)\)</span>,
+similar to the scalar case.</p>
+</section>
+<section id="spf-vectorial-spherical-parameterization">
+<span id="id4"></span><h3>Spherical Parameterization<a class="headerlink" href="#spf-vectorial-spherical-parameterization" title="Link to this heading">¶</a></h3>
+<p>With the help of coordinate transformations similar to the scalar case, we can derive the spherical parametrization
+of the field in the focal region as</p>
+<div class="math-wrapper docutils container" id="equation-eq-polar-vectorial">
+<div class="math notranslate nohighlight" id="equation-eq-polar-vectorial">
+<span class="eqno">(159)<a class="headerlink" href="#equation-eq-polar-vectorial" title="Link to this equation">¶</a></span>\[    \mathbf{E}(\boldsymbol{\rho}) = -\frac{\mathrm{i} fk}{2\pi}\int_0^{\theta_{\max}} \mathrm{d}\theta 
+    \int_0^{2\pi} \mathrm{d}\phi\,\mathbf{e}_\infty(\theta,\phi) 
+    \exp{\left\{\mathrm{i}k\rho\sin\theta\cos(\phi-\varphi)\right\}}
+    \exp{\left\{\mathrm{i}kz\cos\theta\right\}} \sin\theta.\]</div>
+</div>
+<p>Inserting <a class="reference internal" href="#equation-eq-field-gaussian-sphere">Eq. (155)</a> into <a class="reference internal" href="#equation-eq-polar-vectorial">Eq. (159)</a> and
+using the axisymmetric assumption of the incident field,
+we can obtain a simplified expression for the focal field as</p>
+<div class="math-wrapper docutils container" id="equation-eq-polar-vectorial-final">
+<div class="math notranslate nohighlight" id="equation-eq-polar-vectorial-final">
+<span class="eqno">(160)<a class="headerlink" href="#equation-eq-polar-vectorial-final" title="Link to this equation">¶</a></span>\[\begin{split}    \mathbf{E}(\boldsymbol{\rho}) = - \frac{\mathrm{i} fk}{2} \left[ \begin{array}{c}
+    [I_{0}^x - I_{2}^x\cos2\varphi] - I_{2}^y\sin2\varphi\\
+    - I_{2}^x\sin2\varphi + [I_{0}^y + I_{2}^y\cos2\varphi]\\
+    -2\mathrm{i}I_{1}^x\cos\varphi  -2\mathrm{i}I_{1}^y\sin\varphi
+  \end{array} \right]\end{split}\]</div>
+</div>
+<p>where</p>
+<div class="math-wrapper docutils container" id="equation-eq-i0">
+<div class="math notranslate nohighlight" id="equation-eq-i0">
+<span class="eqno">(161)<a class="headerlink" href="#equation-eq-i0" title="Link to this equation">¶</a></span>\[    I_{0}^a (\rho,z) = \int_0^{\theta_{\max}} e_\mathrm{inc}^a(\theta)\sin\theta (\cos\theta+1)
+    J_0(k\rho\sin\theta)\exp{\left\{\mathrm{i}kz\cos\theta\right\}}\mathrm{d}\theta\]</div>
+</div>
+<div class="math-wrapper docutils container" id="equation-eq-i1">
+<div class="math notranslate nohighlight" id="equation-eq-i1">
+<span class="eqno">(162)<a class="headerlink" href="#equation-eq-i1" title="Link to this equation">¶</a></span>\[    I_{1}^a (\rho,z)= \int_0^{\theta_{\max}} e_\mathrm{inc}^a(\theta)\sin^2\theta J_1(k\rho\sin\theta)
+    \exp{\left\{\mathrm{i}kz\cos\theta\right\}}\mathrm{d}\theta\]</div>
+</div>
+<div class="math-wrapper docutils container" id="equation-eq-i2">
+<div class="math notranslate nohighlight" id="equation-eq-i2">
+<span class="eqno">(163)<a class="headerlink" href="#equation-eq-i2" title="Link to this equation">¶</a></span>\[    I_{2}^a (\rho,z) = \int_0^{\theta_{\max}} e_\mathrm{inc}^a(\theta)\sin\theta (\cos\theta-1)
+    J_2(k\rho\sin\theta)\exp{\left\{\mathrm{i}kz\cos\theta\right\}}\mathrm{d}\theta\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(a\in\{x,y\}\)</span>.</p>
+</section>
+</section>
+<section id="additional-factors">
+<span id="psf-additional-factors"></span><h2>Additional Factors<a class="headerlink" href="#additional-factors" title="Link to this heading">¶</a></h2>
+<p>Precise PSF models commonly include several physical effects which may affect the true PSF.
+They are added as amplitude factors <span class="math notranslate nohighlight">\(a(\mathbf{s})\)</span> and phase factors <span class="math notranslate nohighlight">\(W(\mathbf{s})\)</span>
+in the original integral over solid angles in <a class="reference internal" href="#equation-eq-initial-vectorial">Eq. (148)</a>, leading to</p>
+<div class="math-wrapper docutils container" id="equation-eq-vectorial-general-with-correction">
+<div class="math notranslate nohighlight" id="equation-eq-vectorial-general-with-correction">
+<span class="eqno">(164)<a class="headerlink" href="#equation-eq-vectorial-general-with-correction" title="Link to this equation">¶</a></span>\[    \mathbf{E}(\boldsymbol{\rho}) 
+    = -\frac{\mathrm{i} fk}{2\pi}\iint\limits_{\Omega} a(\mathbf{s})
+     \exp{\left\{\mathrm{i} W(\mathbf{s})\right\}} \mathbf{e}_\infty(\mathbf{s})
+      \exp{\left\{\mathrm{i}k\mathbf{s}\cdot\boldsymbol{\rho}\right\}}
+       \mathrm{d}\Omega.\]</div>
+</div>
+<p><a class="reference internal" href="#equation-eq-vectorial-general-with-correction">Eq. (164)</a> enables us to express these correction factors in full generality
+for both vectorial and scalar models, and
+for both Cartesian and spherical parametrizations.
+We present a detailed list of these correction factors in the following sections and their graphical description
+in <a class="reference internal" href="#fig-psf-correction-factors"><span class="std std-numref">Fig. 55</span></a>.</p>
+<figure class="align-center" id="fig-psf-correction-factors">
+<a class="reference internal image-reference" href="../../../_images/aberrations.png"><img alt="../../../_images/aberrations.png" src="../../../_images/aberrations.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Correction factors and associated physical origins.
+Top part: phase correction factors, either introduced on the incident field or due to refraction.
+Bottom part: amplitude correction factors that model the incident beam envelope or apodization factor
+for energy conservation.</span><a class="headerlink" href="#fig-psf-correction-factors" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<section id="phase-correction-factors">
+<span id="psf-additional-factor-phase"></span><h3>Phase Correction Factors<a class="headerlink" href="#phase-correction-factors" title="Link to this heading">¶</a></h3>
+<section id="gibson-lanni-factor-correction-for-refractive-index-mismatch">
+<span id="psf-gibson-lanni-factor"></span><h4>Gibson-Lanni Factor: Correction for Refractive Index Mismatch<a class="headerlink" href="#gibson-lanni-factor-correction-for-refractive-index-mismatch" title="Link to this heading">¶</a></h4>
+<p>Microscopes typically have stratified layers of different refractive indices.
+The biological sample is usually aqueous,
+on top of which we place a coverslip made of glass,
+and the whole sample is then put in a water or oil immersion medium to increase the numerical aperture.
+The microscope objectives are designed to provide aberration-free images in a specific setting
+with design values for refractive indices and thicknesses of each layer.
+Any mismatch introduces spherical aberrations due to refraction at the interface between the layers.
+These aberrations can be computed using the following formula expressed in spherical coordinates</p>
+<div class="math-wrapper docutils container" id="equation-eq-stratified-layers-general-formula">
+<div class="math notranslate nohighlight" id="equation-eq-stratified-layers-general-formula">
+<span class="eqno">(165)<a class="headerlink" href="#equation-eq-stratified-layers-general-formula" title="Link to this equation">¶</a></span>\[\begin{split}    \begin{aligned}
+    W(\mathbf{s}) = \frac{2\pi}{\lambda}
+    &amp;\left(
+    t_s \sqrt{n_s^2 - n_i^2 \sin^2 \theta} +
+    t_i \sqrt{n_i^2 - n_i^2 \sin^2 \theta}\right. \\ 
+    &amp; \left. -t_i^* \sqrt{\left.n_i^*\right.^2 - n_i^2 \sin^2 \theta} +
+    t_g \sqrt{n_g^2 - n_i^2 \sin^2 \theta} \right.\\
+    &amp; \left. -t_g^* \sqrt{\left.n_g^*\right.^2 - n_i^2 \sin^2 \theta}
+    \right),
+    \end{aligned}\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\sin\theta\)</span> is computed as <span class="math notranslate nohighlight">\(\sin\theta = \frac{NA}{n_i}\sqrt{s_x^2+s_y^2}\)</span>.
+The quantities <span class="math notranslate nohighlight">\(n_s\)</span>, <span class="math notranslate nohighlight">\(n_i\)</span>, <span class="math notranslate nohighlight">\(n_g\)</span> are the refractive indices of the sample,
+immersion medium, and glass respectively, <span class="math notranslate nohighlight">\(t_s\)</span>, <span class="math notranslate nohighlight">\(t_i\)</span>, <span class="math notranslate nohighlight">\(t_g\)</span> are
+the thicknesses of the sample, immersion medium, and glass respectively, and their
+counterparts with stars are the design conditions.</p>
+<p>In practice, it is challenging in practice to assess the thickness of the immersion medium.
+Since this distance is manually tuned to obtain an optimal focus of a point emitter at depth
+<span class="math notranslate nohighlight">\(t_s\)</span> on the camera, this focusing condition gives the following relation:</p>
+<div class="math-wrapper docutils container" id="equation-eq-gibson-lanni-t-i">
+<div class="math notranslate nohighlight" id="equation-eq-gibson-lanni-t-i">
+<span class="eqno">(166)<a class="headerlink" href="#equation-eq-gibson-lanni-t-i" title="Link to this equation">¶</a></span>\[    t_i = t_s + n_i \left( -\frac{t_s}{n_s} - \frac{t_g}{n_g} + \frac{t_g^*}{n_g^*} + \frac{t_i^*}{n_i^*} \right),\]</div>
+</div>
+<p>which can be inserted in <a class="reference internal" href="#equation-eq-stratified-layers-general-formula">Eq. (165)</a>.
+This particular expression has first been derived for the spherical scalar case in <span id="id5">[<a class="reference internal" href="../../../index.html#id164" title="Sarah Frisken Gibson and Frederick Lanni. Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy. Journal of the Optical Society of America A, 9(1):154–166, January 1992.">197</a>]</span>
+and extended to the spherical vectorial case in <span id="id6">[<a class="reference internal" href="../../../index.html#id156" title="Peter Török, P Varga, Z Laczik, and GR Booker. Electromagnetic diffraction of light focused through a planar interface between materials of mismatched refractive indices: An integral representation. Journal of the Optical Society of America A, 12(2):325–332, 1995.">238</a>, <a class="reference internal" href="../../../index.html#id157" title="P Török and P Varga. Electromagnetic diffraction of light focused through a stratified medium. Applied Optics, 36(11):2305–2312, 1997.">239</a>]</span>.</p>
+</section>
+<section id="arbitrary-phase-aberrations">
+<span id="psf-arbitrary-phase-aberrations"></span><h4>Arbitrary Phase Aberrations<a class="headerlink" href="#arbitrary-phase-aberrations" title="Link to this heading">¶</a></h4>
+<p>More general aberration models can be introduced to describe imperfections in the optical system,
+for the benefit of PSF engineering or wavefront shaping.
+Designed aberrations can be introduced purposefully via a phase mask or a spatial light modulator at the pupil plane.
+These aberrations are often parametrized by Zernike polynomials (a set of orthonormal polynomials
+defined on the pupil disk, see <a class="reference internal" href="#fig-psf-zernike"><span class="std std-numref">Fig. 56</span></a>) or by a direct fixed phase mask to obtain desired PSFs.</p>
+<figure class="align-center" id="fig-psf-zernike">
+<a class="reference internal image-reference" href="../../../_images/zernike.png"><img alt="../../../_images/zernike.png" src="../../../_images/zernike.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Images of the first 15 Zernike polynomials. Generated using the library
+<a class="reference external" href="https://pypi.org/project/ZernikePy/">ZernikePy</a>.</span><a class="headerlink" href="#fig-psf-zernike" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We write it in the most general case as</p>
+<div class="math-wrapper docutils container" id="equation-eq-zernike-aberrations">
+<div class="math notranslate nohighlight" id="equation-eq-zernike-aberrations">
+<span class="eqno">(167)<a class="headerlink" href="#equation-eq-zernike-aberrations" title="Link to this equation">¶</a></span>\[    W(\mathbf{s}) = \sum_{k=0}^{K-1} c_k Z_k(\mathbf{s}) + W_0(\mathbf{s}).\]</div>
+</div>
+<p><a class="reference internal" href="#equation-eq-zernike-aberrations">Eq. (167)</a> is composed of the sum of two terms:</p>
+<ul class="simple">
+<li><p>an inner product of the first <span class="math notranslate nohighlight">\(K\)</span> Zernike polynomials and their corresponding coefficients <span class="math notranslate nohighlight">\(c_k\)</span>, and</p></li>
+<li><p>an additional term <span class="math notranslate nohighlight">\(W_0\)</span> which can be used to include special cases not covered by the Zernike polynomials, e.g. a vortex phase ramp that leads to a donut PSF as we have seen in <a class="reference internal" href="../minflux/index.html#chapter-minflux"><span class="std std-ref">Optimal Excitation Patterns in MINFLUX via PSF Engineering</span></a>.</p></li>
+</ul>
+<p>Since the arbitrary phase aberrations described in <a class="reference internal" href="#equation-eq-zernike-aberrations">Eq. (167)</a> may not necessarily be axisymmetric,
+they can only be applied to the most general, Cartesian parametrization.</p>
+</section>
+</section>
+<section id="amplitude-correction-factors">
+<span id="psf-additional-factor-amplitude"></span><h3>Amplitude Correction Factors<a class="headerlink" href="#amplitude-correction-factors" title="Link to this heading">¶</a></h3>
+<section id="apodization-factor">
+<span id="psf-apodization-factor"></span><h4>Apodization Factor<a class="headerlink" href="#apodization-factor" title="Link to this heading">¶</a></h4>
+<p>The apodization factor is an amplitude correction factor
+to ensure energy conservation during the change of basis from cylindrical coordinates
+(incident field <span class="math notranslate nohighlight">\(\mathbf{e}_\mathrm{inc}\)</span>) to spherical coordinates (far field <span class="math notranslate nohighlight">\(\mathbf{e}_\infty\)</span>),
+which takes prominence especially for high-NA objectives.
+Since areas of cross-sections are modified, the field is also rescaled accordingly.
+Such rescaling ensures that the differential areas <span class="math notranslate nohighlight">\(dA_1\)</span> on the plane and
+<span class="math notranslate nohighlight">\(dA_2\)</span> on the sphere,
+as shown in <a class="reference internal" href="#fig-psf-correction-factors"><span class="std std-numref">Fig. 55</span></a>,
+remain consistent under the change of coordinates.
+The corresponding correcting factor is</p>
+<div class="math-wrapper docutils container" id="equation-src-microscopy-psf-theory-2">
+<div class="math notranslate nohighlight" id="equation-src-microscopy-psf-theory-2">
+<span class="eqno">(168)<a class="headerlink" href="#equation-src-microscopy-psf-theory-2" title="Link to this equation">¶</a></span>\[    A(\mathbf{s}) = \sqrt{\cos\theta},\]</div>
+</div>
+<p>when going from cylindrical to spherical in the focusing configuration of <a class="reference internal" href="#fig-psf-geometry"><span class="std std-numref">Fig. 54</span></a>.</p>
+</section>
+<section id="gaussian-envelop">
+<span id="psf-gaussian-envelope"></span><h4>Gaussian Envelop<a class="headerlink" href="#gaussian-envelop" title="Link to this heading">¶</a></h4>
+<p>The incident illumination can also depart from a perfect uniform plane wave.
+In particular, we often assume a Gaussian and express it as</p>
+<div class="math-wrapper docutils container" id="equation-src-microscopy-psf-theory-3">
+<div class="math notranslate nohighlight" id="equation-src-microscopy-psf-theory-3">
+<span class="eqno">(169)<a class="headerlink" href="#equation-src-microscopy-psf-theory-3" title="Link to this equation">¶</a></span>\[    A(\mathbf{s}) = \exp\left\{-\frac{\sin^2\theta}{s_\mathrm{env}^2}\right\},\]</div>
+</div>
+<p>where the constant <span class="math notranslate nohighlight">\(s_\mathrm{env}\)</span> determines the size of the envelope.</p>
+</section>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="implementation.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Implementation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="background.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Background</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">A Unifying Theory of PSF Models</a><ul>
+<li><a class="reference internal" href="#the-richards-wolf-model-starting-point">The Richards-Wolf Model: Starting Point</a></li>
+<li><a class="reference internal" href="#scalar-models">Scalar Models</a><ul>
+<li><a class="reference internal" href="#cartesian-parameterization">Cartesian parameterization</a></li>
+<li><a class="reference internal" href="#spherical-parameterization">Spherical parameterization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vectorial-models">Vectorial Models</a><ul>
+<li><a class="reference internal" href="#psf-vectorial-cartesian-parameterization">Cartesian Parameterization</a></li>
+<li><a class="reference internal" href="#spf-vectorial-spherical-parameterization">Spherical Parameterization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#additional-factors">Additional Factors</a><ul>
+<li><a class="reference internal" href="#phase-correction-factors">Phase Correction Factors</a><ul>
+<li><a class="reference internal" href="#gibson-lanni-factor-correction-for-refractive-index-mismatch">Gibson-Lanni Factor: Correction for Refractive Index Mismatch</a></li>
+<li><a class="reference internal" href="#arbitrary-phase-aberrations">Arbitrary Phase Aberrations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#amplitude-correction-factors">Amplitude Correction Factors</a><ul>
+<li><a class="reference internal" href="#apodization-factor">Apodization Factor</a></li>
+<li><a class="reference internal" href="#gaussian-envelop">Gaussian Envelop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

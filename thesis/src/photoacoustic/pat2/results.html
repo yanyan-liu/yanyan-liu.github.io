@@ -1,0 +1,774 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Summary" href="summary.html"><link rel="prev" title="Inverse Problems" href="inverse.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Results</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<style>
+  .ss-layout-default-A_B_C { grid-template-areas: 'A' 'B' 'C'; }
+  .ss-layout-default-AB_CD { grid-template-areas: 'A B' 'C D'; }
+</style>
+<section class="tex2jax_ignore mathjax_ignore" id="results">
+<h1>Results<a class="headerlink" href="#results" title="Link to this heading">¶</a></h1>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
+<p>We use a numerical phantom of size <span class="math notranslate nohighlight">\((300 \times 300)\)</span> pixels to represent a 2D sample with physical size
+<span class="math notranslate nohighlight">\((5.6 \times 5.6)\)</span> mm and disk-like objects to mimic photo-switching reporters.
+They are located around the acoustic focal plane, at depth 2.8 mm.
+We also consider two species A and B.
+They are located in the disks on top of a heterogeneous background.
+One disk in particular contains a mixture of A and B in 1:1 ratio,
+which helps us to test the performance of the algorithm on spatially overlapping targets
+(see <a class="reference internal" href="#fig-pat2-simu-setup"><span class="std std-numref">Fig. 32</span></a> (a)-(c)).
+We let that species A has a higher dynamic range of switching signals and a faster switching speed than species B.
+Detailed information on the photo-physical properties and optical parameters involved in the simulation is provided in
+<a class="reference internal" href="#tab-photophysics"><span class="std std-numref">Table 6</span></a>.</p>
+<div class="table-wrapper colwidths-auto docutils container" id="tab-photophysics">
+<table class="docutils align-default" id="tab-photophysics">
+<caption><span class="caption-number">Table 6 </span><span class="caption-text">Photo-Physical Properties of the Reporters</span><a class="headerlink" href="#tab-photophysics" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(k\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\varepsilon^{\text{ON}}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\varepsilon^{\text{OFF}}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Species A</p></td>
+<td><p>4</p></td>
+<td><p><span class="math notranslate nohighlight">\(5\times 10 ^{-3}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1 \times 10^{-4}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Species B</p></td>
+<td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(4 \times 10^{-3}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1 \times 10^{-4}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Background</p></td>
+<td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\(5 \times 10^{-3}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(5 \times 10^{-3}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We use a uniform illumination of width <span class="math notranslate nohighlight">\(W=2.8\)</span> mm centered on the top surface of the sample.
+The computed fluence map, assuming a constant absorption coefficient <span class="math notranslate nohighlight">\(\mu_{\text{a}}=0.02\text{ mm}^{-1}\)</span>
+and constant scattering coefficient <span class="math notranslate nohighlight">\(\mu_{\text{s}}=1\text{ mm}^{-1}\)</span>,
+is used for reconstruction and shown in <a class="reference internal" href="#fig-pat2-simu-setup"><span class="std std-numref">Fig. 32</span></a> (d).
+We compare it with the true fluence map (<a class="reference internal" href="#fig-pat2-simu-setup"><span class="std std-numref">Fig. 32</span></a> (e)) computed using the true heterogeneous absorption
+coefficient map based on the background and the reporters and show the difference between them in
+<a class="reference internal" href="#fig-pat2-simu-setup"><span class="std std-numref">Fig. 32</span></a> (f).
+We will see that despite the mismatch of up to 10% between the approximated and the true fluence distribution,
+our framework is robust to achieve good unmixing results.</p>
+<figure class="align-default" id="fig-pat2-simu-setup">
+<a class="reference internal image-reference" href="../../../_images/simu_setup.png"><img alt="../../../_images/simu_setup.png" src="../../../_images/simu_setup.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">(a)-(c) Ground-truth concentration maps (in <span class="math notranslate nohighlight">\(\mu\)</span>M) of the two photo-switching species of reporters and
+the non-switching background.
+The insets of two of the reporters are shown in (a) and (b) for better visualization.
+The horizontal dotted line in (c) indicates position of the focal plane of the transducer.
+(d) Computed fluence map (arbitrary unit) used for reconstruction.
+(e) True fluence map (arbitrary unit) used to synthesize measurements.
+(f) Difference map between (d) and (e) in percentage.
+(g) Synthesized PA signals (first frame) during an OFF-switching cycle.
+Each reporter is circled out for better identification.
+(h) Temporal series of PA signals (intensity averaged over the area of each reporter).
+The color coding is the same as in (g), similar for (j) and (l).
+(i) and (k): Subsequent acoustic signals (first frame) with 1% (i) and 10% (k) noise.
+(j) and (l): Temporal series of acoustic signals (intensity averaged over the area of each reporter)
+that correspond to (i) and (k).</span><a class="headerlink" href="#fig-pat2-simu-setup" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>To synthesize acoustic measurements, we construct and apply the true forward model on the
+ground-truth concentration maps shown in <a class="reference internal" href="#fig-pat2-simu-setup"><span class="std std-numref">Fig. 32</span></a> (a)-(c) using the true fluence distribution
+map.
+Gaussian random noise proportional to a fraction of the maximal amplitude of the complete switching cycle is
+added to the measurements.
+Temporal evolution of photo-switching PA and resulting acoustic signals with 1% and 10% noise are shown in
+<a class="reference internal" href="#fig-pat2-simu-setup"><span class="std std-numref">Fig. 32</span></a> (g)-(l).
+Animations of these signals are also available online <span id="id1">[<a class="reference internal" href="../../../index.html#id296" title="https://doi.org/10.5281/zenodo.17449090.">174</a>]</span>.
+Forward model for the reconstruction algorithm is established using the computed fluence map without prior
+information on the heterogeneity of the background or on the reporters.</p>
+</section>
+<section id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">¶</a></h2>
+<p>We use four metrics to evaluate the quality of reconstruction, which afford us several perspectives.
+Let <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y} \in\mathbb{R}^N\)</span> be the ground truth and reconstructed images, respectively.</p>
+<p>Normalized root-mean-square error (NRMSE) which is defined as</p>
+<div class="math-wrapper docutils container" id="equation-eq-nrmse">
+<div class="math notranslate nohighlight" id="equation-eq-nrmse">
+<span class="eqno">(96)<a class="headerlink" href="#equation-eq-nrmse" title="Link to this equation">¶</a></span>\[    \text{NRMSE} = \frac{\|\mathbf{x} - \mathbf{y}\|_2}{\|\mathbf{x}\|_2},\]</div>
+</div>
+<p>quantifies the relative total error of the reconstruction <span id="id2">[<a class="reference internal" href="../../../index.html#id259" title="Tyler Harrison, Peng Shao, and Roger J. Zemp. A least-squares fixed-point iterative algorithm for multiple illumination photoacoustic tomography. Biomedical Optics Express, 4(10):2224, October 2013.">175</a>]</span> .
+Peak signal-to-noise ratio (PSNR) which is defined as</p>
+<div class="math-wrapper docutils container" id="equation-eq-psnr">
+<div class="math notranslate nohighlight" id="equation-eq-psnr">
+<span class="eqno">(97)<a class="headerlink" href="#equation-eq-psnr" title="Link to this equation">¶</a></span>\[    \text{PSNR}(\mathbf{x}, \mathbf{y}) = 20 \cdot \log_{10} (\text{MAX}) - 10 \cdot \log_{10}
+    (\|\mathbf{x} - \mathbf{y}\|_2),\]</div>
+</div>
+<p>evaluates the strength of the signal against noise,
+where MAX represents the largest possible pixel value of the image.
+Structural similarity (SSIM) which is defined as</p>
+<div class="math-wrapper docutils container" id="equation-eq-ssim">
+<div class="math notranslate nohighlight" id="equation-eq-ssim">
+<span class="eqno">(98)<a class="headerlink" href="#equation-eq-ssim" title="Link to this equation">¶</a></span>\[    {\rm SSIM}({\bf x},{\bf y})=\frac{(2\mu_{x}\mu_{y}+C_{1})(2\sigma_{xy}+C_{2})}
+    {\left(\mu_{x}^{2}+\mu_{y}^{2}+C_{1}\right) \left(\sigma_{x}^{2}+\sigma_{y}^{2}+C_{2}\right)},\]</div>
+</div>
+<p>measures the textural similarity between reconstruction and ground truth <span id="id3">[<a class="reference internal" href="../../../index.html#id260" title="Zhou Wang, A.C. Bovik, H.R. Sheikh, and E.P. Simoncelli. Image quality assessment: from error visibility to structural similarity. IEEE Transactions on Image Processing, 13(4):600–612, April 2004.">176</a>]</span>.
+Quantities <span class="math notranslate nohighlight">\(\mu_{x(y)}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{x(y)}\)</span> are the estimated mean intensity and standard deviation of
+an image <span class="math notranslate nohighlight">\(\mathbf{x}(\mathbf{y})\)</span>, <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> are constant to avoid division by a tiny number.
+Dice similarity (Dice) which is defined as</p>
+<div class="math-wrapper docutils container" id="equation-eq-dice">
+<div class="math notranslate nohighlight" id="equation-eq-dice">
+<span class="eqno">(99)<a class="headerlink" href="#equation-eq-dice" title="Link to this equation">¶</a></span>\[    \textrm{Dice}=\frac{2|\textrm{ROI}(\mathbf{y})\cap\textrm{ROI}
+    (\mathbf{x})|}{|\textrm{ROI}(\mathbf{y})|+|\textrm{ROI}(\mathbf{x})|},
+    \quad \text{ROI}(\mathbf{x}) = \left\{ n | x_n &gt; \max(\mathbf{x}) \times 10\% \right\},\]</div>
+</div>
+<p>assesses the overlap of locations of the signal between reconstruction and ground
+truth <span id="id4">[<a class="reference internal" href="../../../index.html#id261" title="Lee R. Dice. Measures of the Amount of Ecologic Association Between Species. Ecology, 26(3):297–302, July 1945.">177</a>]</span>.
+Here, we choose a strict threshold of 10% in the definition of the ROI to better evaluate the separation
+of the signal due to the high noise setting in our simulations.
+Dice is between 0 and 1, and a high Dice value indicates good recovery of the location of the ROI.</p>
+</section>
+<section id="reconstruction-results">
+<h2>Reconstruction Results<a class="headerlink" href="#reconstruction-results" title="Link to this heading">¶</a></h2>
+<section id="low-noise-regime">
+<span id="pat2-low-noise-regime"></span><h3>Low Noise Regime<a class="headerlink" href="#low-noise-regime" title="Link to this heading">¶</a></h3>
+<p>We first show the performance of our proposed regularized one-step approach with 1% noise in the acoustic signals.
+In <a class="reference internal" href="#fig-low-noise-recon"><span class="std std-numref">Fig. 33</span></a>, we see that our method not only faithfully recovered concentration maps of the
+two photo-switching species compared to ground truth, but also cleanly unmixed them from each other and from the
+background.
+Our method also performs better than the regularized two-step method in the reconstruction of the two species.</p>
+<figure class="align-default" id="fig-low-noise-recon">
+<a class="reference internal image-reference" href="../../../_images/regularized_recon_noise_1e-02_paper.png"><img alt="../../../_images/regularized_recon_noise_1e-02_paper.png" src="../../../_images/regularized_recon_noise_1e-02_paper.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Reconstruction results using the regularized one-step approach under <strong>1% noise</strong> level.
+(a)-(c) Reconstructed concentration maps of the two species and the background.
+(d)-(e) Ground truth.
+Rectangular region between the two horizontal dashed lines in (d) indicates the area on which we calculate the SSIM.</span><a class="headerlink" href="#fig-low-noise-recon" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="high-noise-regime">
+<span id="pat2-high-noise-regime"></span><h3>High Noise Regime<a class="headerlink" href="#high-noise-regime" title="Link to this heading">¶</a></h3>
+<p>We then further validate our approach by comparing it with the two-step approach at a higher level of noise of 10%.
+In <a class="reference internal" href="#fig-high-noise-recon"><span class="std std-numref">Fig. 34</span></a>, we compare four inversion techniques:
+unregularized two-step, unregularized one-step, regularized two-step, and regularized one-step (proposed).
+Unregularized techniques use the LSQR algorithm <span id="id5">[<a class="reference internal" href="../../../index.html#id252" title="Christopher C. Paige and Michael A. Saunders. LSQR: An Algorithm for Sparse Linear Equations and Sparse Least Squares. ACM Transactions on Mathematical Software, 8(1):43–71, March 1982.">178</a>]</span> to obtain the solution.
+We observe that only the proposed approach successfully reconstructed and unmixed the two species out of
+the background (<a class="reference internal" href="#fig-high-noise-recon"><span class="std std-numref">Fig. 34</span></a> (p)-(t)); a close comparison of the intensity profile over a line
+segment (indicated in <a class="reference internal" href="#fig-high-noise-recon"><span class="std std-numref">Fig. 34</span></a> (a) and (b)) with ground truth reveals quantitative
+quality of reconstruction.
+Two unregularized approaches separated the photo-switching reporters from the background but failed to distinguish
+the two species and mitigate noise in the reconstruction.
+The regularized two-step approach produced less noisy images due to the regularization but failed at unmixing the
+slower-switching species B from the other faster-switching species A or the background.
+This is indicated by the absence of reporters which belong to species B in <a class="reference internal" href="#fig-high-noise-recon"><span class="std std-numref">Fig. 34</span></a> (l) and the
+appearance of them in image of species A and the background (<a class="reference internal" href="#fig-high-noise-recon"><span class="std std-numref">Fig. 34</span></a> (k) and (m)).</p>
+<figure class="align-default" id="fig-high-noise-recon">
+<a class="reference internal image-reference" href="../../../_images/compare_methods_noise_1e-01_paper.png"><img alt="../../../_images/compare_methods_noise_1e-01_paper.png" src="../../../_images/compare_methods_noise_1e-01_paper.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Comparison of reconstruction results using different inversion approaches under <strong>10% noise</strong> level.
+(a)-(e): unregularized two-step approach.
+(f)-(j): unregularized one-step approach.
+(k)-(o): Regularized two-step approach.
+(p)-(t): Regularized one-step approach.
+First to third columns: reconstructed concentration maps of the two species and background.
+Last column: Intensity of the reconstruction along a dashed line segment drawn in (a) and (b).
+Color orange and green represent line profiles in species A and B, respectively.
+Corresponding solid orange and green lines represent ground truth.</span><a class="headerlink" href="#fig-high-noise-recon" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Evolution of the cost during the main minimization problem for the two regularized methods in
+<a class="reference internal" href="#fig-low-noise-recon"><span class="std std-numref">Fig. 33</span></a> and <a class="reference internal" href="#fig-high-noise-recon"><span class="std std-numref">Fig. 34</span></a> is
+shown in <a class="reference internal" href="#fig-pat2-cost-evolution"><span class="std std-numref">Fig. 35</span></a>.</p>
+<figure class="align-default" id="fig-pat2-cost-evolution">
+<img alt="../../../_images/cost_evolution.png" src="../../../_images/cost_evolution.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Cost evolution of the regularized approaches in the case of 1% ((a)-(c)) and 10% ((d)-(f)) noise in the measurement.</span><a class="headerlink" href="#fig-pat2-cost-evolution" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="dependence-on-the-setup">
+<h3>Dependence on the Setup<a class="headerlink" href="#dependence-on-the-setup" title="Link to this heading">¶</a></h3>
+<p>Finally, we check the performance of our proposed approach in a variety of configurations.</p>
+<ul class="simple">
+<li><p>Noise levels: 1%, 5%, and 10%</p></li>
+<li><p>Kinetic constant of species A: 4.0, 3.5 and 3 (while species B is 2.0)</p></li>
+<li><p>Laser energy: 500, 400, 300 (arbitrary unit).</p></li>
+</ul>
+<p>We show quantitative evaluation of our approach for several configurations in
+<a class="reference internal" href="#fig-compare-metrics-over-noise-levels"><span class="std std-numref">Fig. 36</span></a>.
+We see that the performance of our approach is stable across configurations.
+In the test of robustness against the noise level, SSIM and Dice values are close to the perfect value 1.0
+(see <a class="reference internal" href="#fig-compare-metrics-over-noise-levels"><span class="std std-numref">Fig. 36</span></a> (b) and (d)).
+PSNR values slightly decrease (<a class="reference internal" href="#fig-compare-metrics-over-noise-levels"><span class="std std-numref">Fig. 36</span></a> (a)) and NRMSE values increase
+(<a class="reference internal" href="#fig-compare-metrics-over-noise-levels"><span class="std std-numref">Fig. 36</span></a> (c)) when the noise level is raised.</p>
+<p>In a second test, we show impact of the laser power.
+Similar to the results in the first test, the performance of our approach is still stable,
+especially in terms of SSIM (<a class="reference internal" href="#fig-compare-metrics-over-noise-levels"><span class="std std-numref">Fig. 36</span></a> (f)).
+When laser power decreases, intensity of the light fluence is lowered,
+which decreases not only the amplitude of the detected signal but also the switching speed.
+The difficulty of unmixing therefore increases,
+which explains the decrease in Dice for species A in <a class="reference internal" href="#fig-compare-metrics-over-noise-levels"><span class="std std-numref">Fig. 36</span></a> (h).</p>
+<p>We also compare the quality of unmixing when the difference between the kinetic constants of the two species changes.
+The evolution curve of the three metrics of the background in <a class="reference internal" href="#fig-compare-metrics-over-noise-levels"><span class="std std-numref">Fig. 36</span></a> (i)-(k)
+remains more or less flat, which indicates that the reconstruction of the background is not influenced.
+The reconstruction quality of the two species, measured by the four metrics,
+shows similar tendencies as compared with previous tests.
+Overall, the performance of our proposed approach is stable across different configurations.</p>
+<figure class="sphinx-subfigure align-default" id="fig-compare-metrics-over-noise-levels" style="width: 100%">
+<div class="sphinx-subfigure-grid ss-layout-default-A_B_C" style="display: grid;">
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: A;">
+<img alt="" src="../../../_images/noise_evolution.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: B;">
+<img alt="" src="../../../_images/laser_evolution.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: C;">
+<img alt="" src="../../../_images/kinetic_evolution.png" />
+</div>
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Performance of the proposed regularized one-step approach under different configurations.
+(a)-(d) Different noise levels.
+(e)-(h) Different laser powers (arbitrary unit).
+(i)-(l) Different kinetics for species A.</span><a class="headerlink" href="#fig-compare-metrics-over-noise-levels" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="hyperparameters">
+<span id="pat2-hyperparameters"></span><h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">¶</a></h3>
+<p>Regarding the search for hyperparameters, unregularized methods only have one hyperparameter, the number of
+iterations.
+The linear systems <span class="math notranslate nohighlight">\(\mathbf{W}_{\text{tot}}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are ill-conditioned.
+The estimated condition numbers <span class="math notranslate nohighlight">\(\kappa\)</span> for the setups in
+<a class="reference internal" href="#pat2-low-noise-regime"><span class="std std-ref">Low Noise Regime</span></a> and <a class="reference internal" href="#pat2-high-noise-regime"><span class="std std-ref">High Noise Regime</span></a> are
+<span class="math notranslate nohighlight">\(\kappa(\mathbf{W}_{\text{tot}}) = 160\)</span>, <span class="math notranslate nohighlight">\(\kappa(\mathbf{S}) = 280\)</span>, and <span class="math notranslate nohighlight">\(\kappa(\mathbf{A}) = 460\)</span>.
+we apply early stopping to regularize the solution and avoid fitting it to noise.</p>
+<p>The main hyperparameter of regularized methods is the regularization weight.
+They are tuned such that the reconstruction achieves the overall best PSNR for both species.
+We used <span class="math notranslate nohighlight">\(K_2=20\)</span> iterations for the inner loop of the proximal gradient step,
+threshold values of <span class="math notranslate nohighlight">\(\varepsilon_1=10^{-8}\)</span> and <span class="math notranslate nohighlight">\(\varepsilon_2=10^{-4}\)</span> for the stopping criteria,
+and a maximal number <span class="math notranslate nohighlight">\(K_1=500\)</span> of iterations for the main problem in <a class="reference internal" href="inverse.html#alg:prox-outer">Algorithm 3</a>.</p>
+</section>
+</section>
+<section id="computational-analysis">
+<h2>Computational Analysis<a class="headerlink" href="#computational-analysis" title="Link to this heading">¶</a></h2>
+<p>For a phantom of size <span class="math notranslate nohighlight">\((300 \times 300)\)</span> pixels, average computational time for regularized one-step
+and two-step approaches is 180 seconds and 115 seconds, respectively.
+The spatial integration step of the acoustic model (<a class="reference internal" href="forward_models.html#equation-eq-q-above-final">Eq. (75)</a> and <a class="reference internal" href="forward_models.html#equation-eq-q-below-final">Eq. (77)</a>)
+accounts for the majority of the computation and requires an efficient implementation.
+It involves repeated correlations between the input image and a sparse kernel composed of 1D semicircles of various
+radii that are depth-dependent (see <a class="reference internal" href="forward_models.html#fig-acoustic-signal-generation"><span class="std std-numref">Fig. 30</span></a>).</p>
+<p>The implementation of the spatial integration consists of two core operators:</p>
+<ul class="simple">
+<li><p>Row Operator that generates one horizontal slice of the output signal at a given depth via a correlation with
+the masked spatial response followed by an extraction of a row of pixels at the focal plane;</p></li>
+<li><p>Image Operator that assembles the output of the Row Operators at all depths to form a 2D image.</p></li>
+</ul>
+<p>One approach to compute the correlation involved in Row Operator is to use the fast Fourier transform (FFT) and
+dense array representations of 2D images, hereafter referred to as the FFT Row Operator.
+Another approach, referred to as the custom Row Operator, computes correlations directly in the original domain.</p>
+<figure class="sphinx-subfigure align-default" id="fig-benchmark-rowop" style="width: 100%">
+<div class="sphinx-subfigure-grid ss-layout-default-AB_CD" style="display: grid;">
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: A;">
+<img alt="" src="../../../_images/compare_rowops_per_row.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: B;">
+<img alt="" src="../../../_images/compare_rowops.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: C;">
+<img alt="" src="../../../_images/acoustic_benchmarking.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: D;">
+<img alt="" src="../../../_images/full_benchmarking.png" />
+</div>
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Runtime benchmark of the forward and adjoint modes of the Row Operator (a), Image Operator (b),
+complete acoustic operator (c) and full model operator (d).
+Image size refers to the width of a square image in pixels.
+Number sampling points <span class="math notranslate nohighlight">\(N\)</span> in the switching temporal domain is 50 and number of species <span class="math notranslate nohighlight">\(P\)</span> is 3.
+Each data point in these plots represents the value averaged over 10 repetitions.</span><a class="headerlink" href="#fig-benchmark-rowop" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>To gain insights on the performance of the FFT and custom operators,
+we compare the complexity the two row operators on a single row at depth <span class="math notranslate nohighlight">\(m_2\)</span> in the output image on CPU.
+We assume that the acoustic image <span class="math notranslate nohighlight">\(q\)</span> for one acoustic process and the kernel <span class="math notranslate nohighlight">\(h\)</span> are squares of size
+<span class="math notranslate nohighlight">\((M \times M)\)</span> and <span class="math notranslate nohighlight">\((K \times K)\)</span>, respectively, and <span class="math notranslate nohighlight">\(K\)</span> is much smaller than <span class="math notranslate nohighlight">\(M\)</span>.
+The FFT row operator uses 2D FFTs to compute correlations in the Fourier domain as</p>
+<div class="math-wrapper docutils container" id="equation-src-photoacoustic-pat2-results-0">
+<div class="math notranslate nohighlight" id="equation-src-photoacoustic-pat2-results-0">
+<span class="eqno">(100)<a class="headerlink" href="#equation-src-photoacoustic-pat2-results-0" title="Link to this equation">¶</a></span>\[    \text{Extract}_{k_2} \left(\text{IFFT}_{\text{2D}}\left\{
+    \text{FFT}_{\text{2D}}\left\{ q \right\}
+    \cdot
+    \text{FFT}_{\text{2D}}\left\{\text{conj}(h)\right\}
+    \right\}\right),\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are of the same order, and conj() represents complex conjugate.
+Its complexity is</p>
+<div class="math-wrapper docutils container" id="equation-src-photoacoustic-pat2-results-1">
+<div class="math notranslate nohighlight" id="equation-src-photoacoustic-pat2-results-1">
+<span class="eqno">(101)<a class="headerlink" href="#equation-src-photoacoustic-pat2-results-1" title="Link to this equation">¶</a></span>\[    O\left(M^2\log M^2 + K^2\log K^2 + M^2\log M^2 \right) \sim O(M^2\log M).\]</div>
+</div>
+<p>The custom method calculates correlations in the original domain at each pixel location <span class="math notranslate nohighlight">\((m_1, m_2)\)</span></p>
+<div class="math-wrapper docutils container" id="equation-src-photoacoustic-pat2-results-2">
+<div class="math notranslate nohighlight" id="equation-src-photoacoustic-pat2-results-2">
+<span class="eqno">(102)<a class="headerlink" href="#equation-src-photoacoustic-pat2-results-2" title="Link to this equation">¶</a></span>\[    q[m_1, m_2] = \sum_{k_1=0}^{K-1} \sum_{k_2=0}^{K-1} \beta[k_1, k_2]  \eta[k_1-m_1, k_2-m_2].\]</div>
+</div>
+<p>Its complexity is <span class="math notranslate nohighlight">\(O(K^2)\)</span> per pixel and thus, <span class="math notranslate nohighlight">\(O(K^2 M)\)</span> for a single row at depth <span class="math notranslate nohighlight">\(m_2\)</span>.</p>
+<p>Further, our sparse representation of the kernel reduces the complexity for each pixel to <span class="math notranslate nohighlight">\(O(K)\)</span>
+since the kernel is essentially a 1D curve (sparse representation) instead of a 2D image (dense representation).
+Consequently, we have</p>
+<div class="math-wrapper docutils container" id="equation-src-photoacoustic-pat2-results-3">
+<div class="math notranslate nohighlight" id="equation-src-photoacoustic-pat2-results-3">
+<span class="eqno">(103)<a class="headerlink" href="#equation-src-photoacoustic-pat2-results-3" title="Link to this equation">¶</a></span>\[    q[m_1, m_2] = \sum_{(k_1, k_2)\in \Lambda} \beta[k_1, k_2] \eta[k_1-m_1, k_2-m_2],\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda\)</span> is a set of indices that approximate either the upper or lower semicircle.
+The final complexity is thus <span class="math notranslate nohighlight">\(O(K M) \sim O(M^2)\)</span> instead of <span class="math notranslate nohighlight">\(O(K^2 M) \sim O(M^3)\)</span>.
+Then, we compare the complete acoustic spatial operator based on these two methods on CPU.
+Their theoretical complexity is <span class="math notranslate nohighlight">\(O(M^3\log M)\)</span> and <span class="math notranslate nohighlight">\(O(M^3)\)</span>, due to the for loop
+along the depth of size <span class="math notranslate nohighlight">\(M\)</span>.
+In conclusion, the theoretical complexities of the
+FFT Row Operator and Image operator are <span class="math notranslate nohighlight">\(O(M^2\log M)\)</span> and <span class="math notranslate nohighlight">\(O(M^3\log M)\)</span>, respectively,
+and for the custom Row Operator, <span class="math notranslate nohighlight">\(O(M^2)\)</span> and <span class="math notranslate nohighlight">\(O(M^3)\)</span>, respectively.</p>
+<p>Although the custom approach tends to scale unfavorably in comparison with FFT, especially for kernels of large sizes,
+our setting permits two important simplifications that can mitigate these effects.
+Firstly, we only evaluate the correlated signal on the small window of the output image where it is actually needed,
+namely, along the row of pixels at the focal plane.
+Secondly, we exploit sparsity of the kernels by storing and processing only their nonzero entries.
+Overall, this approach achieves better asymptotic scaling and memory efficiency than the FFT one while also being
+trivial to parallelize over the image rows.</p>
+<p>We use <em>PyLops</em> to define the forward
+models in the complete pipeline as matrix-free operators since explicitly assembling the matrices is prohibitive
+due to their sizes.
+We use the open-source library Numba <span id="id6">[<a class="reference internal" href="../../../index.html#id262" title="Siu Kwan Lam, Antoine Pitrou, and Stanley Seibert. Numba: a llvm-based python jit compiler. In Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC, LLVM '15. New York, NY, USA, 2015. Association for Computing Machinery.">179</a>]</span> for the just-in-time compilation to accelerate the custom Row
+Operator.
+We further accelerate it on GPU using CuPy <span id="id7">[<a class="reference internal" href="../../../index.html#id263" title="Ryosuke Okuta, Yuya Unno, Daisuke Nishino, Shohei Hido, and Crissman Loomis. Cupy: a numpy-compatible library for nvidia gpu calculations. In Proceedings of Workshop on Machine Learning Systems (LearningSys) in The Thirty-first Annual Conference on Neural Information Processing Systems (NIPS). 2017.">180</a>]</span> and a handwritten CUDA kernel that performs
+all the per-row correlations simultaneously and in parallel as the Image Operator.</p>
+<p>We benchmarked the forward and adjoint modes of the two versions of the Row Operator and the corresponding Image
+Operator on an Intel i9-10900X CPU and then the complete acoustic operator and the full pipeline on an
+NVIDIA GeForce RTX3090 GPU.
+The results are shown in <a class="reference internal" href="#fig-benchmark-rowop"><span class="std std-numref">Fig. 37</span></a>.</p>
+<p>In <a class="reference internal" href="#fig-benchmark-rowop"><span class="std std-numref">Fig. 37</span></a> (a) and (b), we compare the two versions of the Row Operator and the Image operator,
+respectively.
+We see that they agree well with their theoretical complexity.
+The custom Row and Image Operators are approximately 50 times faster than the FFT counterparts.
+One evaluation of either the forward or the adjoint mode of the custom Row and Image Operator of a sample of
+<span class="math notranslate nohighlight">\((512\times512)\)</span> pixels with 3 species and 50 switching points costs 0.05 ms and 100 ms, respectively,
+compared to 10 ms and <span class="math notranslate nohighlight">\(10^4\)</span> ms in the case of the FFT approach.
+In <a class="reference internal" href="#fig-benchmark-rowop"><span class="std std-numref">Fig. 37</span></a> (c) and (d), we compare the complete acoustic operator including the temporal
+response (c) and the complete forward model including the acoustic and the photo-switching modules (d)
+when using the custom Image operator.
+We see a significant speedup on GPU compared to CPU.</p>
+<p>The code to produce the simulation results is available online <span id="id8">[<a class="reference internal" href="../../../index.html#id296" title="https://doi.org/10.5281/zenodo.17449090.">174</a>]</span>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="summary.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Summary</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="inverse.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Inverse Problems</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Results</a><ul>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#metrics">Metrics</a></li>
+<li><a class="reference internal" href="#reconstruction-results">Reconstruction Results</a><ul>
+<li><a class="reference internal" href="#low-noise-regime">Low Noise Regime</a></li>
+<li><a class="reference internal" href="#high-noise-regime">High Noise Regime</a></li>
+<li><a class="reference internal" href="#dependence-on-the-setup">Dependence on the Setup</a></li>
+<li><a class="reference internal" href="#hyperparameters">Hyperparameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#computational-analysis">Computational Analysis</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

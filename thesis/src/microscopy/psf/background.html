@@ -1,0 +1,512 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="A Unifying Theory of PSF Models" href="theory.html"><link rel="prev" title="A Unifying Framework for the Computation of Point Spread Functions" href="index.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Background</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="background">
+<span id="psf-background"></span><h1>Background<a class="headerlink" href="#background" title="Link to this heading">¶</a></h1>
+<p>In the previous section, we have seen that the point spread function plays a key role in the localization precision of
+MINFLUX.
+In the broader context of localization microscopy, besides PSF engineering, the characterization of PSF is crucial
+for many applications such as image deconvolution.
+While it is possible to directly measure the PSF, this approach is time-consuming and
+specific to one particular microscope.
+In practice, a theoretical model to compute an approximate PSF given the specifications of a microscope is beneficial
+and necessary.
+In this part, we focus on the precise modeling and computation of PSFs.</p>
+<section id="overview-of-psf-for-microscopy">
+<h2>Overview of PSF for Microscopy<a class="headerlink" href="#overview-of-psf-for-microscopy" title="Link to this heading">¶</a></h2>
+<p>Monitoring and assessment of point psread functions have been longstanding routines for microscopy,
+supported by the development of specific tools <span id="id1">[<a class="reference internal" href="../../../index.html#id171" title="Cédric Matthews and Fabrice P Cordelieres. MetroloJ: an ImageJ plugin to help monitor microscopes’ health. In ImageJ User &amp; Developer Conference Proceedings, 1–6. 2010.">206</a>, <a class="reference internal" href="../../../index.html#id172" title="Patrick Theer, Cyril Mongis, and Michael Knop. PSFj: know your fluorescence microscope. Nature Methods, 11(10):981–982, 2014.">207</a>, <a class="reference internal" href="../../../index.html#id160" title="Ratsimandresy Holinirina Dina Miora, Erich Rohwer, Martin Kielhorn, Colin Sheppard, Gurthwin Bosman, and Rainer Heintzmann. Calculating point spread functions: methods, pitfalls, and solutions. Optics Express, 32(16):27278–27302, 2024.">208</a>]</span>
+and the creation of a consortium to standardize best practices <span id="id2">[<a class="reference internal" href="../../../index.html#id173" title="Glyn Nelson, Ioannis Alexopoulos, Maria Azevedo, Fabio Barachati, Yury Belyaev, Mariana T. Carvalho, Yann Cesbron, Aurelien Dauphin, Alexander D. Corbett, Laurent Gelman, Nadia Halidi, Xiang Hao, Hella Hartmann, Rainer Heintzmann, Peter Hemmerich, Marcel Kirchner, Judith Lacoste, Penghuan Liu, Laure Plantard, Claire A. Mitchell, Tobias Müller, Kees van der Oord, Alex L. Payne-Dwyer, Santosh Podder, Rachid Rezgui, Sandra Ritz, Stanley Schwartz, Michael J. Shaw, Tse-Luen Wee, Roland Nitschke, Orestis Faklaris, and Ian M. Dobbie. Monitoring the point spread function for quality control of confocal microscopes. October 2022.">209</a>]</span>.
+A detailed characterization of the PSF is essential to the design of computational imaging processes
+such as single-molecule localization microscopy <span id="id3">[<a class="reference internal" href="../../../index.html#id179" title="Mickaël Lelek, Melina T Gyparaki, Gerti Beliu, Florian Schueder, Juliette Griffié, Suliana Manley, Ralf Jungmann, Markus Sauer, Melike Lakadamyali, and Christophe Zimmer. Single-molecule localization microscopy. Nature reviews Methods Primers, 1(1):39, 2021.">210</a>]</span> and
+super-resolution microscopy, including 3D deconvolution microscopy <span id="id4">[<a class="reference internal" href="../../../index.html#id174" title="Jean-Baptiste Sibarita. Deconvolution microscopy. Microscopy Techniques, 95:201–243, 2005.">211</a>, <a class="reference internal" href="../../../index.html#id175" title="Daniel Sage, Lauréne Donati, Ferréol Soulez, Denis Fortun, Guillaume Schmit, Arne Seitz, Romain Guiet, Cédric Vonesch, and Michael Unser. DeconvolutionLab2: an open-source software for deconvolution microscopy. Methods, 115:28–41, 2017.">212</a>]</span>, structured illumination microscopy
+<span id="id5">[<a class="reference internal" href="../../../index.html#id176" title="Rainer Heintzmann and Christoph G Cremer. Laterally modulated excitation microscopy: improvement of resolution by using a diffraction grating. In Optical Biopsies and Microscopic Techniques III, volume 3568, 185–196. SPIE, 1999.">213</a>, <a class="reference internal" href="../../../index.html#id177" title="Mats GL Gustafsson. Surpassing the lateral resolution limit by a factor of two using structured illumination microscopy. Journal of Microscopy, 198(2):82–87, 2000.">214</a>]</span>,
+fluctuation microscopy <span id="id6">[<a class="reference internal" href="../../../index.html#id201" title="Thomas Dertinger, Ryan Colyer, Gopal Iyer, Shimon Weiss, and Jörg Enderlein. Fast, background-free, 3D super-resolution optical fluctuation imaging (sofi). Proceedings of the National Academy of Sciences, 106(52):22287–22292, 2009.">215</a>, <a class="reference internal" href="../../../index.html#id203" title="Vasiliki Stergiopoulou, Luca Calatroni, Henrique De Morais Goulart, Sébastien Schaub, and Laure Blanc-Féraud. COL0RME: Super-resolution microscopy based on sparse blinking/fluctuating fluorophore localization and intensity estimation. Biological Imaging, 2:e1, 2022.">216</a>]</span>,
+STED <span id="id7">[<a class="reference internal" href="../../../index.html#id58" title="Stefan W. Hell. Far-Field Optical Nanoscopy. Science, 316(5828):1153–1158, May 2007.">183</a>]</span>,
+and MINFLUX <span id="id8">[<a class="reference internal" href="../../../index.html#id61" title="Francisco Balzarotti, Yvan Eilers, Klaus C. Gwosch, Arvid H. Gynnå, Volker Westphal, Fernando D. Stefani, Johan Elf, and Stefan W. Hell. Nanometer resolution imaging and tracking of fluorescent molecules with minimal photon fluxes. Science, 355(6325):606–612, Febuary 2017.">32</a>]</span> that we have shown in the previous part.</p>
+<p>Computational PSF models have often been applied in fluorescence microscopy.
+For example, the fitting of a theoretical PSF to a measured one can improve accuracy
+<span id="id9">[<a class="reference internal" href="../../../index.html#id159" title="Hagai Kirshner, Aguet François, Daniel Sage, and Michael Unser. 3-D PSF fitting for fluorescence microscopy: implementation and localization application. Journal of Microscopy, 249(1):13–25, 2013.">217</a>, <a class="reference internal" href="../../../index.html#id185" title="Yiming Li, Markus Mund, Philipp Hoess, Joran Deschamps, Ulf Matti, Bianca Nijmeijer, Vilma Jimenez Sabinina, Jan Ellenberg, Ingmar Schoen, and Jonas Ries. Real-time 3D single-molecule localization using experimental point spread functions. Nature Methods, 15(5):367–369, 2018.">218</a>]</span>.
+Detailed models enable the quantification of the 3D uncertainty <span id="id10">[<a class="reference internal" href="../../../index.html#id83" title="Jonathan Dong, Dante Maestre, Clara Conrad-Billroth, and Thomas Juffmann. Fundamental bounds on the precision of iscat, cobri and dark-field microscopy for 3d localization and mass photometry. Journal of Physics D: Applied Physics, 54(39):394002, 2021.">190</a>]</span>,
+while the engineering of PSFs may take full advantage of parametric models
+<span id="id11">[<a class="reference internal" href="../../../index.html#id62" title="Yoav Shechtman, Steffen J. Sahl, Adam S. Backer, and W.E. Moerner. Optimal Point Spread Function Design for 3D Imaging. Physical Review Letters, 113(13):133902, September 2014.">187</a>, <a class="reference internal" href="../../../index.html#id186" title="Nadav Opatovski, Elias Nehme, Noam Zoref, Ilana Barzilai, Reut Orange Kedem, Boris Ferdman, Paul Keselman, Onit Alalouf, and Yoav Shechtman. Depth-enhanced high-throughput microscopy by compact PSF engineering. Nature Communications, 15(1):4861, 2024.">219</a>, <a class="reference internal" href="../../../index.html#id168" title="Yan Liu, Jonathan Dong, Juan Augusto Maya, Francisco Balzarotti, and Michael Unser. Point-spread-function engineering in MINFLUX: ptimality of donut and half-moon excitation patterns. Optics Letters, 50(1):37–40, January 2025.">220</a>]</span>.
+They are a key component of high-quality single-molecule localization microscopy (SMLM) images
+<span id="id12">[<a class="reference internal" href="../../../index.html#id187" title="József Sinkó, Róbert Kákonyi, Eric Rees, Daniel Metcalf, Alex E Knight, Clemens F Kaminski, Gábor Szabó, and Miklós Erdélyi. TestSTORM: simulator for optimizing sample labeling and image acquisition in localization based super-resolution microscopy. Biomedical Optics Express, 5(3):778–787, 2014.">221</a>, <a class="reference internal" href="../../../index.html#id188" title="Daniel Sage, Hagai Kirshner, Thomas Pengo, Nico Stuurman, Junhong Min, Suliana Manley, and Michael Unser. Quantitative evaluation of software packages for single-molecule localization microscopy. Nature Methods, 12(8):717–724, 2015.">222</a>]</span>,
+including single-particle tracking <span id="id13">[<a class="reference internal" href="../../../index.html#id189" title="Stefan Wieser and Gerhard J Schütz. Tracking single molecules in the live cell plasma membrane—Do’s and Don’t’s. Methods, 46(2):131–140, 2008.">223</a>, <a class="reference internal" href="../../../index.html#id190" title="Hao Shen, Lawrence J Tauzin, Rashad Baiyasi, Wenxiao Wang, Nicholas Moringo, Bo Shuang, and Christy F Landes. Single particle tracking: from theory to biophysical applications. Chemical Reviews, 117(11):7331–7376, 2017.">224</a>]</span>
+and virtual SMLM microscopes <span id="id14">[<a class="reference internal" href="../../../index.html#id191" title="Dominique Bourgeois. Single molecule imaging simulations with advanced fluorophore photophysics. Communications Biology, 6(1):53, 2023.">225</a>]</span>.</p>
+<p>The PSF can be measured experimentally from a z-stack of tiny fluorescent beads
+<span id="id15">[<a class="reference internal" href="../../../index.html#id174" title="Jean-Baptiste Sibarita. Deconvolution microscopy. Microscopy Techniques, 95:201–243, 2005.">211</a>, <a class="reference internal" href="../../../index.html#id181" title="Zach Marin, Michael Graff, Andrew ES Barentine, Christian Soeller, Kenny Kwok Hin Chung, Lukas A Fuentes, and David Baddeley. PYMEVisualize: an open-source tool for exploring 3D super-resolution data. Nature Methods, 18(6):582–584, 2021.">226</a>]</span>.
+However, a theoretical PSF is often required.
+Here, the challenge lies in the accurate model of light propagation for imaging systems with high numerical aperture
+(NA).
+Detailed models have been proposed <span id="id16">[<a class="reference internal" href="../../../index.html#id88" title="Marcel Leutenegger, Ramachandra Rao, Rainer A. Leitgeb, and Theo Lasser. Fast focus field calculations. Optics Express, 14(23):11277, 2006.">203</a>, <a class="reference internal" href="../../../index.html#id155" title="Bernard Richards and Emil Wolf. Electromagnetic diffraction in optical systems, II. Structure of the image field in an aplanatic system. Proceedings of the Royal Society of London. Series A. Mathematical and Physical Sciences, 253(1274):358–379, 1959.">227</a>, <a class="reference internal" href="../../../index.html#id158" title="François Aguet. Super-resolution fluorescence microscopy based on physical models. PhD thesis, EPFL, 2009.">228</a>, <a class="reference internal" href="../../../index.html#id154" title="Lukas Novotny and Bert Hecht. Principles of Nano-Optics. Cambridge University Press, Cambridge, UK, second edition, 2012.">229</a>]</span> to</p>
+<ul class="simple">
+<li><p>go beyond simple paraxial approximations,</p></li>
+<li><p>take into account the vectorial nature of the electric field, and</p></li>
+<li><p>include various aberration factors such as the Gibson-Lanni aberrations due to refraction at planar interfaces <span id="id17">[<a class="reference internal" href="../../../index.html#id164" title="Sarah Frisken Gibson and Frederick Lanni. Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy. Journal of the Optical Society of America A, 9(1):154–166, January 1992.">197</a>]</span>.</p></li>
+</ul>
+<p>Several software packages have been developed to generate precise theoretical 3D PSFs that include various
+features and aberrations.
+Among these, the Huygens PSF software <span id="id18">[<a class="reference internal" href="../../../index.html#id301" title="https://svi.nl/.">230</a>]</span> is well-known in the microscopic community,
+and the Java-based ImageJ/FIJI plugin, PSF Generator <span id="id19">[<a class="reference internal" href="../../../index.html#id159" title="Hagai Kirshner, Aguet François, Daniel Sage, and Michael Unser. 3-D PSF fitting for fluorescence microscopy: implementation and localization application. Journal of Microscopy, 249(1):13–25, 2013.">217</a>]</span>,
+has also been widely used.
+Other open-source alternatives include MATLAB-based solutions <span id="id20">[<a class="reference internal" href="../../../index.html#id160" title="Ratsimandresy Holinirina Dina Miora, Erich Rohwer, Martin Kielhorn, Colin Sheppard, Gurthwin Bosman, and Rainer Heintzmann. Calculating point spread functions: methods, pitfalls, and solutions. Optics Express, 32(16):27278–27302, 2024.">208</a>, <a class="reference internal" href="../../../index.html#id183" title="Michael J Nasse and Jörg C Woehl. Realistic modeling of the illumination point spread function in confocal scanning optical microscopy. Journal of the Optical Society of America A, 27(2):295–302, 2010.">231</a>, <a class="reference internal" href="../../../index.html#id182" title="Magdalena C Schneider, Fabian Hinterer, Alexander Jesacher, and Gerhard J Schütz. Interactive simulation and visualization of point spread functions in single molecule imaging. Optics Communications, 560:130463, 2024.">232</a>]</span> as well as Python-based tools <span id="id21">[<a class="reference internal" href="../../../index.html#id161" title="Fernando Caprile, Luciano A Masullo, and Fernando D Stefani. Pyfocus–a Python package for vectorial calculations of focused optical fields under realistic conditions. Application to toroidal foci. Computer Physics Communications, 275:108315, 2022.">233</a>, <a class="reference internal" href="../../../index.html#id184" title="Sylvain Prigent, Hoai-Nam Nguyen, Ludovic Leconte, Cesar Augusto Valades-Cruz, Bassam Hajj, Jean Salamero, and Charles Kervrann. SPITFIR (e): a supermaneuverable algorithm for fast denoising and deconvolution of 3D fluorescence microscopy images and videos. Scientific Reports, 13(1):1489, 2023.">234</a>]</span>.</p>
+</section>
+<section id="state-of-the-art">
+<h2>State of the Art<a class="headerlink" href="#state-of-the-art" title="Link to this heading">¶</a></h2>
+<p>Electromagnetic waves in optical systems are fundamentally described by the Helmholtz wave equations,
+yet solving these equations in full generality is computationally intractable.
+Various approximations and integral formulations have thus been developed.
+The cornerstone for precise PSF models in high-NA systems is the Richards-Wolf integral
+<span id="id22">[<a class="reference internal" href="../../../index.html#id155" title="Bernard Richards and Emil Wolf. Electromagnetic diffraction in optical systems, II. Structure of the image field in an aplanatic system. Proceedings of the Royal Society of London. Series A. Mathematical and Physical Sciences, 253(1274):358–379, 1959.">227</a>]</span>,
+which can be viewed as a vectorial extension of the Debye integral <span id="id23">[<a class="reference internal" href="../../../index.html#id166" title="Peter Josef William Debye. Der lichtdruck auf kugeln von beliebigem material. PhD thesis, Ludwig-Maximilians Universität München, 1908.">235</a>]</span>.
+The conditions of validity for the Richards-Wolf integral have been thoroughly discussed in
+<span id="id24">[<a class="reference internal" href="../../../index.html#id163" title="Emil Wolf and Yajun Li. Conditions for the validity of the Debye integral representation of focused fields. Optics Communications, 39(4):205–210, 1981.">236</a>]</span>.
+While alternative light propagation models exist,
+the Huygens-Fresnel approach has been shown to be equivalent,
+to some extent, for PSF calculations <span id="id25">[<a class="reference internal" href="../../../index.html#id162" title="Alexander Egner and SW Hell. Equivalence of the Huygens–Fresnel and Debye approach for the calculation of high aperture point-spread functions in the presence of refractive index mismatch. Journal of Microscopy, 193(3):244–249, 1999.">237</a>]</span>.</p>
+<p>This has been the basis of a line of work for PSF models based on Bessel functions,
+which we will later refer to as the spherical parametrization of the Richards-Wolf integral.
+This approach includes simpler formulations such as the Kirchhoff model and
+more sophisticated vectorial representations <span id="id26">[<a class="reference internal" href="../../../index.html#id158" title="François Aguet. Super-resolution fluorescence microscopy based on physical models. PhD thesis, EPFL, 2009.">228</a>, <a class="reference internal" href="../../../index.html#id154" title="Lukas Novotny and Bert Hecht. Principles of Nano-Optics. Cambridge University Press, Cambridge, UK, second edition, 2012.">229</a>]</span>.
+These models have progressively been refined by incorporating various correction factors
+to account for additional physical processes:</p>
+<ul class="simple">
+<li><p>the Gibson-Lanni model for spherical aberrations due to refractive index mismatch <span id="id27">[<a class="reference internal" href="../../../index.html#id164" title="Sarah Frisken Gibson and Frederick Lanni. Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy. Journal of the Optical Society of America A, 9(1):154–166, January 1992.">197</a>]</span>
+(later generalized in <span id="id28">[<a class="reference internal" href="../../../index.html#id156" title="Peter Török, P Varga, Z Laczik, and GR Booker. Electromagnetic diffraction of light focused through a planar interface between materials of mismatched refractive indices: An integral representation. Journal of the Optical Society of America A, 12(2):325–332, 1995.">238</a>, <a class="reference internal" href="../../../index.html#id157" title="P Török and P Varga. Electromagnetic diffraction of light focused through a stratified medium. Applied Optics, 36(11):2305–2312, 1997.">239</a>]</span>),</p></li>
+<li><p>apodization factors for energy conservation <span id="id29">[<a class="reference internal" href="../../../index.html#id155" title="Bernard Richards and Emil Wolf. Electromagnetic diffraction in optical systems, II. Structure of the image field in an aplanatic system. Proceedings of the Royal Society of London. Series A. Mathematical and Physical Sciences, 253(1274):358–379, 1959.">227</a>]</span>, and</p></li>
+<li><p>Fresnel transmission coefficients for accurate interface modeling <span id="id30">[<a class="reference internal" href="../../../index.html#id158" title="François Aguet. Super-resolution fluorescence microscopy based on physical models. PhD thesis, EPFL, 2009.">228</a>]</span>.</p></li>
+</ul>
+<p>Models using this spherical parametrization have been implemented in various software libraries in Java
+<span id="id31">[<a class="reference internal" href="../../../index.html#id159" title="Hagai Kirshner, Aguet François, Daniel Sage, and Michael Unser. 3-D PSF fitting for fluorescence microscopy: implementation and localization application. Journal of Microscopy, 249(1):13–25, 2013.">217</a>]</span> and Python <span id="id32">[<a class="reference internal" href="../../../index.html#id161" title="Fernando Caprile, Luciano A Masullo, and Fernando D Stefani. Pyfocus–a Python package for vectorial calculations of focused optical fields under realistic conditions. Application to toroidal foci. Computer Physics Communications, 275:108315, 2022.">233</a>]</span>,
+which makes it widely accessible to researchers,
+albeit with some limitations in computational efficiency and integration with deep-learning frameworks.</p>
+<p>Another line of work on PSF modeling is based on Fourier transforms,
+both in scalar <span id="id33">[<a class="reference internal" href="../../../index.html#id153" title="Joseph W. Goodman. Introduction to Fourier optics. W.H. Freeman, Macmillan Learning, New York, USA, fourth edition, 2017.">43</a>]</span> and
+vectorial <span id="id34">[<a class="reference internal" href="../../../index.html#id88" title="Marcel Leutenegger, Ramachandra Rao, Rainer A. Leitgeb, and Theo Lasser. Fast focus field calculations. Optics Express, 14(23):11277, 2006.">203</a>]</span> formulations.
+These models are based on a Cartesian parametrization of the underlying Richards-Wolf integral,
+and they represent a more general counterpart of the spherical parametrization.
+Recently, these high-NA Fourier models have been implemented in MATLAB <span id="id35">[<a class="reference internal" href="../../../index.html#id160" title="Ratsimandresy Holinirina Dina Miora, Erich Rohwer, Martin Kielhorn, Colin Sheppard, Gurthwin Bosman, and Rainer Heintzmann. Calculating point spread functions: methods, pitfalls, and solutions. Optics Express, 32(16):27278–27302, 2024.">208</a>]</span>
+and Tensorflow as part of a PSF-fitting library <span id="id36">[<a class="reference internal" href="../../../index.html#id167" title="Sheng Liu, Jianwei Chen, Jonas Hellgoth, Lucas-Raphael Müller, Boris Ferdman, Christian Karras, Dafei Xiao, Keith A Lidke, Rainer Heintzmann, Yoav Shechtman, and others. Universal inverse modeling of point spread functions for SMLM localization and microscope characterization. Nature Methods, 21(6):1082–1093, June 2024.">240</a>]</span>.
+Adequate sampling of the Fourier transform is crucial for obtaining high-resolution PSFs and avoiding aliasing.
+A common trick based on the chirp Z transform is usually implemented to achieve it
+<span id="id37">[<a class="reference internal" href="../../../index.html#id88" title="Marcel Leutenegger, Ramachandra Rao, Rainer A. Leitgeb, and Theo Lasser. Fast focus field calculations. Optics Express, 14(23):11277, 2006.">203</a>, <a class="reference internal" href="../../../index.html#id160" title="Ratsimandresy Holinirina Dina Miora, Erich Rohwer, Martin Kielhorn, Colin Sheppard, Gurthwin Bosman, and Rainer Heintzmann. Calculating point spread functions: methods, pitfalls, and solutions. Optics Express, 32(16):27278–27302, 2024.">208</a>, <a class="reference internal" href="../../../index.html#id168" title="Yan Liu, Jonathan Dong, Juan Augusto Maya, Francisco Balzarotti, and Michael Unser. Point-spread-function engineering in MINFLUX: ptimality of donut and half-moon excitation patterns. Optics Letters, 50(1):37–40, January 2025.">220</a>]</span>, as we have seen in
+section <a class="reference internal" href="../minflux/implementation.html#minflux-zoomfft"><span class="std std-ref">Efficient Computation of the Generalized Inverse Fourier Transform</span></a> of <a class="reference internal" href="../minflux/index.html#chapter-minflux"><span class="std std-ref">Optimal Excitation Patterns in MINFLUX via PSF Engineering</span></a>.</p>
+</section>
+<section id="motivation-and-contribution">
+<h2>Motivation and Contribution<a class="headerlink" href="#motivation-and-contribution" title="Link to this heading">¶</a></h2>
+<p>Different models have been proposed based on 2D Fourier transforms or 1D Bessel integrals.
+The most precise ones combine a vectorial description of the electric field and precise aberration models.
+However, it may be unclear which model to choose as there is no comprehensive comparison between the
+Fourier and Bessel approaches yet.
+Moreover, many existing libraries are written in Java (e.g., the existing PSF generator) or MATLAB,
+which hinders their integration into deep-learning algorithms.</p>
+<p>In this section, we start from the original Richards-Wolf integral and revisit both approaches systematically.
+We present a unifying framework in which we prove the equivalence between the Fourier and Bessel strategies and
+detail a variety of correction factors applicable to both of them.
+Then, we provide a high-performance implementation of our theoretical framework in the form of an open-source
+library that is built on top of PyTorch, a popular library for deep learning.
+It enables us to benchmark the accuracy and computational speed of different models and allows for an in-depth
+comparison of existing models for the first time.
+We show that the Bessel strategy is optimal for axisymmetric beams, while the Fourier approach can be applied to
+more general scenarios.
+Our work enables the efficient computation of a point spread function on CPU or GPU, which can then be included
+in simulation and optimization pipelines.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="theory.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">A Unifying Theory of PSF Models</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">A Unifying Framework for the Computation of Point Spread Functions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Background</a><ul>
+<li><a class="reference internal" href="#overview-of-psf-for-microscopy">Overview of PSF for Microscopy</a></li>
+<li><a class="reference internal" href="#state-of-the-art">State of the Art</a></li>
+<li><a class="reference internal" href="#motivation-and-contribution">Motivation and Contribution</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

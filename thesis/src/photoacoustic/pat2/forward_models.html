@@ -1,0 +1,852 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Inverse Problems" href="inverse.html"><link rel="prev" title="Background" href="background.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Forward Models: from Concentration Maps to Acoustic Signals</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="forward-models-from-concentration-maps-to-acoustic-signals">
+<span id="pat2-forward-pipeline"></span><h1>Forward Models: from Concentration Maps to Acoustic Signals<a class="headerlink" href="#forward-models-from-concentration-maps-to-acoustic-signals" title="Link to this heading">¶</a></h1>
+<section id="photo-switching-model">
+<span id="pat2-photo-switching-model"></span><h2>Photo-Switching Model<a class="headerlink" href="#photo-switching-model" title="Link to this heading">¶</a></h2>
+<p>We carry out our modeling on a 2D sample during one OFF-switching cycle.
+We define the sample to be imaged as a function of spatial locations <span class="math notranslate nohighlight">\(\mathbf{r}=(x, z)\in\mathbb{R}^2\)</span>
+with a compact support <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^2\)</span>.
+The forward model of photo-switching has been previously derived in section <a class="reference internal" href="../pat1/theory.html#pat1-modeling"><span class="std std-ref">Modeling of Photo-Switching and Unmixing Method</span></a>, and
+we briefly recall it here</p>
+<div class="math-wrapper docutils container" id="equation-eq-final-h-pat2">
+<div class="math notranslate nohighlight" id="equation-eq-final-h-pat2">
+<span class="eqno">(55)<a class="headerlink" href="#equation-eq-final-h-pat2" title="Link to this equation">¶</a></span>\[    H(\mathbf{r}, t) = 
+    \Phi(\mathbf{r})\left(\sum_{p=1}^{P}
+    \left(\overline{\varepsilon}_p
+    \text{e}^{-k_p\Phi(\mathbf{r})t} +
+    \varepsilon_p^{\text{OFF}}\right)
+    c_p(\mathbf{r})\right),\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(c_p(\mathbf{r})\)</span> is the spatial distribution map of the <span class="math notranslate nohighlight">\(p\)</span>th species and the unknown quantity that
+we are interested in.
+The non-switching background is included in <a class="reference internal" href="#equation-eq-final-h-pat2">Eq. (55)</a> as the <span class="math notranslate nohighlight">\(P\)</span>th reporter with <span class="math notranslate nohighlight">\(k_P=0\)</span> and
+<span class="math notranslate nohighlight">\(\overline{\varepsilon}_P=0\)</span>.</p>
+</section>
+<section id="optical-model">
+<span id="pat2-optical-model"></span><h2>Optical Model<a class="headerlink" href="#optical-model" title="Link to this heading">¶</a></h2>
+<p>We precompute the fluence map <span class="math notranslate nohighlight">\(\Phi^0(\mathbf{r})\)</span> without the contribution of the reporters
+and assume that <span class="math notranslate nohighlight">\(\Phi(\mathbf{r}) \approx \Phi^0(\mathbf{r})\)</span>, similar to the case for PAT.
+Illumination is wide-field and can be assumed homogeneous when it reaches the sample surface.
+We model it with a function <span class="math notranslate nohighlight">\(S(\mathbf{r})\)</span>
+that describes a line segment with center <span class="math notranslate nohighlight">\(\mathbf{r}_c = (x_c, 0)\)</span>, of length <span class="math notranslate nohighlight">\(W&gt;0\)</span> and
+uniform intensity <span class="math notranslate nohighlight">\(I_0&gt;0\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-light-source-pat2">
+<div class="math notranslate nohighlight" id="equation-eq-light-source-pat2">
+<span class="eqno">(56)<a class="headerlink" href="#equation-eq-light-source-pat2" title="Link to this equation">¶</a></span>\[\begin{split}    S(\mathbf{r}) = \left\{
+        \begin{array}{ll}
+        I_0, &amp; \text{if } |x-x_c|&lt;\frac{W}{2}\\
+        0, &amp; \text{else}.
+        \end{array}
+    \right.\end{split}\]</div>
+</div>
+<p>We set the absorption coefficient map <span class="math notranslate nohighlight">\(\mu_a(\mathbf{r})\)</span> and scattering coefficient map <span class="math notranslate nohighlight">\(\mu_s(\mathbf{r})\)</span>
+the same as the counterparts of the nonswitching background because we assume the contribution from reporters
+to be negligible.
+The reduced scattering coefficient <span class="math notranslate nohighlight">\(\mu_s'(\mathbf{r})\)</span> is defined as</p>
+<div class="math-wrapper docutils container" id="equation-eq-def-of-mu-s">
+<div class="math notranslate nohighlight" id="equation-eq-def-of-mu-s">
+<span class="eqno">(57)<a class="headerlink" href="#equation-eq-def-of-mu-s" title="Link to this equation">¶</a></span>\[\mu_s'(\mathbf{r}) = (1-g)\mu_s(\mathbf{r}),\]</div>
+</div>
+<p>where the anisotropy factor <span class="math notranslate nohighlight">\(g\in(0, 1)\)</span> is set to a typical value of <span class="math notranslate nohighlight">\(0.9\)</span>.
+Following a similar approach to section <a class="reference internal" href="../pat1/fluence.html#pat-compute-fluence"><span class="std std-ref">Computation of Light Fluence</span></a> in the previous part, we solve the pair of equations
+<a class="reference internal" href="../pat1/fluence.html#equation-eq-de">Eq. (47)</a> and <a class="reference internal" href="../pat1/fluence.html#equation-eq-bc">Eq. (48)</a> combined with the illumination in <a class="reference internal" href="#equation-eq-light-source-pat2">Eq. (56)</a>,
+to obtain a map of the fluence distribution within the sample which we use to construct the forward model
+<a class="reference internal" href="#equation-eq-final-h-pat2">Eq. (55)</a> for photo-switching PAM.</p>
+</section>
+<section id="photoacoustic-effect">
+<span id="pat2-pa-effect"></span><h2>Photoacoustic Effect<a class="headerlink" href="#photoacoustic-effect" title="Link to this heading">¶</a></h2>
+<p>The deposited optical energy <span class="math notranslate nohighlight">\(H\)</span> absorbed by the tissue leads to a local rise in temperature.
+It causes a thermo-elastic expansion of the tissue and produces acoustic waves that propagate through the sample.
+The detector on the sample surface records acoustic waves as measurements.</p>
+<p>Because acoustic propagation and detection is independent for each pulse and its mathematical model takes the
+same form, we there from omit the notation <span class="math notranslate nohighlight">\(t\)</span> in the modeling of a single acoustic process for simplicity.
+The generated initial pressure (acoustic) field <span class="math notranslate nohighlight">\(b(\mathbf{r})\)</span> is proportional to the optical energy such that</p>
+<div class="math-wrapper docutils container" id="equation-eq-pa-effect">
+<div class="math notranslate nohighlight" id="equation-eq-pa-effect">
+<span class="eqno">(58)<a class="headerlink" href="#equation-eq-pa-effect" title="Link to this equation">¶</a></span>\[    b(\mathbf{r}) = \iota(\mathbf{r}) H(\mathbf{r}),\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\iota(\mathbf{r})\)</span> is the unitless Grueneisen coefficient.
+It indicates the efficiency of conversion between heat and pressure,
+and we assume it to be constant and set its value to 1 for simplicity
+<span id="id1">[<a class="reference internal" href="../../../index.html#id247" title="Ashkan Javaherian and Sean Holman. Direct quantitative photoacoustic tomography for realistic acoustic media. Inverse Problems, 35(8):084004, August 2019.">169</a>, <a class="reference internal" href="../../../index.html#id257" title="Markus Haltmeier, Lukas Neumann, and Simon Rabanser. Single-stage reconstruction algorithm for quantitative photoacoustic tomography. Inverse Problems, 31(6):065005, June 2015.">170</a>]</span>.</p>
+</section>
+<section id="acoustic-model">
+<span id="pat2-acoustic-model"></span><h2>Acoustic Model<a class="headerlink" href="#acoustic-model" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="fig-acoustic-signal-generation">
+<a class="reference internal image-reference" href="../../../_images/spr.png"><img alt="../../../_images/spr.png" src="../../../_images/spr.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">(a) Spatial response of the transducer.
+Blue area represents the sensitivity field of the transducer.
+Dots represent the center of the transducer (T),
+the focal spot (F) and a point PA source (M).
+(b)-(f) Illustration of the generation of acoustic signals.
+SPR: spatial response of the transducer.
+EIR: electrical impulse response of the transducer.
+(b) and (b’): Sample.
+Background is in gray, green and orange discs represent two photoswitching reporters.
+Dashed horizontal red line represents location of the focal plane.
+Dashed gray lines in (b) and (b’) indicate the horizontal line of pixels of interest, one above (b) and
+one below (b’) the focal plane.
+(c) and (c’): Masked SPR, i.e. map of the weighted curves that corresponds to the depth of interest in (b) and (b’),
+respectively.
+(d) and (d’): Outcome of the convolution between the sample and the masked SPR (c) and (c’).
+Focal plane (red dash line) indicates where to extract the line of pixels.
+(e) Outcome of the spatial integration step by stacking the extracted lines at the corresponding locations indicated
+in (b) and (b’).
+The narrow vertical box indicates a line of pixels on which we filter with the EIR of the transducer (f).</span><a class="headerlink" href="#fig-acoustic-signal-generation" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>During one acoustic process, ultrasonic waves originating from sources within the sample propagate through
+the sample and are detected by the transducer array on the sample surface.
+We assume a constant speed of sound <span class="math notranslate nohighlight">\(c_0\)</span> and an acoustically homogeneous and non-attenuating medium.
+We denote by <span class="math notranslate nohighlight">\(\tau\)</span> the acoustic propagation time (microsecond scale, propagation of sound over a few millimeters)
+to distinguish it from the switching time <span class="math notranslate nohighlight">\(t\)</span> (millisecond scale, repetition rate of the laser).</p>
+<p>Following the principles of SAFT, we assume
+that signal from the focal point arrives at the same time on all the area of the transducer element,
+owing to its parabolic geometry,
+Therefore, we use the focal spot as a reference and propagate back to it.
+We denote the transducer position by <span class="math notranslate nohighlight">\(\mathbf{r}_{\text{T}}=(x_{\text{T}}, 0)\)</span>,
+the focal length by a constant <span class="math notranslate nohighlight">\(f&gt;0\)</span>, and location of the focal spot by
+<span class="math notranslate nohighlight">\(\mathbf{r}_{\text{F}}=(x_{\text{T}}, z_{\text{F}})\)</span>.
+The detected signal <span class="math notranslate nohighlight">\(q(x_{\text{T}}, \tau)\)</span> on the transducer at time <span class="math notranslate nohighlight">\(\tau\)</span>,
+comes from the contributions of all the point sources
+lying on the (upper) semicircle
+<span class="math notranslate nohighlight">\(C_1^{(x_{\text{T}}, \tau)} = \left\{ \mathbf{r} : |\mathbf{r} - \mathbf{r}_{\text{F}}| = f - c_0\tau, z&lt;z_{\text{F}} \right\}\)</span> centered at
+<span class="math notranslate nohighlight">\(\mathbf{r}_{\text{F}}\)</span> with radius <span class="math notranslate nohighlight">\((f-c_0\tau)\)</span> when <span class="math notranslate nohighlight">\(c_0\tau &lt; f\)</span>,
+and on another (lower) semicircle
+<span class="math notranslate nohighlight">\(C_2^{(x_{\text{T}}, \tau)} = \left\{ \mathbf{r} : |\mathbf{r} - \mathbf{r}_{\text{F}}| = c_0\tau - f, z&gt;z_{\text{F}} \right\}\)</span> when <span class="math notranslate nohighlight">\(c_0\tau &gt; f\)</span>.
+At the focal spot <span class="math notranslate nohighlight">\(\mathbf{r}_\text{F}\)</span>, i.e., when <span class="math notranslate nohighlight">\(c_0\tau=f\)</span>,
+<span class="math notranslate nohighlight">\(q\)</span> is defined directly as <span class="math notranslate nohighlight">\(b(\mathbf{r}_\text{F})\)</span>.
+Further, we take into account the influence of the sensitivity of the transducer,
+described by its (shifted) spatial response function <span class="math notranslate nohighlight">\(h(\mathbf{r} - \mathbf{r}_{\text{T}})\)</span>
+at the location <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> of the point source (see <a class="reference internal" href="#fig-acoustic-signal-generation"><span class="std std-numref">Fig. 30</span></a> (a)).
+Hence, we integrate the weighted amplitude <span class="math notranslate nohighlight">\(b(\mathbf{r})h(\mathbf{r} - \mathbf{r}_{\text{T}})\)</span>
+on <span class="math notranslate nohighlight">\(C_1^{(x_{\text{T}}, \tau)}\)</span> when <span class="math notranslate nohighlight">\(c_0\tau &lt; f\)</span> as</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-above-1d">
+<div class="math notranslate nohighlight" id="equation-eq-q-above-1d">
+<span class="eqno">(59)<a class="headerlink" href="#equation-eq-q-above-1d" title="Link to this equation">¶</a></span>\[    q(x_{\text{T}}, \tau) = \int_{C_1^{(x_{\text{T}}, \tau)}}
+    b(\mathbf{r})h(\mathbf{r} - \mathbf{r}_{\text{T}}) \text{d}s,\]</div>
+</div>
+<p>and on <span class="math notranslate nohighlight">\(C_2^{(x_{\text{T}}, \tau)}\)</span> when <span class="math notranslate nohighlight">\(c_0\tau &gt; f\)</span> as</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-below-1d">
+<div class="math notranslate nohighlight" id="equation-eq-q-below-1d">
+<span class="eqno">(60)<a class="headerlink" href="#equation-eq-q-below-1d" title="Link to this equation">¶</a></span>\[    q(x_{\text{T}}, \tau) = \int_{C_2^{(x_{\text{T}}, \tau)}}
+    b(\mathbf{r})h(\mathbf{r} - \mathbf{r}_{\text{T}}) \text{d}s,\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\text{d}s\)</span> is the 1D arc-length element.
+We denote <span class="math notranslate nohighlight">\(r_\tau=f-c_0\tau\)</span> for the sake of simplicity.</p>
+<p>By representing the 1D line integral as a constrained 2D integral via a Dirac delta function,
+we formulate  <a class="reference internal" href="#equation-eq-q-above-1d">Eq. (59)</a> equivalently as</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-above-2d">
+<div class="math notranslate nohighlight" id="equation-eq-q-above-2d">
+<span class="eqno">(61)<a class="headerlink" href="#equation-eq-q-above-2d" title="Link to this equation">¶</a></span>\[    q(x_{\text{T}}, \tau) = 
+    \int_{\mathbb{R}}\text{d}x \int_{-\infty}^{z_{\text{F}}}\text{d}z \;
+    b(x, z)  h(x - x_{\text{T}}, z - z_{\text{F}})
+    \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 - r_\tau^2 \right) (2r_\tau),\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(2r_\tau\)</span> represents the Jacobian correction to account for the change of variables in the Dirac delta function.
+Similarly, for  <a class="reference internal" href="#equation-eq-q-below-1d">Eq. (60)</a>, we obtain</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-below-2d">
+<div class="math notranslate nohighlight" id="equation-eq-q-below-2d">
+<span class="eqno">(62)<a class="headerlink" href="#equation-eq-q-below-2d" title="Link to this equation">¶</a></span>\[    q(x_{\text{T}}, \tau) = 
+    \int_{\mathbb{R}}\text{d}x \int_{z_{\text{F}}}^{\infty}\text{d}z \;
+    b(x, z) h(x - x_{\text{T}}, z - z_{\text{F}})
+    \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 - r_\tau^2 \right) (2r_\tau).\]</div>
+</div>
+<p>Next, we take into account the electrical impulse response <span class="math notranslate nohighlight">\(v(\tau)\)</span> of the transducer
+and model its effect as the temporal convolution of <span class="math notranslate nohighlight">\(q(x_{\text{T}}, \tau)\)</span> with <span class="math notranslate nohighlight">\(v(\tau)\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-acoustic-temporal-conv">
+<div class="math notranslate nohighlight" id="equation-eq-acoustic-temporal-conv">
+<span class="eqno">(63)<a class="headerlink" href="#equation-eq-acoustic-temporal-conv" title="Link to this equation">¶</a></span>\[    p(x_{\text{T}}, \tau) = \int_{\mathbb{R}} q(x_{\text{T}}, \tau')  v(\tau - \tau') \text{d}\tau',\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(p(x_{\text{T}}, \tau)\)</span> is the noise-free acoustic signal detected on the transducer.</p>
+</section>
+<section id="full-forward">
+<span id="pat2-pull-forward"></span><h2>Full Forward<a class="headerlink" href="#full-forward" title="Link to this heading">¶</a></h2>
+<p>Putting every piece of the puzzle together, we have the full forward process of photo-switching PAM
+as shown in <a class="reference internal" href="#fig-pat2-full-pipeline"><span class="std std-numref">Fig. 31</span></a>.</p>
+<figure class="align-default" id="fig-pat2-full-pipeline">
+<a class="reference internal image-reference" href="../../../_images/full_pipeline1.png"><img alt="../../../_images/full_pipeline1.png" src="../../../_images/full_pipeline1.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Forward pipeline and inversion approaches.
+Solid and dashed arrows represent forward and inversion processes, respectively.</span><a class="headerlink" href="#fig-pat2-full-pipeline" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>This pipeline takes concentration maps as input, enters them in the multiplexing module where
+the optical process is applied <span class="math notranslate nohighlight">\(N\)</span> times for <span class="math notranslate nohighlight">\(N\)</span> photo-switching pulses
+to obtain a stack of <span class="math notranslate nohighlight">\(N\)</span> PA images.
+These images are fed to the acoustic module where an acoustic detection process is applied to each of them.
+The final output is a stack of acoustic images (measurements).
+The goal of unmixing is to recover unknown concentration maps.</p>
+<p>There are two ways to accomplish this (see <a class="reference internal" href="#fig-pat2-full-pipeline"><span class="std std-numref">Fig. 31</span></a>).
+A commonly adopted approach is two-step unmixing.
+One first reconstructs the PA images by solving an inverse problem involving the acoustic process;
+then, one apply an unmixing algorithm on them.
+An alternative approach is to solve a global inverse problem that recovers concentration maps
+directly from acoustic measurements.
+These two approaches will be detailed in <a class="reference internal" href="inverse.html#pat2-inverse-problem"><span class="std std-ref">Inverse Problems</span></a>.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="numerical-implementation">
+<span id="pat2-numerical-implementation"></span><h1>Numerical Implementation<a class="headerlink" href="#numerical-implementation" title="Link to this heading">¶</a></h1>
+<p>We discretize the 2D object domain <span class="math notranslate nohighlight">\(\Omega\)</span> into a collection of points
+<span class="math notranslate nohighlight">\(\Delta\boldsymbol{i} = (\Delta_1 i_1, \Delta_2 i_2)\)</span>,
+where <span class="math notranslate nohighlight">\(\boldsymbol{i} = (i_1, i_2) \in \Omega_{\text{2D}}\subset \mathbb{Z}^2\)</span> is the index of sampled points,
+<span class="math notranslate nohighlight">\(i_1 = 0, \ldots, L_\text{x} - 1\)</span>, and <span class="math notranslate nohighlight">\(i_2=0, \ldots, L_\text{z} - 1\)</span>.
+The diagonal matrix <span class="math notranslate nohighlight">\(\Delta = \text{diag}\left\{\Delta_1, \Delta_2\right\}\)</span>
+defines the stepsize <span class="math notranslate nohighlight">\(\Delta_1\)</span> and <span class="math notranslate nohighlight">\(\Delta_2\)</span> for the lateral and axial direction, respectively.
+Switching time <span class="math notranslate nohighlight">\(t\)</span> is sampled at <span class="math notranslate nohighlight">\(N\)</span> pulses such that <span class="math notranslate nohighlight">\(t_n = \Delta_{\text{t}} n\)</span>,
+<span class="math notranslate nohighlight">\(n=0, \ldots, N-1\)</span>, with <span class="math notranslate nohighlight">\(\Delta_{\text{t}}\)</span> the temporal stepsize which is determined
+by the laser repetition rate during switching.</p>
+<section id="discrete-photo-switching-model">
+<span id="pat2-discrete-photo-switching-model"></span><h2>Discrete Photo-Switching Model<a class="headerlink" href="#discrete-photo-switching-model" title="Link to this heading">¶</a></h2>
+<p>The discretization of <a class="reference internal" href="#equation-eq-final-h-pat2">Eq. (55)</a> follows the same procedure as in <a class="reference internal" href="../pat1/theory.html#pat1-forward-model-discrete"><span class="std std-ref">Discrete Forward Model</span></a>.
+We briefly recall the equation here for completeness:</p>
+<div class="math-wrapper docutils container" id="equation-src-photoacoustic-pat2-forward-models-0">
+<div class="math notranslate nohighlight" id="equation-src-photoacoustic-pat2-forward-models-0">
+<span class="eqno">(64)<a class="headerlink" href="#equation-src-photoacoustic-pat2-forward-models-0" title="Link to this equation">¶</a></span>\[\mathbf{H} = \mathbf{S}\mathbf{c},\]</div>
+</div>
+<p>with the deposited energy vector <span class="math notranslate nohighlight">\(\mathbf{H} \in \mathbb{R}^{NL}\)</span>,
+concentration maps <span class="math notranslate nohighlight">\(\mathbf{c} \in \mathbb{R}^{PL}\)</span>,
+and the pooled system matrix <span class="math notranslate nohighlight">\(\mathbf{S} \in \mathbb{R}^{NL \times PL}\)</span>.</p>
+<p>We compute the fluence map by applying the finite element method to
+the diffusion equation <a class="reference internal" href="../pat1/fluence.html#equation-eq-de">Eq. (47)</a> with the boundary condition <a class="reference internal" href="../pat1/fluence.html#equation-eq-bc">Eq. (48)</a> and the light source defined in
+<a class="reference internal" href="#equation-eq-light-source-pat2">Eq. (56)</a> and by following the same methodology described in
+<a class="reference internal" href="../pat1/fluence.html#pat1-diffusion-equation-implementation"><span class="std std-ref">Numerical Implementation of the Diffusion Equation</span></a>.</p>
+</section>
+<section id="discrete-acoustic-model">
+<span id="pat2-discrete-acoustic-model"></span><h2>Discrete Acoustic Model<a class="headerlink" href="#discrete-acoustic-model" title="Link to this heading">¶</a></h2>
+<p>Implementation of the acoustic model lies in the discretization of
+<a class="reference internal" href="#equation-eq-q-above-2d">Eq. (61)</a> and <a class="reference internal" href="#equation-eq-q-below-2d">Eq. (62)</a>, where <span class="math notranslate nohighlight">\(q(x_{\text{T}}, \tau)\)</span>
+depends on both space and time.
+Here, we introduce a convenient variable <span class="math notranslate nohighlight">\(y = c_0\tau\)</span> and express <span class="math notranslate nohighlight">\(q(x_{\text{T}}, \tau)\)</span>
+equivalently in pure spatial coordinates as <span class="math notranslate nohighlight">\(q(x_{\text{T}}, y)\)</span> via a change of variables.
+We discretize the measurement domain into a grid of pixels <span class="math notranslate nohighlight">\(\Gamma\boldsymbol{m}\)</span>,
+where <span class="math notranslate nohighlight">\(\boldsymbol{m}=(m_1, m_2) \in \Theta_{\text{2D}}\subset\mathbb{Z}_2\)</span> is the pixel index,
+<span class="math notranslate nohighlight">\(m_1=0, \ldots, M_1 - 1\)</span>, and <span class="math notranslate nohighlight">\(m_2=0, \ldots, M_2 - 1\)</span>.
+The set of indices <span class="math notranslate nohighlight">\(\Theta_{\text{2D}}\)</span> has <span class="math notranslate nohighlight">\(M = M_1M_2\)</span> elements.
+The diagonal matrix <span class="math notranslate nohighlight">\(\Gamma = \text{diag}(\gamma_1, \gamma_2)\)</span>
+contains the sampling stepsize <span class="math notranslate nohighlight">\(\gamma_1\)</span> and <span class="math notranslate nohighlight">\(\gamma_2\)</span> for the lateral and axial direction, respectively.</p>
+<p>We define the forward model described in <a class="reference internal" href="#equation-eq-q-above-2d">Eq. (61)</a>
+as a linear operator <span class="math notranslate nohighlight">\(\mathcal{L}:L_2(\mathbb{R}^2)\to L_2(\mathbb{R}^2)\)</span>
+and write <a class="reference internal" href="#equation-eq-q-above-2d">Eq. (61)</a> equivalently as</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-above-compact">
+<div class="math notranslate nohighlight" id="equation-eq-q-above-compact">
+<span class="eqno">(65)<a class="headerlink" href="#equation-eq-q-above-compact" title="Link to this equation">¶</a></span>\[    q(x_{\text{T}}, y) = \mathcal{L}\{b\}(x_{\text{T}}, y).\]</div>
+</div>
+<p>Similarly, the discretized measurement function <span class="math notranslate nohighlight">\(q:\Theta_{\text{2D}}\to\mathbb{R}\)</span> can be written as</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-above-compact-discrete">
+<div class="math notranslate nohighlight" id="equation-eq-q-above-compact-discrete">
+<span class="eqno">(66)<a class="headerlink" href="#equation-eq-q-above-compact-discrete" title="Link to this equation">¶</a></span>\[    q[\boldsymbol{m}] = \mathcal{L}\{b\}
+    (\Gamma\boldsymbol{m}).\]</div>
+</div>
+<p>We represent the compactly supported function <span class="math notranslate nohighlight">\(b(\mathbf{r})\)</span> (equivalently <span class="math notranslate nohighlight">\(H(\mathbf{r})\)</span>,
+c.f <a class="reference internal" href="#equation-eq-pa-effect">Eq. (58)</a>) via a series of shifted basis functions <span class="math notranslate nohighlight">\(\varphi\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-b-on-basis">
+<div class="math notranslate nohighlight" id="equation-eq-b-on-basis">
+<span class="eqno">(67)<a class="headerlink" href="#equation-eq-b-on-basis" title="Link to this equation">¶</a></span>\[    b(\mathbf{r})
+    = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}} \beta[\boldsymbol{k}] \varphi(\mathbf{r} / \Delta - \boldsymbol{k}), \quad \mathbf{r}\in \Omega.\]</div>
+</div>
+<p>Here, we choose the basis function <span class="math notranslate nohighlight">\(\varphi(\mathbf{r})\)</span> to be the 2D rectangular function
+<span class="math notranslate nohighlight">\(\text{rect}(\mathbf{r})\)</span> to represent regular pixel grid, where</p>
+<div class="math-wrapper docutils container" id="equation-src-photoacoustic-pat2-forward-models-1">
+<div class="math notranslate nohighlight" id="equation-src-photoacoustic-pat2-forward-models-1">
+<span class="eqno">(68)<a class="headerlink" href="#equation-src-photoacoustic-pat2-forward-models-1" title="Link to this equation">¶</a></span>\[\begin{split}    \text{rect}(\mathbf{r}) = \left\{
+    \begin{aligned}
+        1, &amp; \quad -\frac{1}{2}\leq x \leq \frac{1}{2} \text{ and } -\frac{1}{2}\leq z \leq \frac{1}{2}, \\
+    0, &amp; \quad \text{ else}.
+    \end{aligned}\right.\end{split}\]</div>
+</div>
+<p>Thanks to the linearity of <span class="math notranslate nohighlight">\(\mathcal{L}\)</span>, we obtain</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-above-on-basis">
+<div class="math notranslate nohighlight" id="equation-eq-q-above-on-basis">
+<span class="eqno">(69)<a class="headerlink" href="#equation-eq-q-above-on-basis" title="Link to this equation">¶</a></span>\[        q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}}\beta[\boldsymbol{k}] \mathcal{L}\{\varphi(\cdot / \Delta -\boldsymbol{k})\}(\Gamma\boldsymbol{m}),\]</div>
+</div>
+<p>where the quantity <span class="math notranslate nohighlight">\(\mathcal{L}\{\varphi(\cdot / \Delta -\boldsymbol{k})\}(\Gamma\boldsymbol{m})\)</span>
+has the expression</p>
+<div class="math-wrapper docutils container" id="equation-eq-l-above">
+<div class="math notranslate nohighlight" id="equation-eq-l-above">
+<span class="eqno">(70)<a class="headerlink" href="#equation-eq-l-above" title="Link to this equation">¶</a></span>\[     \mathcal{L}\{\varphi(\cdot / \Delta -\boldsymbol{k})\}(\Gamma\boldsymbol{m}) =  \int_{I_{\text{x}}}\int_{I_{\text{z}}} h(\mathbf{r} - \mathbf{r}_T) \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 -r_\tau^2 \right) (2r_\tau)\text{d}z\text{d}x,\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(I_{\text{x}} = [(k_1 - 1/2)\Delta_1, (k_1 + 1/2)\Delta_1]\)</span>,
+and <span class="math notranslate nohighlight">\(I_{\text{z}} = [(k_2 - 1/2)\Delta_2, (k_2 + 1/2)\Delta_2]\)</span>.</p>
+<p>To compute a discrete version of this integral,
+we express the function <span class="math notranslate nohighlight">\(h(\mathbf{r})\)</span> on the same rectangular basis with the same grid
+and support as <span class="math notranslate nohighlight">\(b(\mathbf{r})\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-h-t-on-basis">
+<div class="math notranslate nohighlight" id="equation-eq-h-t-on-basis">
+<span class="eqno">(71)<a class="headerlink" href="#equation-eq-h-t-on-basis" title="Link to this equation">¶</a></span>\[    h(\mathbf{r}) = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}} \eta[\boldsymbol{k}]
+    \text{rect}(\mathbf{r} / \Delta -\boldsymbol{k}), \quad \mathbf{r}\in \Omega.\]</div>
+</div>
+<p>We also assume that the discretization grids <span class="math notranslate nohighlight">\(\Omega_{\text{2D}}\)</span> and <span class="math notranslate nohighlight">\(\Theta_{\text{2D}}\)</span> match
+and that <span class="math notranslate nohighlight">\(\boldsymbol{r}_{\text{T}} = (x_\text{T},  z_\text{F}) = \Delta \boldsymbol{k}_{\text{T}}\)</span>
+with <span class="math notranslate nohighlight">\(\boldsymbol{k}_{\text{T}} \in \mathbb{Z}^2\)</span> the indices of the transducer focal position.
+Then,</p>
+<div class="math-wrapper docutils container" id="equation-eq-h-t-shifted-on-basis">
+<div class="math notranslate nohighlight" id="equation-eq-h-t-shifted-on-basis">
+<span class="eqno">(72)<a class="headerlink" href="#equation-eq-h-t-shifted-on-basis" title="Link to this equation">¶</a></span>\[    h(\mathbf{r} - \boldsymbol{r}_{\text{T}}) = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}}
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}] \text{rect}(\mathbf{r} / \Delta -\boldsymbol{k}),
+    \quad \mathbf{r}\in \Omega.\]</div>
+</div>
+<p>In <a class="reference internal" href="#equation-eq-l-above">Eq. (70)</a>, <span class="math notranslate nohighlight">\(h\)</span> is constant in the support <span class="math notranslate nohighlight">\((I_\text{x} \times I_\text{z})\)</span>, such that:</p>
+<div class="math-wrapper docutils container" id="equation-eq-l-above2">
+<div class="math notranslate nohighlight" id="equation-eq-l-above2">
+<span class="eqno">(73)<a class="headerlink" href="#equation-eq-l-above2" title="Link to this equation">¶</a></span>\[     \mathcal{L}\{\varphi(\cdot-\boldsymbol{k})\}(\Gamma\boldsymbol{m}) = 
+     \eta[\boldsymbol{k}-\boldsymbol{k}_\text{T}]
+     \int_{I_{\text{x}}}\int_{I_{\text{z}}}
+     \delta\left((x - x_{\text{T}})^2 + (z - z_{\text{F}})^2 - r_\tau^2 \right) (2r_\tau)\text{d}z\text{d}x,\]</div>
+</div>
+<p>The integral in  <a class="reference internal" href="#equation-eq-l-above2">Eq. (73)</a>
+reduces to computing the arc length of the semicircle intersecting with the 2D box defined by
+<span class="math notranslate nohighlight">\((I_{\text{x}}\times I_{\text{z}})\)</span>, which we denote by <span class="math notranslate nohighlight">\(s_{\boldsymbol{m}}[\boldsymbol{k}]\)</span>.
+Therefore, <a class="reference internal" href="#equation-eq-q-above-on-basis">Eq. (69)</a> becomes</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-above-simplified">
+<div class="math notranslate nohighlight" id="equation-eq-q-above-simplified">
+<span class="eqno">(74)<a class="headerlink" href="#equation-eq-q-above-simplified" title="Link to this equation">¶</a></span>\[    q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Omega_{\text{2D}}} \beta[\boldsymbol{k}]
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}]  s_{\boldsymbol{m}}[\boldsymbol{k}].\]</div>
+</div>
+<p>The precise computation of <span class="math notranslate nohighlight">\(s_{\boldsymbol{m}}[\boldsymbol{k}]\)</span> for all spatial locations is expensive,
+especially for large-scale reconstructions.
+For computational speed, we use a unit length of 1 for all pixels that intersect with the semicircle.
+<a class="reference internal" href="#equation-eq-q-above-simplified">Eq. (74)</a> simplifies to</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-above-final">
+<div class="math notranslate nohighlight" id="equation-eq-q-above-final">
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-q-above-final" title="Link to this equation">¶</a></span>\[    q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Lambda_+^{\boldsymbol{m}}}\beta[\boldsymbol{k}]
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}],\]</div>
+</div>
+<p>where we denote by <span class="math notranslate nohighlight">\(\Lambda_+^{\boldsymbol{m}}\)</span> the discrete upper semicircle.
+It is the set of pixel indices <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> whose corresponding pixels intersect with
+the continuous upper semicircle <span class="math notranslate nohighlight">\(C_+^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-discrete-upper-circle">
+<div class="math notranslate nohighlight" id="equation-eq-discrete-upper-circle">
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-discrete-upper-circle" title="Link to this equation">¶</a></span>\[     C_+^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}= \left\{ (x, z): (x - x_{\text{T}, m_1})^2 + (z - z_{\text{F}})^2 =
+     r_{\tau}^2 \text{ and } z&lt; z_{\text{F}}\right\},\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(x_{\text{T}, m_1}\)</span> is the location of the transducer on the measurement grid.</p>
+<p>Similarly, in the case of the lower semicircle, we have</p>
+<div class="math-wrapper docutils container" id="equation-eq-q-below-final">
+<div class="math notranslate nohighlight" id="equation-eq-q-below-final">
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-q-below-final" title="Link to this equation">¶</a></span>\[    q[\boldsymbol{m}] = \sum_{\boldsymbol{k}\in \Lambda_-^{\boldsymbol{m}}}\beta[\boldsymbol{k}]
+    \eta[\boldsymbol{k} - \boldsymbol{k}_{\text{T}}],\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda_-^{\boldsymbol{m}}\)</span> is the discrete lower semicircle whose corresponding pixels intersect with the continuous lower semicircle <span class="math notranslate nohighlight">\(C_-^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-discrete-lower-circle">
+<div class="math notranslate nohighlight" id="equation-eq-discrete-lower-circle">
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-discrete-lower-circle" title="Link to this equation">¶</a></span>\[     C_-^{\mathbf{r}_{\text{T}, \boldsymbol{m}}}= \left\{ (x, z): (x - x_{\text{T}, m_1})^2 + (z - z_{\text{F}})^2 =
+     r_{\tau}^2 \text{ and } z&gt; z_{\text{F}}\right\}.\]</div>
+</div>
+<p>In our implementation, <span class="math notranslate nohighlight">\(\Lambda_+^{\boldsymbol{m}}\)</span> and <span class="math notranslate nohighlight">\(\Lambda_-^{\boldsymbol{m}}\)</span>
+are generated via a function
+<a class="reference external" href="https://scikit-image.org/docs/0.25.x/api/skimage.draw.html#skimage.draw.circle_perimeter"><code class="docutils literal notranslate"><span class="pre">skimage.draw.circle_perimeter</span></code></a>
+from the imaging processing library <em>scikit-image</em> <span id="id2">[<a class="reference internal" href="../../../index.html#id297" title="Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias, François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart, Tony Yu, and the scikit-image contributors. Scikit-image: image processing in Python. PeerJ, 2:e453, June 2014.">171</a>]</span>.
+<a class="reference internal" href="#equation-eq-q-above-final">Eq. (75)</a> (and similarly, <a class="reference internal" href="#equation-eq-q-below-final">Eq. (77)</a>) can be implemented based on the following steps:
+for each measurement location <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span>,</p>
+<ol class="arabic simple">
+<li><p>Shift <span class="math notranslate nohighlight">\(\eta\)</span> to grid location of the transducer, then, element-wise multiply <span class="math notranslate nohighlight">\(\beta\)</span> with it;</p></li>
+<li><p>Generate the semicircle mask <span class="math notranslate nohighlight">\(\Lambda_+^{\boldsymbol{m}}\)</span> and apply it to the outcome of Step 1);</p></li>
+<li><p>Sum up all masked pixels <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> to obtain <span class="math notranslate nohighlight">\(q[\boldsymbol{m}]\)</span>.</p></li>
+</ol>
+<p>Since the radius of the semicircle is the same for a given depth, we can generate a row of the image
+<span class="math notranslate nohighlight">\(q\)</span> at once.
+To avoid explicitly constructing the forward matrix by computing <a class="reference internal" href="#equation-eq-q-above-final">Eq. (75)</a>
+for each pixel <span class="math notranslate nohighlight">\(\boldsymbol{m}\)</span>,
+we interpret <a class="reference internal" href="#equation-eq-q-above-final">Eq. (75)</a> equivalently as follows:
+the pixel value <span class="math notranslate nohighlight">\(q[\boldsymbol{m}]\)</span> is the result of the correlation between a 2D image <span class="math notranslate nohighlight">\(\beta\)</span>
+and a 2D image <span class="math notranslate nohighlight">\(\eta\)</span> multiplied by a binary mask,
+then evaluated at location <span class="math notranslate nohighlight">\(\boldsymbol{k}_{\text{T}}\)</span>.
+We thus implement <a class="reference internal" href="#equation-eq-q-above-final">Eq. (75)</a> (similarly <a class="reference internal" href="#equation-eq-q-below-final">Eq. (77)</a>) based on the following steps:</p>
+<ol class="arabic simple">
+<li><p>Generate the semicircle mask at current depth <span class="math notranslate nohighlight">\(k_{2}\)</span>;</p></li>
+<li><p>Element-wise multiply it with the SPR image (see <a class="reference internal" href="#fig-acoustic-signal-generation"><span class="std std-numref">Fig. 30</span></a> (c) and (c’));</p></li>
+<li><p>Correlate the PA image <span class="math notranslate nohighlight">\(\beta\)</span> with the masked SPR image;</p></li>
+<li><p>Extract the horizontal slice at focal plane <span class="math notranslate nohighlight">\(k_{\text{T}, 2}\)</span> from the outcome of Step 3);</p></li>
+<li><p>Perform Step 1) to 4) for all depths and stack the horizontal slices according to their respective location to
+produce the 2D image <span class="math notranslate nohighlight">\(q\)</span>.
+The temporal convolution step is applied to each column of the 2D image <span class="math notranslate nohighlight">\(q\)</span> via standard convolution in 1D.
+We provide an illustration of the acoustic signal-generation process in <a class="reference internal" href="#fig-acoustic-signal-generation"><span class="std std-numref">Fig. 30</span></a>.</p></li>
+</ol>
+<p>We write the forward model for a single acoustic process at switching time point <span class="math notranslate nohighlight">\(t_n\)</span> as the linear system</p>
+<div class="math-wrapper docutils container" id="equation-eq-acoustic-discrete-single">
+<div class="math notranslate nohighlight" id="equation-eq-acoustic-discrete-single">
+<span class="eqno">(79)<a class="headerlink" href="#equation-eq-acoustic-discrete-single" title="Link to this equation">¶</a></span>\[    \mathbf{p}^n = \mathbf{W} \mathbf{b}^n,\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{b}^n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}^n \in\mathbb{R}^{L}\)</span> are the vector representation
+of the PA image <span class="math notranslate nohighlight">\(\beta\)</span> and the acoustic image <span class="math notranslate nohighlight">\(p\)</span> at <span class="math notranslate nohighlight">\(t_n\)</span>, respectively.
+We construct the acoustic forward operator <span class="math notranslate nohighlight">\(\mathbf{W}\in\mathbb{R}^{L \times L}\)</span> as a matrix-free linear
+operator following the interpretation in <a class="reference internal" href="#fig-acoustic-signal-generation"><span class="std std-numref">Fig. 30</span></a>.</p>
+<p>Finally, we build the acoustic forward operator <span class="math notranslate nohighlight">\(\mathbf{W}_{\text{tot}}\)</span>
+for <span class="math notranslate nohighlight">\(N\)</span> switching pulses during an OFF-switching cycle and obtain</p>
+<div class="math-wrapper docutils container" id="equation-eq-acoustic-full-forward">
+<div class="math notranslate nohighlight" id="equation-eq-acoustic-full-forward">
+<span class="eqno">(80)<a class="headerlink" href="#equation-eq-acoustic-full-forward" title="Link to this equation">¶</a></span>\[\begin{split}    \underbrace{
+    \begin{bmatrix}
+        \mathbf{p}^{0} \\
+        \mathbf{p}^{1} \\
+        \vdots \\
+        \mathbf{p}^{N-1}
+    \end{bmatrix}
+    }_{\mathbf{p}}
+    =
+    \underbrace{
+    \begin{bmatrix}
+        \mathbf{W} &amp; 
+        \mathbf{0} &amp;     
+        \cdots &amp; 
+        \mathbf{0} \\
+        \mathbf{0} &amp; 
+        \mathbf{W} &amp;
+        \cdots &amp; 
+        \vdots \\
+        \vdots &amp; 
+        \cdots &amp;    
+        \ddots &amp;
+        \mathbf{0} \\
+        \mathbf{0} &amp; 
+        \cdots &amp; 
+        \mathbf{0} &amp;     
+        \mathbf{W} \\
+    \end{bmatrix}}
+    _{\mathbf{W}_{\text{tot}}}
+    \underbrace{
+    \begin{bmatrix}
+        \mathbf{b}^{0} \\
+        \mathbf{b}^{1} \\
+        \vdots \\
+        \mathbf{b}^{N-1}
+    \end{bmatrix}}
+    _{\mathbf{b}}  + \quad\mathbf{n}.\end{split}\]</div>
+</div>
+<p>In <a class="reference internal" href="#equation-eq-acoustic-full-forward">Eq. (80)</a>,
+<span class="math notranslate nohighlight">\(\mathbf{b}\in\mathbb{R}^{NL}\)</span> is the vector of the initial pressure of all <span class="math notranslate nohighlight">\(N\)</span> pulses,
+<span class="math notranslate nohighlight">\(\mathbf{W}_{\text{tot}}\in\mathbb{R}^{NL\times NL}\)</span> is the system matrix,
+<span class="math notranslate nohighlight">\(\mathbf{p}\in\mathbb{R}^{NL}\)</span> is the vector of the acoustic measurement of all <span class="math notranslate nohighlight">\(N\)</span> pulses,
+and the vector <span class="math notranslate nohighlight">\(\mathbf{n}\in\mathbb{R}^{NL}\)</span> represents measurement noise.
+Note that both <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{W}_{\text{tot}}\)</span> are matrix-free linear operators.</p>
+</section>
+<section id="complete-forward-pipeline">
+<h2>Complete Forward Pipeline<a class="headerlink" href="#complete-forward-pipeline" title="Link to this heading">¶</a></h2>
+<p>We denote the forward operator of the complete pipeline as <span class="math notranslate nohighlight">\(\mathbf{A}\in\mathbb{R}^{NL\times PL}\)</span>.
+It is a composition of the photo-switching forward operator <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> and the complete acoustic
+forward matrix <span class="math notranslate nohighlight">\(\mathbf{W}_{\text{tot}}\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-full-forward">
+<div class="math notranslate nohighlight" id="equation-eq-full-forward">
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-full-forward" title="Link to this equation">¶</a></span>\[    \mathbf{A} = \mathbf{W}_{\text{tot}}\mathbf{S}.\]</div>
+</div>
+<p>The forward pipeline takes the vector <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> of concentration maps as input,
+applies the photo-switching operator <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> in which the optical process is applied <span class="math notranslate nohighlight">\(N\)</span>
+times for <span class="math notranslate nohighlight">\(N\)</span> photo-switching pulses to obtain a stack of <span class="math notranslate nohighlight">\(N\)</span> PA images <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>
+(or equivalently <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, cf. <a class="reference internal" href="#equation-eq-pa-effect">Eq. (58)</a>).
+They are then fed to the acoustic module where the acoustic detection process is applied to each PA image.
+The final measurement is a stack of acoustic signals <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="inverse.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Inverse Problems</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="background.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Background</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Forward Models: from Concentration Maps to Acoustic Signals</a><ul>
+<li><a class="reference internal" href="#photo-switching-model">Photo-Switching Model</a></li>
+<li><a class="reference internal" href="#optical-model">Optical Model</a></li>
+<li><a class="reference internal" href="#photoacoustic-effect">Photoacoustic Effect</a></li>
+<li><a class="reference internal" href="#acoustic-model">Acoustic Model</a></li>
+<li><a class="reference internal" href="#full-forward">Full Forward</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-implementation">Numerical Implementation</a><ul>
+<li><a class="reference internal" href="#discrete-photo-switching-model">Discrete Photo-Switching Model</a></li>
+<li><a class="reference internal" href="#discrete-acoustic-model">Discrete Acoustic Model</a></li>
+<li><a class="reference internal" href="#complete-forward-pipeline">Complete Forward Pipeline</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

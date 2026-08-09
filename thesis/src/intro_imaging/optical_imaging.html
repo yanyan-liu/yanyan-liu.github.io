@@ -1,0 +1,698 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Modeling and Solving of Inverse Problems" href="../intro_math/index.html"><link rel="prev" title="Biomedical Optical Imaging" href="index.html">
+        <link rel="prefetch" href="../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Basic Principles</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="basic-principles">
+<span id="intro-imaging-basic-principles"></span><h1>Basic Principles<a class="headerlink" href="#basic-principles" title="Link to this heading">¶</a></h1>
+<p>The basic principle of any optical imaging modality can be explained with four components:</p>
+<ul class="simple">
+<li><p>Probe</p></li>
+<li><p>Light-matter iteration</p></li>
+<li><p>Detection</p></li>
+<li><p>Image formation.</p></li>
+</ul>
+<section id="probe">
+<span id="intro-imaging-probe"></span><h2>Probe<a class="headerlink" href="#probe" title="Link to this heading">¶</a></h2>
+<p>We call <em>probe</em> the electromagnetic wave sent onto the sample to gather information about its composition.
+Optical imaging employs photons in visible (380-750 nm) and near-infrared (650-950 nm) range as probes,
+between short CT X-rays (10 pm-10 nm) and long MRI radio-frequency waves (meters)
+<span id="id1">[<a class="reference internal" href="../../index.html#id25" title="Brian W. Pogue. Optics in the Molecular Imaging Race. Optics and Photonics News, 26(9):24, September 2015.">34</a>]</span> (See <a class="reference internal" href="../introduction/background.html#fig-intro-em-spectrum"><span class="std std-numref">Fig. 1</span></a>).
+In optical tomography, one usually operates in the near-infrared window (also known as the optical window)
+where light can propagate several centimeters deep inside the biological tissue, as light at these wavelengths
+is less absorbed by water
+<span id="id2">[<a class="reference internal" href="../../index.html#id26" title="Felix Scholkmann, Stefan Kleiser, Andreas Jaakko Metz, Raphael Zimmermann, Juan Mata Pavia, Ursula Wolf, and Martin Wolf. A review on continuous wave functional near-infrared spectroscopy and imaging instrumentation and methodology. NeuroImage, 85:6–27, January 2014.">10</a>]</span>.
+In fluorescence microscopy, one typically operates in the visible window with markers
+such as the green fluorescent protein and mCherry <span id="id3">[<a class="reference internal" href="../../index.html#id29" title="Douglas B. Murphy and Michael W. Davidson. Fundamentals of Light Microscopy and Electronic Imaging. Wiley, first edition, September 2012.">35</a>]</span>.</p>
+</section>
+<section id="light-matter-interaction">
+<span id="intro-imaging-matter-interaction"></span><h2>Light-Matter Interaction<a class="headerlink" href="#light-matter-interaction" title="Link to this heading">¶</a></h2>
+<p>As mentioned in <a class="reference internal" href="../introduction/background.html#intro-background"><span class="std std-ref">Background</span></a>, there are many types of light-matter interactions.
+Here, we introduce the most relevant ones for this thesis.</p>
+<section id="absorption">
+<span id="intro-imaging-absorption"></span><h3>Absorption<a class="headerlink" href="#absorption" title="Link to this heading">¶</a></h3>
+<p>Absorption contributes to the formation of contrast in optical imaging.
+When biological tissue is illuminated, it absorbs part of the photon energy from the light source.
+Absorption is characterized by the absorption coefficient <span class="math notranslate nohighlight">\(\mu_a\)</span>.
+It is defined as the probability of photon absorption in a medium per unit path length <span id="id4">[<a class="reference internal" href="../../index.html#id254" title="Lihong V. Wang and Hsin-i Wu. Biomedical optics: principles and imaging. Wiley-Interscience, Hoboken, NJ, USA, 2007.">8</a>]</span>.
+The wavelength-dependent absorption coefficient
+can vary substantially across the spectrum <span id="id5">[<a class="reference internal" href="../../index.html#id228" title="Mucong Li, Yuqi Tang, and Junjie Yao. Photoacoustic tomography of blood oxygenation: A mini review. Photoacoustics, 10:65–73, 2018.">36</a>]</span>.
+It carries information about the sample and enables one to build an image from the absorption map.
+Brightfield optical microscopy is a representative example of a technique that relies on absorption.
+As the first and most basic microscopy technique widely used in biology and medicine,
+its contrast comes from the attenuation of the transmitted light in the sample.
+However, an absorption-related contrast remains limited due to the transparency of many biological structures,
+particularly, living cells.</p>
+<p>In other cases, the absorbed photon energy may be further converted to either
+radiative (e.g., fluorescence, Raman photon) or non-radiative (e.g., heat) energy.
+These are called second-order processes.
+In the case of fluorescence, the absorbed energy by the fluorescent labels introduced into the sample
+is transformed and emitted as light again, but at a longer wavelength (known as Stoke’s shift)
+<span id="id6">[<a class="reference internal" href="../../index.html#id29" title="Douglas B. Murphy and Michael W. Davidson. Fundamentals of Light Microscopy and Electronic Imaging. Wiley, first edition, September 2012.">35</a>]</span>.
+Representative modalities include fluorescence microscopy (nanometer-to-micrometer resolution)
+<span id="id7">[<a class="reference internal" href="../../index.html#id29" title="Douglas B. Murphy and Michael W. Davidson. Fundamentals of Light Microscopy and Electronic Imaging. Wiley, first edition, September 2012.">35</a>, <a class="reference internal" href="../../index.html#id23" title="James B. Pawley, editor. Handbook Of Biological Confocal Microscopy. Springer US, Boston, MA, USA, 2006.">37</a>]</span> and several tomography techniques
+such as (emission) optical projection tomography (tens of micrometer resolution) <span id="id8">[<a class="reference internal" href="../../index.html#id109" title="James Sharpe. Optical projection tomography. Annual Review of Biomedical Engineering, 6(1):209-228, 2004.">11</a>]</span>
+or fluorescence molecular tomography (hundreds of micrometer resolution) <span id="id9">[<a class="reference internal" href="../../index.html#id41" title="Vasilis Ntziachristos. FLUORESCENCE MOLECULAR IMAGING. Annual Review of Biomedical Engineering, 8(1):1–33, August 2006.">38</a>]</span>.
+In the non-radiative case, when the heat is further converted to thermoelastic energy in the form of acoustic waves,
+one can perform photoacoustic imaging <span id="id10">[<a class="reference internal" href="../../index.html#id254" title="Lihong V. Wang and Hsin-i Wu. Biomedical optics: principles and imaging. Wiley-Interscience, Hoboken, NJ, USA, 2007.">8</a>]</span>.</p>
+<p>An alternative to absorption-based and intensity-based imaging is phase-contrast imaging <span id="id11">[<a class="reference internal" href="../../index.html#id33" title="Jonathan Dong, Lorenzo Valzania, Antoine Maillard, Thanh-an Pham, Sylvain Gigan, and Michael Unser. Phase Retrieval: From Computational Imaging to Machine Learning: A tutorial. IEEE Signal Processing Magazine, 40(1):45–57, January 2023.">39</a>]</span>.
+It converts differences in the refractive index of different parts of the specimen into differences in brightness,
+which enhances the visibility of transparent objects (e.g., live cells), without staining or exogenous labels.</p>
+</section>
+<section id="scattering">
+<span id="intro-imaging-scattering"></span><h3>Scattering<a class="headerlink" href="#scattering" title="Link to this heading">¶</a></h3>
+<p>Biological tissues are highly scattering media for the optical photons that propagate through them.
+The immediate effect of scattering is the attenuation of light;
+therefore, it restricts imaging depth.
+Here, we focus mainly on elastic scattering, where only the direction of photons changes while their energy remains
+unchanged <span id="id12">[<a class="reference internal" href="../../index.html#id254" title="Lihong V. Wang and Hsin-i Wu. Biomedical optics: principles and imaging. Wiley-Interscience, Hoboken, NJ, USA, 2007.">8</a>]</span>.
+The strength of scattering is characterized by the scattering coefficient <span class="math notranslate nohighlight">\(\mu_s\)</span>.
+It describes how strongly a photon is scattered per unit length <span id="id13">[<a class="reference internal" href="../../index.html#id254" title="Lihong V. Wang and Hsin-i Wu. Biomedical optics: principles and imaging. Wiley-Interscience, Hoboken, NJ, USA, 2007.">8</a>]</span>.
+The direction of scattering, related to the likelihood of a photon to be scattered forward,
+is described by a quantity called anisotropy (<span class="math notranslate nohighlight">\(g\in[0, 1]\)</span>).
+There are two important concepts related to scattering,</p>
+<ul class="simple">
+<li><p>the mean free path (MFP): <span class="math notranslate nohighlight">\(1/\mu_s\)</span>, which represents the typical distance traveled between scattering events
+and is approximately 0.1 mm in soft tissue; and</p></li>
+<li><p>the transport mean free path (TMFP): <span class="math notranslate nohighlight">\(1/((1-g)\mu_s)\)</span>, which is approximately 1 mm in
+soft tissue <span id="id14">[<a class="reference internal" href="../../index.html#id223" title="Vasilis Ntziachristos. Going deeper than microscopy: the optical imaging frontier in biology. Nature Methods, 7(8):603–614, August 2010.">25</a>]</span>.
+It represents the typical distance after which the original direction of propagation is lost.</p></li>
+</ul>
+<p>Within the mean free path, photons undergo none or minimal scattering events.
+These events can be considered random and
+coherently scattered (referred to as the ballistic regime) <span id="id15">[<a class="reference internal" href="../../index.html#id15" title="Xunbin Wei and Bobo Gu, editors. Optical Imaging in Human Disease and Biological Research. Volume 3233 of Advances in Experimental Medicine and Biology. Springer Singapore, Singapore, 2021.">6</a>]</span>.
+The intensity of light is minimally affected, the photons still <em>remember</em> their original orientation and carry
+information about the compositions of tissue structures.
+Most microscopy techniques, such as confocal microscopy (CFM) and two-photon microscopy (TFM), operate in this regime
+<span id="id16">[<a class="reference internal" href="../../index.html#id29" title="Douglas B. Murphy and Michael W. Davidson. Fundamentals of Light Microscopy and Electronic Imaging. Wiley, first edition, September 2012.">35</a>]</span>.</p>
+<p>Beyond the mean free path but within the transport mean free path,
+as photons propagate deeper into the turbid tissue medium,
+multiple scattering events cause rapid intensity attenuation and strong divergence of the light.
+Beyond the transport mean free path,
+photon propagation transitions into a diffusive regime, where multiple scattering events statistically average out,
+enabling a deterministic description of light transport.
+Therefore, this regime is usually described by diffusion theory
+<span id="id17">[<a class="reference internal" href="../../index.html#id256" title="Jorge Ripoll Lorenzo. Principles of Diffuse Light Propagation: Light Propagation in Tissues with Applications in Biology and Medicine. WORLD SCIENTIFIC, March 2012.">40</a>, <a class="reference internal" href="../../index.html#id211" title="Steven L. Jacques and Brian W. Pogue. Tutorial on diffuse light transport. Journal of Biomedical Optics, 13(4):041302, 2008.">41</a>]</span>.
+Many tomographic techniques such as fluorescence molecular tomography (FMT) or diffuse optical tomography (DOT)
+<span id="id18">[<a class="reference internal" href="../../index.html#id31" title="Florian Stuker, Jorge Ripoll, and Markus Rudin. Fluorescence molecular tomography: principles and potential for pharmaceutical research. Pharmaceutics, 3(2):229–274, April 2011.">42</a>]</span> work in this regime.</p>
+<p>Absorption and scattering both contribute to the attenuation of light inside tissue, which determines the penetration
+depth.
+This attenuation follows an exponential law
+known as the Beer-Lambert law <span id="id19">[<a class="reference internal" href="../../index.html#id254" title="Lihong V. Wang and Hsin-i Wu. Biomedical optics: principles and imaging. Wiley-Interscience, Hoboken, NJ, USA, 2007.">8</a>]</span>.
+The imaging depth of current optical tomographic techniques is limited to approximately 10 cm in soft tissue.
+Beyond this limit, optical fluence is significantly attenuated due to absorption and scattering, and
+very little useful information can be recovered <span id="id20">[<a class="reference internal" href="../../index.html#id220" title="Junjie Yao, Jun Xia, and Lihong V. Wang. Multiscale Functional and Molecular Photoacoustic Tomography. Ultrasonic Imaging, 38(1):44–62, January 2016.">18</a>]</span>.</p>
+</section>
+</section>
+<section id="detection">
+<span id="intro-imaging-detection"></span><h2>Detection<a class="headerlink" href="#detection" title="Link to this heading">¶</a></h2>
+<p>The detection step entails defining the target and the detection mechanism.
+In this thesis, we mainly focus on the intensity of either transmitted or emitted light
+(or acoustic waves in the special case of photoacoustic imaging).
+To explain the detection procedure, we illustrate it with a generic <span class="math notranslate nohighlight">\(4f\)</span>-imaging system in
+<a class="reference internal" href="#fig-intro-imaging-basic-optical-system"><span class="std std-numref">Fig. 8</span></a>.</p>
+<figure class="align-default" id="fig-intro-imaging-basic-optical-system">
+<a class="reference internal image-reference" href="../../_images/basic_optical_system.png"><img alt="../../_images/basic_optical_system.png" src="../../_images/basic_optical_system.png" style="width: 75%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Illustration of a generic <span class="math notranslate nohighlight">\(4f\)</span>-imaging system. The sample is represented by a star.
+The light (in orange) is either transmitted (e.g., in the case of transmission OPT) or emitted (e.g., emission OPT
+or fluorescence microscopy).
+The focal lengths of the first and second lens are <span class="math notranslate nohighlight">\(f_1\)</span> and <span class="math notranslate nohighlight">\(f_2\)</span>.</span><a class="headerlink" href="#fig-intro-imaging-basic-optical-system" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>It has three main components: the lens system, the aperture, and the detector.
+The lenses focus light and form an image on the detector.
+Mathematically, a lens performs a Fourier (or inverse Fourier) transform between its front and back focal planes
+<span id="id21">[<a class="reference internal" href="../../index.html#id153" title="Joseph W. Goodman. Introduction to Fourier optics. W.H. Freeman, Macmillan Learning, New York, USA, fourth edition, 2017.">43</a>]</span>.
+The magnification of the system is determined by the ratio <span class="math notranslate nohighlight">\(f_2/f_1\)</span> between the focal lengths of
+the two lenses.</p>
+<p>The numerical aperture (NA) of an imaging system is determined by the refractive index of the immersion medium
+between the sample and the lens, together with the angular aperture.
+It defines how much light (brightness of the image) and how many diffraction orders (resolution of the image) are
+captured by the system.
+In a low-NA system such as OPT, the aperture is fairly narrow to allow for a large depth of field.
+The principles of ray optics and the paraxial approximation facilitate the understanding of light propagation
+in this case.
+This enables tomographic imaging of a sample by virtually <em>seeing through</em> it without actually slicing it.
+A high-NA system, such as super-resolution microscopy, targets high spatial resolution
+(with a small depth of field).
+More refined models based on wave optics are required to comprehend the behavior of the electric field and
+accurately describe the PSF in this case <span id="id22">[<a class="reference internal" href="../../index.html#id35" title="Max Born and Emil Wolf. Principles of Optics: 60th Anniversary Edition. Cambridge University Press, seventh edition, December 2019.">44</a>]</span>.</p>
+<p>The detector is usually a camera that produces intensity-based images
+(or a highly sensitive photodiode that counts the number of photons, e.g. in MINFLUX)
+<span id="id23">[<a class="reference internal" href="../../index.html#id29" title="Douglas B. Murphy and Michael W. Davidson. Fundamentals of Light Microscopy and Electronic Imaging. Wiley, first edition, September 2012.">35</a>, <a class="reference internal" href="../../index.html#id23" title="James B. Pawley, editor. Handbook Of Biological Confocal Microscopy. Springer US, Boston, MA, USA, 2006.">37</a>]</span>.
+In the special case of photoacoustic imaging, an ultrasound transducer serves as the detector to capture
+the amplitude of the ultrasonic waves <span id="id24">[<a class="reference internal" href="../../index.html#id250" title="Lihong V. Wang, editor. Photoacoustic imaging and spectroscopy. Number 144 in Optical science and engineering. CRC, Boca Raton, FL, USA, 2009.">45</a>]</span>.</p>
+</section>
+<section id="image-formation">
+<span id="intro-imaging-image-formation"></span><h2>Image Formation<a class="headerlink" href="#image-formation" title="Link to this heading">¶</a></h2>
+<p>Image formation refers to the procedure of postprocessing the raw data into a human-readable image.
+In the ballistic regime, where most fluorescence microscopes operate, a 2D image of the sample can be directly
+formed on the camera.
+This is because the minimally scattered photons still carry information about the internal structure of the sample.
+Further image processing and analysis steps (for instance, deconvolution <span id="id25">[<a class="reference internal" href="../../index.html#id23" title="James B. Pawley, editor. Handbook Of Biological Confocal Microscopy. Springer US, Boston, MA, USA, 2006.">37</a>]</span>)
+can be applied to enhance the quality of the image.
+In SMLM systems, reconstruction algorithms are needed to estimate the location of molecules from the
+number of detected photons before forming the final image <span id="id26">[<a class="reference internal" href="../../index.html#id32" title="Mickaël Lelek, Melina T. Gyparaki, Gerti Beliu, Florian Schueder, Juliette Griffié, Suliana Manley, Ralf Jungmann, Markus Sauer, Melike Lakadamyali, and Christophe Zimmer. Single-molecule localization microscopy. Nature Reviews Methods Primers, 1(1):39, June 2021.">46</a>]</span>.</p>
+<p>For tomographic techniques, the image formation is indirect and usually involves the solution of
+an inverse problem to produce a meaningful image.
+These techniques can be classified into categories based on their principles.
+The first category includes OPT and non-optical modalities such as X-ray CT and SPECT, where the rays in question
+pass through the sample in more or less straight lines that approximate projections <span id="id27">[<a class="reference internal" href="../../index.html#id109" title="James Sharpe. Optical projection tomography. Annual Review of Biomedical Engineering, 6(1):209-228, 2004.">11</a>]</span>.
+There, one needs to employ a backprojection-type algorithm or solve a variational form of inverse problem
+to reconstruct the image of the 3D sample.
+The second category includes techniques that work in the diffuse regime (e.g., FMT, DOT, and PAT).
+There, photons undergo a substantial amount of scattering and have lost their initial directions,
+thus carrying too little information to directly generate an image.
+It is necessary to solve an inverse problem involving a model that describes photon transport
+(e.g., the diffusion equation) to recover the quantity of interest.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="key-aspects">
+<span id="intro-imaging-note"></span><h1>Key Aspects<a class="headerlink" href="#key-aspects" title="Link to this heading">¶</a></h1>
+<p>Imaging depth and (spatial and temporal) resolution are two important aspects of biomedical optical imaging,
+and there exists a tradeoff between them.
+For instance, confocal microscopy can produce images of single cells at hundreds of nanometer resolution
+at depths up to 200 micrometers <span id="id28">[<a class="reference internal" href="../../index.html#id23" title="James B. Pawley, editor. Handbook Of Biological Confocal Microscopy. Springer US, Boston, MA, USA, 2006.">37</a>]</span>,
+while photoacoustic tomography is able to <em>see</em> centimeter-deep inside the whole body of small animals at a relaxed
+resolution of a few hundred micrometers <span id="id29">[<a class="reference internal" href="../../index.html#id207" title="Hans-Peter F. Brecht, Richard Su, Matthew P. Fronheiser, Sergey A. Ermilov, André Conjusteau, and Alexander A. Oraevsky. Whole-body three-dimensional optoacoustic tomography system for small animals. Journal of Biomedical Optics, 14(6):064007, November 2009.">47</a>]</span>.</p>
+<section id="imaging-depth">
+<span id="intro-imaging-depth"></span><h2>Imaging Depth<a class="headerlink" href="#imaging-depth" title="Link to this heading">¶</a></h2>
+<p>Researchers have devoted significant efforts over the years to break the diffusion limit
+and achieve better imaging depth without sacrificing the resolution.
+One strategy is to reduce the strong scattering of photons,
+with OPT as a representative example.
+Invented in the early 2000s, OPT is able to produce three-dimensional volumetric images at tens of micrometer
+resolution for samples of millimeter or centimeter sizes <span id="id30">[<a class="reference internal" href="../../index.html#id114" title="James Sharpe, Ulf Ahlgren, Paul Perry, Bill Hill, Allyson Ross, Jacob Hecksher-Sørensen, Richard Baldock, and Duncan Davidson. Optical projection tomography as a tool for 3D microscopy and gene expression studies. Science, 296(5567):541-545, 2002.">22</a>]</span>.
+This 3D technique allows for the rapid mapping of the tissue distribution of RNA and
+protein expression in intact embryos or organ systems <span id="id31">[<a class="reference internal" href="../../index.html#id114" title="James Sharpe, Ulf Ahlgren, Paul Perry, Bill Hill, Allyson Ross, Jacob Hecksher-Sørensen, Richard Baldock, and Duncan Davidson. Optical projection tomography as a tool for 3D microscopy and gene expression studies. Science, 296(5567):541-545, 2002.">22</a>]</span>.
+It is therefore instrumental in studies of developmental biology or gene function <span id="id32">[<a class="reference internal" href="../../index.html#id114" title="James Sharpe, Ulf Ahlgren, Paul Perry, Bill Hill, Allyson Ross, Jacob Hecksher-Sørensen, Richard Baldock, and Duncan Davidson. Optical projection tomography as a tool for 3D microscopy and gene expression studies. Science, 296(5567):541-545, 2002.">22</a>]</span>.
+The enabling technology is optical clearing, a process that renders turbid biological samples transparent
+<span id="id33">[<a class="reference internal" href="../../index.html#id94" title="Mark Oldham, Harshad Sakhalkar, Tim Oliver, G. Allan Johnson, and Mark Dewhirst. Optical clearing of unsectioned specimens for three-dimensional imaging via optical transmission and emission tomography. Journal of Biomedical Optics, 13(2):021113, 2008.">48</a>]</span> to reduce scattering.
+Consequently, light is minimally attenuated in its pathways and propagates through the sample almost like X-rays.
+The shortcoming of this technology is that OPT is constrained to image only ex vivo biological samples,
+unless they are naturally clear (e.g., zebrafish) <span id="id34">[<a class="reference internal" href="../../index.html#id95" title="Luca Fieramonti, Andrea Bassi, Efrem Alessandro Foglia, Anna Pistocchi, Cosimo D'Andrea, Gianluca Valentini, Rinaldo Cubeddu, Sandro De Silvestri, Giulio Cerullo, and Franco Cotelli. Time-Gated Optical Projection Tomography Allows Visualization of Adult Zebrafish Internal Structures. PLoS ONE, 7(11):e50744, November 2012.">49</a>, <a class="reference internal" href="../../index.html#id96" title="Teresa Correia, Nicola Lockwood, Sunil Kumar, Jun Yin, Marie-Christine Ramel, Natalie Andrews, Matilda Katan, Laurence Bugeon, Margaret J. Dallman, James McGinty, Paul Frankel, Paul M. W. French, and Simon Arridge. Accelerated Optical Projection Tomography Applied to In Vivo Imaging of Zebrafish. PLOS ONE, 10(8):e0136213, August 2015.">50</a>]</span>.</p>
+<p>Another direction is to leverage the advantages of other modalities, a good example being photoacoustic imaging (PAI).
+Invented as a biomedical imaging technology between the 1990s and 2000s, it capitalizes on the photoacoustic effect.
+After illumination with a short-pulsed laser, the absorbed heat is converted to acoustic waves due to the
+thermoelastic expansion of the tissue.
+PAI overcomes the optical diffusion limit because acoustic waves scatter much less than photons in soft tissue
+<span id="id35">[<a class="reference internal" href="../../index.html#id223" title="Vasilis Ntziachristos. Going deeper than microscopy: the optical imaging frontier in biology. Nature Methods, 7(8):603–614, August 2010.">25</a>]</span>.
+For instance, acoustic-resolution photoacoustic microscopy (AR-PAM) is capable of imaging melanoma
+at a resolution of 15 micrometers and 3 mm depth;
+photoacoustic tomography (PAT) is able to image 3 centimeters deep into the tissue with an excellent resolution of
+144 micrometers <span id="id36">[<a class="reference internal" href="../../index.html#id225" title="Lihong V. Wang. Multiscale photoacoustic microscopy and computed tomography. Nature Photonics, 3(9):503–509, September 2009.">51</a>]</span>.
+PAI combines excellent optical contrast with remarkable ultrasonic depth and significantly surpasses the performance
+of traditional optical imaging.</p>
+<p>Recently, the rising field of wavefront shaping in complex media has demonstrated the unique possibility
+of deep tissue imaging and focusing at optical resolution through the control of light propagation
+<span id="id37">[<a class="reference internal" href="../../index.html#id7" title="Sylvain Gigan, Ori Katz, Hilton B De Aguiar, Esben Ravn Andresen, Alexandre Aubry, Jacopo Bertolotti, Emmanuel Bossy, Dorian Bouchet, Joshua Brake, Sophie Brasselet, Yaron Bromberg, Hui Cao, Thomas Chaigne, Zhongtao Cheng, Wonshik Choi, Tomáš Čižmár, Meng Cui, Vincent R Curtis, Hugo Defienne, Matthias Hofer, Ryoichi Horisaki, Roarke Horstmeyer, Na Ji, Aaron K LaViolette, Jerome Mertz, Christophe Moser, Allard P Mosk, Nicolas C Pégard, Rafael Piestun, Sebastien Popoff, David B Phillips, Demetri Psaltis, Babak Rahmani, Hervé Rigneault, Stefan Rotter, Lei Tian, Ivo M Vellekoop, Laura Waller, Lihong Wang, Timothy Weber, Sheng Xiao, Chris Xu, Alexey Yamilov, Changhuei Yang, and Hasan Yılmaz. Roadmap on wavefront shaping and deep imaging in complex media. Journal of Physics: Photonics, 4(4):042501, October 2022.">52</a>]</span>.
+The main idea is to retrieve information from scattered light through physical wavefront control via modulators
+and detectors, or through computational methods.
+Because the tissue-induced scattering is a deterministic linear process, information of the distorted wavefront
+can be measured and compensated to achieve larger imaging depth and better resolution.
+For instance, to image opaque samples with fluorescence microscopy,
+one can measure the tissue-induced aberrations and account for them by pre-shaping the excitation wavefront
+<span id="id38">[<a class="reference internal" href="../../index.html#id8" title="Antoine Boniface, Jonathan Dong, and Sylvain Gigan. Non-invasive focusing and imaging in scattering media with a fluorescence-based transmission matrix. Nature Communications, 11(1):6154, December 2020.">53</a>]</span>.</p>
+</section>
+<section id="resolution">
+<span id="intro-imaging-resolution"></span><h2>Resolution<a class="headerlink" href="#resolution" title="Link to this heading">¶</a></h2>
+<section id="diffraction">
+<span id="intro-imaging-diffraction"></span><h3>Diffraction<a class="headerlink" href="#diffraction" title="Link to this heading">¶</a></h3>
+<p>Spatial resolution is mainly determined by diffraction.
+Optical diffraction refers to the phenomenon that an interference pattern arises
+when coherent light (e.g., a laser beam) passes through a finite-size aperture <span id="id39">[<a class="reference internal" href="../../index.html#id29" title="Douglas B. Murphy and Michael W. Davidson. Fundamentals of Light Microscopy and Electronic Imaging. Wiley, first edition, September 2012.">35</a>]</span>.
+For instance, the image of a point source captured by a microscope, also known as the
+point spread function (PSF) or the impulse response of the microscope, is an Airy disk,
+which has a characteristic blob of high intensity in the center
+and concentric rings of much lower intensities around it <span id="id40">[<a class="reference internal" href="../../index.html#id29" title="Douglas B. Murphy and Michael W. Davidson. Fundamentals of Light Microscopy and Electronic Imaging. Wiley, first edition, September 2012.">35</a>, <a class="reference internal" href="../../index.html#id32" title="Mickaël Lelek, Melina T. Gyparaki, Gerti Beliu, Florian Schueder, Juliette Griffié, Suliana Manley, Ralf Jungmann, Markus Sauer, Melike Lakadamyali, and Christophe Zimmer. Single-molecule localization microscopy. Nature Reviews Methods Primers, 1(1):39, June 2021.">46</a>]</span>.
+The resolution <span class="math notranslate nohighlight">\(d\)</span> of any optical-imaging system is determined by the maximal spatial frequency it can capture,
+in accordance with Abbe’s law <span id="id41">[<a class="reference internal" href="../../index.html#id34" title="E. Abbe. Beiträge zur Theorie des Mikroskops und der mikroskopischen Wahrnehmung. Archiv für Mikroskopische Anatomie, 9(1):413–468, December 1873.">54</a>]</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-abbe-law">
+<div class="math notranslate nohighlight" id="equation-eq-abbe-law">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-abbe-law" title="Link to this equation">¶</a></span>\[d = \frac{\lambda}{2\text{NA}},\]</div>
+</div>
+<p>where the wavelength of light is denoted by <span class="math notranslate nohighlight">\(\lambda\)</span> and NA is the numerical aperture of the microscope.
+In other words, the finest achievable resolution of conventional optical microscopy is on the order of the
+wavelength.
+For instance, in confocal microscopy and two-photon microscopy, it is approximately 200 nanometers.</p>
+</section>
+<section id="beyond-the-diffraction-limit">
+<span id="intro-imaging-beyond-the-diffraction-limit"></span><h3>Beyond the Diffraction Limit<a class="headerlink" href="#beyond-the-diffraction-limit" title="Link to this heading">¶</a></h3>
+<p>While the resolution of traditional optical microscopes is sufficient to distinguish cells,
+it is insufficient to resolve crucial intracellular biochemical processes that occur at tens of nanometer scales.
+To break the diffraction barrier, super-resolution microscopy,
+such as stimulated emission depletion microscopy (STED, 1994) <span id="id42">[<a class="reference internal" href="../../index.html#id71" title="Stefan W Hell and Jan Wichmann. Breaking the diffraction resolution limit by stimulated emission: stimulated-emission-depletion fluorescence microscopy. Optics letters, 19(11):780–782, 1994.">31</a>]</span>,
+photo-activated localization microscopy (PALM, 2006) <span id="id43">[<a class="reference internal" href="../../index.html#id70" title="Eric Betzig, George H. Patterson, Rachid Sougrat, O. Wolf Lindwasser, Scott Olenych, Juan S. Bonifacino, Michael W. Davidson, Jennifer Lippincott-Schwartz, and Harald F. Hess. Imaging Intracellular Fluorescent Proteins at Nanometer Resolution. Science, 313(5793):1642–1645, September 2006.">55</a>]</span>
+and stochastic optical reconstruction microscopy (STORM, 2006) <span id="id44">[<a class="reference internal" href="../../index.html#id69" title="Michael J Rust, Mark Bates, and Xiaowei Zhuang. Sub-diffraction-limit imaging by stochastic optical reconstruction microscopy (STORM). Nature Methods, 3(10):793–796, October 2006.">56</a>]</span>,
+has been proposed.
+These technologies enable researchers to study the functions of subcellular organelles,
+which is essential to understand the mechanisms of diseases and disorders <span id="id45">[<a class="reference internal" href="../../index.html#id74" title="Marco Scarselli, Paolo Annibale, Peter J. McCormick, Shivakumar Kolachalam, Stefano Aringhieri, Aleksandra Radenovic, Giovanni U. Corsini, and Roberto Maggio. Revealing g-protein-coupled receptor oligomerization at the single-molecule level through a nanoscopic lens: methods, dynamics and biological function. The FEBS Journal, 283(7):1197-1217, 2016.">29</a>, <a class="reference internal" href="../../index.html#id77" title="T. Vavrdová, O. Šamajová, P. Křenek, M. Ovečka, P. Floková, R. Šnaurová, J. Šamaj, and G. Komis. Multicolour three dimensional structured illumination microscopy of immunolabeled plant microtubules and associated proteins. Plant Methods, 15(1):22, December 2019.">57</a>]</span>.
+The development of novel super-resolution microscopy techniques
+and the enhancement of their performance have been active areas of research.
+Two core aspects underpin this advancement: engineering the point spread function (PSF) of microscopes
+and developing new fluorescent probes with favorable photophysical properties.</p>
+<p>The shape and size of the PSF is directly linked to the spatial resolution.
+Super-resolution techniques, such as STED, rely on the innovative design of the shape of the excitation beam
+via PSF engineering.
+Precisely, after having switched the fluorophores into their ON state and having formed a diffraction-limited PSF,
+STED uses a second depletion laser with a donut-shaped beam (with zero intensity in the center) to switch off the fluorophores at
+the periphery of the beam <span id="id46">[<a class="reference internal" href="../../index.html#id71" title="Stefan W Hell and Jan Wichmann. Breaking the diffraction resolution limit by stimulated emission: stimulated-emission-depletion fluorescence microscopy. Optics letters, 19(11):780–782, 1994.">31</a>]</span>.
+This yields an excitation spot significantly smaller than the diffraction limit,
+which enables spatial separation of neighboring fluorophores and achieves a resolution of approximately 20 nm.</p>
+<p>One category of super-resolution techniques is single-molecule localization microscopy (SMLM)
+<span id="id47">[<a class="reference internal" href="../../index.html#id32" title="Mickaël Lelek, Melina T. Gyparaki, Gerti Beliu, Florian Schueder, Juliette Griffié, Suliana Manley, Ralf Jungmann, Markus Sauer, Melike Lakadamyali, and Christophe Zimmer. Single-molecule localization microscopy. Nature Reviews Methods Primers, 1(1):39, June 2021.">46</a>]</span>, such as STORM and PALM.
+They stochastically activate individual fluorophores, rather than all simultaneously,
+which enables temporal separation of single molecules and precise localization.
+The attainable spatial resolution is 10-40 nm in the lateral direction <span id="id48">[<a class="reference internal" href="../../index.html#id15" title="Xunbin Wei and Bobo Gu, editors. Optical Imaging in Human Disease and Biological Research. Volume 3233 of Advances in Experimental Medicine and Biology. Springer Singapore, Singapore, 2021.">6</a>]</span>.
+Temporal resolution depends on the rate of stochastic photoswitching and is typically limited,
+as super-resolved images require accumulating many frames.
+Ultimately, both the resolution of STED and the localization precision of SMLM are governed
+by the number of photons detected per fluorophore.
+Consequently, significant effort has been devoted to developing specialized fluorescent probes
+with superior photophysical and photochemical properties, including higher brightness, improved photostability,
+faster switching kinetics, reduced photofatigue, and lower toxicity.</p>
+<p>In 2017, an emerging SMLM technique called MINFLUX (minimal photon fluxes) has been proposed in
+<span id="id49">[<a class="reference internal" href="../../index.html#id61" title="Francisco Balzarotti, Yvan Eilers, Klaus C. Gwosch, Arvid H. Gynnå, Volker Westphal, Fernando D. Stefani, Johan Elf, and Stefan W. Hell. Nanometer resolution imaging and tracking of fluorescent molecules with minimal photon fluxes. Science, 355(6325):606–612, Febuary 2017.">32</a>]</span> to overcome the issue of limited number of detected photons.
+It uses four donut beams (as in STED) directly as excitation and has the potential to improve the lateral resolution
+to single-digit nanometer scales.
+The shape of the excitation beams and the illumination pattern (spatial arrangement of the beams)
+are crucial aspects of MINFLUX.
+This technique will be detailed in a dedicated chapter <a class="reference internal" href="../microscopy/minflux/index.html#chapter-minflux"><span class="std std-ref">Optimal Excitation Patterns in MINFLUX via PSF Engineering</span></a>.</p>
+<p>In summary, understanding the fundamental principles of an imaging modality,
+including its capabilities in resolution and imaging depth, is essential.
+This forms the foundational step in addressing challenges for any optical imaging technology.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../intro_math/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Modeling and Solving of Inverse Problems</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Biomedical Optical Imaging</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Basic Principles</a><ul>
+<li><a class="reference internal" href="#probe">Probe</a></li>
+<li><a class="reference internal" href="#light-matter-interaction">Light-Matter Interaction</a><ul>
+<li><a class="reference internal" href="#absorption">Absorption</a></li>
+<li><a class="reference internal" href="#scattering">Scattering</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detection">Detection</a></li>
+<li><a class="reference internal" href="#image-formation">Image Formation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#key-aspects">Key Aspects</a><ul>
+<li><a class="reference internal" href="#imaging-depth">Imaging Depth</a></li>
+<li><a class="reference internal" href="#resolution">Resolution</a><ul>
+<li><a class="reference internal" href="#diffraction">Diffraction</a></li>
+<li><a class="reference internal" href="#beyond-the-diffraction-limit">Beyond the Diffraction Limit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

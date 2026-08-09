@@ -1,0 +1,25 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(pat2)=
+# Part II: Global Unmixing Framework Directly from Acoustic Signals
+
+```{note}
+This section is based on the following publication (preprint):
+
+Y. Liu, J. Chuah, M. Unser, and J. Dong.
+"A global inverse-problem approach to quantitative photo-switching optoacoustic mesoscopy", _arXiv preprint arXiv:2510.23739_ (2025).
+```
+
+```{toctree}
+:maxdepth: 2
+
+background.md
+forward_models.md
+inverse.md
+results.md
+summary.md
+```

@@ -1,0 +1,228 @@
+```{eval-rst}
+.. raw:: latex
+
+    \newpage
+```
+
+(pa-appendix)=
+# Appendix
+
+(pat1-effectiveness-of-regularization)=
+## Effectiveness of Regularization
+
+We demonstrate effectiveness of the proposed regularization in our unmixing framework with the
+following simulation.
+
+```{figure} pat1/images/noise_compare.*
+:name: fig:pat1-decay-compare
+
+Evolution of the PA signal during an OFF-switching cycle of 50 time points at three representative locations inside the
+three rsOAPs: Re (blue), Dr (red), and Rp (green) for the simulated (a) and experimental measurements (b) of a phantom
+of beads.
+The noise level in the measurements of the simulated beads phantom is 1\% of its maximal intensity. 
+
+```
+````{subfigure} A|B|C|D
+:name: fig:pat1-effect-of-reg
+:width: 80%
+   ```{image} pat1/images/simu_noreg_paper.*
+       :alt: simu no reg
+   ```
+   
+   ```{image} pat1/images/simu_onlytv_paper.*
+       :alt: simu only tv
+   ```
+   
+   ```{image} pat1/images/simu_l1tv_paper.*
+       :alt: simu l1 plus tv
+   ```
+   
+   ```{image} pat1/images/simu_noisefree_paper.*
+       :alt: simu noise free
+   ```
+
+Unmixing results of a simulated beads phantom mimicking the experimental beads phantom.
+The first three rows each contains reconstructed distribution maps of Re (first column), Dr (second column),
+and Rp (third column) and the non-switching background (fourth column). 
+PSNR and SSIM of each reconstruction is indicated on top of each image.
+Row one (a)-(d): via least-square.
+Row two (e)-(h): via least-square with total variation regularization.
+Row three (i)-(l): via least-square with total variation and {math}`\ell_1` regularization.
+Row four (m)-(p): ground truth.
+Intensities of all images are normalized to {math}`[0, 1]` for visual comparison.
+````
+
+````{subfigure} A|B|C
+:name: fig:pat1-effect-of-reg-profiles
+:width: 80%
+   ```{image} pat1/images/reporter1_profiles.*
+       :alt: profile reporter 1
+   ```
+   ```{image} pat1/images/reporter2_profiles.*
+       :alt: profile reporter 2
+   ```
+   ```{image} pat1/images/reporter3_profiles.*
+       :alt: profile reporter 3
+   ```
+
+Comparison of the intensity profiles at the 60th row of pixels of the reporter
+Re (q), Dr (r), and Rp (s) for eachreconstruction method shown in {numref}`fig:pat1-effect-of-reg`.
+````
+
+We design a 2D numerical phantom of size {math}`(150\times150)` px in which we randomly insert three groups of disk
+targets of diameter between 7 px and 12 px that represent photo-switching reporters on a heterogeneous
+background.
+The background image is synthesized similarly as in [](#pat1-result-numerical-phantom).
+Each target has homogeneous intensity.
+The ratio of intensities between the three groups and the background (maximal) is 2:1:1:5,
+mimicking a blood-rich sample where the background signal is stronger than that of the reporters.
+Each group has the same kinetic constant as one of the three rsOAPs (see {numref}`tab:pat1-reporters`).
+We generate measurements simulating an OFF-switching cycle with 50 PA images of size {math}`(150\times150)` px, with
+1% additive white Gaussian noise to mimic to experimental datasets (see {numref}`fig:pat1-decay-compare`).
+
+We test three reconstruction approaches, namely, least-square only (LS), least-square regularized with total variation
+on the spatial maps of each reporter (LS+TV), and least-square regularized with TV and additionally {math}`\ell_1` among
+the reporters (LS+TV+{math}`\ell_1`).
+We compare in {numref}`fig:pat1-effect-of-reg` the results of using these methods against the ground truth.
+
+In all scenarios, the non-switching background
+is well recovered with a perfect structural similarity index (SSIM) of 1.0, though the peak signal-to-noise ratio (PSNR)
+varies among different methods ({numref}`fig:pat1-decay-compare` (d), (h), and (l)).
+
+Without any regularization, unmixing performs well only on the Re (with the largest kinetic constant among three rsOAPs),
+achieving an SSIM of 0.88 out of 1 ({numref}`fig:pat1-decay-compare` (a)).
+However, the algorithm struggles to separate Dr and Rp.
+This is indicated by the presence of reporters belonging to Rp appearing in the map of the Dr
+({numref}`fig:pat1-decay-compare` (b)-(c)), leading to an SSIM of only 0.73 for Dr.
+In fact, Rp reporters appear in images of the first two rsOAPs (see the zoom-in area in
+{numref}`fig:pat1-effect-of-reg` (a) and (b)).
+
+After adding TV regularizer, we observe in {numref}`fig:pat1-effect-of-reg` (e)-(g) that
+TV not only reduces noise inside the beads, giving a much smoother intensity
+distribution for each of them, but also greatly mitigates the cross-talk issue if we compare
+{numref}`fig:pat1-effect-of-reg` (b) and (f).
+PSNR of each group enjoys an average boost of 7 dB and SSIM of reporters Re and Dr is improved by 7\% on average.
+
+However, there still remains a hint of cross-talk (see for example {numref}`fig:pat1-effect-of-reg` (f)),
+which is solved by adding {math}`\ell_1` regularizer to enforce sparsity at each pixel
+({numref}`fig:pat1-effect-of-reg` (i)-(j)).
+The intensity of each bead is more uniform, increasing
+the PSNR of each map by another 2-5 dB (see {numref}`fig:pat1-effect-of-reg` (i)-(k)).
+
+To gain more insight on the reconstruction quality, we compare intensity profiles along a representative horizontal
+line at the 60th row in {numref}`fig:pat1-effect-of-reg-profiles` (q)-(s).
+We see that LS+TV+{math}`\ell_1` outperforms LS only and LS+TV in the following aspects:
+
+- Signal is correctly recovered at nearly its 100\% intensity with very little fluctuation inside the bead
+(see signals at location 55 px and 140 px in {numref}`fig:pat1-effect-of-reg-profiles` (s) for a good example)
+- LS+TV+{math}`\ell_1` does not suffer from cross-talk on locations where there should not
+be any signal compared to the other two approaches.
+
+Taking signals at location 55 px and 140 px in {numref}`fig:pat1-effect-of-reg-profiles` (q) and (r)
+as an example, LS only and LS+TV show relatively prominent peaks at these two locations where signals from
+the Rp should not appear at all, while LS+TV+{math}`\ell_1` shows only flat tiny bumps.
+These details confirm that our proposed reconstruction method, LS+TV+{math}`\ell_1` is effective and
+yields the best reconstruction results.
+
+(pat1-optical-parameters)=
+## Optical Parameters
+
+The absorption coefficient {math}`\mu_a` of the background is calculated according to {cite:p}`absorption`
+```{math}
+:label: eq:mu_a-blood
+
+\mu_a(\lambda) = \ln 10 \cdot
+\varepsilon(\lambda) [\text{cm}^{-1 }\cdot \text{mole}^{-1} \cdot \text{L}] \cdot 
+\frac{x\% \cdot 150 [\text{g}\cdot\text{L}^{-1}]} 
+{64500 [\text{g}\cdot\text{mole}^{-1}]},
+
+```
+where {math}`\lambda=770` nm is the OFF-switching wavelength,
+{math}`\varepsilon(\lambda) = 1311.88 [\text{cm}^{-1 }\cdot \text{mole}^{-1} \cdot \text{L} =
+\text{cm}^{-1 }\cdot \text{M}^{-1}]`
+is the molar extinction coefficient of blood at 770 nm, assuming the blood we used in the phantom to be mostly composed
+of deoxygenated hemoglobin (Hb),
+{math}`x=3` is the percentage of blood used in the phantom,
+{math}`150[\text{g}\cdot\text{L}^{-1}]` is the typical mass concentration of hemoglobin within blood,
+and {math}`64500 [\text{g}\cdot\text{mole}^{-1}]` is the molecular weight of hemoglobin.
+Using these values, the background is determined by {math}`\mu_a^{\text{bg}} =  0.21 [\text{cm}^{-1}]`.
+
+The absorption coefficients of the protein species Re and Dr are calculated via {cite:p}`jacques_optical_2013`
+
+```{math}
+:label: eq:mu_a-protein
+
+\mu_a(\lambda) = \ln 10 \cdot \varepsilon(\lambda) [\text{M}^{-1}\cdot\text{cm}^{-1}] \cdot c [\text{M}]
+
+```
+
+from their molar concentration {math}`c_{\text{Re}}=4.23\times 10^{-6}` [M],
+{math}`c_{\text{Dr}}=3.71\times 10^{-6}` [M] and their respective molar extinction coefficients at 770nm
+{math}`\varepsilon_{\text{Re}}(770\text{nm})\approx 0.7\times 10^{5}` {math}`[\text{M}^{-1}\cdot\text{cm}^{-1}]`,
+{math}`\varepsilon_{\text{Dr}}(770\text{nm})\approx 0.4\times 10^{5}` {math}`[\text{M}^{-1}\cdot\text{cm}^{-1}]`.
+We thus have {math}`\mu_a^{\text{Re}} = 0.68\text{ cm}^{-1}` and {math}`\mu_a^{\text{Dr}} = 0.34\text{ cm}^{-1}`.
+
+We adopt a typical value of {math}`10\text{ cm}^{-1}` for the reduced scattering coefficient {math}`\mu_s^{'}` of the
+background, which is composed of 3\% intralipid as a scatterer.
+
+(pat1-estimation-of-kinetic-constants)=
+## Estimation of Kinetic Constants
+
+The kinetic constants {math}`\bar{k}` reported in {numref}`tab:pat1-reporters` are measured experimentally and depend
+on the pulse energy and the subsequent unknown light fluence {math}`\Phi_m` during the measurement via
+{math}`k = \frac{\bar{k}}{\Phi_m}`, where {math}`k` is the intrinsic constant.
+To estimate {math}`\Phi_m`, we first use an empirical method to retrieve the decay rates
+{math}`\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}` of each species from the experimental dataset.
+Then, we determine {math}`\Phi_m` from
+```{math}
+:label: eq:average
+
+\Phi_m = \sqrt[3]{\frac{\bar{k}_{\text{Re}}}{b_{\text{Re}}}\frac{\bar{k}_{\text{Dr}}}
+{b_{\text{Dr}}}\frac{\bar{k}_{\text{Rp}}}{b_{\text{Rp}}}},
+
+```
+
+which is the geometric mean of the estimated results from all three species.
+To estimate {math}`\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}`, we fit an exponential function
+```{math}
+:label: eq:exp-fit
+
+y = a\text{e}^{-bt} + c
+
+```
+at each pixel to obtain a map of decay rates {math}`b`.
+Then, we approximate the OFF-switching rate of each reporter by locating the peaks in the
+histogram of the map of {math}`b`.
+
+In {numref}`fig:find-k` (a), we show an example of the fitting result at one location inside each of the three rsOAPs
+marked by the three dots in {numref}`fig:find-k` (b) for the dataset of the experimental phantom of beads.
+In {numref}`fig:find-k` (c), we show the result of the empirical estimate of kinetic constants.
+Three prominent peaks are observed, indicating decay rates of the three species.
+We take a value around these peaks as the empirical estimate for {math}`\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}`.
+Plugging the estimated values of {math}`\{b_{\text{Re}}, b_{\text{Dr}}, b_{\text{Rp}}\}` shown in {numref}`fig:find-k`
+and {math}`\{\bar{k}_{\text{Re}}, \bar{k}_{\text{Dr}},\bar{k}_{\text{Rp}}\}` in {numref}`tab:pat1-reporters`
+into {eq}`eq:average`, we obtain that {math}`\Phi_m = 0.3`.
+
+````{subfigure} AB|CC
+:name: fig:find-k
+:width: 80%
+   ```{image} pat1/images/exp_fits.*
+       :alt: exp fits
+   ```
+   
+   ```{image} pat1/images/exp_locations.*
+       :alt: exp locations
+   ```
+   
+   ```{image} pat1/images/hist_ks.*
+       :alt: histogram of k
+   ```
+
+Estimation of the decay rates for the three species based on the OFF-switching dataset of the experimental
+beads phantom.
+(a) Fitting results at three representative pixels, each inside one of the three rsOAPs. 
+Scatter points represent original data, curves are the fitted results.
+(b) Location of the three pixels used in (a). PA image is the first frame of the OFF-switching series.
+(c) Histogram (partial) of the fitted decay rate {math}`b` for all pixels in the PA image. 
+Based on the fitting result in (a), only the part of the histogram where the values within the range (<25) is displayed.
+````

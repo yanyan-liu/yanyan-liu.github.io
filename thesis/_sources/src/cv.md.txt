@@ -1,0 +1,123 @@
+# Curriculum Vitae
+
+**Yan Liu** \
+Year of Birth: 1995 \
+Origin: Nanyang, China
+
+* * *
+**Education**
+
+(_2020 - 2026_) **PhD in Electrical Engineering**  
+
+Biomedical Imaging Group, EPFL \
+Advisors: Prof. Dr. Michael Unser and Dr. Jonathan Dong
+
+(_2017 - 2020_) **Master of Science in Mathematics**
+
+Department of Mathematics, ETH Zürich \
+Advisor: Prof. Dr. Habib Ammari
+
+(_2013 - 2017_) **Bachelor of Science in Mathematics and Applied Mathematics**
+
+School of Mathematical Sciences, Beijing Normal University \
+Advisor: Prof. Dr. Hui Zhang
+
+* * *
+**Publications**
+
+- **Y. Liu**, J. Chuah, M. Unser, and J. Dong. "A global inverse-problem approach to quantitative photo-switching
+optoacoustic mesoscopy", Under review, (2025).
+- L. Gu, **Y. Liu**, X. Zhu, R. Li, N. Zhou, J. Dong, and W. Ren. "High-fidelity miniature fluorescence microscopy
+using Zernike-polynomial-based spatially-varying deconvolution", Under review, (2025).
+- **Y. Liu**, V. Stergiopoulou, J. Chuah, E. Bezzam, G.-J. Both, M. Unser, D. Sage,
+and J. Dong.
+"Revisiting PSF models: Unifying framework and high‐performance implementation,"
+_Journal of Microscopy_, 1-13, (2025).
+- **Y. Liu**, J. Chuah, Y. Huang, A. C. Stiel, M. Unser, and J. Dong, "Model-based temporal unmixing towards quantitative photo-switching optoacoustic tomography," _Opt. Express_ 33, 6216 (2025).
+- **Y. Liu**, J. Dong, J. Augusto Maya, F. Balzarotti, and M. Unser, "Point-spread-function engineering in MINFLUX: optimality of donut and half-moon excitation patterns," _Opt. Lett_. 50, 37 (2025).
+- **Y. Liu**, J. Dong, T. Pham, F. Marelli, and M. Unser, "Mechanical artifacts in optical projection tomography: classification and automatic calibration," _Opt. Continuum_ 1, 2577 (2022).
+- **Y. Liu**, J. Dong, C. Schmidt, A. Boquet-Pujadas, J. Extermann, and M. Unser, "Artifacts in optical projection tomography due to refractive-index mismatch: model and correction," _Opt. Lett_. 47, 2618 (2022).
+- **Y. Liu**, W. Ren, H. Ammari, "Robust reconstruction of fluorescence molecular tomography with an optimized illumination pattern," _Inverse Problems & Imaging_ 14, 535–568 (2020).
+
+* * *
+**Projects**
+
+(_2024 - 2025_) **Data Analysis Workflow for Miniscope** \
+In collaboration with the [MibLab](https://miblab.sist.shanghaitech.edu.cn/), ShanghaiTech University
+
+- Co-supervised a Master student on modeling and algorithms
+- Collaborated on deconvolution with spatially-varying PSFs for Miniscope
+- Participated in writing and reviewing the manuscript
+
+(_2022 - 2025_) **SWOPT: Novel Photo-Switching Photoacoustic Imaging Technology** \
+Multi-year collaborative [EU project](https://swopt.munichimaging.eu/) hosted at Helmholtz Zentrum München
+
+- Co-led work package on data analysis workflow and inversion algorithms
+- Developed regularized temporal unmixing framework with GPU-acceleration
+- Technical reporting of deliverables and coordination between partners
+
+(_2023 - 2025_) **PSF Generator: Open-Source PyTorch Library for Point-Spread Function Computation** \
+In collaboration with [LCAV](https://www.epfl.ch/labs/lcav/), EPFL
+
+- Unifying framework proving equivalence between different computational approaches
+- ML-ready implementation with comprehensive documentation and benchmarking
+- Napari plugin with user-friendly interface for 3D visualization
+
+(_2022 - 2024_) **Point-Spread-Function Engineering for MINFLUX Localization Microscopy** \
+In collaboration with the [Balzarotti Lab](https://www.imp.ac.at/groups/francisco-balzarotti), Vienna BioCenter
+
+- Developed a differentiable optimization framework for MINFLUX microscopy
+- Investigated optimality of excitation patterns (donut and half-moon beams)
+- Enabled fast explorations of new beam patterns avoiding expensive experiments
+
+(_2020 - 2022_) **Artifact Correction for Optical Projection Tomography** \
+In collaboration with the [Idiap](https://www.idiap.ch/) institute and the [University of Applied Sciences
+of Western Switzerland](https://www.unige.ch/gap/biophotonics/former-members/cedric_schmidt)
+
+- Systematic documentation of mechanical and optical artifacts for practitioners
+- Developed fast automatic calibration algorithms based on geometry and optics
+- Demonstrated effectiveness on improving the image quality on various samples
+
+(_2018 - 2019_) **Reconstruction and optimization of the illumination pattern in fluorescence molecular tomography** \
+In collaboration with the Institute of Biomedical Engineering, ETH Zürich
+
+- Implemented a reconstruction algorithm with sparsity-based regularization for FMT
+- Developed an optimization approach for optimal design of the illumination pattern
+
+* * *
+**Conferences**
+
+- (_2025_) _Focus on Microscopy_, Taipei, Taiwan, oral presentation
+- (_2023, 2025_) _International Symposium on Computational Sensing_, Luxembourg, oral and poster presentations, _Best Contribution Award 2025_
+- (_2019, 2022, 2024_) _Yearly Meeting of the Biomedical Photonics Network_, Switzerland, oral and poster presentations
+- (_2020_) _15th European Molecular Imaging Meeting_, Thessaloniki, Greece, oral presentation
+
+* * *
+**Supervised Projects**
+
+- (_2024_) _Acoustic reconstruction in photoacoustic mesoscopy_, Master semester project
+- (_2023_) _Modeling and reconstruction of photo-switching photoacoustic tomography using conventional and
+neural-network-based regularization_, Master semester project
+- (_2023_) _Study of different models to compute light fluence distribution for photoacoustic mesoscopy_,
+Master semester project
+- (_2022_) _Measuring wavefront error using optical coherence tomography_, Master thesis,
+In collaboration with Zeiss Lab, Medizinische Universität Wien
+
+* * *
+**Activities**
+
+- (_2021-2024_) Head teaching assistant of Master courses Image Processing I and II, EPFL
+- (_2023_) _17th EXCITE Summer School on Biomedical Imaging_, Zürich, Switzerland
+- (_2023_) _Advanced Light Microscopy for Life Science PhDs summer school_, EPFL
+- (_2019, 2022, 2023_) Volunteer for _Platform for Advanced Scientific Computing (PASC) Conference_, Switzerland
+
+* * *
+**Technical Skills**
+
+Python, Pytorch, ImageJ, MATLAB, Git, Linux, Latex
+
+* * *
+**Languages**
+
+- Chinese (native)
+- English (full professional proficiency)

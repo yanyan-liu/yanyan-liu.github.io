@@ -1,0 +1,352 @@
+# Results
+
+## Setup
+
+We use a numerical phantom of size {math}`(300 \times 300)` pixels to represent a 2D sample with physical size
+{math}`(5.6 \times 5.6)` mm and disk-like objects to mimic photo-switching reporters.
+They are located around the acoustic focal plane, at depth 2.8 mm.
+We also consider two species A and B.
+They are located in the disks on top of a heterogeneous background.
+One disk in particular contains a mixture of A and B in 1:1 ratio,
+which helps us to test the performance of the algorithm on spatially overlapping targets
+(see {numref}`fig:pat2-simu-setup` (a)-(c)).
+We let that species A has a higher dynamic range of switching signals and a faster switching speed than species B.
+Detailed information on the photo-physical properties and optical parameters involved in the simulation is provided in
+{numref}`tab:photophysics`.
+
+```{table} Photo-Physical Properties of the Reporters
+:name: tab:photophysics
+
+| Name | {math}`k` | {math}`\varepsilon^{\text{ON}}`  | {math}`\varepsilon^{\text{OFF}}` |
+|------|-----|----------------------------|----------------------------|
+|Species A |  4 | {math}`5\times 10 ^{-3}` | {math}`1 \times 10^{-4}` |
+|Species B |  2 | {math}`4 \times 10^{-3}` | {math}`1 \times 10^{-4}` |
+|Background  | 0 | {math}`5 \times 10^{-3}` | {math}`5 \times 10^{-3}` |
+
+```
+
+We use a uniform illumination of width {math}`W=2.8` mm centered on the top surface of the sample.
+The computed fluence map, assuming a constant absorption coefficient {math}`\mu_{\text{a}}=0.02\text{ mm}^{-1}`
+and constant scattering coefficient {math}`\mu_{\text{s}}=1\text{ mm}^{-1}`,
+is used for reconstruction and shown in {numref}`fig:pat2-simu-setup` (d).
+We compare it with the true fluence map ({numref}`fig:pat2-simu-setup` (e)) computed using the true heterogeneous absorption
+coefficient map based on the background and the reporters and show the difference between them in
+{numref}`fig:pat2-simu-setup` (f).
+We will see that despite the mismatch of up to 10\% between the approximated and the true fluence distribution,
+our framework is robust to achieve good unmixing results.
+
+````{figure} images/simu_setup.*
+:name: fig:pat2-simu-setup
+:width: 100%
+
+(a)-(c) Ground-truth concentration maps (in {math}`\mu`M) of the two photo-switching species of reporters and
+the non-switching background.
+The insets of two of the reporters are shown in (a) and (b) for better visualization.
+The horizontal dotted line in (c) indicates position of the focal plane of the transducer.
+(d) Computed fluence map (arbitrary unit) used for reconstruction.
+(e) True fluence map (arbitrary unit) used to synthesize measurements.
+(f) Difference map between (d) and (e) in percentage.
+(g) Synthesized PA signals (first frame) during an OFF-switching cycle.
+Each reporter is circled out for better identification.
+(h) Temporal series of PA signals (intensity averaged over the area of each reporter).
+The color coding is the same as in (g), similar for (j) and (l).
+(i) and (k): Subsequent acoustic signals (first frame) with 1\% (i) and 10\% (k) noise.
+(j) and (l): Temporal series of acoustic signals (intensity averaged over the area of each reporter)
+that correspond to (i) and (k).
+````
+
+To synthesize acoustic measurements, we construct and apply the true forward model on the
+ground-truth concentration maps shown in {numref}`fig:pat2-simu-setup` (a)-(c) using the true fluence distribution
+map.
+Gaussian random noise proportional to a fraction of the maximal amplitude of the complete switching cycle is
+added to the measurements.
+Temporal evolution of photo-switching PA and resulting acoustic signals with 1\% and 10\% noise are shown in
+{numref}`fig:pat2-simu-setup` (g)-(l).
+Animations of these signals are also available online {cite:p}`pat2-data-code`.
+Forward model for the reconstruction algorithm is established using the computed fluence map without prior
+information on the heterogeneity of the background or on the reporters.
+
+## Metrics
+
+We use four metrics to evaluate the quality of reconstruction, which afford us several perspectives.
+Let {math}`\mathbf{x}, \mathbf{y} \in\mathbb{R}^N` be the ground truth and reconstructed images, respectively.
+
+Normalized root-mean-square error (NRMSE) which is defined as
+```{math}
+:label: eq:nrmse
+    \text{NRMSE} = \frac{\|\mathbf{x} - \mathbf{y}\|_2}{\|\mathbf{x}\|_2},
+```
+quantifies the relative total error of the reconstruction {cite:p}`harrison_least-squares_2013` .
+Peak signal-to-noise ratio (PSNR) which is defined as
+```{math}
+:label: eq:psnr
+    \text{PSNR}(\mathbf{x}, \mathbf{y}) = 20 \cdot \log_{10} (\text{MAX}) - 10 \cdot \log_{10}
+    (\|\mathbf{x} - \mathbf{y}\|_2),
+```
+evaluates the strength of the signal against noise,
+where MAX represents the largest possible pixel value of the image.
+Structural similarity (SSIM) which is defined as
+```{math}
+:label: eq:ssim
+    {\rm SSIM}({\bf x},{\bf y})=\frac{(2\mu_{x}\mu_{y}+C_{1})(2\sigma_{xy}+C_{2})}
+    {\left(\mu_{x}^{2}+\mu_{y}^{2}+C_{1}\right) \left(\sigma_{x}^{2}+\sigma_{y}^{2}+C_{2}\right)},
+```
+measures the textural similarity between reconstruction and ground truth {cite:p}`zhou_wang_image_2004`.
+Quantities {math}`\mu_{x(y)}` and {math}`\sigma_{x(y)}` are the estimated mean intensity and standard deviation of
+an image {math}`\mathbf{x}(\mathbf{y})`, {math}`C_1` and {math}`C_2` are constant to avoid division by a tiny number.
+Dice similarity (Dice) which is defined as
+```{math}
+:label: eq:dice
+    \textrm{Dice}=\frac{2|\textrm{ROI}(\mathbf{y})\cap\textrm{ROI}
+    (\mathbf{x})|}{|\textrm{ROI}(\mathbf{y})|+|\textrm{ROI}(\mathbf{x})|},
+    \quad \text{ROI}(\mathbf{x}) = \left\{ n | x_n > \max(\mathbf{x}) \times 10\% \right\},
+```
+assesses the overlap of locations of the signal between reconstruction and ground
+truth {cite:p}`dice_measures_1945`.
+Here, we choose a strict threshold of 10\% in the definition of the ROI to better evaluate the separation
+of the signal due to the high noise setting in our simulations.
+Dice is between 0 and 1, and a high Dice value indicates good recovery of the location of the ROI.
+
+## Reconstruction Results
+
+(pat2-low-noise-regime)=
+### Low Noise Regime
+
+We first show the performance of our proposed regularized one-step approach with 1\% noise in the acoustic signals.
+In {numref}`fig:low-noise-recon`, we see that our method not only faithfully recovered concentration maps of the
+two photo-switching species compared to ground truth, but also cleanly unmixed them from each other and from the
+background.
+Our method also performs better than the regularized two-step method in the reconstruction of the two species.
+
+```{figure} images/regularized_recon_noise_1e-02_paper.*
+:name: fig:low-noise-recon
+:width: 80%
+
+Reconstruction results using the regularized one-step approach under **1\% noise** level.
+(a)-(c) Reconstructed concentration maps of the two species and the background.
+(d)-(e) Ground truth.
+Rectangular region between the two horizontal dashed lines in (d) indicates the area on which we calculate the SSIM.
+```
+
+(pat2-high-noise-regime)=
+### High Noise Regime
+
+We then further validate our approach by comparing it with the two-step approach at a higher level of noise of 10\%.
+In {numref}`fig:high-noise-recon`, we compare four inversion techniques:
+unregularized two-step, unregularized one-step, regularized two-step, and regularized one-step (proposed).
+Unregularized techniques use the LSQR algorithm {cite:p}`paige_lsqr_1982` to obtain the solution.
+We observe that only the proposed approach successfully reconstructed and unmixed the two species out of
+the background ({numref}`fig:high-noise-recon` (p)-(t)); a close comparison of the intensity profile over a line
+segment (indicated in {numref}`fig:high-noise-recon` (a) and (b)) with ground truth reveals quantitative
+quality of reconstruction.
+Two unregularized approaches separated the photo-switching reporters from the background but failed to distinguish
+the two species and mitigate noise in the reconstruction.
+The regularized two-step approach produced less noisy images due to the regularization but failed at unmixing the
+slower-switching species B from the other faster-switching species A or the background.
+This is indicated by the absence of reporters which belong to species B in {numref}`fig:high-noise-recon` (l) and the
+appearance of them in image of species A and the background ({numref}`fig:high-noise-recon` (k) and (m)).
+
+```{figure} images/compare_methods_noise_1e-01_paper.*
+:name: fig:high-noise-recon
+:width: 100%
+
+Comparison of reconstruction results using different inversion approaches under **10\% noise** level.
+(a)-(e): unregularized two-step approach.
+(f)-(j): unregularized one-step approach.
+(k)-(o): Regularized two-step approach.
+(p)-(t): Regularized one-step approach.
+First to third columns: reconstructed concentration maps of the two species and background.
+Last column: Intensity of the reconstruction along a dashed line segment drawn in (a) and (b).
+Color orange and green represent line profiles in species A and B, respectively.
+Corresponding solid orange and green lines represent ground truth.
+```
+
+Evolution of the cost during the main minimization problem for the two regularized methods in
+{numref}`fig:low-noise-recon` and {numref}`fig:high-noise-recon` is
+shown in {numref}`fig:pat2-cost-evolution`.
+```{figure} images/cost_evolution.*
+:name: fig:pat2-cost-evolution
+
+Cost evolution of the regularized approaches in the case of 1\% ((a)-(c)) and 10\% ((d)-(f)) noise in the measurement.
+```
+
+### Dependence on the Setup
+
+Finally, we check the performance of our proposed approach in a variety of configurations.
+
+- Noise levels: 1\%, 5\%, and 10\%
+- Kinetic constant of species A: 4.0, 3.5 and 3 (while species B is 2.0)
+- Laser energy: 500, 400, 300 (arbitrary unit).
+
+We show quantitative evaluation of our approach for several configurations in
+{numref}`fig:compare-metrics-over-noise-levels`.
+We see that the performance of our approach is stable across configurations.
+In the test of robustness against the noise level, SSIM and Dice values are close to the perfect value 1.0
+(see {numref}`fig:compare-metrics-over-noise-levels` (b) and (d)).
+PSNR values slightly decrease ({numref}`fig:compare-metrics-over-noise-levels` (a)) and NRMSE values increase
+({numref}`fig:compare-metrics-over-noise-levels` (c)) when the noise level is raised.
+
+In a second test, we show impact of the laser power.
+Similar to the results in the first test, the performance of our approach is still stable,
+especially in terms of SSIM ({numref}`fig:compare-metrics-over-noise-levels` (f)).
+When laser power decreases, intensity of the light fluence is lowered,
+which decreases not only the amplitude of the detected signal but also the switching speed.
+The difficulty of unmixing therefore increases,
+which explains the decrease in Dice for species A in {numref}`fig:compare-metrics-over-noise-levels` (h).
+
+We also compare the quality of unmixing when the difference between the kinetic constants of the two species changes.
+The evolution curve of the three metrics of the background in {numref}`fig:compare-metrics-over-noise-levels` (i)-(k)
+remains more or less flat, which indicates that the reconstruction of the background is not influenced.
+The reconstruction quality of the two species, measured by the four metrics,
+shows similar tendencies as compared with previous tests.
+Overall, the performance of our proposed approach is stable across different configurations.
+
+````{subfigure} A|B|C
+:name: fig:compare-metrics-over-noise-levels
+:width: 100%
+```{image} images/noise_evolution.*
+    :alt:
+```
+```{image} images/laser_evolution.*
+    :alt:
+```
+```{image} images/kinetic_evolution.*
+    :alt:
+```
+
+Performance of the proposed regularized one-step approach under different configurations.
+(a)-(d) Different noise levels.
+(e)-(h) Different laser powers (arbitrary unit).
+(i)-(l) Different kinetics for species A.
+````
+
+(pat2-hyperparameters)=
+### Hyperparameters
+
+Regarding the search for hyperparameters, unregularized methods only have one hyperparameter, the number of
+iterations.
+The linear systems {math}`\mathbf{W}_{\text{tot}}`, {math}`\mathbf{S}` and {math}`\mathbf{A}` are ill-conditioned.
+The estimated condition numbers {math}`\kappa` for the setups in
+[](#pat2-low-noise-regime) and [](#pat2-high-noise-regime) are
+{math}`\kappa(\mathbf{W}_{\text{tot}}) = 160`, {math}`\kappa(\mathbf{S}) = 280`, and {math}`\kappa(\mathbf{A}) = 460`.
+we apply early stopping to regularize the solution and avoid fitting it to noise.
+
+The main hyperparameter of regularized methods is the regularization weight.
+They are tuned such that the reconstruction achieves the overall best PSNR for both species.
+We used {math}`K_2=20` iterations for the inner loop of the proximal gradient step,
+threshold values of {math}`\varepsilon_1=10^{-8}` and {math}`\varepsilon_2=10^{-4}` for the stopping criteria,
+and a maximal number {math}`K_1=500` of iterations for the main problem in {prf:ref}`alg:prox-outer`.
+
+## Computational Analysis
+
+For a phantom of size {math}`(300 \times 300)` pixels, average computational time for regularized one-step
+and two-step approaches is 180 seconds and 115 seconds, respectively.
+The spatial integration step of the acoustic model ({eq}`eq:q-above-final` and {eq}`eq:q-below-final`)
+accounts for the majority of the computation and requires an efficient implementation.
+It involves repeated correlations between the input image and a sparse kernel composed of 1D semicircles of various
+radii that are depth-dependent (see {numref}`fig:acoustic-signal-generation`).
+
+The implementation of the spatial integration consists of two core operators:
+- Row Operator that generates one horizontal slice of the output signal at a given depth via a correlation with
+the masked spatial response followed by an extraction of a row of pixels at the focal plane;
+- Image Operator that assembles the output of the Row Operators at all depths to form a 2D image.
+
+One approach to compute the correlation involved in Row Operator is to use the fast Fourier transform (FFT) and
+dense array representations of 2D images, hereafter referred to as the FFT Row Operator.
+Another approach, referred to as the custom Row Operator, computes correlations directly in the original domain.
+
+````{subfigure} AB|CD
+:name: fig:benchmark-rowop
+:width: 100%
+```{image} images/compare_rowops_per_row.*
+    :alt:
+```
+```{image} images/compare_rowops.*
+    :alt:
+```
+```{image} images/acoustic_benchmarking.*
+    :alt:
+```
+```{image} images/full_benchmarking.*
+    :alt:
+```
+
+Runtime benchmark of the forward and adjoint modes of the Row Operator (a), Image Operator (b),
+complete acoustic operator (c) and full model operator (d).
+Image size refers to the width of a square image in pixels.
+Number sampling points {math}`N` in the switching temporal domain is 50 and number of species {math}`P` is 3.
+Each data point in these plots represents the value averaged over 10 repetitions.
+````
+
+To gain insights on the performance of the FFT and custom operators,
+we compare the complexity the two row operators on a single row at depth {math}`m_2` in the output image on CPU.
+We assume that the acoustic image {math}`q` for one acoustic process and the kernel {math}`h` are squares of size
+{math}`(M \times M)` and {math}`(K \times K)`, respectively, and {math}`K` is much smaller than {math}`M`.
+The FFT row operator uses 2D FFTs to compute correlations in the Fourier domain as
+```{math}
+    \text{Extract}_{k_2} \left(\text{IFFT}_{\text{2D}}\left\{
+    \text{FFT}_{\text{2D}}\left\{ q \right\}
+    \cdot
+    \text{FFT}_{\text{2D}}\left\{\text{conj}(h)\right\}
+    \right\}\right),
+```
+where {math}`M` and {math}`K` are of the same order, and conj() represents complex conjugate.
+Its complexity is
+```{math}
+    O\left(M^2\log M^2 + K^2\log K^2 + M^2\log M^2 \right) \sim O(M^2\log M).
+```
+The custom method calculates correlations in the original domain at each pixel location {math}`(m_1, m_2)`
+```{math}
+    q[m_1, m_2] = \sum_{k_1=0}^{K-1} \sum_{k_2=0}^{K-1} \beta[k_1, k_2]  \eta[k_1-m_1, k_2-m_2].
+```
+Its complexity is {math}`O(K^2)` per pixel and thus, {math}`O(K^2 M)` for a single row at depth {math}`m_2`.
+
+Further, our sparse representation of the kernel reduces the complexity for each pixel to {math}`O(K)`
+since the kernel is essentially a 1D curve (sparse representation) instead of a 2D image (dense representation).
+Consequently, we have
+```{math}
+    q[m_1, m_2] = \sum_{(k_1, k_2)\in \Lambda} \beta[k_1, k_2] \eta[k_1-m_1, k_2-m_2],
+```
+where {math}`\Lambda` is a set of indices that approximate either the upper or lower semicircle.
+The final complexity is thus {math}`O(K M) \sim O(M^2)` instead of {math}`O(K^2 M) \sim O(M^3)`.
+Then, we compare the complete acoustic spatial operator based on these two methods on CPU.
+Their theoretical complexity is {math}`O(M^3\log M)` and {math}`O(M^3)`, due to the for loop
+along the depth of size {math}`M`.
+In conclusion, the theoretical complexities of the
+FFT Row Operator and Image operator are {math}`O(M^2\log M)` and {math}`O(M^3\log M)`, respectively,
+and for the custom Row Operator, {math}`O(M^2)` and {math}`O(M^3)`, respectively.
+
+Although the custom approach tends to scale unfavorably in comparison with FFT, especially for kernels of large sizes,
+our setting permits two important simplifications that can mitigate these effects.
+Firstly, we only evaluate the correlated signal on the small window of the output image where it is actually needed,
+namely, along the row of pixels at the focal plane.
+Secondly, we exploit sparsity of the kernels by storing and processing only their nonzero entries.
+Overall, this approach achieves better asymptotic scaling and memory efficiency than the FFT one while also being
+trivial to parallelize over the image rows.
+
+We use _PyLops_ to define the forward
+models in the complete pipeline as matrix-free operators since explicitly assembling the matrices is prohibitive
+due to their sizes.
+We use the open-source library Numba {cite:p}`numba` for the just-in-time compilation to accelerate the custom Row
+Operator.
+We further accelerate it on GPU using CuPy {cite:p}`cupy_learningsys2017` and a handwritten CUDA kernel that performs
+all the per-row correlations simultaneously and in parallel as the Image Operator.
+
+We benchmarked the forward and adjoint modes of the two versions of the Row Operator and the corresponding Image
+Operator on an Intel i9-10900X CPU and then the complete acoustic operator and the full pipeline on an
+NVIDIA GeForce RTX3090 GPU.
+The results are shown in {numref}`fig:benchmark-rowop`.
+
+In {numref}`fig:benchmark-rowop` (a) and (b), we compare the two versions of the Row Operator and the Image operator,
+respectively.
+We see that they agree well with their theoretical complexity.
+The custom Row and Image Operators are approximately 50 times faster than the FFT counterparts.
+One evaluation of either the forward or the adjoint mode of the custom Row and Image Operator of a sample of
+{math}`(512\times512)` pixels with 3 species and 50 switching points costs 0.05 ms and 100 ms, respectively,
+compared to 10 ms and {math}`10^4` ms in the case of the FFT approach.
+In {numref}`fig:benchmark-rowop` (c) and (d), we compare the complete acoustic operator including the temporal
+response (c) and the complete forward model including the acoustic and the photo-switching modules (d)
+when using the custom Image operator.
+We see a significant speedup on GPU compared to CPU.
+
+The code to produce the simulation results is available online {cite:p}`pat2-data-code`.

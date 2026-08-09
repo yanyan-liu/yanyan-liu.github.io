@@ -1,0 +1,1534 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Acknowledgement" href="src/acknowledgement.html">
+        <link rel="prefetch" href="_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Physics-Based Modeling and Inverse Problems in Optical Imaging</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="src/acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="src/introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="src/intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="src/intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="src/opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="src/opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="src/opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="src/photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="src/photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="src/photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="src/microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/microscopy/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="src/microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="src/microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="physics-based-modeling-and-inverse-problems-in-optical-imaging">
+<h1>Physics-Based Modeling and Inverse Problems in Optical Imaging<a class="headerlink" href="#physics-based-modeling-and-inverse-problems-in-optical-imaging" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="src/acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/introduction/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/introduction/background.html">Background</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/introduction/background.html#optical-imaging">Optical Imaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/introduction/background.html#computational-imaging">Computational Imaging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/introduction/contributions.html">Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/introduction/contributions.html#correction-of-artifacts-in-optical-projection-tomography">Correction of Artifacts in Optical Projection Tomography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/introduction/contributions.html#temporal-unmixing-for-photo-switching-photoacoustic-imaging">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/introduction/contributions.html#engineering-of-point-spread-functions-for-localization-microscopy">Engineering of Point Spread Functions for Localization Microscopy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/intro_imaging/index.html">Biomedical Optical Imaging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_imaging/optical_imaging.html">Basic Principles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#probe">Probe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#light-matter-interaction">Light-Matter Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#detection">Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#image-formation">Image Formation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#imaging-depth">Imaging Depth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_imaging/optical_imaging.html#resolution">Resolution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/intro_math/index.html">Modeling and Solving of Inverse Problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#forward-model">Forward Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_math/mathematics.html#continuous-formulation">Continuous Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_math/mathematics.html#discrete-formulation">Discrete Formulation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#inverse-problem">Inverse Problem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_math/mathematics.html#formulation">Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_math/mathematics.html#regularization-roles-and-choices">Regularization: Roles and Choices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/intro_math/mathematics.html#computational-aspects">Computational Aspects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_math/mathematics.html#matrix-free-operators">Matrix-Free Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_math/mathematics.html#data-preprocessing">Data Preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/intro_math/mathematics.html#automatic-differentiation">Automatic Differentiation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/opt/introduction.html">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/introduction.html#overview-of-opt">Overview of OPT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/introduction.html#motivation-and-contribution">Motivation and Contribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/opt/mechanical/index.html">Mechanical Artifacts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/photoacoustic/introduction.html">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/introduction.html#overview-of-pai">Overview of PAI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/introduction.html#motivation-and-contribution">Motivation and Contribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/photoacoustic/appendix.html">Appendix</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/appendix.html#effectiveness-of-regularization">Effectiveness of Regularization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/appendix.html#optical-parameters">Optical Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/photoacoustic/appendix.html#estimation-of-kinetic-constants">Estimation of Kinetic Constants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/microscopy/index.html">Engineering of Point Spread Functions for Localization Microscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/microscopy/introduction.html">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/introduction.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/introduction.html#motivation-and-contribution">Motivation and Contribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/microscopy/minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/microscopy/psf/index.html">A Unifying Framework for the Computation of Point Spread Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/microscopy/psf/summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/conclusion.html">Conclusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/conclusion.html#contributions">Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/conclusion.html#correction-of-artifacts-in-optical-projection-tomography">Correction of Artifacts in Optical Projection Tomography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/conclusion.html#temporal-unmixing-for-photo-switching-photoacoustic-imaging">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/conclusion.html#engineering-of-point-spread-functions-for-localization-microscopy">Engineering of Point Spread Functions for Localization Microscopy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/conclusion.html#outlook">Outlook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/cv.html">Curriculum Vitae</a></li>
+</ul>
+</div>
+<div class="docutils container" id="id1">
+<div role="list" class="citation-list">
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Paul G. Newman and Grace S. Rozycki. THE HISTORY OF ULTRASOUND. <em>Surgical Clinics of North America</em>, 78(2):179–195, April 1998.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Willi A Kalender. X-ray computed tomography. <em>Physics in Medicine &amp; Biology</em>, 51(13):R29–R43, July 2006.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p>Marinus T. Vlaardingerbroek and Jacques A. den Boer. <em>Magnetic resonance imaging: theory and practice</em>. Springer, Berlin, Heidelberg, Germany; New York, USA, third edition, 2003.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<p>David E. Kuhl, John Hale, and Walter L. Eaton. Transmission Scanning: A Useful Adjunct to Conventional Emission Scanning for Accurately Keying Isotope Deposition to Radiographic Anatomy. <em>Radiology</em>, 87(2):278–284, August 1966.</p>
+</div>
+<div class="citation" id="id298" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://commons.wikimedia.org/w/index.php?curid=2974242">https://commons.wikimedia.org/w/index.php?curid=2974242</a>.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
+<p>Xunbin Wei and Bobo Gu, editors. <em>Optical Imaging in Human Disease and Biological Research</em>. Volume 3233 of Advances in Experimental Medicine and Biology. Springer Singapore, Singapore, 2021.</p>
+</div>
+<div class="citation" id="id22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<p>Wolfgang Drexler and James G. Fujimoto, editors. <em>Optical Coherence Tomography: Technology and Applications</em>. Springer International Publishing, Switzerland, second edition, 2015.</p>
+</div>
+<div class="citation" id="id254" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
+<p>Lihong V. Wang and Hsin-i Wu. <em>Biomedical optics: principles and imaging</em>. Wiley-Interscience, Hoboken, NJ, USA, 2007.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
+<p>YongKeun Park, Christian Depeursinge, and Gabriel Popescu. Quantitative phase imaging in biomedicine. <em>Nature Photonics</em>, 12(10):578–589, October 2018.</p>
+</div>
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
+<p>Felix Scholkmann, Stefan Kleiser, Andreas Jaakko Metz, Raphael Zimmermann, Juan Mata Pavia, Ursula Wolf, and Martin Wolf. A review on continuous wave functional near-infrared spectroscopy and imaging instrumentation and methodology. <em>NeuroImage</em>, 85:6–27, January 2014.</p>
+</div>
+<div class="citation" id="id109" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
+<p>James Sharpe. Optical projection tomography. <em>Annual Review of Biomedical Engineering</em>, 6(1):209–228, 2004.</p>
+</div>
+<div class="citation" id="id103" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
+<p>Jacqueline Gleave, Michael Wong, Jun Dazai, Maliha Altaf, Mark Henkelman, Jason Lerch, and Brian Nieman. Neuroanatomical phenotyping of the mouse brain with three-dimensional autofluorescence imaging. <em>Physiological genomics</em>, 44:778–85, 06 2012.</p>
+</div>
+<div class="citation" id="id140" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
+<p>Cédric Schmidt, Arielle L. Planchette, David Nguyen, Gabriel Giardina, Yoan Neuenschwander, Mathieu Di Franco, Alessio Mylonas, Adrien C. Descloux, Enrico Pomarico, Aleksandra Radenovic, and Jérôme Extermann. High resolution optical projection tomography platform for multispectral imaging of the mouse gut. <em>Biomedical Optics Express</em>, 12(6):3619–3629, June 2021.</p>
+</div>
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
+<p>Markus Rudin. <em>Molecular Imaging: Basic Principles and Applications in Biomedical Research</em>. WORLD SCIENTIFIC (EUROPE), third edition, May 2020.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></span>
+<p>J. Sven D. Mieog, Friso B. Achterberg, Aimen Zlitni, Merlijn Hutteman, Jacobus Burggraaf, Rutger-Jan Swijnenburg, Sylvain Gioux, and Alexander L. Vahrmeijer. Fundamentals and developments in fluorescence-guided cancer surgery. <em>Nature Reviews Clinical Oncology</em>, 19(1):9–22, January 2022.</p>
+</div>
+<div class="citation" id="id27" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></span>
+<p>M. D. Duncan, M. Bashkansky, and J. Reintjes. Subsurface defect detection in materials using optical coherence tomography. <em>Optics Express</em>, 2(13):540, June 1998.</p>
+</div>
+<div class="citation" id="id28" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></span>
+<p>Ricardo Roriz, Jorge Cabral, and Tiago Gomes. Automotive LiDAR Technology: A Survey. <em>IEEE Transactions on Intelligent Transportation Systems</em>, 23(7):6282–6297, July 2022.</p>
+</div>
+<div class="citation" id="id220" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
+<p>Junjie Yao, Jun Xia, and Lihong V. Wang. Multiscale Functional and Molecular Photoacoustic Tomography. <em>Ultrasonic Imaging</em>, 38(1):44–62, January 2016.</p>
+</div>
+<div class="citation" id="id45" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></span>
+<p>Yaniv Romano, Michael Elad, and Peyman Milanfar. The Little Engine That Could: Regularization by Denoising (RED). <em>SIAM Journal on Imaging Sciences</em>, 10(4):1804–1844, January 2017.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
+<p>Francesco Guzzi, Alessandra Gianoncelli, Fulvio Billè, Sergio Carrato, and George Kourousias. Automatic Differentiation for Inverse Problems in X-ray Imaging and Microscopy. <em>Life</em>, 13(3):629, Febuary 2023.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></span>
+<p>Alison Wong, Benjamin Pope, Louis Desdoigts, Peter Tuthill, Barnaby Norris, and Chris Betters. Phase retrieval and design with automatic differentiation: tutorial. <em>Journal of the Optical Society of America B</em>, 38(9):2465, September 2021.</p>
+</div>
+<div class="citation" id="id114" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>22<span class="fn-bracket">]</span></span>
+<p>James Sharpe, Ulf Ahlgren, Paul Perry, Bill Hill, Allyson Ross, Jacob Hecksher-Sørensen, Richard Baldock, and Duncan Davidson. Optical projection tomography as a tool for 3D microscopy and gene expression studies. <em>Science</em>, 296(5567):541–545, 2002.</p>
+</div>
+<div class="citation" id="id113" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>23<span class="fn-bracket">]</span></span>
+<p>Allard A. Hendriksen, Dirk Schut, Willem Jan Palenstijn, Nicola Viganó, Jisoo Kim, Daniël M. Pelt, Tristan van Leeuwen, and K. Joost Batenburg. Tomosipo: fast, flexible, and convenient 3d tomography for complex scanning geometries in python. <em>Optics Express</em>, 29(24):40494–40513, November 2021.</p>
+</div>
+<div class="citation" id="id222" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>24<span class="fn-bracket">]</span></span>
+<p>Lihong V. Wang and Song Hu. Photoacoustic Tomography: In Vivo Imaging from Organelles to Organs. <em>Science</em>, 335(6075):1458–1462, March 2012.</p>
+</div>
+<div class="citation" id="id223" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>25<span class="fn-bracket">]</span></span>
+<p>Vasilis Ntziachristos. Going deeper than microscopy: the optical imaging frontier in biology. <em>Nature Methods</em>, 7(8):603–614, August 2010.</p>
+</div>
+<div class="citation" id="id224" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>26<span class="fn-bracket">]</span></span>
+<p>Lihong V Wang and Junjie Yao. A practical guide to photoacoustic tomography in the life sciences. <em>Nature Methods</em>, 13(8):627–638, August 2016.</p>
+</div>
+<div class="citation" id="id219" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>27<span class="fn-bracket">]</span></span>
+<p>Junjie Yao, Andrii A Kaberniuk, Lei Li, Daria M Shcherbakova, Ruiying Zhang, Lidai Wang, Guo Li, Vladislav V Verkhusha, and Lihong V Wang. Multiscale photoacoustic tomography using reversibly switchable bacterial phytochrome as a near-infrared photochromic probe. <em>Nature Methods</em>, 13(1):67–73, January 2016.</p>
+</div>
+<div class="citation" id="id208" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>28<span class="fn-bracket">]</span></span>
+<p>Shuai Chen, Kaixin Li, Xin Chen, Shan Lei, Jing Lin, and Peng Huang. Reversibly photoswitchable protein assemblies with collagen affinity for in vivo photoacoustic imaging of tumors. <em>Science Advances</em>, 10(35):eadn8274, August 2024.</p>
+</div>
+<div class="citation" id="id74" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></span>
+<p>Marco Scarselli, Paolo Annibale, Peter J. McCormick, Shivakumar Kolachalam, Stefano Aringhieri, Aleksandra Radenovic, Giovanni U. Corsini, and Roberto Maggio. Revealing g-protein-coupled receptor oligomerization at the single-molecule level through a nanoscopic lens: methods, dynamics and biological function. <em>The FEBS Journal</em>, 283(7):1197–1217, 2016.</p>
+</div>
+<div class="citation" id="id86" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>30<span class="fn-bracket">]</span></span>
+<p>Jan O. Wolff, Lukas Scheiderer, Tobias Engelhardt, Johann Engelhardt, Jessica Matthias, and Stefan W. Hell. MINFLUX dissects the unimpeded walking of kinesin-1. <em>Science</em>, 379(6636):1004–1010, March 2023.</p>
+</div>
+<div class="citation" id="id71" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>31<span class="fn-bracket">]</span></span>
+<p>Stefan W Hell and Jan Wichmann. Breaking the diffraction resolution limit by stimulated emission: stimulated-emission-depletion fluorescence microscopy. <em>Optics letters</em>, 19(11):780–782, 1994.</p>
+</div>
+<div class="citation" id="id61" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>32<span class="fn-bracket">]</span></span>
+<p>Francisco Balzarotti, Yvan Eilers, Klaus C. Gwosch, Arvid H. Gynnå, Volker Westphal, Fernando D. Stefani, Johan Elf, and Stefan W. Hell. Nanometer resolution imaging and tracking of fluorescent molecules with minimal photon fluxes. <em>Science</em>, 355(6325):606–612, Febuary 2017.</p>
+</div>
+<div class="citation" id="id57" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>33<span class="fn-bracket">]</span></span>
+<p>Raimund J. Ober, Sripad Ram, and E. Sally Ward. Localization Accuracy in Single-Molecule Microscopy. <em>Biophysical Journal</em>, 86(2):1185–1200, Febuary 2004.</p>
+</div>
+<div class="citation" id="id25" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>34<span class="fn-bracket">]</span></span>
+<p>Brian W. Pogue. Optics in the Molecular Imaging Race. <em>Optics and Photonics News</em>, 26(9):24, September 2015.</p>
+</div>
+<div class="citation" id="id29" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>35<span class="fn-bracket">]</span></span>
+<p>Douglas B. Murphy and Michael W. Davidson. <em>Fundamentals of Light Microscopy and Electronic Imaging</em>. Wiley, first edition, September 2012.</p>
+</div>
+<div class="citation" id="id228" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>36<span class="fn-bracket">]</span></span>
+<p>Mucong Li, Yuqi Tang, and Junjie Yao. Photoacoustic tomography of blood oxygenation: A mini review. <em>Photoacoustics</em>, 10:65–73, 2018.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>37<span class="fn-bracket">]</span></span>
+<p>James B. Pawley, editor. <em>Handbook Of Biological Confocal Microscopy</em>. Springer US, Boston, MA, USA, 2006.</p>
+</div>
+<div class="citation" id="id41" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>38<span class="fn-bracket">]</span></span>
+<p>Vasilis Ntziachristos. FLUORESCENCE MOLECULAR IMAGING. <em>Annual Review of Biomedical Engineering</em>, 8(1):1–33, August 2006.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>39<span class="fn-bracket">]</span></span>
+<p>Jonathan Dong, Lorenzo Valzania, Antoine Maillard, Thanh-an Pham, Sylvain Gigan, and Michael Unser. Phase Retrieval: From Computational Imaging to Machine Learning: A tutorial. <em>IEEE Signal Processing Magazine</em>, 40(1):45–57, January 2023.</p>
+</div>
+<div class="citation" id="id256" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>40<span class="fn-bracket">]</span></span>
+<p>Jorge Ripoll Lorenzo. <em>Principles of Diffuse Light Propagation: Light Propagation in Tissues with Applications in Biology and Medicine</em>. WORLD SCIENTIFIC, March 2012.</p>
+</div>
+<div class="citation" id="id211" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>41<span class="fn-bracket">]</span></span>
+<p>Steven L. Jacques and Brian W. Pogue. Tutorial on diffuse light transport. <em>Journal of Biomedical Optics</em>, 13(4):041302, 2008.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>42<span class="fn-bracket">]</span></span>
+<p>Florian Stuker, Jorge Ripoll, and Markus Rudin. Fluorescence molecular tomography: principles and potential for pharmaceutical research. <em>Pharmaceutics</em>, 3(2):229–274, April 2011.</p>
+</div>
+<div class="citation" id="id153" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>43<span class="fn-bracket">]</span></span>
+<p>Joseph W. Goodman. <em>Introduction to Fourier optics</em>. W.H. Freeman, Macmillan Learning, New York, USA, fourth edition, 2017.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>44<span class="fn-bracket">]</span></span>
+<p>Max Born and Emil Wolf. <em>Principles of Optics: 60th Anniversary Edition</em>. Cambridge University Press, seventh edition, December 2019.</p>
+</div>
+<div class="citation" id="id250" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>45<span class="fn-bracket">]</span></span>
+<p>Lihong V. Wang, editor. <em>Photoacoustic imaging and spectroscopy</em>. Number 144 in Optical science and engineering. CRC, Boca Raton, FL, USA, 2009.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>46<span class="fn-bracket">]</span></span>
+<p>Mickaël Lelek, Melina T. Gyparaki, Gerti Beliu, Florian Schueder, Juliette Griffié, Suliana Manley, Ralf Jungmann, Markus Sauer, Melike Lakadamyali, and Christophe Zimmer. Single-molecule localization microscopy. <em>Nature Reviews Methods Primers</em>, 1(1):39, June 2021.</p>
+</div>
+<div class="citation" id="id207" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>47<span class="fn-bracket">]</span></span>
+<p>Hans-Peter F. Brecht, Richard Su, Matthew P. Fronheiser, Sergey A. Ermilov, André Conjusteau, and Alexander A. Oraevsky. Whole-body three-dimensional optoacoustic tomography system for small animals. <em>Journal of Biomedical Optics</em>, 14(6):064007, November 2009.</p>
+</div>
+<div class="citation" id="id94" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>48<span class="fn-bracket">]</span></span>
+<p>Mark Oldham, Harshad Sakhalkar, Tim Oliver, G. Allan Johnson, and Mark Dewhirst. Optical clearing of unsectioned specimens for three-dimensional imaging via optical transmission and emission tomography. <em>Journal of Biomedical Optics</em>, 13(2):021113, 2008.</p>
+</div>
+<div class="citation" id="id95" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>49<span class="fn-bracket">]</span></span>
+<p>Luca Fieramonti, Andrea Bassi, Efrem Alessandro Foglia, Anna Pistocchi, Cosimo D'Andrea, Gianluca Valentini, Rinaldo Cubeddu, Sandro De Silvestri, Giulio Cerullo, and Franco Cotelli. Time-Gated Optical Projection Tomography Allows Visualization of Adult Zebrafish Internal Structures. <em>PLoS ONE</em>, 7(11):e50744, November 2012.</p>
+</div>
+<div class="citation" id="id96" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>50<span class="fn-bracket">]</span></span>
+<p>Teresa Correia, Nicola Lockwood, Sunil Kumar, Jun Yin, Marie-Christine Ramel, Natalie Andrews, Matilda Katan, Laurence Bugeon, Margaret J. Dallman, James McGinty, Paul Frankel, Paul M. W. French, and Simon Arridge. Accelerated Optical Projection Tomography Applied to In Vivo Imaging of Zebrafish. <em>PLOS ONE</em>, 10(8):e0136213, August 2015.</p>
+</div>
+<div class="citation" id="id225" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>51<span class="fn-bracket">]</span></span>
+<p>Lihong V. Wang. Multiscale photoacoustic microscopy and computed tomography. <em>Nature Photonics</em>, 3(9):503–509, September 2009.</p>
+</div>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>52<span class="fn-bracket">]</span></span>
+<p>Sylvain Gigan, Ori Katz, Hilton B De Aguiar, Esben Ravn Andresen, Alexandre Aubry, Jacopo Bertolotti, Emmanuel Bossy, Dorian Bouchet, Joshua Brake, Sophie Brasselet, Yaron Bromberg, Hui Cao, Thomas Chaigne, Zhongtao Cheng, Wonshik Choi, Tomáš Čižmár, Meng Cui, Vincent R Curtis, Hugo Defienne, Matthias Hofer, Ryoichi Horisaki, Roarke Horstmeyer, Na Ji, Aaron K LaViolette, Jerome Mertz, Christophe Moser, Allard P Mosk, Nicolas C Pégard, Rafael Piestun, Sebastien Popoff, David B Phillips, Demetri Psaltis, Babak Rahmani, Hervé Rigneault, Stefan Rotter, Lei Tian, Ivo M Vellekoop, Laura Waller, Lihong Wang, Timothy Weber, Sheng Xiao, Chris Xu, Alexey Yamilov, Changhuei Yang, and Hasan Yılmaz. Roadmap on wavefront shaping and deep imaging in complex media. <em>Journal of Physics: Photonics</em>, 4(4):042501, October 2022.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>53<span class="fn-bracket">]</span></span>
+<p>Antoine Boniface, Jonathan Dong, and Sylvain Gigan. Non-invasive focusing and imaging in scattering media with a fluorescence-based transmission matrix. <em>Nature Communications</em>, 11(1):6154, December 2020.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>54<span class="fn-bracket">]</span></span>
+<p>E. Abbe. Beiträge zur Theorie des Mikroskops und der mikroskopischen Wahrnehmung. <em>Archiv für Mikroskopische Anatomie</em>, 9(1):413–468, December 1873.</p>
+</div>
+<div class="citation" id="id70" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>55<span class="fn-bracket">]</span></span>
+<p>Eric Betzig, George H. Patterson, Rachid Sougrat, O. Wolf Lindwasser, Scott Olenych, Juan S. Bonifacino, Michael W. Davidson, Jennifer Lippincott-Schwartz, and Harald F. Hess. Imaging Intracellular Fluorescent Proteins at Nanometer Resolution. <em>Science</em>, 313(5793):1642–1645, September 2006.</p>
+</div>
+<div class="citation" id="id69" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>56<span class="fn-bracket">]</span></span>
+<p>Michael J Rust, Mark Bates, and Xiaowei Zhuang. Sub-diffraction-limit imaging by stochastic optical reconstruction microscopy (STORM). <em>Nature Methods</em>, 3(10):793–796, October 2006.</p>
+</div>
+<div class="citation" id="id77" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>57<span class="fn-bracket">]</span></span>
+<p>T. Vavrdová, O. Šamajová, P. Křenek, M. Ovečka, P. Floková, R. Šnaurová, J. Šamaj, and G. Komis. Multicolour three dimensional structured illumination microscopy of immunolabeled plant microtubules and associated proteins. <em>Plant Methods</em>, 15(1):22, December 2019.</p>
+</div>
+<div class="citation" id="id110" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>58<span class="fn-bracket">]</span></span>
+<p>Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Correction of artefacts in optical projection tomography. <em>Physics in Medicine &amp; Biology</em>, 50(19):4645–4665, sep 2005.</p>
+</div>
+<div class="citation" id="id106" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>59<span class="fn-bracket">]</span></span>
+<p>Michael Unser. Sampling—50 Years after Shannon. <em>Proceedings of the IEEE</em>, 88(4):569–587, 2000.</p>
+</div>
+<div class="citation" id="id100" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>60<span class="fn-bracket">]</span></span>
+<p>Masih Nilchian, John Paul Ward, Cédric Vonesch, and Michael A. Unser. Optimized kaiser–bessel window functions for computed tomography. <em>IEEE Transactions on Image Processing</em>, 24:3826–3833, 2015.</p>
+</div>
+<div class="citation" id="id42" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>61<span class="fn-bracket">]</span></span>
+<p>Curtis R. Vogel. <em>Computational Methods for Inverse Problems</em>. Society for Industrial and Applied Mathematics, January 2002.</p>
+</div>
+<div class="citation" id="id43" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>62<span class="fn-bracket">]</span></span>
+<p>Per Christian Hansen and Dianne Prost O’Leary. The Use of the L-Curve in the Regularization of Discrete Ill-Posed Problems. <em>SIAM Journal on Scientific Computing</em>, 14(6):1487–1503, November 1993.</p>
+</div>
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>63<span class="fn-bracket">]</span></span>
+<p>Andrey N. Tikhonov and Vasiliy Y. Arsenin. <em>Solutions of ill-posed problems</em>. V. H. Winston &amp; Sons, Washington, D.C.: John Wiley &amp; Sons, New York, USA, 1977. Translated from the Russian, Preface by translation editor Fritz John, Scripta Series in Mathematics.</p>
+</div>
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>64<span class="fn-bracket">]</span></span>
+<p>Leonid I. Rudin, Stanley Osher, and Emad Fatemi. Nonlinear total variation based noise removal algorithms. <em>Physica D: Nonlinear Phenomena</em>, 60(1-4):259–268, November 1992.</p>
+</div>
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>65<span class="fn-bracket">]</span></span>
+<p>David C. Dobson and Fadil Santosa. Recovery of Blocky Images from Noisy and Blurred Data. <em>SIAM Journal on Applied Mathematics</em>, 56(4):1181–1198, August 1996.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>66<span class="fn-bracket">]</span></span>
+<p>Xiaoqun Zhang, Martin Burger, Xavier Bresson, and Stanley Osher. Bregmanized Nonlocal Regularization for Deconvolution and Sparse Reconstruction. <em>SIAM Journal on Imaging Sciences</em>, 3(3):253–276, January 2010.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>67<span class="fn-bracket">]</span></span>
+<p>S. Lefkimmiatis, A. Bourquard, and M. Unser. Hessian-Based Norm Regularization for Image Restoration With Biomedical Applications. <em>IEEE Transactions on Image Processing</em>, 21(3):983–995, March 2012.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>68<span class="fn-bracket">]</span></span>
+<p>Jun Liu, Ting-Zhu Huang, Ivan W. Selesnick, Xiao-Guang Lv, and Po-Yu Chen. Image restoration using total variation with overlapping group sparsity. <em>Information Sciences</em>, 295:232–246, Febuary 2015.</p>
+</div>
+<div class="citation" id="id44" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>69<span class="fn-bracket">]</span></span>
+<p>Singanallur V. Venkatakrishnan, Charles A. Bouman, and Brendt Wohlberg. Plug-and-Play priors for model based reconstruction. In <em>2013 IEEE Global Conference on Signal and Information Processing</em>, 945–948. Austin, TX, USA, December 2013. IEEE.</p>
+</div>
+<div class="citation" id="id46" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>70<span class="fn-bracket">]</span></span>
+<p>Sripad Krishna Devalla, Prajwal K. Renukanand, Bharathwaj K. Sreedhar, Giridhar Subramanian, Liang Zhang, Shamira Perera, Jean-Martial Mari, Khai Sing Chin, Tin A. Tun, Nicholas G. Strouthidis, Tin Aung, Alexandre H. Thiéry, and Michaël J. A. Girard. DRUNET: a dilated-residual U-Net deep learning network to segment optic nerve head tissues in optical coherence tomography images. <em>Biomedical Optics Express</em>, 9(7):3244, July 2018.</p>
+</div>
+<div class="citation" id="id47" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>71<span class="fn-bracket">]</span></span>
+<p>Yuanzhi Zhu, Kai Zhang, Jingyun Liang, Jiezhang Cao, Bihan Wen, Radu Timofte, and Luc Van Gool. Denoising Diffusion Models for Plug-and-Play Image Restoration. In <em>2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)</em>, 1219–1229. Vancouver, BC, Canada, June 2023. IEEE.</p>
+</div>
+<div class="citation" id="id48" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>72<span class="fn-bracket">]</span></span>
+<p>Ulugbek S. Kamilov, Charles A. Bouman, Gregery T. Buzzard, and Brendt Wohlberg. Plug-and-Play Methods for Integrating Physical and Learned Models in Computational Imaging: Theory, algorithms, and applications. <em>IEEE Signal Processing Magazine</em>, 40(1):85–97, January 2023.</p>
+</div>
+<div class="citation" id="id50" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>73<span class="fn-bracket">]</span></span>
+<p>Augustin Cauchy. Méthode générale pour la résolution des systèmes d'équations simultanées. <em>Comp. Rend. Sci. Paris</em>, 25:536–538, 1847.</p>
+</div>
+<div class="citation" id="id52" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>74<span class="fn-bracket">]</span></span>
+<p>Herbert Robbins and Sutton Monro. A Stochastic Approximation Method. <em>The Annals of Mathematical Statistics</em>, 22(3):400–407, September 1951.</p>
+</div>
+<div class="citation" id="id51" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>75<span class="fn-bracket">]</span></span>
+<p>Y. E. Nesterov. A method for unconstrained convex minimization problem with the rate of convergence o(1/k^2). <em>Dokl. Akad. Nauk SSSR</em>, 269(3):543–547, 1983.</p>
+</div>
+<div class="citation" id="id53" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>76<span class="fn-bracket">]</span></span>
+<p>I. Daubechies, M. Defrise, and C. De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. <em>Communications on Pure and Applied Mathematics</em>, 57(11):1413–1457, November 2004.</p>
+</div>
+<div class="citation" id="id210" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>77<span class="fn-bracket">]</span></span>
+<p>Amir Beck and Marc Teboulle. A fast iterative shrinkage-thresholding algorithm for linear inverse problems. <em>SIAM Journal on Imaging Sciences</em>, 2(1):183–202, 2009.</p>
+</div>
+<div class="citation" id="id286" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>78<span class="fn-bracket">]</span></span>
+<p>Antonin Chambolle and Thomas Pock. A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging. <em>Journal of Mathematical Imaging and Vision</em>, 40(1):120–145, May 2011.</p>
+</div>
+<div class="citation" id="id49" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>79<span class="fn-bracket">]</span></span>
+<p>Stephen Boyd. Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers. <em>Foundations and Trends® in Machine Learning</em>, 3(1):1–122, 2010.</p>
+</div>
+<div class="citation" id="id55" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>80<span class="fn-bracket">]</span></span>
+<p>J. E. Dennis and Robert B. Schnabel. <em>Numerical methods for unconstrained optimization and nonlinear equations</em>. Number 16 in Classics in applied mathematics. Society for Industrial and Applied Mathematics, Philadelphia, USA, 1996.</p>
+</div>
+<div class="citation" id="id289" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>81<span class="fn-bracket">]</span></span>
+<p>Richard H. Byrd, Peihuang Lu, Jorge Nocedal, and Ciyou Zhu. A limited memory algorithm for bound constrained optimization. <em>SIAM Journal on Scientific Computing</em>, 16(5):1190–1208, 1995.</p>
+</div>
+<div class="citation" id="id125" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>82<span class="fn-bracket">]</span></span>
+<p>Emmanuel Soubies, Ferréol Soulez, Michael T McCann, Thanh-an Pham, Laurène Donati, Thomas Debarre, Daniel Sage, and Michael Unser. Pocket guide to solve inverse problems with GlobalBioIm. <em>Inverse Problems</em>, 35(10):104006, sep 2019.</p>
+</div>
+<div class="citation" id="id251" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>83<span class="fn-bracket">]</span></span>
+<p>Matteo Ravasi and Ivan Vasconcelos. Pylops—a linear-operator python library for scalable algebra and optimization. <em>SoftwareX</em>, 11:100361, 2020.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>84<span class="fn-bracket">]</span></span>
+<p>Matthieu Simeoni, Sepand Kashani, Joan Rué-Queralt, and Pyxu Developers. Pyxu-org/pyxu: pyxu.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>85<span class="fn-bracket">]</span></span>
+<p>Diederik P. Kingma and Jimmy Ba. Adam: a method for stochastic optimization. In <em>3rd International Conference on Learning Representations (ICLR)</em>. San Diego, CA, USA, 2015.</p>
+</div>
+<div class="citation" id="id118" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>86<span class="fn-bracket">]</span></span>
+<p>Xiaoze Ou, Guoan Zheng, and Changhuei Yang. Embedded pupil function recovery for Fourier ptychographic microscopy. <em>Optics Express</em>, 22(5):4960, March 2014.</p>
+</div>
+<div class="citation" id="id117" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>87<span class="fn-bracket">]</span></span>
+<p>Mona Zehni, Laurene Donati, Emmanuel Soubies, Zhizhen Zhao, and Michael Unser. Joint Angular Refinement and Reconstruction for Single-Particle Cryo-EM. <em>IEEE Transactions on Image Processing</em>, 29:6151–6163, 2020.</p>
+</div>
+<div class="citation" id="id137" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>88<span class="fn-bracket">]</span></span>
+<p>Benjamin W. Lindsey and Jan Kaslin. Optical projection tomography as a novel method to visualize and quantitate whole-brain patterns of cell proliferation in the adult zebrafish brain. <em>Zebrafish</em>, 14(6):574–577, 2017.</p>
+</div>
+<div class="citation" id="id126" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>89<span class="fn-bracket">]</span></span>
+<p>Yi Wang and Ruikang K. Wang. Optimization of image-forming optics for transmission optical projection tomography. <em>Applied Optics</em>, 46(27):6815–6820, September 2007.</p>
+</div>
+<div class="citation" id="id127" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>90<span class="fn-bracket">]</span></span>
+<p>Andrea Bassi, Luca Fieramonti, Cosimo D'Andrea, Gianluca Valentini, and Marina Mione. In vivo label-free three-dimensional imaging of zebrafish vasculature with optical projection tomography. <em>Journal of Biomedical Optics</em>, 16(10):1–4, 2011.</p>
+</div>
+<div class="citation" id="id121" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>91<span class="fn-bracket">]</span></span>
+<p>Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Resolution improvement in emission optical projection tomography. <em>Physics in Medicine &amp; Biology</em>, 52(10):2775–2790, apr 2007.</p>
+</div>
+<div class="citation" id="id128" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>92<span class="fn-bracket">]</span></span>
+<p>James McGinty, Harriet B. Taylor, Lingling Chen, Laurence Bugeon, Jonathan R. Lamb, Margaret J. Dallman, and Paul M. W. French. In vivo fluorescence lifetime optical projection tomography. <em>Biomedical Optics Express</em>, 2(5):1340–1350, May 2011.</p>
+</div>
+<div class="citation" id="id115" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>93<span class="fn-bracket">]</span></span>
+<p>Veronica C. Torres, Chengyue Li, Wei Zhou, Jovan G. Brankov, and Kenneth M. Tichauer. Characterization of an angular domain fluorescence optical projection tomography system for mesoscopic lymph node imaging. <em>Applied Optics</em>, 60(1):135–146, January 2021.</p>
+</div>
+<div class="citation" id="id129" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>94<span class="fn-bracket">]</span></span>
+<p>Frank Natterer. <em>The mathematics of computerized tomography</em>. Number 32 in Classics in applied mathematics. Society for Industrial and Applied Mathematics, Philadelphia, USA, 2001.</p>
+</div>
+<div class="citation" id="id142" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>95<span class="fn-bracket">]</span></span>
+<p>Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Correction of artefacts in optical projection tomography. <em>Physics in Medicine &amp; Biology</em>, 50(19):4645–4665, sep 2005.</p>
+</div>
+<div class="citation" id="id123" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>96<span class="fn-bracket">]</span></span>
+<p>Udo Jochen Birk, Alex Darrell, Nikos Konstantinides, Ana Sarasa-Renedo, and Jorge Ripoll. Improved reconstructions and generalized filtered back projection for optical projection tomography. <em>Applied Optics</em>, 50(4):392–398, Febuary 2011.</p>
+</div>
+<div class="citation" id="id119" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>97<span class="fn-bracket">]</span></span>
+<p>Tilman Donath, Felix Beckmann, and Andreas Schreyer. Automated determination of the center of rotation in tomography data. <em>Journal of the Optical Society of America A</em>, 23(5):1048–1057, May 2006.</p>
+</div>
+<div class="citation" id="id144" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>98<span class="fn-bracket">]</span></span>
+<p>Jan Michalek. Total variation-based reduction of streak artifacts, ring artifacts and noise in 3d reconstruction from optical projection tomography. <em>Microscopy and Microanalysis</em>, 21(6):1602–1615, 2015.</p>
+</div>
+<div class="citation" id="id116" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>99<span class="fn-bracket">]</span></span>
+<p>Daniele Ancora, Diego Di Battista, Georgia Giasafaki, Stylianos Psycharakis, Evangelos Liapis, Athanasios Zacharopoulos, and Giannis Zacharakis. Optical projection tomography via phase retrieval algorithms for hidden three dimensional imaging. In <em>Quantitative Phase Imaging III</em>, volume 10074, 100741E. SPIE, 2017.</p>
+</div>
+<div class="citation" id="id141" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>100<span class="fn-bracket">]</span></span>
+<p>Udo Jochen Birk, Alex Darrell, Nikos Konstantinides, Ana Sarasa-Renedo, and Jorge Ripoll. Improved reconstructions and generalized filtered back projection for optical projection tomography. <em>Applied Optics</em>, 50(4):392–398, Febuary 2011.</p>
+</div>
+<div class="citation" id="id145" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>101<span class="fn-bracket">]</span></span>
+<p>Georgios Christian Antonopoulos, Dimitri Pscheniza, Raoul-Amadeus Lorbeer, Marko Heidrich, Kristin Schwanke, Robert Zweigerdt, Tammo Ripken, and Heiko Meyer. Correction of image artifacts caused by refractive index gradients in scanning laser optical tomography. <em>Three-Dimensional and Multidimensional Microscopy: Image Acquisition and Processing XXI</em>, 8949:21 – 26, 2014.</p>
+</div>
+<div class="citation" id="id135" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>102<span class="fn-bracket">]</span></span>
+<p>Pedro P. Vallejo Ramirez, Joseph Zammit, Oliver Vanderpoorten, Fergus Riche, Francois-Xavier Blé, Xiao-Hong Zhou, Bogdan Spiridon, Christopher Valentine, Simeon E. Spasov, Pelumi W. Oluwasanya, Gemma Goodfellow, Marcus J. Fantham, Omid Siddiqui, Farah Alimagham, Miranda Robbins, Andrew Stretton, Dimitrios Simatos, Oliver Hadeler, Eric J. Rees, Florian Ströhl, Romain F. Laine, and Clemens F. Kaminski. OptiJ: open-source optical projection tomography of large organ samples. <em>Scientific Reports</em>, 9(1):15693, October 2019.</p>
+</div>
+<div class="citation" id="id131" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>103<span class="fn-bracket">]</span></span>
+<p>Hanqing Zhang, Laura Waldmann, Remy Manuel, Henrik Boije, Tatjana Haitina, and Amin Allalou. zOPT: an open source optical projection tomography system and methods for rapid 3D zebrafish imaging. <em>Biomedical Optics Express</em>, 11(8):4290–4305, August 2020.</p>
+</div>
+<div class="citation" id="id132" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>104<span class="fn-bracket">]</span></span>
+<p>Xiaoqin Tang, Merel van't Hoff, Jerry Hoogenboom, Yuanhao Guo, Fuyu Cai, Gerda Lamers, and Fons Verbeek. Fluorescence and bright-field 3D image fusion based on sinogram unification for optical projection tomography. In <em>2016 IEEE International Conference on Bioinformatics and Biomedicine (BIBM)</em>, volume, 403–410. 2016.</p>
+</div>
+<div class="citation" id="id108" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>105<span class="fn-bracket">]</span></span>
+<p>Tilman Donath, Felix Beckmann, and Andreas Schreyer. Automated determination of the center of rotation in tomography data. <em>Journal of the Optical Society of America A</em>, 23(5):1048–1057, May 2006.</p>
+</div>
+<div class="citation" id="id105" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>106<span class="fn-bracket">]</span></span>
+<p>Olli Koskela, Toni Montonen, Birhanu Belay, Edite Figueiras, Sampsa Pursiainen, and Jari Hyttinen. Gaussian Light Model in Brightfield Optical Projection Tomography. <em>Scientific Reports</em>, 9(1):13934, December 2019.</p>
+</div>
+<div class="citation" id="id134" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>107<span class="fn-bracket">]</span></span>
+<p>Jelle van der Horst and Jeroen Kalkman. Image resolution and deconvolution in optical tomography. <em>Optics Express</em>, 24(21):24460–24472, October 2016.</p>
+</div>
+<div class="citation" id="id120" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>108<span class="fn-bracket">]</span></span>
+<p>Ville Koljonen, Olli Koskela, Toni Montonen, Atena Rezaei, Birhanu Belay, Edite Figueiras, Jari Hyttinen, and Sampsa Pursiainen. A mathematical model and iterative inversion for fluorescent optical projection tomography. <em>Physics in Medicine &amp; Biology</em>, 64(4):045017, Febuary 2019.</p>
+</div>
+<div class="citation" id="id122" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>109<span class="fn-bracket">]</span></span>
+<p>A Darrell, H Meyer, K Marias, M Brady, and J Ripoll. Weighted filtered backprojection for quantitative fluorescence optical projection tomography. <em>Physics in Medicine &amp; Biology</em>, 53(14):3863–3881, jun 2008.</p>
+</div>
+<div class="citation" id="id102" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>110<span class="fn-bracket">]</span></span>
+<p>A. Darrell, H. Meyer, U. Birk, K. Marias, M. Brady, and J. Ripoll. Maximum likelihood reconstruction for fluorescence optical projection tomography. In <em>2008 8th IEEE International Conference on BioInformatics and BioEngineering</em>, volume, 1–6. 2008.</p>
+</div>
+<div class="citation" id="id124" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>111<span class="fn-bracket">]</span></span>
+<p>Anna K Trull, Jelle van der Horst, Willem Jan Palenstijn, Lucas J van Vliet, Tristan van Leeuwen, and Jeroen Kalkman. Point spread function based image reconstruction in optical projection tomography. <em>Physics in Medicine &amp; Biology</em>, 62(19):7784–7797, sep 2017.</p>
+</div>
+<div class="citation" id="id112" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>112<span class="fn-bracket">]</span></span>
+<p>Avinash C. Kak and Malcolm Slaney. <em>Principles of Computerized Tomographic Imaging</em>. Society for Industrial and Applied Mathematics, Philadelphia, USA, first edition, 2001.</p>
+</div>
+<div class="citation" id="id101" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>113<span class="fn-bracket">]</span></span>
+<p>Udo Jochen Birk, Matthias Rieckher, Nikos Konstantinides, Alex Darrell, Ana Sarasa-Renedo, Heiko Meyer, Nektarios Tavernarakis, and Jorge Ripoll. Correction for specimen movement and rotation errors for in-vivo optical projection tomography. <em>Biomedical Optics Express</em>, 1(1):87–96, August 2010.</p>
+</div>
+<div class="citation" id="id133" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>114<span class="fn-bracket">]</span></span>
+<p>François Marelli and Michael Liebling. Optics versus computation: influence of illumination and reconstruction model accuracy in focal-plane-scanning optical projection tomography. In <em>2021 IEEE 18th International Symposium on Biomedical Imaging (ISBI)</em>, volume, 567–570. 2021.</p>
+</div>
+<div class="citation" id="id99" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>115<span class="fn-bracket">]</span></span>
+<p>Robert M. Lewitt. Multidimensional digital image representations using generalized kaiser-bessel window functions. <em>Journal of the Optical Society of America. A, Optics and image science</em>, 7 10:1834–46, 1990.</p>
+</div>
+<div class="citation" id="id98" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>116<span class="fn-bracket">]</span></span>
+<p>Laurene Donati, Masih Nilchian, Carlos Oscar Sanchez Sorzano, and Michael A. Unser. Fast multiscale reconstruction for cryo-em. <em>Journal of Structural Biology</em>, 204:543 – 554, 2018.</p>
+</div>
+<div class="citation" id="id303" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>117<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.5281/zenodo.7315108">https://doi.org/10.5281/zenodo.7315108</a>.</p>
+</div>
+<div class="citation" id="id138" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>118<span class="fn-bracket">]</span></span>
+<p>Kevin Zhou, Ruobing Qian, Simone Degan, Sina Farsiu, and Joseph Izatt. Optical coherence refraction tomography. <em>Nature Photonics</em>, 13:794–802, 11 2019.</p>
+</div>
+<div class="citation" id="id139" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>119<span class="fn-bracket">]</span></span>
+<p>Yongjin Sung, Wonshik Choi, Christopher Fang-Yen, Kamran Badizadegan, Ramachandra R. Dasari, and Michael S. Feld. Optical diffraction tomography for high resolution live cell imaging. <em>Optics Express</em>, 17(1):266–277, January 2009.</p>
+</div>
+<div class="citation" id="id146" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>120<span class="fn-bracket">]</span></span>
+<p>Simon Doran, Koen Koerkamp, Mamdouh Bero, P. Jenneson, Edward Morton, and Walter Gilboy. A ccd-based optical ct scanner for high-resolution 3d imaging of radiation dose distributions: equipment specifications, optical simulations and preliminary results. <em>Physics in Medicine &amp; Biology</em>, 46:3191–213, 01 2002.</p>
+</div>
+<div class="citation" id="id147" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>121<span class="fn-bracket">]</span></span>
+<p>K Islam, James Dempsey, Manisha Ranade, Marek Maryanski, and Daniel Low. Initial evaluation of commercial optical ct-based 3d gel dosimeter. <em>Medical Physics</em>, 30:2159–68, 09 2003.</p>
+</div>
+<div class="citation" id="id148" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>122<span class="fn-bracket">]</span></span>
+<p>Mark Haidekker. Optical transillumination tomography with tolerance against refraction mismatch. <em>Computer Methods and Programs in Biomedicine</em>, 80:225–35, 01 2006.</p>
+</div>
+<div class="citation" id="id149" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>123<span class="fn-bracket">]</span></span>
+<p>Asier Marcos-Vidal and Jorge Ripoll. Recent advances in optical tomography in low scattering media. <em>Optics and Lasers in Engineering</em>, 135:106191, 2020.</p>
+</div>
+<div class="citation" id="id143" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>124<span class="fn-bracket">]</span></span>
+<p>Johnathon R Walls, John G Sled, James Sharpe, and R Mark Henkelman. Resolution improvement in emission optical projection tomography. <em>Physics in Medicine &amp; Biology</em>, 52(10):2775–2790, apr 2007.</p>
+</div>
+<div class="citation" id="id150" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>125<span class="fn-bracket">]</span></span>
+<p>Wim van Aarle, Willem Jan Palenstijn, Jeroen Cant, Eline Janssens, Folkert Bleichrodt, Andrei Dabravolski, Jan De Beenhouwer, K. Joost Batenburg, and Jan Sijbers. Fast and flexible x-ray tomography using the astra toolbox. <em>Optics Express</em>, 24(22):25129–25147, October 2016.</p>
+</div>
+<div class="citation" id="id151" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>126<span class="fn-bracket">]</span></span>
+<p>M Grass, Th Köhler, and R Proksa. 3D cone-beam CT reconstruction for circular trajectories. <em>Physics in Medicine &amp; Biology</em>, 45(2):329–347, Febuary 2000.</p>
+</div>
+<div class="citation" id="id152" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>127<span class="fn-bracket">]</span></span>
+<p>L. A. Feldkamp, L. C. Davis, and J. W. Kress. Practical cone-beam algorithm. <em>Journal of the Optical Society of America A</em>, 1(6):612, June 1984.</p>
+</div>
+<div class="citation" id="id304" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>128<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.5281/zenodo.6141020">https://doi.org/10.5281/zenodo.6141020</a>.</p>
+</div>
+<div class="citation" id="id206" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>129<span class="fn-bracket">]</span></span>
+<p>Jeongwoo Park, Seongwook Choi, Ferdinand Knieling, Bryan Clingman, Sarah Bohndiek, Lihong V. Wang, and Chulhong Kim. Clinical translation of photoacoustic imaging. <em>Nature Reviews Bioengineering</em>, 3(3):193–212, September 2024.</p>
+</div>
+<div class="citation" id="id226" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>130<span class="fn-bracket">]</span></span>
+<p>Tri Vu, Daniel Razansky, and Junjie Yao. Listening to tissues with new light: recent technological advances in photoacoustic imaging. <em>Journal of Optics</em>, 21(10):103001, October 2019.</p>
+</div>
+<div class="citation" id="id227" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>131<span class="fn-bracket">]</span></span>
+<p>Joanna Brunker, Junjie Yao, Jan Laufer, and Sarah E. Bohndiek. Photoacoustic imaging using genetically encoded reporters: a review. <em>Journal of Biomedical Optics</em>, 22(7):070901, July 2017.</p>
+</div>
+<div class="citation" id="id230" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>132<span class="fn-bracket">]</span></span>
+<p>Tanja Brakemann, Andre C Stiel, Gert Weber, Martin Andresen, Ilaria Testa, Tim Grotjohann, Marcel Leutenegger, Uwe Plessmann, Henning Urlaub, Christian Eggeling, Markus C Wahl, Stefan W Hell, and Stefan Jakobs. A reversibly photoswitchable GFP-like protein with fluorescence excitation decoupled from switching. <em>Nature Biotechnology</em>, 29(10):942–947, October 2011.</p>
+</div>
+<div class="citation" id="id218" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>133<span class="fn-bracket">]</span></span>
+<p>Julia Märk, Hakan Dortay, Asja Wagener, Edward Zhang, Jens Buchmann, Carsten Grötzinger, Thomas Friedrich, and Jan Laufer. Dual-wavelength 3D photoacoustic imaging of mammalian cells using a photoswitchable phytochrome reporter protein. <em>Communications Physics</em>, 1(1):3, December 2018.</p>
+</div>
+<div class="citation" id="id234" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>134<span class="fn-bracket">]</span></span>
+<p>Kanuj Mishra, Juan Pablo Fuenzalida-Werner, Vasilis Ntziachristos, and Andre C. Stiel. Photocontrollable Proteins for Optoacoustic Imaging. <em>Analytical Chemistry</em>, 91(9):5470–5477, May 2019.</p>
+</div>
+<div class="citation" id="id231" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>135<span class="fn-bracket">]</span></span>
+<p>Ryan K. W. Chee, Yan Li, Wei Zhang, and Robert E. Campbell. In vivo photoacoustic difference-spectra imaging of bacteria using photoswitchable chromoproteins. <em>Journal of Biomedical Optics</em>, 23(10):106006, October 2018.</p>
+</div>
+<div class="citation" id="id216" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>136<span class="fn-bracket">]</span></span>
+<p>Lei Li, Anton A. Shemetov, Mikhail Baloban, Peng Hu, Liren Zhu, Daria M. Shcherbakova, Ruiying Zhang, Junhui Shi, Junjie Yao, Lihong V. Wang, and Vladislav V. Verkhusha. Small near-infrared photochromic protein for photoacoustic multi-contrast imaging and detection of protein interactions in vivo. <em>Nature Communications</em>, 9(1):2734, December 2018.</p>
+</div>
+<div class="citation" id="id217" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>137<span class="fn-bracket">]</span></span>
+<p>Kanuj Mishra, Mariia Stankevych, Juan Pablo Fuenzalida-Werner, Simon Grassmann, Vipul Gujrati, Yuanhui Huang, Uwe Klemm, Veit R. Buchholz, Vasilis Ntziachristos, and Andre C. Stiel. Multiplexed whole-animal imaging with reversibly switchable optoacoustic proteins. <em>Science Advances</em>, 6(24):eaaz6293, June 2020.</p>
+</div>
+<div class="citation" id="id232" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>138<span class="fn-bracket">]</span></span>
+<p>Andre C. Stiel, Xosé Luís Deán-Ben, Yuanyuan Jiang, Vasilis Ntziachristos, Daniel Razansky, and Gil G. Westmeyer. High-contrast imaging of reversibly switchable fluorescent proteins via temporally unmixed multispectral optoacoustic tomography. <em>Optics Letters</em>, 40(3):367, Febuary 2015.</p>
+</div>
+<div class="citation" id="id236" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>139<span class="fn-bracket">]</span></span>
+<p>Yan Liu, Jonathan Chuah, Yishu Huang, Andre C. Stiel, Michael Unser, and Jonathan Dong. Model-based temporal unmixing towards quantitative photo-switching optoacoustic tomography. <em>Optics Express</em>, 33(3):6216–6227, Febuary 2025.</p>
+</div>
+<div class="citation" id="id265" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>140<span class="fn-bracket">]</span></span>
+<p>Murad Omar, Juan Aguirre, and Vasilis Ntziachristos. Optoacoustic mesoscopy for biomedicine. <em>Nature Biomedical Engineering</em>, 3(5):354–370, May 2019.</p>
+</div>
+<div class="citation" id="id221" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>141<span class="fn-bracket">]</span></span>
+<p>Hailong He, Christine Schönmann, Mathias Schwarz, Benedikt Hindelang, Andrei Berezhnoi, Susanne Annette Steimle-Grauer, Ulf Darsow, Juan Aguirre, and Vasilis Ntziachristos. Fast raster-scan optoacoustic mesoscopy enables assessment of human melanoma microvasculature in vivo. <em>Nature Communications</em>, 13(1):2803, December 2022.</p>
+</div>
+<div class="citation" id="id272" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>142<span class="fn-bracket">]</span></span>
+<p>Juan Aguirre, Mathias Schwarz, Natalie Garzorz, Murad Omar, Andreas Buehler, Kilian Eyerich, and Vasilis Ntziachristos. Precision assessment of label-free psoriasis biomarkers with ultra-broadband optoacoustic mesoscopy. <em>Nature Biomedical Engineering</em>, 1(5):0068, May 2017.</p>
+</div>
+<div class="citation" id="id258" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>143<span class="fn-bracket">]</span></span>
+<p>Habib Ammari, editor. <em>Mathematical Modeling in Biomedical Imaging II</em>. Volume 2035 of Lecture Notes in Mathematics. Springer Berlin Heidelberg, Berlin, Heidelberg, Germany, 2012.</p>
+</div>
+<div class="citation" id="id281" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>144<span class="fn-bracket">]</span></span>
+<p>Otmar Scherzer, editor. <em>Handbook of Mathematical Methods in Imaging</em>. Springer New York, New York, NY, USA, 2011.</p>
+</div>
+<div class="citation" id="id266" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>145<span class="fn-bracket">]</span></span>
+<p>Yulia Hristova, Peter Kuchment, and Linh Nguyen. Reconstruction and time reversal in thermoacoustic tomography in acoustically homogeneous and inhomogeneous media. <em>Inverse Problems</em>, 24(5):055006, October 2008.</p>
+</div>
+<div class="citation" id="id237" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>146<span class="fn-bracket">]</span></span>
+<p>Minghua Xu and Lihong V. Wang. Universal back-projection algorithm for photoacoustic computed tomography. <em>Physical Review E</em>, 71(1):016706, January 2005.</p>
+</div>
+<div class="citation" id="id267" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>147<span class="fn-bracket">]</span></span>
+<p>X. L. Dean-Ben, A. Buehler, V. Ntziachristos, and D. Razansky. Accurate Model-Based Reconstruction Algorithm for Three-Dimensional Optoacoustic Tomography. <em>IEEE Transactions on Medical Imaging</em>, 31(10):1922–1928, October 2012.</p>
+</div>
+<div class="citation" id="id269" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>148<span class="fn-bracket">]</span></span>
+<p>Amir Rosenthal, Daniel Razansky, and Vasilis Ntziachristos. Fast Semi-Analytical Model-Based Acoustic Inversion for Quantitative Optoacoustic Tomography. <em>IEEE Transactions on Medical Imaging</em>, 29(6):1275–1285, June 2010.</p>
+</div>
+<div class="citation" id="id268" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>149<span class="fn-bracket">]</span></span>
+<p>Kun Wang, Sergey A. Ermilov, Richard Su, Hans-Peter Brecht, Alexander A. Oraevsky, and Mark A. Anastasio. An Imaging Model Incorporating Ultrasonic Transducer Properties for Three-Dimensional Optoacoustic Tomography. <em>IEEE Transactions on Medical Imaging</em>, 30(2):203–214, Febuary 2011.</p>
+</div>
+<div class="citation" id="id270" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>150<span class="fn-bracket">]</span></span>
+<p>Juan Aguirre, Alexia Giannoula, Taisuke Minagawa, Lutz Funk, Pau Turon, and Turgut Durduran. A low memory cost model based reconstruction algorithm exploiting translational symmetry for photoacustic microscopy. <em>Biomedical Optics Express</em>, 4(12):2813, December 2013.</p>
+</div>
+<div class="citation" id="id241" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>151<span class="fn-bracket">]</span></span>
+<p>Meng-Lin Li, Hao F. Zhang, Konstantin Maslov, George Stoica, and Lihong V. Wang. Improved in vivo photoacoustic microscopy based on a virtual-detector concept. <em>Optics Letters</em>, 31(4):474–476, Febuary 2006.</p>
+</div>
+<div class="citation" id="id240" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>152<span class="fn-bracket">]</span></span>
+<p>C.-K. Liao, M.-L. Li, and P.-C. Li. Optoacoustic imaging with synthetic aperture focusing and coherence weighting. <em>Optics Letters</em>, 29(21):2506–2508, November 2004.</p>
+</div>
+<div class="citation" id="id242" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>153<span class="fn-bracket">]</span></span>
+<p>Jake Turner, Héctor Estrada, Moritz Kneipp, and Daniel Razansky. Improved optoacoustic microscopy through three-dimensional spatial impulse response synthetic aperture focusing technique. <em>Optics Letters</em>, 39(12):3390–3393, June 2014.</p>
+</div>
+<div class="citation" id="id238" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>154<span class="fn-bracket">]</span></span>
+<p>Xue Bai, Xu Li, Jun Ma, and Bai-Ou Guan. Improvement in resolution of fiber-laser photoacoustic tomography based on a virtual-point concept. <em>Visual Computing for Industry, Biomedicine, and Art</em>, 4(1):4, December 2021.</p>
+</div>
+<div class="citation" id="id245" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>155<span class="fn-bracket">]</span></span>
+<p>X. Luís Deán-Ben, Andre C. Stiel, Yuanyuan Jiang, Vasilis Ntziachristos, Gil G. Westmeyer, and Daniel Razansky. Light fluence normalization in turbid tissues via temporally unmixed multispectral optoacoustic tomography. <em>Optics Letters</em>, 40(20):4691–4694, October 2015.</p>
+</div>
+<div class="citation" id="id209" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>156<span class="fn-bracket">]</span></span>
+<p>Mariia Stankevych, Kanuj Mishra, Vasilis Ntziachristos, and Andre C. Stiel. Chapter fifteen - a practical guide to photoswitching optoacoustics tomography. In Jefferson Chan, editor, <em>Photoacoustic Probes for In Vivo Imaging</em>, volume 657 of Methods in Enzymology, pages 365–383. Academic Press, 2021.</p>
+</div>
+<div class="citation" id="id283" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>157<span class="fn-bracket">]</span></span>
+<p>Junjie Yao, Lidai Wang, Chiye Li, Chi Zhang, and Lihong V. Wang. Photoimprint Photoacoustic Microscopy for Three-Dimensional Label-Free Subdiffraction Imaging. <em>Physical Review Letters</em>, 112(1):014302, January 2014.</p>
+</div>
+<div class="citation" id="id284" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>158<span class="fn-bracket">]</span></span>
+<p>Adam Q. Bauer, Ralph E. Nothdurft, Todd N. Erpelding, Lihong V. Wang, and Joseph P. Culver. Quantitative photoacoustic imaging: correcting for heterogeneous light fluence distributions using diffuse optical tomography. <em>Journal of Biomedical Optics</em>, 16(9):096016, 2011.</p>
+</div>
+<div class="citation" id="id248" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>159<span class="fn-bracket">]</span></span>
+<p>Ben Cox, Jan G. Laufer, Simon R. Arridge, and Paul C. Beard. Quantitative spectroscopic photoacoustic imaging: a review. <em>Journal of Biomedical Optics</em>, 17(6):061202, 2012.</p>
+</div>
+<div class="citation" id="id299" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>160<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html">https://numpy.org/doc/stable/reference/generated/numpy.einsum.html</a>.</p>
+</div>
+<div class="citation" id="id285" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>161<span class="fn-bracket">]</span></span>
+<p>Antonin Chambolle. An Algorithm for Total Variation Minimization and Applications. <em>Journal of Mathematical Imaging and Vision</em>, 20(1):89–97, January 2004.</p>
+</div>
+<div class="citation" id="id255" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>162<span class="fn-bracket">]</span></span>
+<p>Habib Ammari, Josselin Garnier, Hyeonbae Kang, Loc Hoang Nguyen, and Laurent Seppecher. <em>Multi-Wave Medical Imaging: Mathematical Modelling &amp; Imaging Reconstruction</em>. Volume 2 of Modelling and Simulation in Medical Imaging. WORLD SCIENTIFIC (EUROPE), May 2017.</p>
+</div>
+<div class="citation" id="id213" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>163<span class="fn-bracket">]</span></span>
+<p>A. Logg, K. B. Ølgaard, M. E. Rognes, and G. N. Wells. FFC: the FEniCS form compiler. In A. Logg, K.-A. Mardal, and G. N. Wells, editors, <em>Automated Solution of Differential Equations by the Finite Element Method</em>, volume 84 of Lecture Notes in Computational Science and Engineering, chapter 11. Springer, 2012.</p>
+</div>
+<div class="citation" id="id214" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>164<span class="fn-bracket">]</span></span>
+<p>M. S. Alnaes, J. Blechta, J. Hake, A. Johansson, B. Kehlet, A. Logg, C. Richardson, J. Ring, M. E. Rognes, and G. N. Wells. The FEniCS project version 1.5. <em>Archive of Numerical Software</em>, 2015.</p>
+</div>
+<div class="citation" id="id292" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>165<span class="fn-bracket">]</span></span>
+<p>Christophe Geuzaine and Jean‐François Remacle. Gmsh: A 3‐D finite element mesh generator with built‐in pre‐ and post‐processing facilities. <em>International Journal for Numerical Methods in Engineering</em>, 79(11):1309–1331, September 2009.</p>
+</div>
+<div class="citation" id="id290" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>166<span class="fn-bracket">]</span></span>
+<p>Johannes Schindelin, Ignacio Arganda-Carreras, Erwin Frise, Verena Kaynig, Mark Longair, Tobias Pietzsch, Stephan Preibisch, Curtis Rueden, Stephan Saalfeld, Benjamin Schmid, Jean-Yves Tinevez, Daniel James White, Volker Hartenstein, Kevin Eliceiri, Pavel Tomancak, and Albert Cardona. Fiji: an open-source platform for biological-image analysis. <em>Nature Methods</em>, 9(7):676–682, July 2012.</p>
+</div>
+<div class="citation" id="id291" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>167<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.5281/zenodo.14219005">https://doi.org/10.5281/zenodo.14219005</a>.</p>
+</div>
+<div class="citation" id="id246" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>168<span class="fn-bracket">]</span></span>
+<p>Tian Ding, Kui Ren, and Sarah Vallélian. A one-step reconstruction algorithm for quantitative photoacoustic imaging. <em>Inverse Problems</em>, 31(9):095005, September 2015.</p>
+</div>
+<div class="citation" id="id247" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>169<span class="fn-bracket">]</span></span>
+<p>Ashkan Javaherian and Sean Holman. Direct quantitative photoacoustic tomography for realistic acoustic media. <em>Inverse Problems</em>, 35(8):084004, August 2019.</p>
+</div>
+<div class="citation" id="id257" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>170<span class="fn-bracket">]</span></span>
+<p>Markus Haltmeier, Lukas Neumann, and Simon Rabanser. Single-stage reconstruction algorithm for quantitative photoacoustic tomography. <em>Inverse Problems</em>, 31(6):065005, June 2015.</p>
+</div>
+<div class="citation" id="id297" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>171<span class="fn-bracket">]</span></span>
+<p>Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias, François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart, Tony Yu, and the scikit-image contributors. Scikit-image: image processing in Python. <em>PeerJ</em>, 2:e453, June 2014.</p>
+</div>
+<div class="citation" id="id295" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>172<span class="fn-bracket">]</span></span>
+<p>Ryan J. Tibshirani and Jonathan Taylor. The solution path of the generalized lasso. <em>The Annals of Statistics</em>, June 2011. Publisher: Institute of Mathematical Statistics.</p>
+</div>
+<div class="citation" id="id235" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>173<span class="fn-bracket">]</span></span>
+<p>Mehrsa Pourya, Alexis Goujon, and Michael Unser. Delaunay-Triangulation-Based Learning With Hessian Total-Variation Regularization. <em>IEEE Open Journal of Signal Processing</em>, 4:167–178, 2023.</p>
+</div>
+<div class="citation" id="id296" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>174<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.5281/zenodo.17449090">https://doi.org/10.5281/zenodo.17449090</a>.</p>
+</div>
+<div class="citation" id="id259" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>175<span class="fn-bracket">]</span></span>
+<p>Tyler Harrison, Peng Shao, and Roger J. Zemp. A least-squares fixed-point iterative algorithm for multiple illumination photoacoustic tomography. <em>Biomedical Optics Express</em>, 4(10):2224, October 2013.</p>
+</div>
+<div class="citation" id="id260" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>176<span class="fn-bracket">]</span></span>
+<p>Zhou Wang, A.C. Bovik, H.R. Sheikh, and E.P. Simoncelli. Image quality assessment: from error visibility to structural similarity. <em>IEEE Transactions on Image Processing</em>, 13(4):600–612, April 2004.</p>
+</div>
+<div class="citation" id="id261" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>177<span class="fn-bracket">]</span></span>
+<p>Lee R. Dice. Measures of the Amount of Ecologic Association Between Species. <em>Ecology</em>, 26(3):297–302, July 1945.</p>
+</div>
+<div class="citation" id="id252" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>178<span class="fn-bracket">]</span></span>
+<p>Christopher C. Paige and Michael A. Saunders. LSQR: An Algorithm for Sparse Linear Equations and Sparse Least Squares. <em>ACM Transactions on Mathematical Software</em>, 8(1):43–71, March 1982.</p>
+</div>
+<div class="citation" id="id262" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>179<span class="fn-bracket">]</span></span>
+<p>Siu Kwan Lam, Antoine Pitrou, and Stanley Seibert. Numba: a llvm-based python jit compiler. In <em>Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC</em>, LLVM '15. New York, NY, USA, 2015. Association for Computing Machinery.</p>
+</div>
+<div class="citation" id="id263" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>180<span class="fn-bracket">]</span></span>
+<p>Ryosuke Okuta, Yuya Unno, Daisuke Nishino, Shohei Hido, and Crissman Loomis. Cupy: a numpy-compatible library for nvidia gpu calculations. In <em>Proceedings of Workshop on Machine Learning Systems (LearningSys) in The Thirty-first Annual Conference on Neural Information Processing Systems (NIPS)</em>. 2017.</p>
+</div>
+<div class="citation" id="id293" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>181<span class="fn-bracket">]</span></span>
+<p>Scott Prahl. Tabulated molar extinction coefficient for hemoglobin in water. <a class="reference external" href="https://omlc.org/spectra/hemoglobin/summary.html">https://omlc.org/spectra/hemoglobin/summary.html</a>. Accessed: 2024-10-18.</p>
+</div>
+<div class="citation" id="id294" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>182<span class="fn-bracket">]</span></span>
+<p>Steven L Jacques. Optical properties of biological tissues: a review. <em>Physics in Medicine &amp; Biology</em>, 58(11):R37–R61, June 2013.</p>
+</div>
+<div class="citation" id="id58" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>183<span class="fn-bracket">]</span></span>
+<p>Stefan W. Hell. Far-Field Optical Nanoscopy. <em>Science</em>, 316(5828):1153–1158, May 2007.</p>
+</div>
+<div class="citation" id="id73" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>184<span class="fn-bracket">]</span></span>
+<p>James E. Sillibourne, Christian G. Specht, Ignacio Izeddin, Ilse Hurbain, Phong Tran, Antoine Triller, Xavier Darzacq, Maxime Dahan, and Michel Bornens. Assessing the localization of centrosomal proteins by palm/storm nanoscopy. <em>Cytoskeleton</em>, 68(11):619–627, 2011.</p>
+</div>
+<div class="citation" id="id75" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>185<span class="fn-bracket">]</span></span>
+<p>Rengasayee Veeraraghavan and Robert G. Gourdie. Stochastic optical reconstruction microscopy–based relative localization analysis (storm-rla) for quantitative nanoscale assessment of spatial protein organization. <em>Molecular Biology of the Cell</em>, 27(22):3583–3590, 2016.</p>
+</div>
+<div class="citation" id="id72" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>186<span class="fn-bracket">]</span></span>
+<p>Jennifer-Magdalena Masch, Heinz Steffens, Joachim Fischer, Johann Engelhardt, Jasmine Hubrich, Jan Keller-Findeisen, Elisa D’Este, Nicolai T. Urban, Seth G. N. Grant, Steffen J. Sahl, Dirk Kamin, and Stefan W. Hell. Robust nanoscopy of a synaptic protein in living mice by organic-fluorophore labeling. <em>Proceedings of the National Academy of Sciences</em>, 115(34):E8047–E8056, 2018.</p>
+</div>
+<div class="citation" id="id62" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>187<span class="fn-bracket">]</span></span>
+<p>Yoav Shechtman, Steffen J. Sahl, Adam S. Backer, and W.E. Moerner. Optimal Point Spread Function Design for 3D Imaging. <em>Physical Review Letters</em>, 113(13):133902, September 2014.</p>
+</div>
+<div class="citation" id="id78" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>188<span class="fn-bracket">]</span></span>
+<p>Omer Tzang, Dan Feldkhun, Anurag Agrawal, Alexander Jesacher, and Rafael Piestun. Two-photon PSF-engineered image scanning microscopy. <em>Optics Letters</em>, 44(4):895, Febuary 2019.</p>
+</div>
+<div class="citation" id="id79" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>189<span class="fn-bracket">]</span></span>
+<p>Elias Nehme, Daniel Freedman, Racheli Gordon, Boris Ferdman, Lucien E. Weiss, Onit Alalouf, Tal Naor, Reut Orange, Tomer Michaeli, and Yoav Shechtman. DeepSTORM3D: dense 3D localization microscopy and PSF design by deep learning. <em>Nature Methods</em>, 17(7):734–740, July 2020.</p>
+</div>
+<div class="citation" id="id83" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>190<span class="fn-bracket">]</span></span>
+<p>Jonathan Dong, Dante Maestre, Clara Conrad-Billroth, and Thomas Juffmann. Fundamental bounds on the precision of iscat, cobri and dark-field microscopy for 3d localization and mass photometry. <em>Journal of Physics D: Applied Physics</em>, 54(39):394002, 2021.</p>
+</div>
+<div class="citation" id="id81" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>191<span class="fn-bracket">]</span></span>
+<p>Shuang Fu, Mengfan Li, Lulu Zhou, Yingchuan He, Xin Liu, Xiang Hao, and Yiming Li. Deformable mirror based optimal psf engineering for 3d super-resolution imaging. <em>Optics Letters</em>, 47(12):3031–3034, June 2022.</p>
+</div>
+<div class="citation" id="id80" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>192<span class="fn-bracket">]</span></span>
+<p>Nadav Opatovski, Elias Nehme, Noam Zoref, Ilana Barzilai, Reut Orange Kedem, Boris Ferdman, Paul Keselman, Onit Alalouf, and Yoav Shechtman. Depth-enhanced high-throughput microscopy by compact PSF engineering. <em>Nature Communications</em>, 15(1):4861, June 2024.</p>
+</div>
+<div class="citation" id="id56" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>193<span class="fn-bracket">]</span></span>
+<p>Clemens Roider, Rafael Piestun, and Alexander Jesacher. 3D image scanning microscopy with engineered excitation and detection. <em>Optica</em>, 4(11):1373, November 2017.</p>
+</div>
+<div class="citation" id="id82" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>194<span class="fn-bracket">]</span></span>
+<p>Vasudevan Lakshminarayanan and Andre Fleck. Zernike polynomials: a guide. <em>Journal of Modern Optics</em>, 58(7):545–561, April 2011.</p>
+</div>
+<div class="citation" id="id60" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>195<span class="fn-bracket">]</span></span>
+<p>Maximilian K Geismann, Alba Gomez-Segalas, Alessandro Passera, Mehrta Shirzadian, and Francisco Balzarotti. A fast interferometric beam shaper for multi-emitter 3d minflux. <em>bioRxiv</em>, pages 2023–12, 2023.</p>
+</div>
+<div class="citation" id="id87" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>196<span class="fn-bracket">]</span></span>
+<p>Takahiro Deguchi and Jonas Ries. Simple and robust 3d minflux excitation with a variable phase plate. <em>Light: Science &amp; Applications</em>, 13(1):134, 2024.</p>
+</div>
+<div class="citation" id="id164" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>197<span class="fn-bracket">]</span></span>
+<p>Sarah Frisken Gibson and Frederick Lanni. Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy. <em>Journal of the Optical Society of America A</em>, 9(1):154–166, January 1992.</p>
+</div>
+<div class="citation" id="id65" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>198<span class="fn-bracket">]</span></span>
+<p>Klaus C. Gwosch, Jasmin K. Pape, Francisco Balzarotti, Philipp Hoess, Jan Ellenberg, Jonas Ries, and Stefan W. Hell. MINFLUX nanoscopy delivers 3D multicolor nanometer resolution in cells. <em>Nature Methods</em>, 17(2):217–224, Febuary 2020.</p>
+</div>
+<div class="citation" id="id59" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>199<span class="fn-bracket">]</span></span>
+<p>Yvan Eilers, Haisen Ta, Klaus C Gwosch, Francisco Balzarotti, and Stefan W Hell. MINFLUX monitors rapid molecular jumps with superior spatiotemporal resolution. <em>Proceedings of the National Academy of Sciences of the United States of America</em>, pages 201801672, 2018. 00002.</p>
+</div>
+<div class="citation" id="id68" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>200<span class="fn-bracket">]</span></span>
+<p>Alexander Carsten, Maren Rudolph, Tobias Weihs, Roman Schmidt, Isabelle Jansen, Christian A Wurm, Andreas Diepold, Antonio Virgilio Failla, Manuel Wolters, and Martin Aepfelbacher. MINFLUX imaging of a bacterial molecular machine at nanometer resolution. <em>Methods and Applications in Fluorescence</em>, 11(1):015004, January 2023.</p>
+</div>
+<div class="citation" id="id89" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>201<span class="fn-bracket">]</span></span>
+<p>L. Bluestein. A linear filtering approach to the computation of discrete Fourier transform. <em>IEEE Transactions on Audio and Electroacoustics</em>, 18(4):451–455, December 1970.</p>
+</div>
+<div class="citation" id="id90" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>202<span class="fn-bracket">]</span></span>
+<p>Lawrence R. Rabiner, Ronald W. Schafer, and Charles M. Rader. The Chirp z-Transform Algorithm and Its Application. <em>Bell System Technical Journal</em>, 48(5):1249–1292, May 1969.</p>
+</div>
+<div class="citation" id="id88" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>203<span class="fn-bracket">]</span></span>
+<p>Marcel Leutenegger, Ramachandra Rao, Rainer A. Leitgeb, and Theo Lasser. Fast focus field calculations. <em>Optics Express</em>, 14(23):11277, 2006.</p>
+</div>
+<div class="citation" id="id305" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>204<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://zenodo.org/records/13857972">https://zenodo.org/records/13857972</a>.</p>
+</div>
+<div class="citation" id="id91" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>205<span class="fn-bracket">]</span></span>
+<p>Chenying He, Zhengyi Zhan, Chuankang Li, Xiaofan Sun, Yong Liu, Cuifang Kuang, and Xu Liu. Effects of Optical Aberrations on Localization of Minflux Super-Resolution Microscopy. <em>SSRN Electronic Journal</em>, 2022.</p>
+</div>
+<div class="citation" id="id171" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>206<span class="fn-bracket">]</span></span>
+<p>Cédric Matthews and Fabrice P Cordelieres. MetroloJ: an ImageJ plugin to help monitor microscopes’ health. In <em>ImageJ User &amp; Developer Conference Proceedings</em>, 1–6. 2010.</p>
+</div>
+<div class="citation" id="id172" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>207<span class="fn-bracket">]</span></span>
+<p>Patrick Theer, Cyril Mongis, and Michael Knop. PSFj: know your fluorescence microscope. <em>Nature Methods</em>, 11(10):981–982, 2014.</p>
+</div>
+<div class="citation" id="id160" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>208<span class="fn-bracket">]</span></span>
+<p>Ratsimandresy Holinirina Dina Miora, Erich Rohwer, Martin Kielhorn, Colin Sheppard, Gurthwin Bosman, and Rainer Heintzmann. Calculating point spread functions: methods, pitfalls, and solutions. <em>Optics Express</em>, 32(16):27278–27302, 2024.</p>
+</div>
+<div class="citation" id="id173" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>209<span class="fn-bracket">]</span></span>
+<p>Glyn Nelson, Ioannis Alexopoulos, Maria Azevedo, Fabio Barachati, Yury Belyaev, Mariana T. Carvalho, Yann Cesbron, Aurelien Dauphin, Alexander D. Corbett, Laurent Gelman, Nadia Halidi, Xiang Hao, Hella Hartmann, Rainer Heintzmann, Peter Hemmerich, Marcel Kirchner, Judith Lacoste, Penghuan Liu, Laure Plantard, Claire A. Mitchell, Tobias Müller, Kees van der Oord, Alex L. Payne-Dwyer, Santosh Podder, Rachid Rezgui, Sandra Ritz, Stanley Schwartz, Michael J. Shaw, Tse-Luen Wee, Roland Nitschke, Orestis Faklaris, and Ian M. Dobbie. Monitoring the point spread function for quality control of confocal microscopes. October 2022.</p>
+</div>
+<div class="citation" id="id179" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>210<span class="fn-bracket">]</span></span>
+<p>Mickaël Lelek, Melina T Gyparaki, Gerti Beliu, Florian Schueder, Juliette Griffié, Suliana Manley, Ralf Jungmann, Markus Sauer, Melike Lakadamyali, and Christophe Zimmer. Single-molecule localization microscopy. <em>Nature reviews Methods Primers</em>, 1(1):39, 2021.</p>
+</div>
+<div class="citation" id="id174" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>211<span class="fn-bracket">]</span></span>
+<p>Jean-Baptiste Sibarita. Deconvolution microscopy. <em>Microscopy Techniques</em>, 95:201–243, 2005.</p>
+</div>
+<div class="citation" id="id175" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>212<span class="fn-bracket">]</span></span>
+<p>Daniel Sage, Lauréne Donati, Ferréol Soulez, Denis Fortun, Guillaume Schmit, Arne Seitz, Romain Guiet, Cédric Vonesch, and Michael Unser. DeconvolutionLab2: an open-source software for deconvolution microscopy. <em>Methods</em>, 115:28–41, 2017.</p>
+</div>
+<div class="citation" id="id176" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>213<span class="fn-bracket">]</span></span>
+<p>Rainer Heintzmann and Christoph G Cremer. Laterally modulated excitation microscopy: improvement of resolution by using a diffraction grating. In <em>Optical Biopsies and Microscopic Techniques III</em>, volume 3568, 185–196. SPIE, 1999.</p>
+</div>
+<div class="citation" id="id177" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>214<span class="fn-bracket">]</span></span>
+<p>Mats GL Gustafsson. Surpassing the lateral resolution limit by a factor of two using structured illumination microscopy. <em>Journal of Microscopy</em>, 198(2):82–87, 2000.</p>
+</div>
+<div class="citation" id="id201" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>215<span class="fn-bracket">]</span></span>
+<p>Thomas Dertinger, Ryan Colyer, Gopal Iyer, Shimon Weiss, and Jörg Enderlein. Fast, background-free, 3D super-resolution optical fluctuation imaging (sofi). <em>Proceedings of the National Academy of Sciences</em>, 106(52):22287–22292, 2009.</p>
+</div>
+<div class="citation" id="id203" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>216<span class="fn-bracket">]</span></span>
+<p>Vasiliki Stergiopoulou, Luca Calatroni, Henrique De Morais Goulart, Sébastien Schaub, and Laure Blanc-Féraud. COL0RME: Super-resolution microscopy based on sparse blinking/fluctuating fluorophore localization and intensity estimation. <em>Biological Imaging</em>, 2:e1, 2022.</p>
+</div>
+<div class="citation" id="id159" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>217<span class="fn-bracket">]</span></span>
+<p>Hagai Kirshner, Aguet François, Daniel Sage, and Michael Unser. 3-D PSF fitting for fluorescence microscopy: implementation and localization application. <em>Journal of Microscopy</em>, 249(1):13–25, 2013.</p>
+</div>
+<div class="citation" id="id185" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>218<span class="fn-bracket">]</span></span>
+<p>Yiming Li, Markus Mund, Philipp Hoess, Joran Deschamps, Ulf Matti, Bianca Nijmeijer, Vilma Jimenez Sabinina, Jan Ellenberg, Ingmar Schoen, and Jonas Ries. Real-time 3D single-molecule localization using experimental point spread functions. <em>Nature Methods</em>, 15(5):367–369, 2018.</p>
+</div>
+<div class="citation" id="id186" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>219<span class="fn-bracket">]</span></span>
+<p>Nadav Opatovski, Elias Nehme, Noam Zoref, Ilana Barzilai, Reut Orange Kedem, Boris Ferdman, Paul Keselman, Onit Alalouf, and Yoav Shechtman. Depth-enhanced high-throughput microscopy by compact PSF engineering. <em>Nature Communications</em>, 15(1):4861, 2024.</p>
+</div>
+<div class="citation" id="id168" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>220<span class="fn-bracket">]</span></span>
+<p>Yan Liu, Jonathan Dong, Juan Augusto Maya, Francisco Balzarotti, and Michael Unser. Point-spread-function engineering in MINFLUX: ptimality of donut and half-moon excitation patterns. <em>Optics Letters</em>, 50(1):37–40, January 2025.</p>
+</div>
+<div class="citation" id="id187" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>221<span class="fn-bracket">]</span></span>
+<p>József Sinkó, Róbert Kákonyi, Eric Rees, Daniel Metcalf, Alex E Knight, Clemens F Kaminski, Gábor Szabó, and Miklós Erdélyi. TestSTORM: simulator for optimizing sample labeling and image acquisition in localization based super-resolution microscopy. <em>Biomedical Optics Express</em>, 5(3):778–787, 2014.</p>
+</div>
+<div class="citation" id="id188" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>222<span class="fn-bracket">]</span></span>
+<p>Daniel Sage, Hagai Kirshner, Thomas Pengo, Nico Stuurman, Junhong Min, Suliana Manley, and Michael Unser. Quantitative evaluation of software packages for single-molecule localization microscopy. <em>Nature Methods</em>, 12(8):717–724, 2015.</p>
+</div>
+<div class="citation" id="id189" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>223<span class="fn-bracket">]</span></span>
+<p>Stefan Wieser and Gerhard J Schütz. Tracking single molecules in the live cell plasma membrane—Do’s and Don’t’s. <em>Methods</em>, 46(2):131–140, 2008.</p>
+</div>
+<div class="citation" id="id190" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>224<span class="fn-bracket">]</span></span>
+<p>Hao Shen, Lawrence J Tauzin, Rashad Baiyasi, Wenxiao Wang, Nicholas Moringo, Bo Shuang, and Christy F Landes. Single particle tracking: from theory to biophysical applications. <em>Chemical Reviews</em>, 117(11):7331–7376, 2017.</p>
+</div>
+<div class="citation" id="id191" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>225<span class="fn-bracket">]</span></span>
+<p>Dominique Bourgeois. Single molecule imaging simulations with advanced fluorophore photophysics. <em>Communications Biology</em>, 6(1):53, 2023.</p>
+</div>
+<div class="citation" id="id181" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>226<span class="fn-bracket">]</span></span>
+<p>Zach Marin, Michael Graff, Andrew ES Barentine, Christian Soeller, Kenny Kwok Hin Chung, Lukas A Fuentes, and David Baddeley. PYMEVisualize: an open-source tool for exploring 3D super-resolution data. <em>Nature Methods</em>, 18(6):582–584, 2021.</p>
+</div>
+<div class="citation" id="id155" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>227<span class="fn-bracket">]</span></span>
+<p>Bernard Richards and Emil Wolf. Electromagnetic diffraction in optical systems, II. Structure of the image field in an aplanatic system. <em>Proceedings of the Royal Society of London. Series A. Mathematical and Physical Sciences</em>, 253(1274):358–379, 1959.</p>
+</div>
+<div class="citation" id="id158" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>228<span class="fn-bracket">]</span></span>
+<p>François Aguet. <em>Super-resolution fluorescence microscopy based on physical models</em>. PhD thesis, EPFL, 2009.</p>
+</div>
+<div class="citation" id="id154" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>229<span class="fn-bracket">]</span></span>
+<p>Lukas Novotny and Bert Hecht. <em>Principles of Nano-Optics</em>. Cambridge University Press, Cambridge, UK, second edition, 2012.</p>
+</div>
+<div class="citation" id="id301" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>230<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://svi.nl/">https://svi.nl/</a>.</p>
+</div>
+<div class="citation" id="id183" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>231<span class="fn-bracket">]</span></span>
+<p>Michael J Nasse and Jörg C Woehl. Realistic modeling of the illumination point spread function in confocal scanning optical microscopy. <em>Journal of the Optical Society of America A</em>, 27(2):295–302, 2010.</p>
+</div>
+<div class="citation" id="id182" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>232<span class="fn-bracket">]</span></span>
+<p>Magdalena C Schneider, Fabian Hinterer, Alexander Jesacher, and Gerhard J Schütz. Interactive simulation and visualization of point spread functions in single molecule imaging. <em>Optics Communications</em>, 560:130463, 2024.</p>
+</div>
+<div class="citation" id="id161" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>233<span class="fn-bracket">]</span></span>
+<p>Fernando Caprile, Luciano A Masullo, and Fernando D Stefani. Pyfocus–a Python package for vectorial calculations of focused optical fields under realistic conditions. Application to toroidal foci. <em>Computer Physics Communications</em>, 275:108315, 2022.</p>
+</div>
+<div class="citation" id="id184" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>234<span class="fn-bracket">]</span></span>
+<p>Sylvain Prigent, Hoai-Nam Nguyen, Ludovic Leconte, Cesar Augusto Valades-Cruz, Bassam Hajj, Jean Salamero, and Charles Kervrann. SPITFIR (e): a supermaneuverable algorithm for fast denoising and deconvolution of 3D fluorescence microscopy images and videos. <em>Scientific Reports</em>, 13(1):1489, 2023.</p>
+</div>
+<div class="citation" id="id166" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>235<span class="fn-bracket">]</span></span>
+<p>Peter Josef William Debye. <em>Der lichtdruck auf kugeln von beliebigem material</em>. PhD thesis, Ludwig-Maximilians Universität München, 1908.</p>
+</div>
+<div class="citation" id="id163" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>236<span class="fn-bracket">]</span></span>
+<p>Emil Wolf and Yajun Li. Conditions for the validity of the Debye integral representation of focused fields. <em>Optics Communications</em>, 39(4):205–210, 1981.</p>
+</div>
+<div class="citation" id="id162" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>237<span class="fn-bracket">]</span></span>
+<p>Alexander Egner and SW Hell. Equivalence of the Huygens–Fresnel and Debye approach for the calculation of high aperture point-spread functions in the presence of refractive index mismatch. <em>Journal of Microscopy</em>, 193(3):244–249, 1999.</p>
+</div>
+<div class="citation" id="id156" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>238<span class="fn-bracket">]</span></span>
+<p>Peter Török, P Varga, Z Laczik, and GR Booker. Electromagnetic diffraction of light focused through a planar interface between materials of mismatched refractive indices: An integral representation. <em>Journal of the Optical Society of America A</em>, 12(2):325–332, 1995.</p>
+</div>
+<div class="citation" id="id157" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>239<span class="fn-bracket">]</span></span>
+<p>P Török and P Varga. Electromagnetic diffraction of light focused through a stratified medium. <em>Applied Optics</em>, 36(11):2305–2312, 1997.</p>
+</div>
+<div class="citation" id="id167" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>240<span class="fn-bracket">]</span></span>
+<p>Sheng Liu, Jianwei Chen, Jonas Hellgoth, Lucas-Raphael Müller, Boris Ferdman, Christian Karras, Dafei Xiao, Keith A Lidke, Rainer Heintzmann, Yoav Shechtman, and others. Universal inverse modeling of point spread functions for SMLM localization and microscope characterization. <em>Nature Methods</em>, 21(6):1082–1093, June 2024.</p>
+</div>
+<div class="citation" id="id300" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>241<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://github.com/Biomedical-Imaging-Group/psf_generator">https://github.com/Biomedical-Imaging-Group/psf_generator</a>.</p>
+</div>
+<div class="citation" id="id165" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>242<span class="fn-bracket">]</span></span>
+<p>J. Stoer and R. Bulirsch. <em>Introduction to Numerical Analysis</em>. Volume 12 of Texts in Applied Mathematics. Springer New York, New York, NY, USA, 2002.</p>
+</div>
+<div class="citation" id="id202" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>243<span class="fn-bracket">]</span></span>
+<p>H Pin Kao and AS1225486 Verkman. Tracking of single fluorescent particles in three dimensions: use of cylindrical optics to encode particle position. <em>Biophysical Journal</em>, 67(3):1291–1300, 1994.</p>
+</div>
+<div class="citation" id="id192" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>244<span class="fn-bracket">]</span></span>
+<p>Chinmay Belthangady and Loic A Royer. Applications, promises, and pitfalls of deep learning for fluorescence image reconstruction. <em>Nature Methods</em>, 16(12):1215–1225, 2019.</p>
+</div>
+<div class="citation" id="id193" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>245<span class="fn-bracket">]</span></span>
+<p>Martin Weigert, Uwe Schmidt, Tobias Boothe, Andreas Müller, Alexandr Dibrov, Akanksha Jain, Benjamin Wilhelm, Deborah Schmidt, Coleman Broaddus, Siân Culley, and others. Content-aware image restoration: pushing the limits of fluorescence microscopy. <em>Nature Methods</em>, 15(12):1090–1097, 2018.</p>
+</div>
+<div class="citation" id="id194" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>246<span class="fn-bracket">]</span></span>
+<p>Yue Li, Yijun Su, Min Guo, Xiaofei Han, Jiamin Liu, Harshad D Vishwasrao, Xuesong Li, Ryan Christensen, Titas Sengupta, Mark W Moyle, and others. Incorporating the image formation process into deep learning improves network performance. <em>Nature Methods</em>, 19(11):1427–1437, 2022.</p>
+</div>
+<div class="citation" id="id195" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>247<span class="fn-bracket">]</span></span>
+<p>Kyrollos Yanny, Kristina Monakhova, Richard W Shuai, and Laura Waller. Deep learning for fast spatially varying deconvolution. <em>Optica</em>, 9(1):96–99, 2022.</p>
+</div>
+<div class="citation" id="id196" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>248<span class="fn-bracket">]</span></span>
+<p>Daniel Sage, Thanh-An Pham, Hazen Babcock, Tomas Lukes, Thomas Pengo, Jerry Chao, Ramraj Velmurugan, Alex Herbert, Anurag Agrawal, Silvia Colabrese, and others. Super-resolution fight club: assessment of 2D and 3D single-molecule localization microscopy software. <em>Nature Methods</em>, 16(5):387–395, 2019.</p>
+</div>
+<div class="citation" id="id197" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>249<span class="fn-bracket">]</span></span>
+<p>Elias Nehme, Daniel Freedman, Racheli Gordon, Boris Ferdman, Lucien E Weiss, Onit Alalouf, Tal Naor, Reut Orange, Tomer Michaeli, and Yoav Shechtman. DeepSTORM3D: dense 3D localization microscopy and PSF design by deep learning. <em>Nature Methods</em>, 17(7):734–740, 2020.</p>
+</div>
+<div class="citation" id="id198" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>250<span class="fn-bracket">]</span></span>
+<p>Artur Speiser, Lucas-Raphael Müller, Philipp Hoess, Ulf Matti, Christopher J Obara, Wesley R Legant, Anna Kreshuk, Jakob H Macke, Jonas Ries, and Srinivas C Turaga. Deep learning enables fast and dense single-molecule localization with high accuracy. <em>Nature Methods</em>, 18(9):1082–1090, 2021.</p>
+</div>
+<div class="citation" id="id199" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>251<span class="fn-bracket">]</span></span>
+<p>Hirofumi Kobayashi, Ahmet Can Solak, Joshua Batson, and Loic A Royer. Image deconvolution via noise-tolerant self-supervised inversion. <em>arXiv preprint arXiv:2006.06156</em>, 2020.</p>
+</div>
+<div class="citation" id="id200" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>252<span class="fn-bracket">]</span></span>
+<p>Mayeul Cachia, Vasiliki Stergiopoulou, Luca Calatroni, Sébastien Schaub, and Laure Blanc-Féraud. Fluorescence image deconvolution microscopy via generative adversarial learning (FluoGAN). <em>Inverse Problems</em>, 39(5):054006, 2023.</p>
+</div>
+</div>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="src/acknowledgement.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Acknowledgement</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

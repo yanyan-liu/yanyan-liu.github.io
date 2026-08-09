@@ -1,0 +1,180 @@
+(pat-compute-fluence)=
+# Computation of Light Fluence
+
+In this section, we explain the computation of light fluence distribution as it is required to
+construct the forward model.
+
+(pat1-diffusion-equation)=
+## Diffusion Equation
+
+Spatial distribution of light fluence is governed by absorption and scattering of photons inside the tissue.
+We precompute a fluence map $\Phi^0(\mathbf{r})$ without the contribution of reporters and assume that
+$\Phi(\mathbf{r}) \approx \Phi^0(\mathbf{r})$.
+This assumption is reasonable, owing to the small contribution of photo-switching reporters to the absorption map.
+The radiative transfer equation (RTE) accurately models the fluence distribution but is difficult to solve
+{cite:p}`ammari_multi-wave_2017`.
+Its numerical counterpart, the Monte Carlo method, is computationally expensive {cite:p}`wang_biomedical_2007`.
+To balance accuracy and efficiency, we adopt the diffusion equation (DE),
+a first-order approximation to the RTE {cite:p}`lorenzo_principles_2012`.
+This approximation is justified in our setup due to the diffuse nature of light at
+centimeter depths (PAT) and millimeter depths (AR-PAM), where photon scattering dominates absorption
+({math}`\mu_a\ll \mu_s^{'}`).
+
+We adopt the following diffusion equation {eq}`eq:de` complemented by the Robin-type boundary
+condition {eq}`eq:bc` which describes tissue/water interface to predict light fluence
+distribution {math}`\Phi(\mathbf{r})` as
+
+```{math}
+:label: eq:de
+
+\mu_a(\mathbf{r})\Phi(\mathbf{r}) - \nabla\cdot (D(\mathbf{r})\nabla\Phi(\mathbf{r}))=S(\mathbf{r}),
+\qquad \mathbf{r}\in\Omega,
+```
+
+```{math}
+:label: eq:bc
+
+\Phi(\mathbf{r}) - 2D(\mathbf{r})\nabla \Phi(\mathbf{r})\cdot\mathbf{n}=0, \qquad\mathbf{r}\in\partial\Omega
+```
+
+where {math}`\Omega` is a 3D domain, and {math}`\mathbf{n}` is the outward normal vector of the boundary.
+Illumination is described by a function {math}`S(\mathbf{r})`.
+The diffusion coefficient {math}`D(\mathbf{r})` is defined by the known absorption coefficient {math}`\mu_a(\mathbf{r})`
+and reduced scattering coefficient {math}`\mu^{'}_s(\mathbf{r})` according to
+
+```{math}
+:label: eq:diffusion-coefficient
+
+D(\mathbf{r})=\frac{1}{3(\mu_a(\mathbf{r}) + \mu^{'}_s(\mathbf{r}))}.
+```
+
+(pat1-diffusion-equation-implementation)=
+## Numerical Implementation of the Diffusion Equation
+
+We numerically solve {eq}`eq:de` and {eq}`eq:bc` via the finite element method,
+and we briefly summarize the key steps here.
+First, we multiply {eq}`eq:de` with a test function {math}`v(\mathbf{r})\in H_1(\Omega)` from the Sobolev space
+{math}`H_1(\Omega)` and integrate over {math}`\Omega` to obtain
+
+```{math}
+:label: eq:de-multiplied-with-v
+
+\int_{\Omega}\mu_a(\mathbf{r})\Phi(\mathbf{r}) v(\mathbf{r}) \text{d}\mathbf{r}-\int_{\Omega} \nabla\cdot
+(D(\mathbf{r})\nabla\Phi(\mathbf{r}))v(\mathbf{r})\text{d}\mathbf{r} =\int_{\Omega}S(\mathbf{r})v(\mathbf{r})\text{d} \mathbf{r}.
+```
+
+Then we use integration by parts to get
+
+```{math}
+:label: eq:integration-by-parts
+
+\int_{\Omega}\mu_a(\mathbf{r})\Phi(\mathbf{r}) v(\mathbf{r}) \text{d}\mathbf{r}+\int_{\Omega}
+D(\mathbf{r})\nabla\Phi(\mathbf{r})\cdot\nabla v(\mathbf{r})\text{d}\mathbf{r}-\int_{\text{d}\Omega}(D(\mathbf{\mathbf{r}})
+\underset{\frac{\Phi(\mathbf{r})}{2D(\mathbf{r})}}{\underbrace{\nabla\Phi(\mathbf{r})\cdot\mathbf{n}})}
+v(\mathbf{r})\text{d} s =\int_{\Omega}S(\mathbf{r})v(\mathbf{r})\text{d} \mathbf{r}.
+```
+
+Finally, we reorganize the terms and conclude with
+
+```{math}
+:label: eq:final-pde
+
+\int_{\Omega}(\left(\mu_a(\mathbf{r})\Phi(\mathbf{r}) - S(\mathbf{r})\right) v(\mathbf{r})+
+D(\mathbf{r})\nabla\Phi(\mathbf{r})\cdot\nabla v(\mathbf{r}))\text{d}\mathbf{r} =
+\int_{\text{d}\Omega}\frac{\Phi(\mathbf{r})v(\mathbf{r})}{2}\text{d} s.
+```
+
+We solve {eq}`eq:final-pde` using Fenicsx, an open-source library for numerical solution
+of partial differential equations {cite:p}`LoggEtal_11_2012, AlnaesEtal2015`.
+We provide a summary in {prf:ref}`alg:fenics`.
+
+```{prf:algorithm} Solving the Diffusion Equation via Fenicsx
+:label: alg:fenics
+
+**Input** {math}`\mu_a(\mathbf{r}), \mu_s^{'}(\mathbf{r})`, and {math}`S(\mathbf{r})` as 3D arrays
+1. Define mesh and function space {math}`V` of type _continuous Galerkin_ of order 1
+2. Convert {math}`\mu_a(\mathbf{r}), \mu_s^{'}(\mathbf{r})`, and {math}`S(\mathbf{r})` to functions in {math}`V`
+3. Assemble {eq}`eq:final-pde` into a linear form {math}`a(\Phi, v) = L(v)`
+4. Solve the linear form to get solution {math}`\phi_h`
+5. Convert the finite-element solution {math}`\phi_h` over a cylinder to a 3D box array {math}`\phi^{3\text{D}}`
+that contains {math}`\phi_h`
+6. Slice a cross-section of {math}`\phi^{3\text{D}}` to obtain a 2D fluence map {math}`\phi^{2\text{D}}`
+
+**Output** 2D array {math}`\phi^{2\text{D}}`
+
+```
+
+## Geometry and Meshes
+
+### Geometry of the Setup
+
+The setup of our phantom experiment is illustrated in {numref}`fig:phantom`.
+The cylindrical agar phantom, which serves as the non-switching background, has a diameter of 27 mm and is submerged
+in water to match the refractive indices.
+We inserted tubes of diameter 580 {math}`\mu`m and filled with solutions of photo-switching proteins
+inside the phantom.
+The illumination originates from five laser outlets that surround the body of the phantom such that incident light
+can be assumed homogeneous and diffuse at the surface of the cylinder body.
+
+```{figure} images/phantom-setup.*
+:name: fig:phantom
+:width: 80%
+
+Left: Depiction of the experimental setup of a tissue-mimicking phantom (ratio between the diameters of a tube
+and the phantom is exaggerated).
+Right: A 2D corss-section of the phantom with illumination from five laser outlets.
+The dotted circles represent locations of protein solution tubes. 
+
+```
+We model the domain {math}`\Omega` with a cylinder of height {math}`H` and
+diameter {math}`L` (see {numref}`fig:relation-meshes`), which leads to
+
+```{math}
+:label: eq:domain
+
+\Omega = \left\{(x, y, z) | (z - z_c)^2 + (x - x_c)^2 \leq (L/2)^2, 0\leq y - y_c \leq H\right\}.
+```
+
+The incident homogeneous illumination on the phantom body
+is modeled by a function {math}`S(\mathbf{r})` of constant intensity {math}`I_0`
+
+```{math}
+:label: eq:laser-source
+
+S(x, y, z) = \left\{
+\begin{aligned}
+    & I_0, \text{ if }  (z - z_c)^2 + (x - x_c)^2 = (L/2)^2 \\ 
+    & 0, \text{ else}.
+\end{aligned}
+\right.
+```
+
+(pat1-fem-meshes)=
+### Meshes
+
+We represent the domain {math}`\Omega` with two types of meshes of uniform mesh elements.
+The first type is a grid composed of boxes with size determined by the physical size {math}`(X, Y, Z)` of {math}`\Omega`
+and the number of sampling points {math}`(N_{\text{x}}, N_{\text{y}}, N_{\text{z}})` in each dimension:
+{math}`(X/N_{\text{x}}, Y/N_{\text{y}}, Z/N_{\text{z}})`.
+This type is used in the construction of the forward model and the unmixing algorithm (due to matrix operations).
+The second type is a finite element mesh that discretizes the cylinder domain directly into tetrahedrons with mesh
+size {math}`\Delta s`, which we choose to be {math}`\max(X/N_{\text{x}}, Y/N_{\text{y}}, Z/N_{\text{z}})/2` to reach
+a balance between computational accuracy and speed (see {numref}`fig:relation-meshes` (a)).
+This is done using _Gmsh_, an open-source 3D finite element mesh generator {cite:p}`geuzaine_gmsh_2009`.
+This type of mesh is used to solve the diffusion equation.
+For computational speed, we precompute and save the 3D mesh with defined physical sizes and only load it when needed.
+
+The relation between these two meshes is illustrated in {numref}`fig:relation-meshes` (b).
+
+```{figure} images/meshes.*
+:name: fig:relation-meshes
+:width: 100%
+
+(a) Finite-element mesh of a cylinder generated using Gmsh.
+(b) Relation between the grid and the finite-element mesh, box mesh tightly fits the cylinder.
+```
+
+The conversion between two meshes is necessary when we compute the fluence using optical parameter maps
+defined on a grid and when we cast the solution from the finite element mesh to the grid.
+The output of the fluence computation is a 2D cross-sectional image of the original 3D map, which we use to construct
+the forward model (see {numref}`fig:simu-mixed-setup` for details).

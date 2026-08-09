@@ -1,0 +1,549 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html"><link rel="next" title="Summary" href="summary.html"><link rel="prev" title="Implementation" href="implementation.html">
+        <link rel="prefetch" href="../../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Results</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=806898c4" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_en.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../abstract_fr.html">Résumé</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/background.html">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/contributions.html">Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_imaging/index.html">Biomedical Optical Imaging</a><input aria-label="Toggle navigation of Biomedical Optical Imaging" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html">Basic Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_imaging/optical_imaging.html#key-aspects">Key Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_math/index.html">Modeling and Solving of Inverse Problems</a><input aria-label="Toggle navigation of Modeling and Solving of Inverse Problems" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#forward-model">Forward Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#inverse-problem">Inverse Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_math/mathematics.html#computational-aspects">Computational Aspects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../opt/index.html">Correction of Artifacts in Optical Projection Tomography</a><input aria-label="Toggle navigation of Correction of Artifacts in Optical Projection Tomography" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/mechanical/index.html">Mechanical Artifacts</a><input aria-label="Toggle navigation of Mechanical Artifacts" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/classification.html">Characterization of Mechanical Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/calibration.html">Automatic Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/mechanical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../opt/optical/index.html">Optical Artifacts Due to Refractive-Index Mismatch</a><input aria-label="Toggle navigation of Optical Artifacts Due to Refractive-Index Mismatch" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#modeling-of-ri-mismatch">Modeling of RI Mismatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/modeling.html#correction-method">Correction Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../opt/optical/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../opt/appendix.html">Appendix: Cone-Beam Shift of Origin due to Off-Center Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../photoacoustic/index.html">Temporal Unmixing for Photo-Switching Photoacoustic Imaging</a><input aria-label="Toggle navigation of Temporal Unmixing for Photo-Switching Photoacoustic Imaging" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat1/index.html">Part I: Model-Based Unmixing from Intermediate PA Images</a><input aria-label="Toggle navigation of Part I: Model-Based Unmixing from Intermediate PA Images" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/theory.html">Modeling of Photo-Switching and Unmixing Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/materials.html">Sample Preparation and Data Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/fluence.html">Computation of Light Fluence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat1/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../photoacoustic/pat2/index.html">Part II: Global Unmixing Framework Directly from Acoustic Signals</a><input aria-label="Toggle navigation of Part II: Global Unmixing Framework Directly from Acoustic Signals" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html">Forward Models: from Concentration Maps to Acoustic Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/forward_models.html#numerical-implementation">Numerical Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/inverse.html">Inverse Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../photoacoustic/pat2/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../photoacoustic/appendix.html">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Engineering of Point Spread Functions for Localization Microscopy</a><input aria-label="Toggle navigation of Engineering of Point Spread Functions for Localization Microscopy" checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../minflux/index.html">Optimal Excitation Patterns in MINFLUX via PSF Engineering</a><input aria-label="Toggle navigation of Optimal Excitation Patterns in MINFLUX via PSF Engineering" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/theory.html">Theoretical Foundation: Physical and Mathematical Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/implementation.html">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/results.html">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../minflux/summary.html">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">A Unifying Framework for the Computation of Point Spread Functions</a><input aria-label="Toggle navigation of A Unifying Framework for the Computation of Point Spread Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html">A Unifying Theory of PSF Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation.html">Implementation</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cv.html">Curriculum Vitae</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<style>
+  .ss-layout-default-AB { grid-template-areas: 'A B'; }
+</style>
+<section class="tex2jax_ignore mathjax_ignore" id="results">
+<span id="psf-results"></span><h1>Results<a class="headerlink" href="#results" title="Link to this heading">¶</a></h1>
+<section id="psf-gallery">
+<span id="id1"></span><h2>PSF Gallery<a class="headerlink" href="#psf-gallery" title="Link to this heading">¶</a></h2>
+<p>We provide a gallery of PSFs to showcase our library in <a class="reference internal" href="#fig-psf-pure-gaussian-images"><span class="std std-numref">Fig. 57</span></a>
+and <a class="reference internal" href="#fig-psf-other-psf-images"><span class="std std-numref">Fig. 58</span></a>.
+We use a wavelength of 632 nm, circular polarization for the vectorial models,
+and we display the amplitude (in arbitrary units) of the beams for better contrast.
+The 2D slices of the same 3D beam share the same dynamic range.
+In <a class="reference internal" href="#fig-psf-pure-gaussian-images"><span class="std std-numref">Fig. 57</span></a>, we present the focal electric field computed
+using both the scalar and vectorial propagators for objectives with different values of NA.
+In the low-NA case (top two rows), the resulting PSFs from both propagators are similar.
+The beams differ more from each other, as expected, in the high-NA case (bottom two rows):
+the rings are blurred out as the energy is spread into different components of the focus field.</p>
+<figure class="align-center" id="fig-psf-pure-gaussian-images">
+<a class="reference internal image-reference" href="../../../_images/psf_gaussian_circular.png"><img alt="../../../_images/psf_gaussian_circular.png" src="../../../_images/psf_gaussian_circular.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Unaberrated PSF generated by the scalar ((a)-(d)) and vectorial with circular polarization
+((e)-(h)) Cartesian propagators, in the case of low-NA (0.5) (first two rows) and high-NA (1.3) (last two rows).
+(a), (e), (c), and (g): Slice of the <span class="math notranslate nohighlight">\(x-y\)</span> plane.
+(b), (f), (d), and (h): Slice of the <span class="math notranslate nohighlight">\(z-y\)</span> plane.
+(i)-(l): Intensity profiles along a vertical line through the center of the PSFs.
+The <span class="math notranslate nohighlight">\(x\)</span>-axis represents the relative distance to the center of the image in micrometers.
+Scale bars represent <span class="math notranslate nohighlight">\(3\mu\)</span>m and <span class="math notranslate nohighlight">\(0.6\mu\)</span>m in the low- and high- NA cases, respectively.
+For images of <span class="math notranslate nohighlight">\(z-y\)</span> planes ((b), (f), (d), and (h)), scale bars for the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> axis are
+indicated by the horizontal and vertical bars, respectively.</span><a class="headerlink" href="#fig-psf-pure-gaussian-images" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="fig-psf-other-psf-images">
+<a class="reference internal image-reference" href="../../../_images/psf_all.png"><img alt="../../../_images/psf_all.png" src="../../../_images/psf_all.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">PSFs with different phase aberrations generated by the vectorial Cartesian propagator with high NA (1.3).
+((a), (d), and (g)): Introduced phase masks at the pupil plane.
+((b), (e), and (h)): Slice of the <span class="math notranslate nohighlight">\(x-y\)</span> plane at <span class="math notranslate nohighlight">\(z=0\)</span>.
+((c), (f), and (i)): Slice of the <span class="math notranslate nohighlight">\(z-x\)</span> plane at <span class="math notranslate nohighlight">\(y=0\)</span>.
+((j)-(l)): PSF with vertical astigmatism at three z-planes: at focus (k), 500 nm above (j), and below (l) focus.
+All PSFs were generated with circular polarization,
+except the Half-Moon PSF where x-axis linear polarization was used.
+The scale bars in all images represent <span class="math notranslate nohighlight">\(0.6\mu\)</span>m.</span><a class="headerlink" href="#fig-psf-other-psf-images" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>In <a class="reference internal" href="#fig-psf-other-psf-images"><span class="std std-numref">Fig. 58</span></a>, we present additional PSFs computed with the vectorial propagator
+in a high-NA setting.
+The impact of the Gibson-Lanni correction factor on a beam is shown in <a class="reference internal" href="#fig-psf-other-psf-images"><span class="std std-numref">Fig. 58</span></a> (a)-(c).
+Key parameters are (c.f. <a class="reference internal" href="theory.html#equation-eq-stratified-layers-general-formula">Eq. (165)</a>):</p>
+<ul class="simple">
+<li><p>refractive indices: <span class="math notranslate nohighlight">\(n_s=1.3\)</span>, <span class="math notranslate nohighlight">\(n_i=1.5\)</span>, <span class="math notranslate nohighlight">\(n_g=1.5\)</span></p></li>
+<li><p>thicknesses: <span class="math notranslate nohighlight">\(t_s=1\mu\)</span>m, <span class="math notranslate nohighlight">\(t_g=170\mu\)</span>m, and <span class="math notranslate nohighlight">\(t_i\)</span> is computed using <a class="reference internal" href="theory.html#equation-eq-gibson-lanni-t-i">Eq. (166)</a>.</p></li>
+</ul>
+<p>We observe that the spherical aberration it introduces degrades the quality of the focus.
+We also show the donut PSF, which has a vortex phase mask in the pupil plane, (<a class="reference internal" href="#fig-psf-other-psf-images"><span class="std std-numref">Fig. 58</span></a> (d)-(f))
+and the half-moon PSF,
+which has a <span class="math notranslate nohighlight">\(\pi\)</span>-jump in its pupil plane (<a class="reference internal" href="#fig-psf-other-psf-images"><span class="std std-numref">Fig. 58</span></a> (g)-(i)).
+Finally, we demonstrate an example of arbitrary phase aberrations using the Zernike polynomials in
+<a class="reference internal" href="#fig-psf-other-psf-images"><span class="std std-numref">Fig. 58</span></a> (j)-(l).
+Here, some amount of astigmatism is introduced, as is often done to encode defocus information
+<span id="id2">[<a class="reference internal" href="../../../index.html#id202" title="H Pin Kao and AS1225486 Verkman. Tracking of single fluorescent particles in three dimensions: use of cylindrical optics to encode particle position. Biophysical Journal, 67(3):1291–1300, 1994.">243</a>]</span>, and we show the evolution of the beam shape along the <span class="math notranslate nohighlight">\(z\)</span>-axis.</p>
+</section>
+<section id="computational-performance">
+<span id="psf-computational-performance"></span><h2>Computational Performance<a class="headerlink" href="#computational-performance" title="Link to this heading">¶</a></h2>
+<section id="speed-benchmark">
+<span id="psf-speed-benchmark"></span><h3>Speed Benchmark<a class="headerlink" href="#speed-benchmark" title="Link to this heading">¶</a></h3>
+<p>We benchmark the runtime to compute a single <span class="math notranslate nohighlight">\(201 \times 201\)</span> 2D PSF image against the size of the pupil.
+The image is captured at focus, and all input parameters take default values in our library.
+We compare the runtime of all four propagators on CPU and GPU and show the results in
+<a class="reference internal" href="#fig-psf-benchmark-runtime-pupil"><span class="std std-numref">Fig. 59</span></a>.
+The benchmarking was performed on a machine with an Intel i9-10900X CPU and an NVIDIA GeForce RTX 3090 GPU.</p>
+<figure class="sphinx-subfigure align-default" id="fig-psf-benchmark-runtime-pupil">
+<div class="sphinx-subfigure-grid ss-layout-default-AB" style="display: grid;">
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: A;">
+<img alt="Image A" src="../../../_images/benchmark_runtime_pupil_cpu.png" />
+</div>
+<div class="sphinx-subfigure-area" style="display: flex; flex-direction: column; justify-content: center; align-items: center; grid-area: B;">
+<img alt="Image B" src="../../../_images/benchmark_runtime_pupil_gpu.png" />
+</div>
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Speed benchmark.
+Time to generate a <span class="math notranslate nohighlight">\(201 \times 201\)</span> PSF for different numerical sizes of the pupil,
+for the different four propagators, on CPU (a) and GPU (b).
+Each data point in the plots is averaged over 10 runs.</span><a class="headerlink" href="#fig-psf-benchmark-runtime-pupil" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We observe that the runtime of all propagators increases with the size of the pupil on CPU.
+The Cartesian propagators (red) are faster than the spherical ones (blue) on smaller sizes (&lt;512 pixels)
+but slower on large sizes.
+This illustrates the difference in the computational complexity of each method.
+Scalar propagators (dotted) are faster than their vectorial counterparts (solid), by roughly 1.5 times for Cartesian
+and 3 times for spherical cases.
+On GPU, Cartesian propagators are faster than on CPU at the same grid size and the curves (red) behave similarly.
+Spherical propagators,
+however, exhibit a flat curve (blue) which indicates that they efficiently benefit from the GPU parallelization.
+The speed improvement between scalar and vectorial propagators is small, especially for the Cartesian case.
+Hence, vectorial propagators should be preferred over the scalar ones as the accuracy gain does not come at a
+high computational cost.
+Moreover, Cartesian propagators are recommended if one works with images of small sizes for both scalar and
+vectorial cases;
+while spherical propagators should be preferred for large sizes, especially when GPU is available.</p>
+</section>
+<section id="accuracy-benchmark">
+<span id="psf-accuracy-benchmark"></span><h3>Accuracy Benchmark<a class="headerlink" href="#accuracy-benchmark" title="Link to this heading">¶</a></h3>
+<p>We benchmark the accuracy of both Cartesian and spherical scalar propagators with the analytic Airy disk for
+asymptotic limit (the Fourier transform of a perfect circular aperture):</p>
+<div class="math-wrapper docutils container" id="equation-eq-airy-disk-analytic">
+<div class="math notranslate nohighlight" id="equation-eq-airy-disk-analytic">
+<span class="eqno">(170)<a class="headerlink" href="#equation-eq-airy-disk-analytic" title="Link to this equation">¶</a></span>\[    F_{\mathrm{AD}}(\rho) = \frac{2J_1(\rho)}{\rho},\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(J_1\)</span> is the Bessel function of the first order of the first kind.
+As the Airy disk is the Fourier transform of a perfect unit modulus circular aperture,
+an additional factor <span class="math notranslate nohighlight">\(s_z = \cos\theta\)</span> is introduced in <a class="reference internal" href="theory.html#equation-eq-cartesian-scalar">Eq. (150)</a>
+and <a class="reference internal" href="theory.html#equation-eq-polar-scalar-final">Eq. (152)</a>.
+This corresponds to a paraxial approximation.</p>
+<p>The spherical integral is computed using two numerical integration rules:
+the Riemann rule (a first-order method) and the Simpson’s rule (a fourth-order method).
+The error <span class="math notranslate nohighlight">\(\delta\)</span> is the <span class="math notranslate nohighlight">\(L_2\)</span>-norm of the difference between the output electric field <span class="math notranslate nohighlight">\(E\)</span> of
+the propagator and <span class="math notranslate nohighlight">\(F_{\text{AD}}\)</span>, as in</p>
+<div class="math-wrapper docutils container" id="equation-src-microscopy-psf-results-0">
+<div class="math notranslate nohighlight" id="equation-src-microscopy-psf-results-0">
+<span class="eqno">(171)<a class="headerlink" href="#equation-src-microscopy-psf-results-0" title="Link to this equation">¶</a></span>\[    \delta = \|E - F_{\text{AD}}\|_2.\]</div>
+</div>
+<figure class="align-center" id="fig-psf-benchmark-accuracy">
+<a class="reference internal image-reference" href="../../../_images/benchmark_accuracy_plot.png"><img alt="../../../_images/benchmark_accuracy_plot.png" src="../../../_images/benchmark_accuracy_plot.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Accuracy benchmark of the Cartesian propagator (red) and the spherical propagator using the Riemann rule
+(green) and Simpsons’ rule (blue).
+<span class="math notranslate nohighlight">\(h\)</span> is the step size of integration.</span><a class="headerlink" href="#fig-psf-benchmark-accuracy" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We observe in <a class="reference internal" href="#fig-psf-benchmark-accuracy"><span class="std std-numref">Fig. 60</span></a> that the error decreases as the number of points in the integration
+domain increases in all cases.
+The spherical propagator has a linear convergence rate using the Riemann rule (green)
+and fourth-order convergence rate using Simpsons’ rule (blue),
+which correlates well with their expected accuracy.
+The Cartesian propagator, which is based on our custom FFT,
+shows a convergence rate between first and second order.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="summary.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Summary</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="implementation.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Implementation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Results</a><ul>
+<li><a class="reference internal" href="#psf-gallery">PSF Gallery</a></li>
+<li><a class="reference internal" href="#computational-performance">Computational Performance</a><ul>
+<li><a class="reference internal" href="#speed-benchmark">Speed Benchmark</a></li>
+<li><a class="reference internal" href="#accuracy-benchmark">Accuracy Benchmark</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

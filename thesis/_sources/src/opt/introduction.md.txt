@@ -1,0 +1,115 @@
+(opt-intro)=
+# Introduction
+
+For many applications, the framework of a precise physical model combined with efficient reconstruction algorithms has
+proven effective, as demonstrated in Fourier ptychography {cite:p}`ou_embedded_2014`
+and cryo-electron microscopy {cite:p}`zehni_joint_2020`.
+In this chapter, we focus on optical projection tomography (OPT), a simple yet powerful pure optical technique
+that pushes the boundaries of the optical diffusion limit to achieve deep-tissue imaging.
+We show how the systematic approach introduced in [](#intro-modeling-and-solving-inverse-problems)
+enables us to correct mechanical and optical artifacts due to imprecision and mismatches in the imaging system.
+
+## Overview of OPT
+
+Conventional optical microscopy, such as confocal microscopy, is limited to imaging relatively thin samples.
+This constraint can be partially overcome using OPT, proposed by Sharpe in 2002 {cite:p}`Sharpe2004`.
+OPT functions as an optical analog to X-ray CT (enabled by tissue optical clearing),
+and bridges the imaging gap between MRI and confocal microscopy.
+It achieves cellular-level resolution with molecular specificity over a large field-of-view (FOV)
+{cite:p}`Sharpe2004, Walls2005`.
+Over the years, OPT has become a mature tool for the production of high-resolution 3D
+images of biological samples at mesoscopic scale {cite:p}`Lindsey2017 ,Schmidt:21` in
+a brightfield {cite:p}`Wang:07, bassi:11` or fluorescence
+{cite:p}`Walls2007, Walls2005, McGinty:11, Torres2021` configuration.
+OPT is widely used in a variety of applications, such as the mapping of the distribution of proteins in embryos
+{cite:p}`Sharpe2002, Sharpe2004`,
+the localization of metastases in lymph nodes {cite:p}`Torres2021`,
+the display of vascular networks and amyloid depositions in the mouse brain model to study Alzheimer's disease
+{cite:p}`Lindsey2017`,
+and the imaging of the spatial arrangement of intestinal villi {cite:p}`Schmidt:21`.
+
+OPT operates in two modes: emission and transmission.
+In emission OPT, widefield illumination excites the fluorophores in the sample; the probe is
+the emitted optical photons and the light-matter interaction is fluorescence.
+In transmission OPT, diffuse white light passes through the sample, and
+the measurements reflect attenuation of the incident light {cite:p}`Walls2005`.
+As a tomographic imaging technology, OPT falls into the same category as X-ray CT and SPECT.
+
+In an OPT experiment, the sample undergoes a clearing process before being imaged, which renders it transparent to
+reduce scattering and heterogeneities of refractive index {cite:p}`Sharpe2002`.
+This allows photons to traverse a thick sample up to several millimeters.
+The sample is then embedded in agarose gel and immersed in a refractive-index-matched liquid (most often BABB).
+A motorized stage holds the sample and rotates it to a series of angular positions.
+A lens system focuses light on the focal plane,
+and a CCD camera captures a series of 2D projection images, either the attenuated
+intensity of light (transmission mode) or the amount of emitted photons (emission mode).
+These projections encode indirect information about the 3D internal structure of the sample, and
+a reconstruction algorithm is required to recover the volumetric image.
+
+In OPT, light passes through the specimen in approximately straight lines
+which _project_ the 3D sample onto a 2D detector plane {cite:p}`Sharpe2002`.
+The mathematical tool to describe such a straight-ray projection is the Radon transform
+{cite:p}`natterer_mathematics_2001`.
+The associated inverse problem is to reconstruct the 3D volume from its set of 2D projections acquired
+at various spatial positions of the sample.
+In the ideal scenario where the rotation axis is well aligned and perpendicular to the optical axis,
+each row of pixels on the detector plane records a sinogram of the corresponding
+cross-section of the 3D sample.
+Hence, 3D reconstruction reduces to reconstructing a stack of 2D transverse slices
+of the sample {cite:p}`Sharpe2004, correia_accelerated_2015`.
+This is usually achieved by applying the 2D filtered backprojection (FBP) algorithm,
+the discrete inversion formula of the 2D Radon transform,
+in a slice-by-slice manner.
+
+## Motivation and Contribution
+
+Despite the best effort of OPT practitioners, artifacts may appear in reconstructed images
+due to a variety of physical and mechanical errors.
+These artifacts can be broadly categorized by their origin.
+
+One category is those due to physical imperfections,
+including illumination, fluorescence reporters or the CCD camera.
+For instance, in emission OPT, fluctuations of the illumination intensity or
+the fluorescent signal decay due to photobleaching effects typically produce smear artifacts {cite:p}`Walls:05`.
+During the recording of measurements, the nonlinearity of the detector response generates streak artifacts
+{cite:p}`Walls:05`;
+pixel variability in the CCD camera results in ring artifacts {cite:p}`Walls:05`;
+non-zero background signal in emission OPT leads to bowl artifacts {cite:p}`Walls2005, Birk2011`.
+
+Another category is those induced by mechanical imprecision.
+For example, a common issue in parallel-beam tomography is misalignment of the center of rotation,
+which leads to double edge and blurring effects
+{cite:p}`Walls:05, Donath2006, michalek:15, Torres2021`.
+Random vibration and drift during sample rotation can cause blurry reconstructions
+as well {cite:p}`Ancora2017`.
+Additionally, optical aberrations, such as refraction at the interface between the agarose gel and the immersion liquid
+due to the refractive index mismatch, introduce artifacts
+{cite:p}`JochenBirk:11, Antonopoulos:14`.
+
+All these artifacts stem from a mismatch between the idealized OPT model and the actual physical realization.
+While they significantly degrade the reconstruction quality,
+they can often be computationally corrected once properly identified {cite:p}`Walls:05, michalek:15`.
+
+The existing forward models and reconstruction methods adopt different assumptions to improve
+upon the Radon transform and account for finer experimental details of OPT, which shows the
+importance of refined physical models.
+It is noteworthy that these methods reconstruct the 3D sample slice by slice.
+While this approach is effective in correcting some artifacts, it may
+be insufficient to account for mechanical errors in the system that requires 3D representations
+of the imaging geometry.
+
+In this chapter, we follow the spirit of computational imaging and develop frameworks to
+correct artifacts in OPT.
+We focus on two primary sources:
+
+- Mechanical errors in the imaging system (mechanical artifacts)
+- Refractive index mismatch between the sample and the immersion liquid (optical artifacts)
+
+For the mechanical errors, we follow the general framework introduced in [](#intro-modeling-and-solving-inverse-problems)
+to model system parameters (rotations and translations)
+and propose a multiscale joint reconstruction-calibration algorithm to correct artifacts.
+For optical artifacts, we derive a cone-beam model based on ray optics to approximate the effect of
+refractive index mismatch and introduce a fast correction technique.
+We validate both methods on simulated and experimental datasets provided by our collaborators
+from the Computational Bioimaging Group at [Idiap](https://www.idiap.ch/) and the
+[University of Applied Sciences of Western Switzerland](https://www.unige.ch/gap/biophotonics/former-members/cedric_schmidt).
