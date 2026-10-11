@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Yan Liu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation bar: same as homepage, auto-populated by layout.js -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Yan Liu</a>
+                <div class="nav-links" id="nav-list"></div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Research</h1>
+            <p class="subtitle">
+                I have some knowledge of inverse problems and optical imaging.
+                My research focused on physics-based modeling + regularized reconstruction to
+                solve specific inverse problems in various imaging technologies.
+            </p>
+
+            <p class="subtitle">
+                My PhD thesis is available <a href="thesis/index.html">here</a>.
+                My list of publications can be found
+                <a href="https://scholar.google.com/citations?user=aac_rdgAAAAJ&hl=en" target="_blank" rel="noopener">here</a>.
+            </p>
+        </section>
+
+        <!-- Page content: list of research projects -->
+        <div class="card figure-top">
+            <div class="text">
+                <span class="date">2024 – 2026</span>
+                <h2>MiniZSV</h2>
+                <p>Modeling and Hardware-Assisted Calibration for Miniature Fluorescence Microscope</p>
+                <p>With the <a href="https://miblab.sist.shanghaitech.edu.cn/" target="_blank" rel="noopener">Biophotonics Lab</a>,
+                    ShanghaiTech</p>
+                <div class="thumb">
+                    <img src="images/thumbnail_miniscope.png" alt="MiniZSV pipeline overview">
+                </div>
+                <ul class="bullets">
+                    <li>Proposed a pipeline combining Zernike-based PSF modeling
+                        and spatially-varying deconvolution for Miniscope images</li>
+                    <li>Built a continuous spatially-varying PSF map from calibration data,
+                        more robust and accurate than SVD-based models</li>
+                    <li>On in vivo data, recovered more active neurons and resolved overlapping vessels for
+                        cleaner hemodynamic analysis</li>
+
+                </ul>
+                <p><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/lpor.202502485" target="_blank" rel="noopener">
+                        Paper,</a>
+                    <a href="https://github.com/gult2022/MiniZSV" target="_blank" rel="noopener">Software</a>
+                </p>
+                <div class="tags">
+                    <span class="tag">Zernike Polynomials</span>
+                    <span class="tag">Image Analysis</span>
+                    <span class="tag">Nonlinear Optimization</span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <span class="date">2023 – 2025</span>
+            <h2>PSF Generator</h2>
+            <p>Open-Source PyTorch Library for Point-Spread Function Computation</p>
+            <p>With the <a href="https://www.epfl.ch/labs/lcav/" target="_blank" rel="noopener">
+                AudioVisual Communications Laboratory</a>, EPFL</p>
+            <div class="thumb">
+                <img src="images/thumbnail_psf.png" alt="PSF Generator Napari interface">
+            </div>
+            <ul class="bullets">
+                <li>Unifying framework proving equivalence between different computation approaches</li>
+                <li>ML-ready implementation with comprehensive documentation and benchmarking</li>
+                <li>Napari plugin with user-friendly interface for 3D visualization</li>
+            </ul>
+            <p>
+                <a href="https://onlinelibrary.wiley.com/doi/10.1111/jmi.70045" target="_blank" rel="noopener">
+                    Paper,</a>
+                <a href="https://psf-generator.readthedocs.io/" target="_blank" rel="noopener">Software</a>
+            </p>
+            <div class="tags">
+                    <span class="tag">Vectorial Electric Field Propagation</span>
+                    <span class="tag">Richards-Wolf Integral</span>
+                    <span class="tag">Aberrations</span>
+                    <span class="tag">Bessel Function</span>
+                    <span class="tag">Benchmarking</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="date">2022 – 2024</span>
+            <h2>Optimal Excitation Patterns in MINFLUX</h2>
+            <p>With the <a href="https://www.imp.ac.at/groups/francisco-balzarotti" target="_blank" rel="noopener">Balzarotti Lab</a>, Vienna BioCenter</p>
+            <div class="thumb">
+                <img src="images/thumbnail_minflux.png" alt="Half-moon beam shape after optimization">
+            </div>
+            <ul class="bullets">
+                <li>Developed a PyTorch differentiable optimization framework for MINFLUX superresolution microscopy</li>
+                <li>Investigated optimality of excitation patterns via simulations and theoretical analysis</li>
+                <li>Enabled fast explorations of new beam patterns avoiding expensive experiments</li>
+            </ul>
+            <p>
+                <a href="https://opg.optica.org/ol/fulltext.cfm?uri=ol-50-1-37" target="_blank" rel="noopener">Paper,</a>
+                <a href="https://zenodo.org/records/13857972" target="_blank" rel="noopener">Software,</a>
+                <a href="https://opg.optica.org/spotlight/summary.cfm?id=565808" target="_blank" rel="noopener">Spotlight,</a>
+                <a href="https://photos.google.com/share/AF1QipNmjupHTfMMuDe90w1iX0nQqUXPemNZ2zns0AgJddHJgXmhMNrnR9aR1293iexI0Q/photo/AF1QipP4S9Cb1FzwY3XQ26yZ6jOdarr6UVHKp6Uf5bt2?key=VFlOVVROSXgxdGQweGFudEl3RkE1RW95aWtIUjNn"
+                target="_blank" rel="noopener">Award</a>
+            </p>
+            <div class="tags">
+                <span class="tag">Single Molecule Localization Microscopy</span>
+                <span class="tag">Donut and Half-Moon Excitation Beams</span>
+                <span class="tag">Fourier Transform</span>
+                <span class="tag">Differentiable Imaging</span>
+                <span class="tag">Cramér-Rao Bound</span>
+            </div>
+        </div>
+        <div class="card">
+            <span class="date">2022 – 2025</span>
+            <h2>Photo-Switching Photoacoustic Imaging</h2>
+            <p>With Helmholtz Zentrum München, <a href="https://swopt.munichimaging.eu/" target="_blank" rel="noopener">SWOPT</a>, EIC Pathfinder</p>
+            <div class="thumb">
+                <a href="images/poster_swopt.png" target="_blank" rel="noopener">
+                    <img src="images/thumbnail_switching.png" alt="Principle of photo-switching">
+                </a>
+            </div>
+            <ul class="bullets">
+                <li>Co-led work package on data analysis workflow and inversion algorithms</li>
+                <li>Developed models and implemented unmixing algorithms with GPU-acceleration</li>
+                <li>Technical reporting and presentation of deliverables and coordination between partners</li>
+            </ul>
+            <p>
+                <a href="https://opg.optica.org/abstract.cfm?URI=oe-33-3-6216" target="_blank" rel="noopener">Paper,</a>
+                <a href="https://zenodo.org/records/17449090" target="_blank" rel="noopener">Software,</a>
+                <a href="images/poster_swopt.png" target="_blank" rel="noopener">Poster</a>
+            </p>
+            <div class="tags">
+                    <span class="tag">Photo-Switching Protein</span>
+                    <span class="tag">Quantitative Temporal Unmixing</span>
+                    <span class="tag">Total Variation</span>
+            </div>
+        </div>
+        <div class="card">
+            <span class="date">2020 – 2022</span>
+            <h2>Artifact Correction for Optical Projection Tomography</h2>
+            <p>With the <a href="https://www.idiap.ch/en/scientific-research/computational-bioimaging/index_html" target="_blank" rel="noopener">Idiap institute</a> and University of Applied Sciences of Western Switzerland</p>
+            <div class="thumb">
+                <img src="images/thumbnail_opt.png" alt="Calibration algorithm">
+            </div>
+            <ul class="bullets">
+                <li>Systematic documentation of mechanical and optical artifacts for practitioners</li>
+                <li>Developed fast automatic calibration algorithms based on geometry and optics</li>
+                <li>Demonstrated effectiveness on improving the image quality on various samples</li>
+            </ul>
+            <p>
+                <a href="https://opg.optica.org/ol/fulltext.cfm?uri=ol-50-1-37" target="_blank" rel="noopener">Paper (Mechanical Artifacts),</a>
+                <a href="https://opg.optica.org/abstract.cfm?URI=ol-47-11-2618" target="_blank" rel="noopener">Paper (Optical Artifacts),</a>
+                <a href="https://zenodo.org/records/13857972" target="_blank" rel="noopener">Software,</a>
+                <a href="https://www.youtube.com/watch?v=uD_rPdSbgq4&list=PLpnwuB3uUgGTyjcq_4GI60BLTmOima9mj&index=1" target="_blank" rel="noopener">Talk,</a>
+                <a href="images/poster_opt.png" target="_blank" rel="noopener">Poster</a>
+            </p>
+            <div class="tags">
+                    <span class="tag">3D X-ray Transform</span>
+                    <span class="tag">Iterative Reconstruction</span>
+                    <span class="tag">Misaligned Rotation Axis</span>
+                    <span class="tag">Refractive-Index Mismatch</span>
+                    <span class="tag">Cone-Beam Geometry</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="text">
+                <span class="date">2018 – 2019</span>
+                <h2>Optimal Illumination Pattern in Fluorescence Molecular Tomography</h2>
+                <p>With the Institute for Biomedical Engineering, ETH Zürich</p>
+                <div class="thumb">
+                    <img src="images/thumbnail_fmt.png" alt="FMT thumbnail">
+                </div>
+                <ul class="bullets">
+                    <li>Applied sparse regularization to improve resolution and SNR over nonsparse methods</li>
+                    <li>Defined the illumination pattern from the discrete forward model and optimized it as a constrained inverse problem</li>
+                    <li>Proposed a two-step reconstruction–optimization algorithm</li>
+                </ul>
+                <p>
+                    <a href="http://aimsciences.org//article/doi/10.3934/ipi.2020025" target="_blank" rel="noopener">Paper,</a>
+                    <a href="images/poster_fmt.png" target="_blank" rel="noopener">Poster</a>
+                </p>
+                <div class="tags">
+                    <span class="tag">Diffusion Equation</span>
+                    <span class="tag">Sparse Regularization</span>
+                    <span class="tag">FISTA</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p id="footer-text"></p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>
