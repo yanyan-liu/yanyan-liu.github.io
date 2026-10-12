@@ -6,6 +6,36 @@
     --bg-section: #f8fafc;    /* Section background: very light blue-gray for distinction */
 }
 
+/* Dark mode variables */
+.dark-mode {
+    --primary: #63b3ed;       /* Lighter blue for better visibility in dark mode */
+    --text-main: #e2e8f0;     /* Light gray for main text */
+    --text-light: #a0aec0;    /* Medium light gray for secondary text */
+    --bg-page: #1a202c;       /* Dark background: dark gray */
+    --bg-section: #2d3748;    /* Section background: slightly lighter dark gray */
+    --tag-border: #718096;
+    --footer-border: #4a5568;
+    --carousel-bg: #4a5568;
+    --carousel-color: #e2e8f0;
+    --carousel-hover: #63b3ed;
+}
+
+/* Dark mode: automatically activated based on user's browser preference */
+@media (prefers-color-scheme: dark) {
+    :root:not(.light-mode) {
+        --primary: #63b3ed;
+        --text-main: #e2e8f0;
+        --text-light: #a0aec0;
+        --bg-page: #1a202c;
+        --bg-section: #2d3748;
+        --tag-border: #718096;
+        --footer-border: #4a5568;
+        --carousel-bg: #4a5568;
+        --carousel-color: #e2e8f0;
+        --carousel-hover: #63b3ed;
+    }
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.7;
@@ -46,6 +76,33 @@ nav {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: var(--bg-section);
+    border: 1px solid var(--text-light);
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.theme-toggle:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.dark-mode .theme-toggle:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
 }
 
 .nav-item {
@@ -116,17 +173,19 @@ h1 {
 }
 
 .tag {
-    background: #e2e8f0; /* Changed to light gray background, more subtle */
+    background: var(--bg-section); /* Use section background color for consistency */
     color: var(--text-main);
     padding: 6px 14px;
     border-radius: 6px; /* Small rounded corners */
     font-size: 0.85rem;
     font-weight: 500;
     transition: background 0.2s;
+    border: 1px solid transparent;
 }
 
 .tag:hover {
-    background: #cbd5e0;
+    background: var(--primary);
+    color: white;
 }
 
 footer {
