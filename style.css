@@ -201,3 +201,50 @@ footer {
     flex: 1;
     min-width: 0;        /* Also prevent text from breaking the container */
 }
+
+/* Image carousel */
+.image-carousel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.carousel-arrow {
+    background: #e2e8f0;
+    color: var(--text-main);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.2s;
+}
+
+.carousel-arrow:hover {
+    background: #cbd5e0;
+}
+
+.carousel-image-container {
+    position: relative;
+    width: 500px;
+    height: 350px;
+    overflow: hidden;
+}
+
+.carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 6px;
+}
+
+.carousel-image.active {
+    opacity: 1;
+}
