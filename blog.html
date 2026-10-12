@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Yan Liu</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 0.85em;
+            cursor: pointer;
+        }
+        .tag:hover {
+            background-color: #f0f0f0;
+        }
+        .tag.active {
+            background-color: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+        .tags-filter {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -22,13 +44,35 @@
             <h1>Blog</h1>
         </section>
 
+        <div class="tags-filter">
+            <button class="tag active" onclick="filterBlog('all')">All</button>
+            <span class="tag" onclick="filterBlog('PhD Life')">PhD Life</span>
+            <span class="tag" onclick="filterBlog('Research')">Research</span>
+            <span class="tag" onclick="filterBlog('中文')">中文</span>
+        </div>
+
         <!-- Blog entries will be listed here, ordered by date (newest first) -->
-        <!-- Template for adding new entries: -->
-        <div class="card">
+        <div class="card" data-tags="PhD Life 中文">
+            <div class="text">
+                <span class="date">2026-02-15</span>
+                <h2><a href="blog/20260215.html">毕业了</a></h2>
+                <p>博士毕业是个什么样的体验呢？</p>
+                <div class="tags">
+                    <span class="tag">PhD Life</span>
+                    <span class="tag">中文</span>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-tags="PhD Life 中文 Research">
             <div class="text">
                 <span class="date">2025-01-04</span>
                 <h2><a href="blog/20250104.html">最近发表的一篇论文</a></h2>
                 <p>用普通人也可以听懂的方式给亲朋好友讲讲我的一个研究项目</p>
+                <div class="tags">
+                    <span class="tag">PhD Life</span>
+                    <span class="tag">中文</span>
+                    <span class="tag">Research</span>
+                </div>
             </div>
         </div>
 
@@ -42,5 +86,38 @@
 
     <script src="config.js"></script>
     <script src="layout.js"></script>
+    <script>
+        document.getElementById('logo-name').innerHTML = siteConfig.name;
+        
+        function filterBlog(tag) {
+            const cards = document.querySelectorAll('.card');
+            const filterTags = document.querySelectorAll('.tags-filter .tag');
+            
+            if (tag === 'all') {
+                cards.forEach(card => card.style.display = 'block');
+                filterTags.forEach(t => {
+                    t.classList.remove('active');
+                    if (t.textContent === 'All') {
+                        t.classList.add('active');
+                    }
+                });
+            } else {
+                cards.forEach(card => {
+                    const cardTags = card.getAttribute('data-tags');
+                    if (cardTags && cardTags.includes(tag)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                filterTags.forEach(t => t.classList.remove('active'));
+                filterTags.forEach(t => {
+                    if (t.textContent === tag) {
+                        t.classList.add('active');
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
