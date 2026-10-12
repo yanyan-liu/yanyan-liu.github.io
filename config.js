@@ -1,5 +1,5 @@
 const siteConfig = {
-    name: "Yan Liu",
+    name: '<img src="/images/swallow.png" alt="Yan Liu" style="height: 40px;">',
 
     // Site navigation: edit here, all pages will sync automatically
     links: [

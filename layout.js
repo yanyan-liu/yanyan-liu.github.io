@@ -10,4 +10,4 @@ siteConfig.links.forEach(link => {
 
 // Render footer year
 document.getElementById('footer-text').textContent =
-    `© ${new Date().getFullYear()} ${siteConfig.name}`;
+    `© ${new Date().getFullYear()} Yan Liu`;
