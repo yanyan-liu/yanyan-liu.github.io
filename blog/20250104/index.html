@@ -393,5 +393,14 @@
             }
         }
     </script>
+    <script>
+    document.querySelectorAll('a[href^="#fn-"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('footnotes-dropdown').style.display = 'block';
+        document.getElementById(a.hash.slice(1)).scrollIntoView();
+      });
+    });
+    </script>
 </body>
 </html>
