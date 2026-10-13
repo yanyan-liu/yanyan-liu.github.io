@@ -248,3 +248,8 @@ footer {
 .carousel-image.active {
     opacity: 1;
 }
+
+figure img {
+  max-width: 100%;
+  height: auto;
+}
